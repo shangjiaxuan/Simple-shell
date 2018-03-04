@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1519891766 source:c:\users\shangjiaxuan\documents\source code\calc-3.x\calc-3.x.cpp
+	<iostream>
+	<stdexcept>
+	<map>
+	"Token_stream.h"
+	"Calculator.h"
+
+1510826606 c:\users\shangjiaxuan\documents\source code\calc-3.x\token_stream.h
+	"Token.h"
+
+1510828071 c:\users\shangjiaxuan\documents\source code\calc-3.x\token.h
+
+1510828071 c:\users\shangjiaxuan\documents\source code\calc-3.x\calculator.h
+	"Token_stream.h"
+
+1510831566 source:c:\users\shangjiaxuan\documents\source code\calc-3.x\calculator.cpp
+	<iostream>
+	<stdexcept>
+	<cmath>
+	<map>
+	"Token.h"
+	"Token_stream.h"
+	"Calculator.h"
+	"Variable.h"
+	"Memory.h"
+
+1510766434 c:\users\shangjiaxuan\documents\source code\calc-3.x\variable.h
+	<string>
+	<map>
+
+1510906153 c:\users\shangjiaxuan\documents\source code\calc-3.x\memory.h
+
+1510834841 source:c:\users\shangjiaxuan\documents\source code\calc-3.x\token_stream.cpp
+	<iostream>
+	<stdexcept>
+	<stdio.h>
+	"Token_stream.h"
+	"Memory.h"
+
+1510770988 source:c:\users\shangjiaxuan\documents\source code\calc-3.x\variable.cpp
+	<map>
+	"Variable.h"
+
