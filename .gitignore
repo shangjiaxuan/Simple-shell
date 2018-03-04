@@ -299,5 +299,5 @@ __pycache__/
 *.xsd.cs
 
 #Project-specific
-#[Bb]uild
+[Bb]uild
 
