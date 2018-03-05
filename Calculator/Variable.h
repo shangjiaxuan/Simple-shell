@@ -1,5 +1,4 @@
-#ifndef _VARIABLE_H
-#define _VARIABLE_H
+#pragma once
 
 #include <string>
 
@@ -9,6 +8,6 @@ namespace Calc {
 	bool is_declared(std::string var);
 	double define_name(std::string var, double val);
 	double assign_name(std::string var, double val);
-}
 
-#endif
+	extern bool isdecl;
+}

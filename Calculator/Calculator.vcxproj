@@ -155,15 +155,13 @@
   <ItemGroup>
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="library.h" />
-    <ClInclude Include="Memory.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Token.h" />
-    <ClInclude Include="Token_stream.h" />
     <ClInclude Include="Variable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Calculator.cpp" />
-    <ClCompile Include="Token_stream.cpp" />
+    <ClCompile Include="Token.cpp" />
     <ClCompile Include="Variable.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

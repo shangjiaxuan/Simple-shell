@@ -1,8 +1,8 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "Token_stream.h"
-#include "Memory.h"
+#include "Token.h"
+#include "Variable.h"
 
 using namespace std;
 
@@ -65,26 +65,23 @@ namespace Calc {
 					cin.putback(ch);
 					if(isdecl) {
 						return Token{name,s};
-					} else {
-						char test{0};
-						cin.get(test);
-						//去空格
-						while(test == ' ') {
-							cin.get(test);
-						}
-						//去空格
-						//传出赋值变量
-						if(test == '=') {
-							return Token{assign,s};
-						}
-							//传出赋值变量
-							//传出读取内容
-						else {
-							cin.putback(test);
-							return Token{access,s};
-						}
-						//传出读取内容
 					}
+					char test{0};
+					cin.get(test);
+					//去空格
+					while(test == ' ') {
+						cin.get(test);
+					}
+					//去空格
+					//传出赋值变量
+					if(test == '=') {
+						return Token{assign,s};
+					}
+					//传出赋值变量
+					//传出读取内容
+					cin.putback(test);
+					return Token{access,s};
+					//传出读取内容
 				}
 				throw runtime_error("Bad token");
 		}

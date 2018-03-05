@@ -157,19 +157,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Console Calculator\Calculator.h" />
-    <ClInclude Include="..\Console Calculator\Platform.h" />
-    <ClInclude Include="..\Console Calculator\Token_stream.h" />
-    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="..\Calculator\Calculator.h" />
+    <ClInclude Include="..\Calculator\Platform.h" />
+    <ClInclude Include="Header.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Calculator caller.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Calculator\Calculator.vcxproj">

@@ -1,7 +1,4 @@
-#ifndef _CALCULATOR_H
-#define _CALCULATOR_H
-
-#include "Token_stream.h"
+#pragma once
 
 #include "Platform.h"
 
@@ -15,6 +12,3 @@ namespace Calc {
 	double term(Token_stream& ts);
 	double primary(Token_stream& ts);
 }
-
-#endif
-

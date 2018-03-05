@@ -18,13 +18,7 @@
     <ClInclude Include="Calculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Memory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Token.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Token_stream.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Variable.h">
@@ -41,10 +35,10 @@
     <ClCompile Include="Calculator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Token_stream.cpp">
+    <ClCompile Include="Variable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Variable.cpp">
+    <ClCompile Include="Token.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
