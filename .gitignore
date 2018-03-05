@@ -300,4 +300,7 @@ __pycache__/
 
 #Project-specific
 [Bb]uild
-
+![Bb]uild/x86-[Rr]elease/Calculator caller.exe
+![Bb]uild/x86-[Rr]elease/Calculator.dll
+![Bb]uild/x64-[Rr]elease/Calculator caller.exe
+![Bb]uild/x64-[Rr]elease/Calculator.dll
