@@ -157,7 +157,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Calculator\Calculator.h" />
     <ClInclude Include="..\Calculator\Platform.h" />
     <ClInclude Include="Header.h" />
   </ItemGroup>
