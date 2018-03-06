@@ -14,7 +14,8 @@ namespace Calc {
 
 	constexpr char number{'6'};
 	constexpr char quit{'q'};
-	constexpr char print{';'};
+	constexpr char print{'\n'};
+	constexpr char end{';'};
 	constexpr char name{'N'};
 	constexpr char assign{'S'};
 	constexpr char access{'A'};

@@ -14,25 +14,28 @@ namespace Calc {
 		buffer = t;
 		full = true;
 	}
-
 	Token Token_stream::get() {
-		if(full) {
+		if (full) {
 			full = false;
 			return buffer;
 		}
-		//处理换行，缓存上一个token
-		char ch;
-		cin.get(ch);
-		if(ch == '\n') {
-			cin.putback(print);
-		} else {
-			if(ch != ' ') {
-				last_char = {ch};
-			}
-			cin.putback(ch);
+		if(!cin) {
+			return end;
 		}
+		char ch = cin.get();
+		if (ch == '\n') {
+			return print;
+		} if (ch == quit) {
+			return quit;
+		}
+
+		cin.putback(ch);
+		
 		//处理换行,缓存上一个token
-		cin >> ch;
+		cin.get(ch);
+		while(ch==' ') {
+			cin.get(ch);
+		}
 		switch(ch) {
 			case quit:
 			case print:

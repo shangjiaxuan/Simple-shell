@@ -14,11 +14,11 @@ int main() {
 	if (!hInst){
 		cout << "Error!" << endl;
 	}
-	const void_ts_ptr calculate = void_ts_ptr(GetProcAddress(hInst, "calculate"));
+	const void_ts_ptr calculator = void_ts_ptr(GetProcAddress(hInst, "calculator"));
 
 	Calc::Token_stream ts;
 	try {
-		calculate(ts);
+		calculator(ts);
 		FreeLibrary(hInst);
 		return 0;
 	} catch(...) {

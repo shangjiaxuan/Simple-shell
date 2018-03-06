@@ -8,24 +8,26 @@
 
 using namespace std;
 
-void calculate(Calc::Token_stream& ts) {
-
-	cout << "DLL loaded!\n";
-
+void calculator(Calc::Token_stream& ts) {
 	const string prompt{ "> " };
 	const string result{ "= " };
-	while (cin) {
+	while(cin) {
 		try {
 			cout << prompt;
 			Calc::Token t = ts.get();
 			if (t.kind == Calc::quit) {
 				return;
 			}
-			while (t.kind == Calc::print) {
+			while (t.kind == Calc::print|| t.kind == Calc::end) {
+				if(t.kind== Calc::print) {
+					cout << "Please inputt something\n" << prompt;
+				}
 				t = ts.get();
 			}
 			ts.putback(t);
-			cout << result << statement(ts) << '\n';
+			double ans = statement(ts);
+			if (on=false){return;}
+			cout << result << ans << '\n';
 		}
 		catch (exception& e) {
 			cerr << e.what() << '\n';
@@ -34,6 +36,34 @@ void calculate(Calc::Token_stream& ts) {
 	}
 }
 
+Calc::message calculate(Calc::Token_stream& ts) {
+	const string prompt{ "> " };
+	const string result{ "= " };
+	char ch;
+	while (cin||cin.get(ch),ch=='\n') {
+		try {
+			cout << prompt;
+			Calc::Token t = ts.get();
+			if (t.kind == Calc::quit) {
+				return{ quit };
+			}
+			while (t.kind == Calc::print) {
+				t = ts.get();
+			}
+			ts.putback(t);
+			return { value ,statement(ts) };
+		}catch (exception& e) {
+			cerr << e.what() << '\n';
+			return { error };
+		}
+	}
+}
+
+
+
+
+
+
 namespace Calc {
 
 	bool isdecl{false};
@@ -41,32 +71,37 @@ namespace Calc {
 	double statement(Token_stream& ts) {
 		Token t = ts.get();
 		switch (t.kind) {
+		case print:
+			throw runtime_error("Please input something");
+		case quit:
+			on = false;
+			return 0;
 		case let:
 			isdecl = true;
 			return declaration(ts);
 		case assign:
-		{
 			ts.putback(t);
 			return assignment(ts);
-		}
 		case access:
-		{
 			ts.putback(t);
 			return expression(ts);
-		}
+		case number:
+			ts.putback(t);
+			return expression(ts);
 		default:
-			ts.putback(t);
-			return expression(ts);
+			throw runtime_error("statement: Unknown statement.");
 		}
 	}
 
 	double declaration(Token_stream& ts) {
+		isdecl = false;
 		Token t = ts.get();
 		if(t.kind != name) {
-			throw runtime_error("declare: name expected in declaration");
+			ts.putback(print);
+			throw runtime_error("declare: name expected in declaration.");
 		}
 		string var_name = t.name;
-		isdecl = false;
+
 		Token t2 = ts.get();
 		if(t2.kind != '=') {
 			throw runtime_error("declare: '=' missing in declaration of " + var_name);
@@ -88,6 +123,7 @@ namespace Calc {
 		double left = term(ts);
 		while(true) {
 			Token t = ts.get();
+			if (t.kind == print) { goto Label; }
 			switch(t.kind) {
 				case '+':
 					left += term(ts);
@@ -97,48 +133,49 @@ namespace Calc {
 					break;
 				default:
 					ts.putback(t);
-					return left;
+					Label: return left;
 			}
 		}
 	}
 
 	double term(Token_stream& ts) {
 		double left = primary(ts);
-		while(true) {
-			Token t = ts.get();
-			switch(t.kind) {
-				case '*':
-					left *= primary(ts);
-					break;
-				case '/':
-					{
-						double d = primary(ts);
-						if(d == 0) {
-							throw runtime_error("divide by zero");
-						}
-						left /= d;
-						break;
-					}
-				case '%':
-					{
-						double d = primary(ts);
-						if(d == 0) {
-							throw runtime_error("divide by zero");
-						}
-						left = fmod(left, d);
-						break;
-					}
-				default:
-					ts.putback(t);
-					return left;
+		Token t=ts.get();
+		if (t.kind == end) { return left; }
+		while (cin) {
+			switch (t.kind) {
+			case '*':
+				left *= primary(ts);
+				break;
+			case '/': {
+				double d = primary(ts);
+				if (d == 0) {
+					throw runtime_error("divide by zero");
+				}
+				left /= d;
+				break;
 			}
-		}
+			case '%': {
+				double m = primary(ts);
+				if (m == 0) {
+					throw runtime_error("divide by zero");
+				}
+				left = fmod(left, m);
+				break;
+			}
+			default:
+				ts.putback(t);
+				return left;
+			}
+			t = ts.get();
+		};
 	}
 
 
 	double primary(Token_stream& ts) {
 		Token t = ts.get();
 		switch(t.kind) {
+			case print: throw runtime_error("???");
 			case '(':
 				{
 					double d = expression(ts);
@@ -162,10 +199,6 @@ namespace Calc {
 				//开平方
 			case number:
 				return t.value;
-			case '-':
-				return -primary(ts);
-			case '+':
-				return primary(ts);
 			case name:
 				return get_value(t.name);
 			case access:
