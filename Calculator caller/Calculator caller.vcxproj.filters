@@ -23,7 +23,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Calculator caller.cpp">
+    <ClCompile Include="Calculator_caller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

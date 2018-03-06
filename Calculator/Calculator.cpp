@@ -9,6 +9,9 @@
 using namespace std;
 
 void calculate(Calc::Token_stream& ts) {
+
+	cout << "DLL loaded!\n";
+
 	const string prompt{ "> " };
 	const string result{ "= " };
 	while (cin) {
@@ -22,7 +25,6 @@ void calculate(Calc::Token_stream& ts) {
 				t = ts.get();
 			}
 			ts.putback(t);
-
 			cout << result << statement(ts) << '\n';
 		}
 		catch (exception& e) {
@@ -34,11 +36,29 @@ void calculate(Calc::Token_stream& ts) {
 
 namespace Calc {
 
-	void clean_up_mess(Token_stream& ts) {
-		ts.ignore(print);
-	}
-
 	bool isdecl{false};
+
+	double statement(Token_stream& ts) {
+		Token t = ts.get();
+		switch (t.kind) {
+		case let:
+			isdecl = true;
+			return declaration(ts);
+		case assign:
+		{
+			ts.putback(t);
+			return assignment(ts);
+		}
+		case access:
+		{
+			ts.putback(t);
+			return expression(ts);
+		}
+		default:
+			ts.putback(t);
+			return expression(ts);
+		}
+	}
 
 	double declaration(Token_stream& ts) {
 		Token t = ts.get();
@@ -62,28 +82,6 @@ namespace Calc {
 		double value = expression(ts);
 		assign_name(var_name, value);
 		return value;
-	}
-
-	double statement(Token_stream& ts) {
-		Token t = ts.get();
-		switch(t.kind) {
-			case let:
-				isdecl = true;
-				return declaration(ts);
-			case assign:
-				{
-					ts.putback(t);
-					return assignment(ts);
-				}
-			case access:
-				{
-					ts.putback(t);
-					return expression(ts);
-				}
-			default:
-				ts.putback(t);
-				return expression(ts);
-		}
 	}
 
 	double expression(Token_stream& ts) {
@@ -155,7 +153,9 @@ namespace Calc {
 				{
 					double e = primary(ts);
 					if(e < 0) {
-						throw runtime_error("Cannot take the square root of a negative number in the real domain.");
+						throw runtime_error(
+							"Cannot take the square root of a negative number in the real domain."
+						);
 					}
 					return sqrt(e);
 				}
@@ -173,5 +173,10 @@ namespace Calc {
 			default:
 				throw runtime_error("primary expected");
 		}
+	}
+
+
+	void clean_up_mess(Token_stream& ts) {
+		ts.ignore(print);
 	}
 }
