@@ -2,8 +2,9 @@
 
 #include "Platform.h"
 
+DLL void calculate(Calc::Token_stream& ts);
+
 namespace Calc {
-	void DLL calculate(Token_stream& ts);
 	void clean_up_mess(Token_stream& ts);
 
 	double statement(Token_stream& ts);

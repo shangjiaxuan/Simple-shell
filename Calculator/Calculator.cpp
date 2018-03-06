@@ -8,6 +8,30 @@
 
 using namespace std;
 
+void calculate(Calc::Token_stream& ts) {
+	const string prompt{ "> " };
+	const string result{ "= " };
+	while (cin) {
+		try {
+			cout << prompt;
+			Calc::Token t = ts.get();
+			if (t.kind == Calc::quit) {
+				return;
+			}
+			while (t.kind == Calc::print) {
+				t = ts.get();
+			}
+			ts.putback(t);
+
+			cout << result << statement(ts) << '\n';
+		}
+		catch (exception& e) {
+			cerr << e.what() << '\n';
+			clean_up_mess(ts);
+		}
+	}
+}
+
 namespace Calc {
 
 	void clean_up_mess(Token_stream& ts) {
@@ -15,29 +39,6 @@ namespace Calc {
 	}
 
 	bool isdecl{false};
-
-	void calculate(Token_stream& ts) {
-		const string prompt{"> "};
-		const string result{"= "};
-		while(cin) {
-			try {
-				cout << prompt;
-				Token t = ts.get();
-				if(t.kind == quit) {
-					return;
-				}
-				while(t.kind == print) {
-					t = ts.get();
-				}
-				ts.putback(t);
-
-				cout << result << statement(ts) << '\n';
-			} catch(exception& e) {
-				cerr << e.what() << '\n';
-				clean_up_mess(ts);
-			}
-		}
-	}
 
 	double declaration(Token_stream& ts) {
 		Token t = ts.get();

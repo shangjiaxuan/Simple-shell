@@ -166,6 +166,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Calculator\Calculator.vcxproj">
       <Project>{3649f0d8-ed6f-4b70-a9cf-0bb448d86ed4}</Project>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
