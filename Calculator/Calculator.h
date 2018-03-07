@@ -23,10 +23,10 @@ namespace Calc {
 
 DLL void calculator(Calc::Token_stream&);
 
-DLL Calc::message calculate(Calc::Token_stream&);
-
-constexpr char quit{ 'q' };
-constexpr char value{ 'v' };
-constexpr char error{ 'e' };		//Could expand this to catch all the exceptions.
+//DLL Calc::message calculate(Calc::Token_stream&);
+//
+//constexpr char quit{ 'q' };
+//constexpr char value{ 'v' };
+//constexpr char error{ 'e' };		//Could expand this to catch all the exceptions.
 
 bool on{ true }; //quiting switch
