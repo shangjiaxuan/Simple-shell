@@ -9,25 +9,20 @@
 using namespace std;
 
 void calculator(Calc::Token_stream& ts) {
-	const string prompt{ "> " };
 	const string result{ "= " };
+	cout << "Calculator version 0.0.0.0\n";
+	cout << "Press 'enter' to continue" << endl;
 	while(cin) {
 		try {
-			cout << prompt;
-			Calc::Token t = ts.get();
-			if (t.kind == Calc::quit) {
-				return;
-			}
-			while (t.kind == Calc::print|| t.kind == Calc::end) {
-				if(t.kind== Calc::print) {
-					cout << "Please inputt something\n" << prompt;
-				}
-				t = ts.get();
-			}
-			ts.putback(t);
-			double ans = statement(ts);
-			if (on=false){return;}
-			cout << result << ans << '\n';
+			init(ts);
+			Calc::Token temp;
+			double answer;
+			do {
+				answer = statement(ts);
+				if(on == false) { return; }
+				cout << result << answer << '\n';
+				temp = ts.peek();
+			}while(temp.kind == Calc::end);
 		}
 		catch (exception& e) {
 			cerr << e.what() << '\n';
@@ -36,43 +31,39 @@ void calculator(Calc::Token_stream& ts) {
 	}
 }
 
-Calc::message calculate(Calc::Token_stream& ts) {
-	const string prompt{ "> " };
-	const string result{ "= " };
-	char ch;
-	while (cin||cin.get(ch),ch=='\n') {
-		try {
-			cout << prompt;
-			Calc::Token t = ts.get();
-			if (t.kind == Calc::quit) {
-				return{ quit };
-			}
-			while (t.kind == Calc::print) {
-				t = ts.get();
-			}
-			ts.putback(t);
-			return { value ,statement(ts) };
-		}catch (exception& e) {
-			cerr << e.what() << '\n';
-			return { error };
-		}
-	}
-}
-
-
-
-
-
-
 namespace Calc {
-
+	bool start{ true };
 	bool isdecl{false};
 
+	void init(Token_stream&ts) {
+		const string prompt{ "> " };
+	calculator_start:
+		ts.get();										//actively wait for input, solves the while(cin) problem with starting
+		cout << prompt;
+		start = true;
+		Token t = ts.peek();
+		switch (t.kind) {
+		case quit: return;
+		case print:
+			if (start) {
+				cout << "Please input something!\n";
+				goto calculator_start;
+			}
+			break;
+		case end: do {
+			t = ts.get();
+		} while (t.kind == end);
+		ts.putback(t); break;
+		default: {}
+		}
+		start = false;
+	}
+
 	double statement(Token_stream& ts) {
-		Token t = ts.get();
+		const Token t = ts.get();
 		switch (t.kind) {
 		case print:
-			throw runtime_error("Please input something");
+			throw runtime_error("Broken link");
 		case quit:
 			on = false;
 			return 0;
@@ -85,24 +76,22 @@ namespace Calc {
 		case access:
 			ts.putback(t);
 			return expression(ts);
-		case number:
+		default:
 			ts.putback(t);
 			return expression(ts);
-		default:
-			throw runtime_error("statement: Unknown statement.");
 		}
 	}
 
 	double declaration(Token_stream& ts) {
+		const Token t = ts.get();
 		isdecl = false;
-		Token t = ts.get();
 		if(t.kind != name) {
 			ts.putback(print);
 			throw runtime_error("declare: name expected in declaration.");
 		}
-		string var_name = t.name;
+		const string var_name = t.name;
 
-		Token t2 = ts.get();
+		const Token t2 = ts.get();
 		if(t2.kind != '=') {
 			throw runtime_error("declare: '=' missing in declaration of " + var_name);
 		}
@@ -112,8 +101,8 @@ namespace Calc {
 	}
 
 	double assignment(Token_stream& ts) {
-		Token t = ts.get();
-		string var_name = t.name;
+		const Token t = ts.get();
+		const string var_name = t.name;
 		double value = expression(ts);
 		assign_name(var_name, value);
 		return value;
@@ -121,9 +110,9 @@ namespace Calc {
 
 	double expression(Token_stream& ts) {
 		double left = term(ts);
+		Token t;
 		while(true) {
-			Token t = ts.get();
-			if (t.kind == print) { goto Label; }
+			t = ts.get();
 			switch(t.kind) {
 				case '+':
 					left += term(ts);
@@ -133,7 +122,7 @@ namespace Calc {
 					break;
 				default:
 					ts.putback(t);
-					Label: return left;
+					return left;
 			}
 		}
 	}
@@ -163,19 +152,21 @@ namespace Calc {
 				left = fmod(left, m);
 				break;
 			}
+			case name:{
+				return left*t.value;
+			}
 			default:
 				ts.putback(t);
 				return left;
 			}
 			t = ts.get();
-		};
+		}throw runtime_error("Term: Unknown term.");
 	}
 
 
 	double primary(Token_stream& ts) {
 		Token t = ts.get();
 		switch(t.kind) {
-			case print: throw runtime_error("???");
 			case '(':
 				{
 					double d = expression(ts);

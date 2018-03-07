@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-
 namespace Calc {
 	double get_value(std::string var);
 	void set_value(std::string var, double val);
@@ -10,4 +9,5 @@ namespace Calc {
 	double assign_name(std::string var, double val);
 
 	extern bool isdecl;
+	extern bool start;
 }

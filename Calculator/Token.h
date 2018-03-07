@@ -30,9 +30,16 @@ namespace Calc {
 		Token get();
 		void putback(Token t);
 		void ignore(char c);
+
+		Token peek();
+
+		bool start;
+
 		private:
 		bool full{false};
 		Token buffer;
 		Token last_char;
+
 	};
+
 }

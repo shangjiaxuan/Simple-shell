@@ -4,6 +4,8 @@
 
 namespace Calc {
 
+	void init(Token_stream&);
+
 	struct message {
 		char kind;
 		double value;
