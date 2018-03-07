@@ -1,3 +1,67 @@
+/* 
+
+Simple calculator
+
+The grammar for input is:
+
+Calculation:
+Statement
+Print
+Quit
+Calculation Statement
+
+Statement:
+Declaration						//"let a=10"
+Expression
+
+End:
+';'
+
+Print:
+'\n'
+
+Quit:
+q
+
+Expression:
+Term
+Expression + Term
+Expression - Term
+
+Term:
+Primary
+Term * Primary
+Term / Primary
+Term % Primary
+
+Primary:
+Number
+Variable
+sqrtPrimary
+(Expression)
+- Primary
++ Primary
+
+Number:
+floating-point-literal
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include <iostream>
 #include <stdexcept>
 #include <cmath>
@@ -190,15 +254,12 @@ namespace Calc {
 				//开平方
 			case number:
 				return t.value;
-			case name:
-				return get_value(t.name);
 			case access:
 				return get_value(t.name);
 			default:
 				throw runtime_error("primary expected");
 		}
 	}
-
 
 	void clean_up_mess(Token_stream& ts) {
 		ts.ignore(print);

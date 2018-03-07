@@ -1,3 +1,5 @@
+//For dynamic linking on different platforms
+
 #pragma once
 #include "Token.h"
 

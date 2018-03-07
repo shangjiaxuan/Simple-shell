@@ -12,18 +12,18 @@ namespace Calc {
 		Token(char ch, std::string n) : kind{ch}, name{n} {}
 	};
 
-	constexpr char number{'6'};
-	constexpr char quit{'q'};
-	constexpr char print{'\n'};
-	constexpr char end{';'};
-	constexpr char name{'N'};
-	constexpr char assign{'S'};
-	constexpr char access{'A'};
-	constexpr char let{'L'};
-	constexpr char root2{'R'};
-	constexpr char space{0};
-	const std::string declkey{"let"};
-	const std::string squareroot{"sqrt"};
+	constexpr char number{'6'};				//a numeric token
+	constexpr char quit{'q'};				//the 'exit' token
+	constexpr char print{'\n'};				//the 'print' token
+	constexpr char end{';'};				//the seperator token
+	constexpr char name{'N'};				//variable name declaration token
+	constexpr char assign{'S'};				//token for assigning value for existing variables
+	constexpr char access{'A'};				//token for accessing variable's value
+	constexpr char let{'L'};				//token for declaration indicator
+	constexpr char root2{'R'};				//token for taking square root
+	constexpr char space{0};				//token for blank space (reserved)
+	const std::string declkey{"let"};		//the declaration key
+	const std::string squareroot{"sqrt"};	//the key for ttaking square root
 
 	class Token_stream {
 		public:
@@ -31,14 +31,14 @@ namespace Calc {
 		void putback(Token t);
 		void ignore(char c);
 
-		Token peek();
+		Token peek();						//new one, not stable or tested with integration (testing)
 
-		bool start;
+		bool start;							//indicator of no being initialized (testing)
 
 		private:
 		bool full{false};
 		Token buffer;
-		Token last_char;
+		Token last_char;					//may be remanant of earlier work 
 
 	};
 

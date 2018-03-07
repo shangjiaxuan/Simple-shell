@@ -4,7 +4,7 @@
 
 namespace Calc {
 
-	void init(Token_stream&);
+	void init(Token_stream&);				//initializes for each round of input
 
 	struct message {
 		char kind;
