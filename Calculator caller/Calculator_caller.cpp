@@ -1,7 +1,4 @@
-﻿// Calculator caller.cpp : Defines the entry point for the console application.
-//
-
-#include "Header.h"
+﻿#include "Header.h"
 
 #include "../Calculator/Calculator.h"
 
@@ -15,7 +12,6 @@ int main() {
 		cout << "Error!" << endl;
 	}
 	const void_ts_ptr calculator = void_ts_ptr(GetProcAddress(hInst, "calculator"));
-
 	Calc::Token_stream ts;
 	try {
 		calculator(ts);

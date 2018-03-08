@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{653C0C54-9AD8-432A-9BE6-82206908629F}</ProjectGuid>
+    <ProjectGuid>{5F19A4E2-79CF-4198-B711-1EA7859926CA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Calculatorcaller</RootNamespace>
+    <RootNamespace>Host</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,23 +72,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Build\$(PlatformTarget)-$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Intermediates\$(ProjectName)\$(PlatformTarget)-$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)Build\$(PlatformTarget)-$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Build\$(PlatformTarget)-$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Intermediates\$(ProjectName)\$(PlatformTarget)-$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)Build\$(PlatformTarget)-$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Build\$(PlatformTarget)-$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Intermediates\$(ProjectName)\$(PlatformTarget)-$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)Build\$(PlatformTarget)-$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Build\$(PlatformTarget)-$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Intermediates\$(ProjectName)\$(PlatformTarget)-$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)Build\$(PlatformTarget)-$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -105,12 +105,15 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile />
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
       <DelayLoadDLLs>$(OutDir)Calculator.dll</DelayLoadDLLs>
+      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
     </Link>
+    <ProjectReference />
+    <ProjectReference>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -125,8 +128,6 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile />
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
       <DelayLoadDLLs>$(OutDir)Calculator.dll</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
@@ -142,8 +143,6 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
       <DelayLoadDLLs>$(OutDir)Calculator.dll</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
@@ -162,18 +161,12 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <DelayLoadDLLs>$(OutDir)Calculator.dll</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Calculator\Platform.h" />
-    <ClInclude Include="Header.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Calculator_caller.cpp" />
+    <ClCompile Include="Host.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
