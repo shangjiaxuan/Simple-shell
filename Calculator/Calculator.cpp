@@ -47,21 +47,6 @@ floating-point-literal
 
 */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #include <iostream>
 #include <stdexcept>
 #include <cmath>
@@ -76,6 +61,7 @@ void calculator(Calc::Token_stream& ts) {
 	const string result{ "= " };
 	cout << "Calculator version 0.0.0.0\n";
 	cout << "Press 'enter' to continue" << endl;
+//	fflush(stdin);
 	while(cin) {
 		try {
 			init(ts);
@@ -96,31 +82,24 @@ void calculator(Calc::Token_stream& ts) {
 }
 
 namespace Calc {
-	bool start{ true };
-	bool isdecl{false};
-
+	bool isdecl{ false };
 	void init(Token_stream&ts) {
 		const string prompt{ "> " };
 	calculator_start:
 		ts.get();										//actively wait for input, solves the while(cin) problem with starting
 		cout << prompt;
-		start = true;
 		Token t = ts.peek();
 		switch (t.kind) {
 		case quit: return;
 		case print:
-			if (start) {
 				cout << "Please input something!\n";
 				goto calculator_start;
-			}
-			break;
 		case end: do {
 			t = ts.get();
 		} while (t.kind == end);
 		ts.putback(t); break;
 		default: {}
 		}
-		start = false;
 	}
 
 	double statement(Token_stream& ts) {

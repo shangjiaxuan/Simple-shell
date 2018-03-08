@@ -4,9 +4,9 @@
 
 using namespace std;
 
-map<string, double> var_table;
-
 namespace Calc {
+
+	map<string, double> var_table;
 
 	double get_value(const string var) {
 		try {

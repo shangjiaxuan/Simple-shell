@@ -24,7 +24,7 @@ namespace Calc {
 	constexpr char space{0};				//token for blank space (reserved)
 	const std::string declkey{"let"};		//the declaration key
 	const std::string squareroot{"sqrt"};	//the key for ttaking square root
-
+						
 	class Token_stream {
 		public:
 		Token get();
@@ -33,13 +33,9 @@ namespace Calc {
 
 		Token peek();						//new one, not stable or tested with integration (testing)
 
-		bool start;							//indicator of no being initialized (testing)
-
 		private:
 		bool full{false};
 		Token buffer;
-		Token last_char;					//may be remanant of earlier work 
-
 	};
 
 }

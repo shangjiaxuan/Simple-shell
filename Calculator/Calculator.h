@@ -6,11 +6,6 @@ namespace Calc {
 
 	void init(Token_stream&);				//initializes for each round of input
 
-	struct message {
-		char kind;
-		double value;
-	};
-
 	double statement(Token_stream&);
 	double declaration(Token_stream&);
 	double assignment(Token_stream&);
@@ -29,4 +24,4 @@ DLL void calculator(Calc::Token_stream&);
 //constexpr char value{ 'v' };
 //constexpr char error{ 'e' };		//Could expand this to catch all the exceptions.
 
-bool on{ true }; //quiting switch
+bool on{ true };	//quiting switch

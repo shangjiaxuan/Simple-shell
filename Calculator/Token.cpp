@@ -4,8 +4,8 @@
 #include "Token.h"
 #include "Variable.h"
 
-
 using namespace std;
+
 
 namespace Calc {
 	void Token_stream::putback(Token t) {
@@ -88,7 +88,6 @@ namespace Calc {
 	}
 
 	void Token_stream::ignore(const char c)
-	// 略过接下来的输入，直到给定的结束符c为止（c一般来说是';'）
 	{
 		// 如果缓冲区里存的就是结束符，清空缓冲区即可
 		if(full && (c == buffer.kind)) {
