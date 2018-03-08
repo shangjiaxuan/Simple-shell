@@ -55,13 +55,14 @@ floating-point-literal
 #include "Calculator.h"
 #include "Variable.h"
 
+#include <vector>
+
 using namespace std;
 
 void calculator(istream& ist) {
 	const string result{ "= " };
-	cout << "Calculator version 0.0.0.0\n";
-	cout << "Press 'enter' to continue" << endl;
-//	fflush(stdin);
+	cout << "\nSimple Calculator\n";
+	cout << "Version 0.0.0.0\n" << endl;;
 	Calc::Token_stream ts;
 	ts.init(ist);
 	while(true) {

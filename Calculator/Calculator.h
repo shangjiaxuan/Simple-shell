@@ -16,7 +16,7 @@ namespace Calc {
 	void clean_up_mess(Token_stream&);
 }
 
-DLL void calculator(Calc::Token_stream&);
+DLL void calculator(std::istream&);
 
 //DLL Calc::message calculate(Calc::Token_stream&);
 //
