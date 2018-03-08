@@ -27,15 +27,19 @@ namespace Calc {
 						
 	class Token_stream {
 		public:
-		Token get();
-		void putback(Token t);
-		void ignore(char c);
+			void init(std::istream&);
+			Token get();
+			void putback(Token t);
+			void ignore(char c);
 
-		Token peek();						//new one, not stable or tested with integration (testing)
+			Token peek();						//new one, not stable or tested with integration (testing)
+
+			std::istream* current;
 
 		private:
-		bool full{false};
-		Token buffer;
+			bool full{false};
+			Token buffer;
+
 	};
 
 }

@@ -57,18 +57,20 @@ floating-point-literal
 
 using namespace std;
 
-void calculator(Calc::Token_stream& ts) {
+void calculator(istream& ist) {
 	const string result{ "= " };
 	cout << "Calculator version 0.0.0.0\n";
 	cout << "Press 'enter' to continue" << endl;
 //	fflush(stdin);
-	while(cin) {
+	Calc::Token_stream ts;
+	ts.init(ist);
+	while(true) {
 		try {
-			init(ts);
+			Calc::init(ts);
 			Calc::Token temp;
 			double answer;
 			do {
-				answer = statement(ts);
+				answer = Calc::statement(ts);
 				if(on == false) { return; }
 				cout << result << answer << '\n';
 				temp = ts.peek();
@@ -76,14 +78,14 @@ void calculator(Calc::Token_stream& ts) {
 		}
 		catch (exception& e) {
 			cerr << e.what() << '\n';
-			clean_up_mess(ts);
+			Calc::clean_up_mess(ts);
 		}
 	}
 }
 
 namespace Calc {
 	bool isdecl{ false };
-	void init(Token_stream&ts) {
+	void init(Token_stream& ts) {
 		const string prompt{ "> " };
 	calculator_start:
 		ts.get();										//actively wait for input, solves the while(cin) problem with starting
@@ -172,9 +174,9 @@ namespace Calc {
 
 	double term(Token_stream& ts) {
 		double left = primary(ts);
-		Token t=ts.get();
+		Token t = ts.get();
 		if (t.kind == end) { return left; }
-		while (cin) {
+		while (cin) {																	//cin still used!!!
 			switch (t.kind) {
 			case '*':
 				left *= primary(ts);
