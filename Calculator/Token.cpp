@@ -31,7 +31,9 @@ namespace Calc {
 				current->get(ch);
 			}
 			switch(ch) {
-				case quit:
+				case quit: if(cin.peek()==space||cin.peek()==end||cin.peek()==print) {
+					return Token{ quit };
+				}goto CalcAlpha;
 				case print:
 				case end:
 				case '(': case ')':
@@ -49,6 +51,7 @@ namespace Calc {
 						return Token{number,val};
 					}
 				default:
+				CalcAlpha:
 					if(isalpha(ch)) {
 						string s{ch};
 						while(current->get(ch) && (isalpha(ch) > 0 || isdigit(ch) > 0 || ch == '_')) {
