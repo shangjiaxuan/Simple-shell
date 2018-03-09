@@ -1,24 +1,32 @@
-#pragma once
+// ConsoleApplication1.cpp : Defines the entry point for the console application.
+//
 
-#define EXEC
+#include "stdafx.h"
 
-#include<stdio.h>
-#include<tchar.h>
 #include<Windows.h>
-#include<iostream>
-#include <vector>
+#include<string>
+#include <iostream>
+#include <filesystem>
+#include <istream>
 
-bool start;
-int arg_number;	//for incorporating multiple use arguments
-void prompt();	//for working with prompts
-void after_start_selector(std::vector<std::wstring>);	//select the function to call if no original argument is found
+using namespace std;
 
-void manual();
+int main() {
+	string s;
+	getline(cin, s);
+	experimental::filesystem::path p2 = s;
+	cout << p2 << '\n';
 
-void Calledcalculator(std::istream& ist);
+	wstring a = p2.wstring();
 
-#ifdef _WIN32
-void Launch(const std::wstring& str) {
+	system("pause");
+	Launch(a);
+	return 0;
+}
+
+
+//windows only (CreateProcess)
+void Launch(const std::wstring& str){
 	STARTUPINFO si;
 	PROCESS_INFORMATION pi;
 
@@ -30,7 +38,7 @@ void Launch(const std::wstring& str) {
 
 	// Start the child process.
 	if (!CreateProcess(NULL,   // No module name (use command line)
-		cmd,			 // Command line
+	    cmd,			 // Command line
 		NULL,           // Process handle not inheritable
 		NULL,           // Thread handle not inheritable
 		FALSE,          // Set handle inheritance to FALSE
@@ -52,6 +60,3 @@ void Launch(const std::wstring& str) {
 	CloseHandle(pi.hProcess);
 	CloseHandle(pi.hThread);
 }
-
-#endif
-

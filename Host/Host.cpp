@@ -15,12 +15,15 @@ using namespace std;
 typedef void(*void_ist_ptr)(istream&);
 
 
+
 void prompt() {
 	experimental::filesystem::path p = experimental::filesystem::current_path();
 	cout << p << ">";
 }
 
 int main(int argc, char* argv[]) {
+//	system("pause");
+//	Launch(L"D:\\学校资料\\资料\\Hermsk.exe");
 	if (argc <= 1) {
 		start = true;
 	host_beginning:
@@ -40,14 +43,14 @@ int main(int argc, char* argv[]) {
 			cout << endl;
 			goto host_prompt;
 		}
-		vector<string> argumentlist;
-		string s;
+		vector<wstring> argumentlist;
+		wstring s;
 		char ch{ 0 };
 		while (ch != '\n') {
-			cin >> s;
+			wcin >> s;
 			argumentlist.push_back(s);
 			arg_number++;
-			ch = cin.peek();
+			ch = wcin.peek();
 		}
 		after_start_selector(argumentlist);
 	}
@@ -55,13 +58,16 @@ int main(int argc, char* argv[]) {
 }
 
 
-void after_start_selector(vector<string> arg) {
-	if (arg[0] == "calculator") {
+void after_start_selector(vector<wstring> arg) {
+	if (arg[0].compare(L"calculator")==0) {
 		Calledcalculator(cin);
 		cout << endl;
 	}
-	else if (arg[0] == "man") {
+	else if (arg[0].compare(L"man")==0) {
 		manual();
+	}
+	else if (arg[0].substr(arg[0].length()-4,4).compare(L".exe")==0) {
+		Launch(arg[0]);
 	}
 	else {
 		cout << "\nSorry, but the program may not exist.\n" << endl;
@@ -74,7 +80,7 @@ void manual() {
 }
 
 void Calledcalculator(istream& ist) {
-	HINSTANCE hInst = LoadLibrary("Calculator.dll");
+	HINSTANCE hInst = LoadLibrary(L"Calculator.dll");
 	if (!hInst) {
 		cout << "Error!" << endl;
 	}
@@ -90,20 +96,3 @@ void Calledcalculator(istream& ist) {
 	}
 }
 
-
-
-
-
-/*
-void test (istream& ist) {
-string s;
-ist >> s;
-cout << s << '\n';
-}
-
-int main() {
-test(cin);
-system("pause");
-return 0;
-}
-*/
