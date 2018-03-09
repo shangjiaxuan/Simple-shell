@@ -9,6 +9,6 @@ namespace Calc {
 	bool is_declared(std::string var);
 	double define_name(std::string var, double val);
 	double assign_name(std::string var, double val);
-	
+
 	extern bool isdecl;
 }

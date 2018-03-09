@@ -24,7 +24,7 @@ namespace Calc {
 	constexpr char space{0};				//token for blank space (reserved)
 	const std::string declkey{"let"};		//the declaration key
 	const std::string squareroot{"sqrt"};	//the key for ttaking square root
-						
+
 	class Token_stream {
 		public:
 			void init(std::istream&);

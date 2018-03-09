@@ -1,10 +1,10 @@
-#pragma once
+﻿#pragma once
 
 #include "Platform.h"
 
 namespace Calc {
 
-	void init(Token_stream&);				//initializes for each round of input
+	void init(Token_stream&);			//initializes for each round of input
 
 	double statement(Token_stream&);
 	double declaration(Token_stream&);
