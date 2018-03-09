@@ -1,20 +1,17 @@
 ﻿#include "Header.h"
 
-#include "../Calculator/Calculator.h"
-
 using namespace std;
 
-typedef void(*void_ts_ptr)(Calc::Token_stream&);
+typedef void(*void_ist_ptr)(istream&);
 
 int main() {
 	HINSTANCE hInst = LoadLibrary("Calculator.dll");
 	if (!hInst){
 		cout << "Error!" << endl;
 	}
-	const void_ts_ptr calculator = void_ts_ptr(GetProcAddress(hInst, "calculator"));
-	Calc::Token_stream ts;
+	const void_ist_ptr calculator = void_ist_ptr(GetProcAddress(hInst, "calculator"));
 	try {
-		calculator(ts);
+		calculator(cin);
 		FreeLibrary(hInst);
 		return 0;
 	} catch(...) {

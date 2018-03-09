@@ -14,6 +14,7 @@ void prompt() {
 int main(int argc, char* argv[]) {
 	if (argc > 1) {}
 	host_beginning:
+		go_to_beginning = false;
 		cout << "********************************************************************************\n";
 		cout << "My mini program collection v0.0.0.0\n";
 		cout << "Which program do you wish to use?\n\n";
@@ -50,7 +51,7 @@ void after_start_selector(vector<wstring> arg) {
 	}
 	else if (arg[0].compare(Man)==0) {
 		manual();
-	}
+	}//launching executables may include lnks in the future
 	else if (arg[0].length() > 4 && arg[0].substr(arg[0].length()-4,4).compare(Exec)==0) {
 		Launch(arg[0]);
 	}else{
@@ -74,6 +75,3 @@ void Change_directory(std::wstring dir) {
 	}
 
 }
-
-
-

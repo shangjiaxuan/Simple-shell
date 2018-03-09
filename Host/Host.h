@@ -2,7 +2,7 @@
 
 #include "Header.h"
 
-bool go_to_beginning{false};
+bool go_to_beginning;
 int arg_number;											//for incorporating multiple use arguments
 void prompt();											//for working with prompts
 void manual();
