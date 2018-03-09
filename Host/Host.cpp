@@ -1,4 +1,4 @@
-﻿#include "Header.h"
+#include "Header.h"
 #include "Host.h"
 
 //#include "testing.h"

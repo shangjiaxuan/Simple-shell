@@ -5,4 +5,3 @@
 #ifdef _WIN32
 #include "WinPlatform.h"
 #endif
-

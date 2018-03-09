@@ -127,9 +127,4 @@ void Calledcalculator(std::istream& ist) {
 	}
 }
 
-
-
-
-
 #endif
-

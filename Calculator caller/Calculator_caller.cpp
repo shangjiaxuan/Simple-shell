@@ -1,4 +1,4 @@
-﻿#include "Header.h"
+#include "Header.h"
 
 using namespace std;
 
