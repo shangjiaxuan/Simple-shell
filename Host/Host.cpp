@@ -1,21 +1,10 @@
 ﻿#include "Header.h"
 #include "Host.h"
 
-#include "../Calculator/Token.h"
-
-#include <iostream>
-#include <string>
-#include <stdio.h>
-#include <vector>
-#include <filesystem>
-#include <experimental/filesystem>
-
-#include "testing.h"
+//#include "testing.h"
 #include "Platform.h"
 
 using namespace std;
-
-typedef void(*void_ist_ptr)(istream&);
 
 void prompt() {
 	experimental::filesystem::path p = experimental::filesystem::current_path();
@@ -23,41 +12,41 @@ void prompt() {
 }
 
 int main(int argc, char* argv[]) {
-	if (argc <= 1) {
-		start = true;
+	if (argc > 1) {}
 	host_beginning:
-		cout << "**************************************************************************************************\n";
+		cout << "********************************************************************************\n";
 		cout << "My mini program collection v0.0.0.0\n";
 		cout << "Which program do you wish to use?\n\n";
 		cout << "Use \"-h\" or \"man\" for help or manual page.\n" << endl;
-		if (!start) { getchar(); }
-		start = false;
-		wchar_t c{ 0 };
-	host_prompt:
-		prompt();
-		arg_number = 0;
-		c = cin.peek();
-		if (c == L'\n') {
-			getchar();
+		while (cin) {
+			prompt();
+			arg_number = 0;
+			vector<wstring> argumentlist = Get_input();
+			if (argumentlist.size()!=0) {
+				after_start_selector(argumentlist);
+			}
 			cout << endl;
-			goto host_prompt;
+			getchar();
+			if (go_to_beginning) { goto host_beginning; }
 		}
-		vector<wstring> argumentlist=Get_input();
-		after_start_selector(argumentlist);
 	}
-	goto host_beginning;
-}
 
 void after_start_selector(vector<wstring> arg) {
 	if(arg[0].compare(Exit)==0) {
 		exit(0);
 	}
 	else if(arg[0].compare(Cd) == 0) {
-		Change_directory(arg[1]);
+		try {
+			Change_directory(arg[1]);
+		}
+		catch(exception& e) {
+			cout << e.what();
+		}
 	}
 	else if (arg[0].compare(Calculator)==0) {
 		Calledcalculator(cin);
 		cout << endl;
+		go_to_beginning = true;
 	}
 	else if (arg[0].compare(Man)==0) {
 		manual();
@@ -65,30 +54,26 @@ void after_start_selector(vector<wstring> arg) {
 	else if (arg[0].length() > 4 && arg[0].substr(arg[0].length()-4,4).compare(Exec)==0) {
 		Launch(arg[0]);
 	}else{
-		cout << "\nSorry, but we cannot find the specified program ";
+		cout << "Sorry, but we cannot find the specified program " << endl;
 		wcout << arg[0] << endl;
+		//because console apps in windows does not support unicode console I/O very well, need some work to fix this
 	}
 }
 
 
 void manual() {
-	cout << "\nI'm sorry but there's no manual page at the moment.\n" << endl;
+	cout << "I'm sorry but there's no manual page at the moment." << endl;
 }
 
-void Calledcalculator(istream& ist) {
-	HINSTANCE hInst = LoadLibrary(L"Calculator.dll");
-	if (!hInst) {
-		cout << "Error!" << endl;
-	}
-	const void_ist_ptr calculator = void_ist_ptr(GetProcAddress(hInst, "calculator"));
-	Calc::Token_stream ts;
+
+void Change_directory(std::wstring dir) {
 	try {
-		calculator(ist);
-		FreeLibrary(hInst);
+		experimental::filesystem::current_path(dir);
+	}catch(experimental::filesystem::filesystem_error) {
+		throw runtime_error("Error: Cannot chage into that working directory!\n");
 	}
-	catch (...) {
-		cerr << "unknown error\n";
-		FreeLibrary(hInst);
-	}
+
 }
+
+
 

@@ -13,18 +13,10 @@
 #include <vector>
 #include <filesystem>
 #include <experimental/filesystem>
+#include <cstring>
+#include <iostream>
+#include <filesystem>
+#include <stdio.h>
+#include <string>
 
-
-
-
-
-
-#ifdef _WIN32
-
-
-
-
-
-
-#endif
 
