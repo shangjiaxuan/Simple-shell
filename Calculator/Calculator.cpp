@@ -61,7 +61,7 @@ using namespace std;
 
 void calculator(istream& ist) {
 	const string result{ "= " };
-	cout << "\nSimple Calculator\n";
+	cout << "Simple Calculator\n";
 	cout << "Version 0.0.0.0\n" << endl;
 	Calc::Token_stream ts;
 	ts.init(ist);

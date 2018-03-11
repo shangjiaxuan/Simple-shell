@@ -12,6 +12,8 @@ std::vector<std::wstring> Get_input() {
 	}
 	return arguments;
 }
+//It seems that vectors are not good containers in this case and it seems that it needs a 
+//structure that incorporate strings and pointers to next string (only one direction needed)
 
 std::wstring parse_input() {
 	std::string input;
@@ -25,22 +27,23 @@ std::wstring parse_input() {
 	return rtn;
 }
 
-void Convert2Unicode(const char* multiByteStr, wchar_t* unicodeStr, DWORD size) {
+LPWSTR Convert2Unicode(const LPSTR multiByteStr, const LPWSTR unicodeStr, DWORD size) {
 	if(MultiByteToWideChar(GetACP(), MB_ERR_INVALID_CHARS, multiByteStr, -1, unicodeStr, size)==0) {
 		throw std::runtime_error("Error converting to UTF16");
 	}
+	return unicodeStr;
 }
 
-DWORD Get_Needed_Unicode_size(const char* multiByteStr) {
-	DWORD rtn = MultiByteToWideChar(GetACP(), MB_ERR_INVALID_CHARS, multiByteStr, -1, nullptr, 0);
+DWORD Get_Needed_Unicode_size(const LPSTR multiByteStr) {
+	DWORD rtn = MultiByteToWideChar(GetACP(), MB_ERR_INVALID_CHARS, multiByteStr, -1, NULL, 0);
 	return rtn;
 }
 
 std::wstring String_input2Wstring_input(std::string& str) {
-	DWORD size = Get_Needed_Unicode_size(str.c_str());
+	DWORD size = Get_Needed_Unicode_size(const_cast<LPSTR>(str.c_str()));
 	if (size >= 8192) { throw std::runtime_error("Input too long!"); }
 	wchar_t temp[8192];												//the size of console input limit
-	Convert2Unicode(str.c_str(), temp, size);
+	Convert2Unicode(const_cast<LPSTR>(str.c_str()), temp, size);
 	std::wstring rtn = temp;
 	rtn.resize(size-1);
 	return rtn;
@@ -125,6 +128,13 @@ void Calledcalculator(std::istream& ist) {
 		std::cerr << "Calculator: Unknown error\n";
 		FreeLibrary(hInst);
 	}
+}
+
+////////////////////////////////////
+//Windows method for handling errors
+void Handle_Error(std::exception& e) {
+	TCHAR a[100];
+	MessageBox(NULL, Convert2Unicode(const_cast<LPSTR>(e.what()), a, 100), NULL, MB_OK);
 }
 
 #endif
