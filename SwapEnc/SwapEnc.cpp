@@ -48,6 +48,9 @@ namespace enc {
 
 	void SwapEnc::run_time() {
 		string a;
+		if(cin.peek()=='\n') {
+			cout << "Please specify at least one file!\n" << endl;
+		}
 		while (true) {
 			char c = cin.peek();
 			if (c == '\n') {
