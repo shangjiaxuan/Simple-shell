@@ -11,6 +11,6 @@ std::vector<std::wstring> Get_input();
 LPSTR UnicodeToMByte(LPCWSTR unicodeStr, LPSTR multiByteStr, DWORD size);
 void Change_directory(std::wstring);
 
-LPWSTR Convert2Unicode(const LPSTR multiByteStr, const LPWSTR unicodeStr, DWORD size);
+LPWSTR MBC2utf16(const LPSTR multiByteStr, const LPWSTR unicodeStr, DWORD size);
 
 void Handle_Error(std::exception&);
