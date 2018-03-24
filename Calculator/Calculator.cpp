@@ -1,4 +1,4 @@
-/* 
+/*
 
 Simple calculator
 
@@ -61,7 +61,7 @@ using namespace std;
 
 void calculator(istream& ist) {
 	const string result{ "= " };
-	cout << "\nSimple Calculator\n";
+	cout << "Simple Calculator\n";
 	cout << "Version 0.0.0.0\n" << endl;
 	Calc::Token_stream ts;
 	ts.init(ist);
@@ -89,7 +89,6 @@ namespace Calc {
 	void init(Token_stream& ts) {
 		const string prompt{ "> " };
 	calculator_start:
-		ts.get();										//actively wait for input, solves the while(cin) problem with starting
 		cout << prompt;
 		Token t = ts.peek();
 		switch (t.kind) {
