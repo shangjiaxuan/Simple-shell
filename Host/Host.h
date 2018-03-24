@@ -26,12 +26,14 @@ void after_start_selector(std::vector<std::wstring>);	//select the function to c
 void Launch(const std::wstring& str);
 
 void Calledcalculator(std::istream& ist);
+void CalledSwapEnc();
 
 const std::wstring Exit{ L"exit" };
 const std::wstring Cd{ L"cd" };
 const std::wstring Calculator{ L"calculator" };
 const std::wstring Man{ L"man" };
 const std::wstring Exec{ L".exe" };
+const std::wstring SwapEnc{ L"SwapEnc" };
 
 inline bool isexecutable(std::wstring& str) {
 	if (str.length() > 4 && str.substr(str.length() - 4, 4) == Exec) { return true; }
@@ -39,3 +41,4 @@ inline bool isexecutable(std::wstring& str) {
 	return false;
 }
 #endif
+
