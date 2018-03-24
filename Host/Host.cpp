@@ -13,6 +13,40 @@ void prompt() {
 	cout << p << ">";
 }
 
+vector<wstring> Get_input() {
+#ifdef WIN32
+	return WIN::Get_input();
+#endif
+}
+
+void Change_directory(wstring dir) {
+#ifdef WIN32
+	WIN::Change_directory(dir);
+#endif
+}
+
+void call(const LPCWSTR library, const LPCSTR function) {
+#ifdef WIN32
+	WIN::call(library, function);
+#endif
+}
+template <class  type>
+void call(const LPCWSTR library, const LPCSTR function, type& pass) {
+#ifdef WIN32
+	WIN::call(library, function, pass);
+#endif
+};
+
+template void call<std::istream>(const LPCWSTR, const LPCSTR, std::istream& pass);
+
+void after_start_selector(vector<wstring> arg) {
+#ifdef WIN32
+	WIN::after_start_selector(arg);
+#endif
+}
+
+
+
 int main(int argc, char* argv[]) {
 	if (argc > 1) {}
 	host_beginning:
@@ -35,45 +69,6 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-void after_start_selector(vector<wstring> arg) {
-	if(arg[arg_number]==Exit) {
-		exit(0);
-	}
-	else if(arg[arg_number]==Cd) {
-		try {
-			arg_number++;
-			Change_directory(arg[arg_number]);
-		}catch(exception& e) {
-//			Handle_Error(e);
-			cout << e.what();
-		}
-		arg_number++;
-	}
-	else if (arg[arg_number]==Calculator) {
-		arg_number++;
-		cout << endl;
-		call<istream>(L"Calculator.dll", "calculator", cin);
-		cout << endl;
-		go_to_beginning = true;
-	}
-	else if(arg[arg_number]==SwapEnc) {
-		arg_number++;
-		call(L"SwapEnc.dll","SwapEnc");
-	}
-	else if (arg[arg_number]==Man) {
-		arg_number++;
-		manual();
-	}//launching executables may include lnks in the future
-	else if (isexecutable(arg[arg_number])) {
-		Launch(arg[arg_number]);
-		arg_number++;
-	}else{
-		cout << "Sorry, but we cannot find the specified program " << endl;
-		wcout << arg[arg_number] << endl;
-		arg_number++;
-		//because console apps in windows does not support unicode console I/O very well, need some work to fix this
-	}
-}
 
 
 void manual() {
@@ -81,18 +76,51 @@ void manual() {
 }
 
 
-void Change_directory(std::wstring dir) {
-	try {
-		wcout << dir << endl;
-		std::experimental::filesystem::path p{ dir };
-		cout << p << endl;
-		experimental::filesystem::current_path(dir);
-	}catch(experimental::filesystem::filesystem_error& e) {
-		cerr << e.what() << '\n' << endl;
-		throw runtime_error("Error: Cannot chage into that working directory!\n");
+#ifdef WIN32
+  namespace WIN {
+	void after_start_selector(vector<wstring> arg) {
+		if (arg[arg_number] == Exit) {
+			exit(0);
+		}
+		else if (arg[arg_number] == Cd) {
+			try {
+				arg_number++;
+				Change_directory(arg[arg_number]);
+			}
+			catch (exception& e) {
+				//			Handle_Error(e);
+				cout << e.what();
+			}
+			arg_number++;
+		}
+		else if (arg[arg_number] == Calculator) {
+			arg_number++;
+			cout << endl;
+			cin.clear();
+			call<istream>(L"Calculator.dll", "calculator", cin);
+			cout << endl;
+			go_to_beginning = true;
+		}
+		else if (arg[arg_number] == SwapEnc) {
+			arg_number++;
+			call(L"SwapEnc.dll", "SwapEnc");
+		}
+		else if (arg[arg_number] == Man) {
+			arg_number++;
+			manual();
+		}//launching executables may include lnks in the future
+		else if (isexecutable(arg[arg_number])) {
+			Launch(arg[arg_number]);
+			arg_number++;
+		}
+		else {
+			cout << "Sorry, but we cannot find the specified program " << endl;
+			wcout << arg[arg_number] << endl;
+			arg_number++;
+			//because console apps in windows does not support unicode console I/O very well, need some work to fix this
+		}
 	}
+
 }
-
-
-
+#endif
 
