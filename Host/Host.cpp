@@ -76,6 +76,7 @@ void manual() {
 
 void Change_directory(std::wstring dir) {
 	try {
+		wcout << dir;
 		experimental::filesystem::current_path(dir);
 	}catch(experimental::filesystem::filesystem_error) {
 		throw runtime_error("Error: Cannot chage into that working directory!\n");
