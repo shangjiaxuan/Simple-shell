@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1520310618 source:c:\users\shangjiaxuan\documents\source code\calculator\calculator\calculator.cpp
+	<iostream>
+	<stdexcept>
+	<cmath>
+	"Token.h"
+	"Calculator.h"
+	"Variable.h"
+
+1520250019 c:\users\shangjiaxuan\documents\source code\calculator\calculator\token.h
+
+1520310618 c:\users\shangjiaxuan\documents\source code\calculator\calculator\calculator.h
+	"Platform.h"
+
+1520310725 c:\users\shangjiaxuan\documents\source code\calculator\calculator\platform.h
+	"Token.h"
+
+1520250019 c:\users\shangjiaxuan\documents\source code\calculator\calculator\variable.h
+	<string>
+
+1520310454 source:c:\users\shangjiaxuan\documents\source code\calculator\calculator\token.cpp
+	<iostream>
+	<stdexcept>
+	"Token.h"
+	"Variable.h"
+
+1520310454 source:c:\users\shangjiaxuan\documents\source code\calculator\calculator\variable.cpp
+	<map>
+	"Variable.h"
+
