@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
 				after_start_selector(argumentlist);
 			}
 			cout << endl;
-			getchar();
+//			getchar();
 			if (go_to_beginning) { goto host_beginning; }
 		}
 	}

@@ -78,7 +78,7 @@ namespace enc {
 						break;
 					}
 					else if (c == '\\') {
-						char t = cin.get();
+						char t = cin.get();//bug
 						if (t == '\\') {
 							cin.get();
 						}

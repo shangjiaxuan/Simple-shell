@@ -24,8 +24,10 @@ namespace WIN {
 		catch (...) {
 			std::cerr << "call: Unknown error\n";
 			FreeLibrary(hInst);
+			cin.get();
 		}
 		FreeLibrary(hInst);
+		cin.get();
 	}
 
 	template <class  type>
@@ -39,12 +41,14 @@ namespace WIN {
 		_func func = _func(GetProcAddress(hInst, function));
 		try {
 			func(pass);
-			FreeLibrary(hInst);
 		}
 		catch (...) {
 			std::cerr << "call: Unknown error\n";
 			FreeLibrary(hInst);
+			cin.get();
 		}
+		FreeLibrary(hInst);
+		cin.get();
 	}
 
 	/////////////////////////////////////////////////////////
@@ -94,7 +98,6 @@ namespace WIN {
 		while (std::cin.peek() != '\n') {
 			arguments.push_back(parse_input());
 		}
-		cin.get();
 		cin.get();
 		return arguments;
 	}
@@ -150,7 +153,7 @@ namespace WIN {
 				}
 			}
 			else if (c == '\n') {
-				cin.putback(c);
+//				cin.putback(c);
 				break;
 			}
 			else {
