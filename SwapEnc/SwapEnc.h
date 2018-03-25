@@ -8,7 +8,7 @@ namespace enc {
 	public:
 		bool on{ true };
 		void prompt();
-		void run_time();
+		void __fastcall run_time();
 		void command_line(int argc, char** argv);
 	private:
 		std::ifstream ifs;
@@ -19,4 +19,4 @@ namespace enc {
 	};
 }
 
-DLL void SwapEnc();
+DLL void __fastcall SwapEnc();

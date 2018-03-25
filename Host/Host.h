@@ -5,7 +5,7 @@
 #include "Platform.h"
 
 bool go_to_beginning;
-int arg_number;											//for incorporating multiple use arguments
+unsigned int arg_number;								//for incorporating multiple use arguments
 void prompt();											//for working with prompts
 void manual();
 
@@ -34,8 +34,8 @@ namespace WIN {
 	void after_start_selector(std::vector<std::wstring>);	//select the function to call if no original argument is found
 	void Launch(const std::wstring& str);
 
-	void Calledcalculator(std::istream& ist);
-	void CalledSwapEnc();
+//	void Calledcalculator(std::istream& ist);
+//	void CalledSwapEnc();
 
 	inline bool isexecutable(std::wstring& str) {
 		if (str.length() > 4 && str.substr(str.length() - 4, 4) == Exec) { return true; }

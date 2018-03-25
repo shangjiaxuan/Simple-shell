@@ -46,7 +46,7 @@ namespace enc {
 		ofs.close();
 	}
 
-	void SwapEnc::run_time() {
+	void __fastcall SwapEnc::run_time() {
 		string a;
 		if(cin.peek()=='\n') {
 			cout << "Please specify at least one file!\n" << endl;
@@ -163,7 +163,7 @@ int main(int argc, char* argv[]) {
 #endif
 
 #ifdef _LIB 
-void SwapEnc() {
+void __fastcall SwapEnc() {
 	enc::SwapEnc This;
 	This.prompt();
 	while (true) {

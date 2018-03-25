@@ -102,9 +102,9 @@ namespace WIN {
 		return arguments;
 	}
 	//It seems that vectors are not good containers in this case and it seems that it needs a 
-	//structure that incorporate strings and pointers to next string (only one direction needed)
+	//structure that incorporate strings and pointers to next wstring2string (only one direction needed)
 
-	bool change(char a) {
+	bool change(const char& a) {
 		if (a == '\a' || a == '\b' || a == '\f' || a == '\n' || a == '\r' || a == '\t' || a == '\'' || a == '\"') {
 			return true;
 		}//'\\'will be dealt with else where. cannot afford to use it too much in cmd shell 
@@ -114,6 +114,7 @@ namespace WIN {
 
 
 	std::wstring parse_input() {
+		convert This;
 		std::string input;
 		//	std::cin >> input;
 		char c;
@@ -170,7 +171,7 @@ namespace WIN {
 			}
 		}
 		//	stop:
-		std::wstring rtn = String_input2Wstring_input(input);
+		std::wstring rtn = This.string2wstring(input);
 		//	wchar_t temp= std::cin.get();
 		//	if (temp!=L'\"'&&temp!=L'\\') {
 		//		std::cin.putback(temp);
@@ -178,51 +179,6 @@ namespace WIN {
 		//	std::cin >> rtn;
 		return rtn;
 	}
-
-	LPWSTR MBC2utf16(const LPSTR multiByteStr, const LPWSTR unicodeStr, DWORD size) {
-		if (MultiByteToWideChar(CP_OEMCP, MB_ERR_INVALID_CHARS, multiByteStr, -1, unicodeStr, size) == 0) {
-			throw std::runtime_error("Error converting to UTF16");
-		}
-		return unicodeStr;
-	}
-
-	DWORD Get_Needed_Unicode_size(const LPSTR multiByteStr) {
-		DWORD rtn = MultiByteToWideChar(CP_OEMCP, MB_ERR_INVALID_CHARS, multiByteStr, -1, NULL, 0);
-		return rtn;
-	}
-
-	std::wstring String_input2Wstring_input(std::string& str) {
-		DWORD size = Get_Needed_Unicode_size(const_cast<LPSTR>(str.c_str()));
-		if (size >= 8192) { throw std::runtime_error("Input too long!"); }
-		wchar_t temp[8192];												//the size of console input limit
-		MBC2utf16(const_cast<LPSTR>(str.c_str()), temp, size);
-		std::wstring rtn = temp;
-		rtn.resize(size - 1);
-		return rtn;
-	}
-
-	///////////////////////////////////////////////////////////////////////////////////////
-	//Need some work to integrate this. Non-ASCII characters cannot be displayed on console
-	//with wcout right now and needs to converted to MBCS
-	LPSTR UnicodeToMByte(LPCWSTR unicodeStr, LPSTR multiByteStr, DWORD size)
-	{
-		DWORD minSize = WideCharToMultiByte(
-			CP_OEMCP, WC_ERR_INVALID_CHARS,
-			unicodeStr,
-			-1,
-			NULL,
-			0,
-			NULL,
-			FALSE);
-		if (size < minSize)
-		{
-			std::cout << FALSE;
-		}
-		// Convert string from Unicode to multi-byte.
-		WideCharToMultiByte(CP_OEMCP, NULL, unicodeStr, -1, multiByteStr, size, NULL, FALSE);
-		return multiByteStr;
-	}
-	/////////////////////////////////////////////////////////////////////////////////////////
 
 	//////////////////////////////////////////////////////////////////
 	//Windows API for launching exectutables
@@ -265,9 +221,9 @@ namespace WIN {
 	////////////////////////////////////
 	//Windows method for handling errors
 	void Handle_Error(std::exception& e) {
-		TCHAR a[100];
-		MessageBox(NULL, MBC2utf16(const_cast<LPSTR>(e.what()), a, 100), NULL, MB_OK);
+		convert This;
+		string temp = e.what();
+		MessageBox(NULL, This.string2wstring(temp).c_str(), NULL, MB_OK);
 	}
-
 }
 #endif
