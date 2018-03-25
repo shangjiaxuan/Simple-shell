@@ -168,6 +168,7 @@
     <ClInclude Include="library.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="SwapEnc.h" />
+    <ClInclude Include="version.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

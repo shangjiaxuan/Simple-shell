@@ -47,31 +47,26 @@ floating-point-literal
 
 */
 
-#include <iostream>
-#include <stdexcept>
-#include <cmath>
-
-#include "Token.h"
 #include "Calculator.h"
-#include "Variable.h"
-
-#include <vector>
 
 using namespace std;
 
 void calculator(istream& ist) {
 	const string result{ "= " };
 	cout << "Simple Calculator\n";
-	cout << "Version 0.0.0.0\n" << endl;
+	cout << "Version " << STRING(VERSION) << '\n' << endl;
 	Calc::Token_stream ts;
 	ts.init(ist);
 	while(true) {
 		try {
-			Calc::init(ts);
+			init(ts);
+			if(on==false) {
+				return;
+			}
 			Calc::Token temp;
 			double answer;
 			do {
-				answer = Calc::statement(ts);
+				answer = statement(ts);
 				if(on == false) { return; }
 				cout << result << answer << '\n';
 				temp = ts.peek();
@@ -81,6 +76,7 @@ void calculator(istream& ist) {
 			cerr << e.what() << '\n';
 			Calc::clean_up_mess(ts);
 		}
+		ts.get();
 	}
 }
 
@@ -90,17 +86,22 @@ namespace Calc {
 		const string prompt{ "> " };
 	calculator_start:
 		cout << prompt;
-		Token t = ts.peek();
+		Token t = ts.get();
 		switch (t.kind) {
-		case quit: return;
+		case quit: 
+			on = false;
+			return;
 		case print:
-				cout << "Please input something!\n";
-				goto calculator_start;
-		case end: do {
+			cout << "Please input something!\n";
+			goto calculator_start;
+		case end: 
+			while (t.kind == end) {
 			t = ts.get();
-		} while (t.kind == end);
+			} 
 		ts.putback(t); break;
-		default: {}
+		default: 
+			ts.putback(t);
+			break;
 		}
 	}
 
@@ -109,6 +110,8 @@ namespace Calc {
 		switch (t.kind) {
 		case print:
 			throw runtime_error("Broken link");
+		case end:
+			return statement(ts);
 		case quit:
 			on = false;
 			return 0;
@@ -159,6 +162,9 @@ namespace Calc {
 		while(true) {
 			t = ts.get();
 			switch(t.kind) {
+				case end:
+					ts.putback(t);
+					return left;
 				case '+':
 					left += term(ts);
 					break;
@@ -175,7 +181,10 @@ namespace Calc {
 	double term(Token_stream& ts) {
 		double left = primary(ts);
 		Token t = ts.get();
-		if (t.kind == end) { return left; }
+		if (t.kind == end) {
+			ts.putback(t);
+			return left;
+		}
 		while (cin) {																	//cin still used!!!
 			switch (t.kind) {
 			case '*':
@@ -200,6 +209,9 @@ namespace Calc {
 			case name:{
 				return left*t.value;
 			}
+//			case end:
+//				ts.putback(t);
+//				return left;
 			default:
 				ts.putback(t);
 				return left;

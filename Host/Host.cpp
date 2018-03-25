@@ -4,7 +4,7 @@
 //#include "testing.h"
 #include "Platform.h"
 #include "testing.h"
-#include "../Calculator/Calculator.h"
+#include "version.h"
 
 using namespace std;
 
@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
 	host_beginning:
 		go_to_beginning = false;
 		cout << "********************************************************************************\n";
-		cout << "My mini program collection v0.0.0.0\n";
+		cout << "My mini program collection " << STRING(VERSION) << '\n';
 		cout << "Which program do you wish to use?\n\n";
 		cout << "Use \"-h\" or \"man\" for help or manual page.\n" << endl;
 		while (cin) {

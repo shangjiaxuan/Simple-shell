@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string>
-
 namespace Calc {
 
 	double get_value(std::string var);
