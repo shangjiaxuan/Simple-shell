@@ -79,12 +79,17 @@ void manual() {
 #ifdef WIN32
   namespace WIN {
 	void after_start_selector(vector<wstring> arg) {
+		convert This;
 		if (arg[arg_number] == Exit) {
 			exit(0);
 		}
 		else if (arg[arg_number] == Cd) {
 			try {
 				arg_number++;
+				if(arg.size()<=arg_number) {
+					cout << "\ncd: no target specified!" << endl;
+					return;
+				}
 				Change_directory(arg[arg_number]);
 			}
 			catch (exception& e) {
@@ -114,8 +119,7 @@ void manual() {
 			arg_number++;
 		}
 		else {
-			cout << "Sorry, but we cannot find the specified program " << endl;
-			wcout << arg[arg_number] << endl;
+			cout << "Sorry, but we cannot find the specified program " <<This.wstring2string(arg[arg_number])<< endl;
 			arg_number++;
 			//because console apps in windows does not support unicode console I/O very well, need some work to fix this
 		}

@@ -170,6 +170,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="convert.cpp" />
     <ClCompile Include="Host.cpp" />
     <ClCompile Include="testing.cpp" />
     <ClCompile Include="Windows.cpp" />
