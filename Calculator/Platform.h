@@ -1,7 +1,6 @@
 //For dynamic linking on different platforms
 
 #pragma once
-#include "Token.h"
 
 #ifdef _WIN32
 #ifdef _LIB

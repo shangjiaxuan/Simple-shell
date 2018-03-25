@@ -5,6 +5,7 @@
 
 #include "Header.h"
 #include "SwapEnc.h"
+#include "version.h"
 
 using namespace std;
 
@@ -12,7 +13,7 @@ namespace enc {
 
 	void SwapEnc::name_ver() {
 		cout << "Simple encryptor & decryptor\n";
-		cout << "Version 0.0.0.0\n" << endl;
+		cout << "Version " << STRING(VERSION) << '\n' << endl;
 	}
 	void SwapEnc::prompt() {
 		name_ver();
@@ -163,7 +164,7 @@ int main(int argc, char* argv[]) {
 #endif
 
 #ifdef _LIB 
-void __fastcall SwapEnc() {
+void SwapEnc() {
 	enc::SwapEnc This;
 	This.prompt();
 	while (true) {

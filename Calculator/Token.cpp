@@ -1,11 +1,8 @@
-﻿#include <iostream>
-#include <stdexcept>
+﻿#include "Header.h"
 
 #include "Token.h"
-#include "Variable.h"
 
 using namespace std;
-
 
 namespace Calc {
 
@@ -31,7 +28,7 @@ namespace Calc {
 				current->get(ch);
 			}
 			switch(ch) {
-				case quit: if(cin.peek()==space||cin.peek()==end||cin.peek()==print) {
+				case quit: if(current->peek()==space||current->peek()==end||current->peek()==print) {
 					return Token{ quit };
 				}goto CalcAlpha;
 				case print:
@@ -70,8 +67,12 @@ namespace Calc {
 						char test{0};
 						current->get(test);
 						//去空格
-						while(test == ' ') {
-							current->get(test);
+						if (test == ' ') {
+							do {
+								current->get(test);
+							} while (test == ' ');
+							current->putback(test);
+							break;
 						}
 						//去空格
 						//传出赋值变量

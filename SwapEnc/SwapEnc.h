@@ -19,4 +19,4 @@ namespace enc {
 	};
 }
 
-DLL void __fastcall SwapEnc();
+DLL void SwapEnc();

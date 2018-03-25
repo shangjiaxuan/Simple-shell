@@ -1,6 +1,9 @@
 ﻿#pragma once
 
+#include "version.h"
 #include "Platform.h"
+
+#include "Token.h"
 
 namespace Calc {
 

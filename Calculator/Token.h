@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Variable.h"
+
 namespace Calc {
 	class Token {
 		public:
