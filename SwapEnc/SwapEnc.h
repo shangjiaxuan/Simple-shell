@@ -15,7 +15,9 @@ namespace enc {
 		std::ifstream ifs;
 		std::ofstream ofs;
 		void Exit();
-		void __fastcall enc(std::string a);
+		void __fastcall enc(fs::path input, fs::path output);
+		std::string parse_pathnames(std::istream& ist);
+		void __fastcall encrypt_loop(std::istream & ist);
 	};
 }
 
