@@ -8,7 +8,7 @@
 
 ### Building from source
 
-* Use Visual Studio 2017 with VC++, C++17 support and you will fine. Other compilers may or may not work with the code. File a issue if you want your compiler supported, but may not be attended until the program reaches a stable stage.
+* Use Visual Studio 2017 with VC++, C++17 support and you will fine (You may need to retarget the solution corresponding to your SDK version, though...). Other compilers may or may not work with the code. File a issue if you want your compiler supported, but may not be attended until the program reaches a stable stage.
 
 ### Contributing guidelines
 
