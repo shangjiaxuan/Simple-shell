@@ -1,9 +1,4 @@
-﻿// SwapEnc.cpp : Defines the entry point for the console application.
-//
-
-#include "library.h"
-
-#include "Header.h"
+﻿#include "Header.h"
 #include "SwapEnc.h"
 #include "version.h"
 
@@ -16,7 +11,6 @@ namespace enc {
 		cout << "Version " << STRING(VERSION) << '\n' << endl;
 	}
 	void SwapEnc::prompt() {
-		name_ver();
 		cout << "Please specify files for encryption or decryption.\n";
 		cout << "You may drag and drop, and then press \"enter\" if you like.\n" << endl;
 	}
@@ -79,17 +73,16 @@ namespace enc {
 						break;
 					}
 					else if (c == '\\') {
-						char t = cin.get();//bug
+						char t = cin.peek();
 						if (t == '\\') {
 							cin.get();
 						}
 						else {
-							cin.putback(t);
 							a += c;
 						}
 					}
 				}
-				//			cout << a << endl;
+				cout << "Encrypting the file \"" << a <<"\""<< endl;
 				enc(a);
 			}
 		}
@@ -123,7 +116,7 @@ namespace enc {
 		switch (c) {
 		case 'Y': case 'y': case '\n':
 			cout << endl;
-			name_ver();
+			prompt();
 			break;
 		case 'N': case 'n':
 			on = false;
@@ -134,7 +127,7 @@ namespace enc {
 	}
 }
 
-#ifndef _LIB
+#ifndef _WINDLL
 
 int main(int argc, char* argv[]) {
 	SwapEnc This;
@@ -163,10 +156,11 @@ int main(int argc, char* argv[]) {
 
 #endif
 
-#ifdef _LIB 
+#ifdef _WINDLL 
 void SwapEnc() {
 	enc::SwapEnc This;
-	This.prompt();
+	enc::SwapEnc::name_ver();
+	enc::SwapEnc::prompt();
 	while (true) {
 		try {
 			This.run_time();
