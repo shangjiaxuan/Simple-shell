@@ -23,7 +23,7 @@
     <ProjectGuid>{BD4CD5F7-7817-4C24-8C01-FCD9BDFB66E4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SwapEnc</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -165,7 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
-    <ClInclude Include="library.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="SwapEnc.h" />
     <ClInclude Include="version.h" />

@@ -26,9 +26,6 @@
     <ClInclude Include="SwapEnc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="library.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
