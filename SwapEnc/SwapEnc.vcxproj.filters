@@ -18,6 +18,9 @@
     <ClCompile Include="SwapEnc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Paths.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h">
@@ -30,6 +33,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Paths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

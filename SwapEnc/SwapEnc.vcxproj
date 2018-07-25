@@ -161,10 +161,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Paths.cpp" />
     <ClCompile Include="SwapEnc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Paths.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="SwapEnc.h" />
     <ClInclude Include="version.h" />
