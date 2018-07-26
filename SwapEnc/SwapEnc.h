@@ -11,6 +11,7 @@ namespace enc {
 		static void prompt();
 		void __fastcall run_time();
 		void command_line(int argc, char** argv);
+		std::string parse_name(std::string ori);
 	private:
 		std::ifstream ifs;
 		std::ofstream ofs;
@@ -21,4 +22,4 @@ namespace enc {
 	};
 }
 
-DLL void SwapEnc();
+DLL_PORT void SwapEnc();

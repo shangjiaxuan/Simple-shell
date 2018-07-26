@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Paths.cpp" />
     <ClCompile Include="SwapEnc.cpp" />
   </ItemGroup>

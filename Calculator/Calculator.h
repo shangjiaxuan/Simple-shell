@@ -19,9 +19,9 @@ namespace Calc {
 	void clean_up_mess(Token_stream&);
 }
 
-DLL void calculator(std::istream&);
+DLL_PORT void calculator(std::istream&);
 
-//DLL Calc::message calculate(Calc::Token_stream&);
+//DLL_PORT Calc::message calculate(Calc::Token_stream&);
 //
 //constexpr char quit{ 'q' };
 //constexpr char value{ 'v' };

@@ -1,8 +1,5 @@
 #pragma once
 
-#ifdef _WIN32
-#include <Windows.h>
-#endif
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -10,6 +7,8 @@
 #include <filesystem>
 #include <cassert>
 #include <stack>
+
+#include "version.h"
 
 namespace fs = std::experimental::filesystem;
 
