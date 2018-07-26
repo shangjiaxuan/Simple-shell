@@ -157,7 +157,6 @@
   <ItemGroup>
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="library.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Token.h" />
     <ClInclude Include="Variable.h" />

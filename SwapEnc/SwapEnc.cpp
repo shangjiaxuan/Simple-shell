@@ -1,6 +1,5 @@
 ﻿#include "Header.h"
 #include "SwapEnc.h"
-#include "version.h"
 #include "Paths.h"
 
 using namespace std;
@@ -86,7 +85,7 @@ namespace enc {
 		}
 	}
 
-	std::string parse_name(std::string ori) {
+	std::string SwapEnc::parse_name(std::string ori) {
 		string rtn;
 		if (ori.substr(ori.length() - 4, 4) == ".enc") {
 			rtn = ori.substr(0, ori.length() - 4);
@@ -97,15 +96,6 @@ namespace enc {
 		return rtn;
 	}
 
-	fs::path parse_output_path(fs::path input, fs::path cur_output, int depth) {
-		if(depth==0) {
-			return parse_name(input.string());
-		}
-		else {
-
-		}
-	}
-
 	void __fastcall SwapEnc::encrypt_loop(std::istream& ist) {
 		while (true) {
 			string name = parse_pathnames(ist);
@@ -114,16 +104,17 @@ namespace enc {
 			}
 			fs::path input = name;
 			if(fs::is_directory(input)) {
-				iopath_recursive_iterator it{ input };
-//				cout << "Iterator constructed!\n";
+				fs::path output = parse_name(input.string());
+				pathman::iopath_recursive_iterator it{ input, output };
+				cout << "Iterator constructed!\n";
 				while(it!=it.end()) {
-//					cout << "Current input path: " << it.cur_ipath << '\n';
-//					cout << "Current output path: " << it.cur_opath << '\n';
+					cout << "Current input path: " << it.cur_ipath << '\n';
+					cout << "Current output path: " << it.cur_opath << '\n';
 					if(fs::is_directory(it.cur_ipath)) {
-						fs::create_directory(it.cur_opath);
+						fs::create_directory(it.cur_opath);//parse_name(it.cur_opath.string()));
 					}
 					else {
-						enc(it.cur_ipath, it.cur_opath);
+						enc(it.cur_ipath, parse_name(it.cur_opath.string()));
 					}
 					++it;
 				}
@@ -178,64 +169,16 @@ namespace enc {
 		switch (c) {
 		case 'Y': case 'y': case '\n':
 			cout << endl;
-			prompt();
 			break;
 		case 'N': case 'n':
 			on = false;
 			break;
 		default:
+			char c;
+			do {
+				cin.get(c);
+			} while (c != '\n'&&c != EOF);
 			throw runtime_error("Unkown specifier!");
 		}
 	}
 }
-
-
-//int main() function for the program to run independently (eg. debug purpose)
-#ifndef _WINDLL
-int main(int argc, char* argv[]) {
-	enc::SwapEnc This;
-	if(argc <= 1) {
-		This.name_ver();
-		while(This.on) {
-			try {
-				This.prompt();
-				This.run_time();
-			} catch(exception& e) {
-				cerr << e.what() << endl;
-			}
-		}
-	}
-	if(argc > 1) {
-		try {
-			This.command_line(argc, argv);
-		} catch(exception& e) {
-			cerr << e.what() << endl;
-		}
-	}
-	//	system("pause");
-	return 0;
-}
-
-#endif
-
-
-//The function for export in extern "C"
-#ifdef _WINDLL 
-void SwapEnc() {
-	enc::SwapEnc This;
-	enc::SwapEnc::name_ver();
-	while (true) {
-		try {
-			enc::SwapEnc::prompt();
-			This.run_time();
-			if(!This.on) {
-				return;
-			}
-		}
-		catch (exception& e) {
-			cerr << e.what() << endl;
-		}
-	}
-}
-#endif
-
