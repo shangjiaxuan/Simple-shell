@@ -32,7 +32,7 @@ namespace enc {
 		// 	b = input + ".enc";
 		// }
 		ofs.open(output, ios::binary);
-		cout << "Encrypting the file \"" << input << "\"" << endl;
+		cout << "Processing the file \"" << input << "\"" << endl;
 		char cur;
 		ifs.get(cur);
 		while (!ifs.eof()) {
@@ -114,10 +114,23 @@ namespace enc {
 			}
 			fs::path input = name;
 			if(fs::is_directory(input)) {
-				fs::path root = input;
+				iopath_recursive_iterator it{ input };
+//				cout << "Iterator constructed!\n";
+				while(it!=it.end()) {
+//					cout << "Current input path: " << it.cur_ipath << '\n';
+//					cout << "Current output path: " << it.cur_opath << '\n';
+					if(fs::is_directory(it.cur_ipath)) {
+						fs::create_directory(it.cur_opath);
+					}
+					else {
+						enc(it.cur_ipath, it.cur_opath);
+					}
+					++it;
+				}
 			}
-			if (fs::is_regular_file(input)) {
-				fs::path output = parse_output_path(input,0);
+//			if (fs::is_regular_file(input)) {
+			else {
+				fs::path output = parse_name(input.string());
 				enc(input,output);
 			}
 		}
@@ -176,17 +189,17 @@ namespace enc {
 	}
 }
 
-#ifndef _WINDLL
 
+//int main() function for the program to run independently (eg. debug purpose)
+#ifndef _WINDLL
 int main(int argc, char* argv[]) {
-	SwapEnc This;
+	enc::SwapEnc This;
 	if(argc <= 1) {
 		This.name_ver();
-		This.prompt();
-		while(true) {
+		while(This.on) {
 			try {
+				This.prompt();
 				This.run_time();
-				This.Exit();
 			} catch(exception& e) {
 				cerr << e.what() << endl;
 			}
@@ -205,13 +218,15 @@ int main(int argc, char* argv[]) {
 
 #endif
 
+
+//The function for export in extern "C"
 #ifdef _WINDLL 
 void SwapEnc() {
 	enc::SwapEnc This;
 	enc::SwapEnc::name_ver();
-	enc::SwapEnc::prompt();
 	while (true) {
 		try {
+			enc::SwapEnc::prompt();
 			This.run_time();
 			if(!This.on) {
 				return;
@@ -223,3 +238,4 @@ void SwapEnc() {
 	}
 }
 #endif
+

@@ -18,6 +18,8 @@ private:
 		return rtn;
 	}
 
+	std::stack<fs::directory_iterator> stack;
+
 public:
 	iopath_recursive_iterator() = default;
 	iopath_recursive_iterator(fs::path& input_root) {
@@ -27,20 +29,21 @@ public:
 		cur_oroot = cur_opath;
 		temp = fs::directory_iterator(iroot);
 	}
+
+
 	unsigned depth{0};
 	fs::path cur_ipath;
 	fs::path cur_opath;
+
 	void pop();
 	iopath_recursive_iterator end();
 	iopath_recursive_iterator& operator++();
 
-	bool operator==(iopath_recursive_iterator& tar) {
+	bool operator==(const iopath_recursive_iterator& tar) {
 		return((cur_ipath == tar.cur_ipath) && (iroot == tar.iroot));
 	}
 
-	bool operator!=(iopath_recursive_iterator& tar) {
+	bool operator!=(const iopath_recursive_iterator& tar) {
 		return !(*this == tar);
 	}
-
-	std::stack<fs::directory_iterator> stack;
 };
