@@ -1,7 +1,5 @@
 #pragma once
 
-#define EXEC
-
 #include<stdio.h>
 #include<tchar.h>
 #include<iostream>
@@ -12,7 +10,7 @@
 #include <stdio.h>
 #include <vector>
 #include <filesystem>
-#include <experimental/filesystem>
+#include <filesystem>
 #include <cstring>
 #include <iostream>
 #include <filesystem>

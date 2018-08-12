@@ -5,7 +5,7 @@
 #define MyAppVersion "0.0.0.0"
 #define MyAppPublisher "shangjiaxuan"
 #define MyAppURL "https://github.com/shangjiaxuan/Calculator"
-#define MyAppExeName "Calculator caller.exe"
+#define MyAppExeName "Host.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -22,19 +22,19 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={userdesktop}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=C:\Users\shangjiaxuan\Documents\Source code\Calculator\LICENSE
-InfoBeforeFile=C:\Users\shangjiaxuan\Documents\Source code\Calculator\Installer stuff\Before.rtf
-InfoAfterFile=C:\Users\shangjiaxuan\Documents\Source code\Calculator\Installer stuff\After.rtf
-OutputDir=C:\Users\shangjiaxuan\Documents\Source code\Calculator\Build\x64-Release
+LicenseFile=..\LICENSE
+InfoBeforeFile=Before.rtf
+InfoAfterFile=After.rtf
+OutputDir=..\Build\x64-Release
 OutputBaseFilename=setup-x64
-Compression=lzma
+Compression=lzma/ultra64
 SolidCompression=yes
 PrivilegesRequired=lowest
-VersionInfoVersion=0.0.0.0
-VersionInfoTextVersion=0.0.0.0
+VersionInfoVersion=0.0.1.1
+VersionInfoTextVersion=0.0.1.1
 VersionInfoProductName=Calculator
-VersionInfoProductVersion=0.0.0.0
-InternalCompressLevel=max
+VersionInfoProductVersion=0.0.1.1
+InternalCompressLevel=ultra64
 CompressionThreads=2
 ArchitecturesInstallIn64BitMode=x64
 
@@ -46,9 +46,10 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "C:\Users\shangjiaxuan\Documents\Source code\Calculator\Build\x64-Release\Calculator caller.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\shangjiaxuan\Documents\Source code\Calculator\Build\x64-Release\Calculator.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+Source: "..\Build\x64-Release\Host.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Build\x64-Release\Calculator.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Build\x64-Release\SwapEnc.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

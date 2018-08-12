@@ -9,16 +9,17 @@ unsigned int arg_number;								//for incorporating multiple use arguments
 void prompt();											//for working with prompts
 void manual();
 
-inline bool operator==(const std::string str1, const std::string& str2) {
+/*
+inline bool operator==(const std::string& str1, const std::string& str2) {
 	if (str1.compare(str2) == 0) { return true; }
 	return false;
 }
 
-inline bool operator==(const std::wstring str1, const std::wstring& str2) {
+inline bool operator==(const std::wstring& str1, const std::wstring& str2) {
 	if (str1.compare(str2) == 0) { return true; }
 	return false;
 }
-
+*/
 
 
 #ifdef _WIN32

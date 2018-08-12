@@ -1,7 +1,6 @@
 ﻿#pragma once
 
-#include "version.h"
-#include "Platform.h"
+#include "Header.h"
 
 #include "Token.h"
 
@@ -19,7 +18,9 @@ namespace Calc {
 	void clean_up_mess(Token_stream&);
 }
 
+#ifdef _WINDLL
 DLL_PORT void calculator(std::istream&);
+#endif
 
 //DLL_PORT Calc::message calculate(Calc::Token_stream&);
 //
@@ -27,4 +28,4 @@ DLL_PORT void calculator(std::istream&);
 //constexpr char value{ 'v' };
 //constexpr char error{ 'e' };		//Could expand this to catch all the exceptions.
 
-bool on{ true };	//quiting switch
+extern bool on;	//quiting switch

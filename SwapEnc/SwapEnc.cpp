@@ -106,10 +106,10 @@ namespace enc {
 			if(fs::is_directory(input)) {
 				fs::path output = parse_name(input.string());
 				pathman::iopath_recursive_iterator it{ input, output };
-				cout << "Iterator constructed!\n";
+//				cout << "Iterator constructed!\n";
 				while(it!=it.end()) {
-					cout << "Current input path: " << it.cur_ipath << '\n';
-					cout << "Current output path: " << it.cur_opath << '\n';
+//					cout << "Current input path: " << it.cur_ipath << '\n';
+//					cout << "Current output path: " << it.cur_opath << '\n';
 					if(fs::is_directory(it.cur_ipath)) {
 						fs::create_directory(it.cur_opath);//parse_name(it.cur_opath.string()));
 					}
@@ -127,7 +127,7 @@ namespace enc {
 		}
 	}
 
-	void __fastcall SwapEnc::run_time() {
+	void SwapEnc::run_time() {
 		if(cin.peek()=='\n') {
 			cout << "Please specify at least one file!\n" << endl;
 		}
