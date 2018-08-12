@@ -6,3 +6,6 @@
 #include <vector>
 #include <string>
 #include <map>
+
+#include "version.h"
+#include "Platform.h"

@@ -299,9 +299,7 @@ __pycache__/
 *.xsd.cs
 
 #Project-specific
-[Bb]uild
-Intermediates/
-![Bb]uild/x86-[Rr]elease/Calculator caller.exe
-![Bb]uild/x86-[Rr]elease/Calculator.dll
-![Bb]uild/x64-[Rr]elease/Calculator caller.exe
-![Bb]uild/x64-[Rr]elease/Calculator.dll
+[Bb]uild/
+[Ii]ntermediates/
+*.png
+

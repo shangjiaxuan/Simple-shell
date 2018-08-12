@@ -11,7 +11,7 @@ namespace Calc {
 	double get_value(const string var) {
 		try {
 			return var_table.at(var);
-		} catch(out_of_range) {
+		} catch(out_of_range&) {
 			throw runtime_error("get: undefined variable " + var);
 		}
 	}
@@ -19,7 +19,7 @@ namespace Calc {
 	void set_value(const string var, const double val) {
 		try {
 			var_table.at(var) = val;
-		} catch(out_of_range) {
+		} catch(out_of_range&) {
 			throw runtime_error("set: undefined variable " + var);
 		}
 	}

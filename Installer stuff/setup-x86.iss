@@ -2,18 +2,18 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Calculator"
-#define MyAppVersion "0.0.0.0"
+#define MyAppVersion "0.0.1.1"
 #define MyAppPublisher "shangjiaxuan"
 #define MyAppURL "https://github.com/shangjiaxuan/Calculator"
-#define MyAppExeName "Calculator caller.exe"
+#define MyAppExeName "Host.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{88B8AAEC-BC77-4040-A86E-1176446DA7E0}
+AppId={{067AC5D2-2000-49A0-AB59-E9F6674C54C6}
 AppName=Calculator
-AppVersion=0.0.0.0
+AppVersion=0.0.1.1
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher=shangjiaxuan
 AppPublisherURL=https://github.com/shangjiaxuan
@@ -22,32 +22,33 @@ AppUpdatesURL=https://github.com/shangjiaxuan/Calculator/releases
 DefaultDirName={userdesktop}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=C:\Users\shangjiaxuan\Documents\Source code\Calculator\LICENSE
-InfoBeforeFile=C:\Users\shangjiaxuan\Documents\Source code\Calculator\Installer stuff\Before.rtf
-InfoAfterFile=C:\Users\shangjiaxuan\Documents\Source code\Calculator\Installer stuff\After.rtf
-OutputDir=C:\Users\shangjiaxuan\Documents\Source code\Calculator\Build\x86-Release
+LicenseFile=..\LICENSE
+InfoBeforeFile=Before.rtf
+InfoAfterFile=After.rtf
+OutputDir=..\Build\x86-Release
 OutputBaseFilename=setup-x86
-Compression=lzma
+Compression=lzma/ultra
 SolidCompression=yes
 PrivilegesRequired=lowest
 ShowUndisplayableLanguages=True
-VersionInfoVersion=0.0.0.0
+VersionInfoVersion=0.0.1.1
 VersionInfoProductName=Calculator
-VersionInfoProductVersion=0.0.0.0
-InternalCompressLevel=max
+VersionInfoProductVersion=0.0.1.1
+InternalCompressLevel=ultra
 CompressionThreads=2
 
 [Languages]
-Name: "english"; MessagesFile: "compiler:Default.isl"
+Name: "english"; MessagesFile: "compiler:Default.isl"; InfoBeforeFile: "Before.rtf"; InfoAfterFile: "After.rtf"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "C:\Users\shangjiaxuan\Documents\Source code\Calculator\Build\x86-Release\Calculator caller.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\shangjiaxuan\Documents\Source code\Calculator\Build\x86-Release\Calculator.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+Source: "..\Build\x86-Release\Host.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Build\x86-Release\Calculator.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Build\x86-Release\SwapEnc.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
