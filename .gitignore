@@ -299,11 +299,27 @@ __pycache__/
 *.xsd.cs
 
 #Project-specific
-<<<<<<< HEAD
 [Aa]rchive/
-=======
->>>>>>> b2ce0492842ec74d5ee4267cbdbff55604ad875e
 [Bb]uild/
 [Ii]ntermediates/
 *.png
+*.dll
+*.lib
+*.exe
+*.obj
+*.o
+*.pdb
+*.idb
+*.log
+*.tlog
+*.exp
+*.ilk
+*.iobj
+*.ipdb
+*.zip
+
+
+
+
+
 
