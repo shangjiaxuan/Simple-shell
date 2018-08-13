@@ -49,6 +49,9 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 Source: "..\Build\x86-Release\Host.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Build\x86-Release\Calculator.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Build\x86-Release\SwapEnc.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Build\x86-Release\Calculator caller.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Build\x86-Release\Calculator.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Build\x86-Release\SwapEnc.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
