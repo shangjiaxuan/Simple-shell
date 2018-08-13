@@ -1,4 +1,4 @@
-# Calculator
+# Simple shell
 
 #### An attempt started from a specific console application to create a console environment that works like a cmd or bash shell but can provide much greater extensibility. 
 
