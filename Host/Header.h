@@ -16,3 +16,6 @@
 #include <filesystem>
 #include <stdio.h>
 #include <string>
+
+#include "version.h"
+

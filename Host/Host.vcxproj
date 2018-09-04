@@ -171,16 +171,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="convert.cpp" />
+    <ClCompile Include="Filemani.cpp" />
     <ClCompile Include="Host.cpp" />
-    <ClCompile Include="testing.cpp" />
+    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="Windows.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Filemani.h" />
     <ClInclude Include="Host.h" />
-    <ClInclude Include="Library.h" />
+    <ClInclude Include="Names.h" />
+    <ClInclude Include="Parser.h" />
     <ClInclude Include="Platform.h" />
-    <ClInclude Include="testing.h" />
     <ClInclude Include="version.h" />
     <ClInclude Include="WinPlatform.h" />
   </ItemGroup>

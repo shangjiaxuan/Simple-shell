@@ -1,9 +1,10 @@
+#include "Header.h"
 #include "WinPlatform.h"
 
 using namespace std;
 
 #ifdef WIN32
-namespace WIN {
+//namespace WIN {
 	wstring convert::string2wstring(string& str) {
 		return MBC2utf16(const_cast<LPSTR>(str.c_str()));
 	}
@@ -46,6 +47,6 @@ namespace WIN {
 		return rtn;
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////
-}
+//}
 
 #endif
