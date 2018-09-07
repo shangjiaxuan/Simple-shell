@@ -1,10 +1,17 @@
+/////////////////////////////////////////////////
+//The core command parser
+//Used for parsing commands
+//call the correct functions for furthur parsing
+//or find the function hierarchically directly
+//if the function is considered miscellaneous
+
 #pragma once
 
 #include "Header.h"
 
-#include "Names.h"
+#include "Names.h"			//required for the command names
 
-#include "Filemani.h"
+#include "Filemani.h"		//required for file management functions
 
 class parser {
 	public:
