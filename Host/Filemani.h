@@ -1,19 +1,13 @@
 #pragma once
+#include "Header.h"
 
-#include "Names.h"
+#include "Names.h"								//currently "isexecutable" function relies on this
 
-void Change_directory(nstring);
-
-class fileman {
-	
+namespace fileman {
+	bool isexecutable(nstring& str);			//function for seeing if a file is an executable
+												//nearly means ".exe" on windows
+												//may add the feature that checks on registry
+												//and gets other programs to open other files
+	void Change_directory(nstring dir);			//function for changing the working directory
 };
-inline bool isexecutable(nstring& str) {
-	if (str.length() > 4 && str.substr(str.length() - 4, 4) == Exec) { return true; }
-#ifdef _UNICODE
-	if (str.back() == L'"' && str.length() > 5 && str.substr(str.length() - 5, 4) == Exec) { return true; }
-#endif
-#ifdef _MBCS
-	if (str.back() == '"' && str.length() > 5 && str.substr(str.length() - 5, 4) == Exec) { return true; }
-#endif
-	return false;
-}
+

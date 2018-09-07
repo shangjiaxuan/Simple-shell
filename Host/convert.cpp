@@ -1,9 +1,12 @@
-#include "Header.h"
-#include "WinPlatform.h"
+///////////////////////////////////////////////////
+//Code specific to Windows platform
 
-using namespace std;
+///////////////////////////////////////////////////
+//Following code referenced mostly from MSDN forum
 
 #ifdef WIN32
+#include "WinPlatform.h"
+using namespace std;
 //namespace WIN {
 	wstring convert::string2wstring(string& str) {
 		return MBC2utf16(const_cast<LPSTR>(str.c_str()));

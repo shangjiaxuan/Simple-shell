@@ -1,31 +1,33 @@
 #pragma once
 #include "Header.h"
 
+//file for declaring the constant strings, all simple commands go here
+
 #ifdef WIN32
 
 #ifdef _UNICODE
-const std::wstring Exit{ L"exit" };
-const std::wstring Cd{ L"cd" };
-const std::wstring Calculator{ L"calculator" };
-const std::wstring Man{ L"man" };
-const std::wstring Exec{ L".exe" };
-const std::wstring SwapEnc{ L"SwapEnc" };
+extern const std::wstring Exit;
+extern const std::wstring Cd;
+extern const std::wstring Calculator;
+extern const std::wstring Man;
+extern const std::wstring Exec;
+extern const std::wstring SwapEnc;
 
-const wchar_t* calcDLL{ L"Calculator.dll" };
-const wchar_t* encDLL{ L"SwapEnc.dll" };
+extern const wchar_t* calcDLL;
+extern const wchar_t* encDLL;
 
 #endif
 
 #ifdef _MBCS
-const std::string Exit{ "exit" };
-const std::string Cd{ "cd" };
-const std::string Calculator{ "calculator" };
-const std::string Man{ "man" };
-const std::string Exec{ ".exe" };
-const std::string SwapEnc{ "SwapEnc" };
+extern const std::string Exit;
+extern const std::string Cd;
+extern const std::string Calculator;
+extern const std::string Man;
+extern const std::string Exec;
+extern const std::string SwapEnc;
 
-const char* calcDLL{ "Calculator.dll" };
-const char* encDLL{ "SwapEnc.dll" };
+extern const char* calcDLL;
+extern const char* encDLL;
 
 #endif
 

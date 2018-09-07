@@ -173,8 +173,9 @@
     <ClCompile Include="convert.cpp" />
     <ClCompile Include="Filemani.cpp" />
     <ClCompile Include="Host.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Names.cpp" />
     <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="Windows.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,8 +184,7 @@
     <ClInclude Include="Host.h" />
     <ClInclude Include="Names.h" />
     <ClInclude Include="Parser.h" />
-    <ClInclude Include="Platform.h" />
-    <ClInclude Include="version.h" />
+    <ClInclude Include="Macros.h" />
     <ClInclude Include="WinPlatform.h" />
   </ItemGroup>
   <ItemGroup>

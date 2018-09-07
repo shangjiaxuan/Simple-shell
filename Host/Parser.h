@@ -1,14 +1,22 @@
 #pragma once
 
 #include "Header.h"
-#include "Platform.h"
 
-#include "Host.h"
+#include "Names.h"
+
 #include "Filemani.h"
 
-std::vector<nstring> Get_input();
-nstring parse_input();
+class parser {
+	public:
+		void after_start_selector(std::vector<nstring>);	//select the function to call
+		//secondary commands' parsers go here
+	private:
+		unsigned cur_arg = 0;				//the argument number that parser is currently parsing
+};
 
-void after_start_selector(std::vector<nstring>);			//select the function to call if no original argument is found
-void manual();
-void Launch(const nstring& str);
+
+//following are functions that only stands alone currently
+void Launch(const nstring& str);			//for launching other executables
+void manual();								//for calling out the manual page
+											//manuals will be encased in a dll in the future
+

@@ -1,41 +1,31 @@
 #pragma once
 
-#include "Platform.h"
-#include <Windows.h>
+//header for the Windows-specific functions
 
-//namespace WIN {
 #ifdef WIN32
+
+#include <Windows.h>
+#include "Header.h"
+
+//operation class for simple conversion between UTF-16 and MBCS
 	class convert {
 	public:
-		std::wstring string2wstring(std::string&);
-		std::string wstring2string(std::wstring&);
-		std::wstring MBC2utf16(const LPSTR&);
-		std::string UTF16_2mbcs(const LPWSTR&);
+		static std::wstring string2wstring(std::string&);
+		static std::string wstring2string(std::wstring&);
+		static std::wstring MBC2utf16(const LPSTR&);
+		static std::string UTF16_2mbcs(const LPWSTR&);
 	protected:
-		DWORD UNC_size(const LPSTR&);
-		DWORD MBCS_size(const LPWSTR&);
+		static DWORD UNC_size(const LPSTR&);
+		static DWORD MBCS_size(const LPWSTR&);
 	};
 
 //void Handle_Error(std::exception&);
 
-void call(const nchar* library, const LPCSTR function);
+//functions for calling functions in dlls
+void call(const nchar* library, const char* function);
 template <class  type>
-void call(const nchar* library, const LPCSTR function, type& pass);
+void call(const nchar* library, const char* function, type& pass);
 
-template void call<std::istream>(const nchar*, const LPCSTR, std::istream&);
-
-/*
-inline bool operator==(const std::string& str1, const std::string& str2) {
-if (str1.compare(str2) == 0) { return true; }
-return false;
-}
-
-inline bool operator==(const std::wstring& str1, const std::wstring& str2) {
-if (str1.compare(str2) == 0) { return true; }
-return false;
-}
-*/
-
+template void call<std::istream>(const nchar*, const char*, std::istream&);
 
 #endif
-//}
