@@ -62,18 +62,18 @@ namespace Calc {
 		cout << prompt;
 		Token t = ts.get();
 		switch (t.kind) {
-		case quit: 
+		case quit:
 			on = false;
 			return;
 		case print:
 			cout << "Please input something!\n";
 			goto calculator_start;
-		case end: 
+		case end:
 			while (t.kind == end) {
-			t = ts.get();
-			} 
-		ts.putback(t); break;
-		default: 
+				t = ts.get();
+			}
+			ts.putback(t); break;
+		default:
 			ts.putback(t);
 			break;
 		}
@@ -107,14 +107,14 @@ namespace Calc {
 	double declaration(Token_stream& ts) {
 		const Token t = ts.get();
 		isdecl = false;
-		if(t.kind != name) {
+		if (t.kind != name) {
 			ts.putback(print);
 			throw runtime_error("declare: name expected in declaration.");
 		}
 		const string var_name = t.name;
 
 		const Token t2 = ts.get();
-		if(t2.kind != '=') {
+		if (t2.kind != '=') {
 			throw runtime_error("declare: '=' missing in declaration of " + var_name);
 		}
 		double d = expression(ts);
@@ -133,21 +133,21 @@ namespace Calc {
 	double expression(Token_stream& ts) {
 		double left = term(ts);
 		Token t;
-		while(true) {
+		while (true) {
 			t = ts.get();
-			switch(t.kind) {
-				case end:
-					ts.putback(t);
-					return left;
-				case '+':
-					left += term(ts);
-					break;
-				case '-':
-					left -= term(ts);
-					break;
-				default:
-					ts.putback(t);
-					return left;
+			switch (t.kind) {
+			case end:
+				ts.putback(t);
+				return left;
+			case '+':
+				left += term(ts);
+				break;
+			case '-':
+				left -= term(ts);
+				break;
+			default:
+				ts.putback(t);
+				return left;
 			}
 		}
 	}
@@ -180,12 +180,12 @@ namespace Calc {
 				left = fmod(left, m);
 				break;
 			}
-			case name:{
-				return left*t.value;
+			case name: {
+				return left * t.value;
 			}
-//			case end:
-//				ts.putback(t);
-//				return left;
+					   //			case end:
+					   //				ts.putback(t);
+					   //				return left;
 			default:
 				ts.putback(t);
 				return left;
@@ -197,34 +197,34 @@ namespace Calc {
 
 	double primary(Token_stream& ts) {
 		Token t = ts.get();
-		switch(t.kind) {
-			case '(':
-				{
-					double d = expression(ts);
-					t = ts.get();
-					if(t.kind != ')') {
-						throw runtime_error("')' expected");
-					}
-					return d;
-				}
-				//寮�骞虫柟
-			case root2:
-				{
-					double e = primary(ts);
-					if(e < 0) {
-						throw runtime_error(
-							"Cannot take the square root of a negative number in the real domain."
-						);
-					}
-					return sqrt(e);
-				}
-				//寮�骞虫柟
-			case number:
-				return t.value;
-			case access:
-				return get_value(t.name);
-			default:
-				throw runtime_error("primary expected");
+		switch (t.kind) {
+		case '(':
+		{
+			double d = expression(ts);
+			t = ts.get();
+			if (t.kind != ')') {
+				throw runtime_error("')' expected");
+			}
+			return d;
+		}
+		//开平方
+		case root2:
+		{
+			double e = primary(ts);
+			if (e < 0) {
+				throw runtime_error(
+					"Cannot take the square root of a negative number in the real domain."
+				);
+			}
+			return sqrt(e);
+		}
+		//开平方
+		case number:
+			return t.value;
+		case access:
+			return get_value(t.name);
+		default:
+			throw runtime_error("primary expected");
 		}
 	}
 

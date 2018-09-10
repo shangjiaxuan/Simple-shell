@@ -14,7 +14,7 @@ namespace fileman {
 	}
 
 	bool isexecutable(nstring& str) {
-#ifdef WIN32
+#ifdef _WIN32
 		if (str.length() > 4 && str.substr(str.length() - 4, 4) != Exec) { return false; }
 #ifdef _UNICODE
 		if (str.back() == L'"' && str.length() > 5 && str.substr(str.length() - 5, 4) != Exec) { return false; }

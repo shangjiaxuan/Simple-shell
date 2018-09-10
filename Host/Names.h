@@ -3,7 +3,7 @@
 
 //file for declaring the constant strings, all simple commands go here
 
-#ifdef WIN32
+#ifdef _WIN32
 
 #ifdef _UNICODE
 extern const std::wstring Exit;

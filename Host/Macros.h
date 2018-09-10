@@ -13,7 +13,7 @@
 
 //For specifying macros for partial cross-compiling
 
-#ifdef WIN32
+#ifdef _WIN32
 //native strings
 #ifdef _UNICODE
 #define nstring std::wstring

@@ -1,6 +1,6 @@
 #include "Names.h"
 
-#ifdef WIN32
+#ifdef _WIN32
 
 #ifdef _UNICODE
 const std::wstring Exit{ L"exit" };

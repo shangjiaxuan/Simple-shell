@@ -1,5 +1,7 @@
 #pragma once
 
+#pragma once
+
 #include "Header.h"
 
 namespace pathman {
@@ -9,16 +11,6 @@ namespace pathman {
 		fs::path iroot;
 		fs::path cur_oroot;
 		fs::directory_iterator temp;
-		// inline std::string parse_name(std::string ori) {
-		// 	std::string rtn;
-		// 	if (ori.substr(ori.length() - 4, 4) == ".enc") {
-		// 		rtn = ori.substr(0, ori.length() - 4);
-		// 	}
-		// 	else {
-		// 		rtn = ori + ".enc";
-		// 	}
-		// 	return rtn;
-		// }
 
 		std::stack<fs::directory_iterator> stack;
 

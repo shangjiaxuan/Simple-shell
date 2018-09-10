@@ -33,13 +33,13 @@ void parser::after_start_selector(std::vector<nstring> arg) {
 		cur_arg++;
 		cout << endl;
 		cin.clear();
-		call<istream>(calcDLL, "calculator", cin);
+		call<istream>(L"sjx.dll", "calculator", cin);
 		cout << endl;
 //		go_to_beginning = true;
 	}
 	else if (arg[cur_arg] == SwapEnc) {
 		cur_arg++;
-		call(encDLL, "SwapEnc");
+		call(L"sjx.dll", "SwapEnc");
 //		go_to_beginning = true;
 	}
 	else if (arg[cur_arg] == Man) {

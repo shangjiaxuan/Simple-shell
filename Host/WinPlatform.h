@@ -2,7 +2,7 @@
 
 //header for the Windows-specific functions
 
-#ifdef WIN32
+#ifdef _WIN32
 
 #include <Windows.h>
 #include "Header.h"

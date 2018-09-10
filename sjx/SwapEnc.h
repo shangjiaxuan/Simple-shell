@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Header.h"
-#include "Platform.h"
+
+#include "sjx_Exports.h"
 
 namespace enc {
 	class SwapEnc {
@@ -22,6 +23,6 @@ namespace enc {
 	};
 }
 
-#ifdef _WINDLL
-DLL_PORT void SwapEnc();
+#ifndef _WINDLL
+void SwapEnc();
 #endif

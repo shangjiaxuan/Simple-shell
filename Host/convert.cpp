@@ -4,7 +4,7 @@
 ///////////////////////////////////////////////////
 //Following code referenced mostly from MSDN forum
 
-#ifdef WIN32
+#ifdef _WIN32
 #include "WinPlatform.h"
 using namespace std;
 //namespace WIN {

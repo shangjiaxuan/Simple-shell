@@ -188,11 +188,8 @@
     <ClInclude Include="WinPlatform.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Calculator\Calculator.vcxproj">
-      <Project>{3649f0d8-ed6f-4b70-a9cf-0bb448d86ed4}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\SwapEnc\SwapEnc.vcxproj">
-      <Project>{bd4cd5f7-7817-4c24-8c01-fcd9bdfb66e4}</Project>
+    <ProjectReference Include="..\sjx\sjx.vcxproj">
+      <Project>{23ba0350-902e-4f24-859f-8c41c6be5393}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

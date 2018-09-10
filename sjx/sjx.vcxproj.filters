@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Libs">
+      <UniqueIdentifier>{4a8df0a9-8b34-41d1-9ad9-3e56fd32a33f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enc">
+      <UniqueIdentifier>{645aa977-ff4e-4895-83fd-87e4765d967a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Calc">
+      <UniqueIdentifier>{279bf3fa-c2b3-4cdc-af36-83aaf9b59b18}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sjx_Exports.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapEnc.h">
+      <Filter>Enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Pathman.h">
+      <Filter>Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="CalcToken.h">
+      <Filter>Calc</Filter>
+    </ClInclude>
+    <ClInclude Include="CalcVariable.h">
+      <Filter>Calc</Filter>
+    </ClInclude>
+    <ClInclude Include="Calculator.h">
+      <Filter>Calc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SwapEnc.cpp">
+      <Filter>Enc</Filter>
+    </ClCompile>
+    <ClCompile Include="Pathman.cpp">
+      <Filter>Libs</Filter>
+    </ClCompile>
+    <ClCompile Include="Calculator.cpp">
+      <Filter>Calc</Filter>
+    </ClCompile>
+    <ClCompile Include="CalcToken.cpp">
+      <Filter>Calc</Filter>
+    </ClCompile>
+    <ClCompile Include="CalcVariable.cpp">
+      <Filter>Calc</Filter>
+    </ClCompile>
+    <ClCompile Include="Calc_main.cpp">
+      <Filter>Calc</Filter>
+    </ClCompile>
+    <ClCompile Include="SwapEnc_main.cpp">
+      <Filter>Enc</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

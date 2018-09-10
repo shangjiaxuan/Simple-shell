@@ -45,7 +45,7 @@ std::vector<nstring> UI::Get_input() {
 //For parsing commandline input
 nstring UI::parse_input() {
 std::string input;
-#ifdef WIN32
+#ifdef _WIN32
 //////////////////////////////////////////
 //using the Windows file system convention
 	convert This;
