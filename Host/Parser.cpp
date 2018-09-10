@@ -51,7 +51,7 @@ void parser::after_start_selector(std::vector<nstring> arg) {
 		cur_arg++;
 	}
 	else {
-		cout << "Sorry, but we cannot find the specified program " << This.wstring2string(arg[cur_arg]) << endl;
+		cout << "Sorry, but we cannot find the specified program " << convert::wstring2string(arg[cur_arg]) << endl;
 		cur_arg++;
 		//because console apps in windows does not support unicode console I/O very well, need some work to fix this
 	}
