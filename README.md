@@ -1,5 +1,7 @@
 # Simple shell
 
+[![Build status](https://ci.appveyor.com/api/projects/status/4ioxd82h1l91yoqd?svg=true)](https://ci.appveyor.com/project/shangjiaxuan/simple-shell)
+
 #### An attempt started from a specific console application to create a console environment that works like a cmd or bash shell but can provide much greater extensibility. 
 
 ## General Information
