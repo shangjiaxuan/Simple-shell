@@ -2,6 +2,9 @@
 
 using namespace std;
 
+#ifdef _WINDLL
+DLL_PORT
+#endif
 void SwapEnc() {
 	enc::SwapEnc This;
 	enc::SwapEnc::name_ver();

@@ -3,7 +3,7 @@
 							//will add macros in the future to support unix-like systems
 using namespace std;
 
-void manual() {
+void parser::manual() {
 	cout << "I'm sorry but there's no manual page at the moment." << endl;
 }
 
@@ -33,23 +33,40 @@ void parser::after_start_selector(std::vector<nstring> arg) {
 		cur_arg++;
 		cout << endl;
 		cin.clear();
-		call<istream>(L"sjx.dll", "calculator", cin);
+		call<void,istream>(sjxDLL, "calculator", &cin);
 		cout << endl;
 //		go_to_beginning = true;
 	}
 	else if (arg[cur_arg] == SwapEnc) {
 		cur_arg++;
-		call(L"sjx.dll", "SwapEnc");
+		call<void,void>(sjxDLL, "SwapEnc", nullptr);
 //		go_to_beginning = true;
 	}
 	else if (arg[cur_arg] == Man) {
 		cur_arg++;
 		manual();
-	}//launching executables may include lnks in the future
-	else if (fileman::isexecutable(arg[cur_arg])) {
-		Launch(arg[cur_arg]);
-		cur_arg++;
 	}
+	else if(fs::exists(arg[cur_arg])){
+		//launching executables may include lnks in the future
+		if (fileman::isexecutable(arg[cur_arg])) {
+			nstring cmd = _T("");
+			size_t size = arg.size();
+			while (true) {
+				cmd += arg[cur_arg];
+				cur_arg++;
+				if (cur_arg >= size - 1) {
+					break;
+				}
+				cmd += _T(" ");
+			}
+			Launch(cmd);
+		}
+		else {
+			cout << "I'm sorry, but we currently do not support opening files with default programs yet." << endl;
+			cur_arg++;
+		}
+	}
+
 	else {
 		cout << "Sorry, but we cannot find the specified program " << convert::wstring2string(arg[cur_arg]) << endl;
 		cur_arg++;

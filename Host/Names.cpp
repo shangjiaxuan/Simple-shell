@@ -2,30 +2,13 @@
 
 #ifdef _WIN32
 
-#ifdef _UNICODE
-const std::wstring Exit{ L"exit" };
-const std::wstring Cd{ L"cd" };
-const std::wstring Calculator{ L"calculator" };
-const std::wstring Man{ L"man" };
-const std::wstring Exec{ L".exe" };
-const std::wstring SwapEnc{ L"SwapEnc" };
+const nstring Exit{ _T("exit") };
+const nstring Cd{ _T("cd") };
+const nstring Calculator{ _T("calculator") };
+const nstring Man{ _T("man") };
+const nstring Exec{ _T(".exe") };
+const nstring SwapEnc{ _T("SwapEnc") };
 
-const wchar_t* calcDLL{ L"Calculator.dll" };
-const wchar_t* encDLL{ L"SwapEnc.dll" };
-
-#endif
-
-#ifdef _MBCS
-const std::string Exit{ "exit" };
-const std::string Cd{ "cd" };
-const std::string Calculator{ "calculator" };
-const std::string Man{ "man" };
-const std::string Exec{ ".exe" };
-const std::string SwapEnc{ "SwapEnc" };
-
-const char* calcDLL{ "Calculator.dll" };
-const char* encDLL{ "SwapEnc.dll" };
-
-#endif
+const nchar* sjxDLL{ _T("sjx.dll") };
 
 #endif

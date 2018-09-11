@@ -2,10 +2,13 @@
 
 using namespace std;
 
+#ifdef _WINDLL
+DLL_PORT
+#endif
 void calculator(istream& ist) {
 	const string result{ "= " };
 	cout << "Simple Calculator\n";
-	cout << "Version " << STRING(VERSION) << '\n' << endl;
+	cout << "Version " << STRING(CALC_VERSION) << '\n' << endl;
 	Calc::Token_stream ts;
 	ts.init(ist);
 	while (true) {

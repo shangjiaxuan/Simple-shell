@@ -16,7 +16,13 @@
 class parser {
 	public:
 		void after_start_selector(std::vector<nstring>);	//select the function to call
+
 		//secondary commands' parsers go here
+		void manual();								//for calling out the manual page
+													//manuals will be encased in dlls in the future
+													//this function will call the corresponding man()
+													//functions in the dlls.
+
 	private:
 		unsigned cur_arg = 0;				//the argument number that parser is currently parsing
 };
@@ -24,6 +30,3 @@ class parser {
 
 //following are functions that only stands alone currently
 void Launch(const nstring& str);			//for launching other executables
-void manual();								//for calling out the manual page
-											//manuals will be encased in a dll in the future
-
