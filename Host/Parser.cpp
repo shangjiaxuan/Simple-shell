@@ -1,4 +1,4 @@
-#include "Parser.h"
+﻿#include "Parser.h"
 #include "WinPlatform.h"	//required for calling functions from dlls
 							//will add macros in the future to support unix-like systems
 using namespace std;

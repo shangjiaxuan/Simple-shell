@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Header.h"
 
 //file for declaring the constant strings, all simple commands go here

@@ -1,4 +1,4 @@
-#include "Host.h"
+﻿#include "Host.h"
 
 #include "WinPlatform.h"	//input conversion requires including the convert class
 							//will add macros here in the future to support unix-like systems
