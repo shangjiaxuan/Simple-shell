@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define _STRING(str) #str
 #define STRING(str) _STRING(str)

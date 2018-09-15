@@ -1,4 +1,4 @@
-#include "SwapEnc.h"
+﻿#include "SwapEnc.h"
 #include "Pathman.h"
 
 using namespace std;

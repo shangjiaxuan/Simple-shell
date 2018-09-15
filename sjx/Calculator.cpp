@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 
 Simple calculator
 
@@ -207,7 +207,7 @@ namespace Calc {
 			}
 			return d;
 		}
-		//¿ªÆ½·½
+		//å¼€å¹³æ–¹
 		case root2:
 		{
 			double e = primary(ts);
@@ -218,7 +218,7 @@ namespace Calc {
 			}
 			return sqrt(e);
 		}
-		//¿ªÆ½·½
+		//å¼€å¹³æ–¹
 		case number:
 			return t.value;
 		case access:

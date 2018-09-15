@@ -1,4 +1,4 @@
-#include "Header.h"
+ï»¿#include "Header.h"
 
 #include "CalcToken.h"
 
@@ -66,7 +66,7 @@ namespace Calc {
 					}
 					char test{ 0 };
 					current->get(test);
-					//È¥¿Õ¸ñ
+					//å»ç©ºæ ¼
 					if (test == ' ') {
 						do {
 							current->get(test);
@@ -74,16 +74,16 @@ namespace Calc {
 						current->putback(test);
 						break;
 					}
-					//È¥¿Õ¸ñ
-					//´«³ö¸³Öµ±äÁ¿
+					//å»ç©ºæ ¼
+					//ä¼ å‡ºèµ‹å€¼å˜é‡
 					if (test == '=') {
 						return Token{ assign,s };
 					}
-					//´«³ö¸³Öµ±äÁ¿
-					//´«³ö¶ÁÈ¡ÄÚÈİ
+					//ä¼ å‡ºèµ‹å€¼å˜é‡
+					//ä¼ å‡ºè¯»å–å†…å®¹
 					current->putback(test);
 					return Token{ access,s };
-					//´«³ö¶ÁÈ¡ÄÚÈİ
+					//ä¼ å‡ºè¯»å–å†…å®¹
 				}
 				throw runtime_error("Bad token");
 			}
@@ -98,16 +98,16 @@ namespace Calc {
 
 	void Token_stream::ignore(const char c)
 	{
-		// Èç¹û»º³åÇøÀï´æµÄ¾ÍÊÇ½áÊø·û£¬Çå¿Õ»º³åÇø¼´¿É
+		// å¦‚æœç¼“å†²åŒºé‡Œå­˜çš„å°±æ˜¯ç»“æŸç¬¦ï¼Œæ¸…ç©ºç¼“å†²åŒºå³å¯
 		if (full && (c == buffer.kind)) {
 			full = false;
 			return;
 		}
 
-		full = false; // Çå¿Õ»º³åÇø
+		full = false; // æ¸…ç©ºç¼“å†²åŒº
 
-		// ËÑË÷½áÊø·û
-		char ch{ 0 }; // 0´ú±í¿Õ×Ö·û£¬ÊÇ²»¿ÉÄÜÓÃ¼üÅÌÊäÈëµÄ
+		// æœç´¢ç»“æŸç¬¦
+		char ch{ 0 }; // 0ä»£è¡¨ç©ºå­—ç¬¦ï¼Œæ˜¯ä¸å¯èƒ½ç”¨é”®ç›˜è¾“å…¥çš„
 		while (current->get(ch)) {
 			if (ch == c || ch == '\n') {
 				return;
