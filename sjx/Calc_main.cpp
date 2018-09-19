@@ -6,28 +6,28 @@ using namespace std;
 DLL_PORT
 #endif
 void calculator(istream& ist) {
-	const string result{ "= " };
+	const string result{"= "};
 	cout << "Simple Calculator\n";
 	cout << "Version " << STRING(CALC_VERSION) << '\n' << endl;
 	Calc::Token_stream ts;
 	ts.init(ist);
-	while (true) {
+	while(true) {
 		try {
 			init(ts);
-			if (!on) {
+			if(!on) {
 				return;
 			}
 			Calc::Token temp;
 			do {
 				const double answer = statement(ts);
-				if (!on) { return; }
+				if(!on) { return; }
 				cout << result << answer << '\n';
 				temp = ts.peek();
-			} while (temp.kind == Calc::end);
-		}
-		catch (exception& e) {
+			}
+			while(temp.kind == Calc::end);
+		} catch(exception& e) {
 			cerr << e.what() << '\n';
-			Calc::clean_up_mess(ts);
+			clean_up_mess(ts);
 		}
 		ts.get();
 	}

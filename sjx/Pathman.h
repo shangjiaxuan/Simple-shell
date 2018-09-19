@@ -14,15 +14,16 @@ namespace pathman {
 
 	public:
 		iopath_recursive_iterator() = default;
+
 		iopath_recursive_iterator(fs::path& input_root, fs::path& output_root) {
 			iroot = input_root;
 			cur_ipath = input_root;
-			cur_opath = output_root;//parse_name(input_root.string());
+			cur_opath = output_root; //parse_name(input_root.string());
 			cur_oroot = cur_opath;
 			temp = fs::directory_iterator(iroot);
 		}
 
-		unsigned depth{ 0 };
+		unsigned depth{0};
 		fs::path cur_ipath;
 		fs::path cur_opath;
 
@@ -31,7 +32,7 @@ namespace pathman {
 		iopath_recursive_iterator& operator++();
 
 		bool operator==(const iopath_recursive_iterator& tar) const {
-			return((cur_ipath == tar.cur_ipath) && (iroot == tar.iroot));
+			return ((cur_ipath == tar.cur_ipath) && (iroot == tar.iroot));
 		}
 
 		bool operator!=(const iopath_recursive_iterator& tar) const {

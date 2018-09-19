@@ -5,7 +5,7 @@ using namespace std;
 namespace pathman {
 
 	void iopath_recursive_iterator::pop() {
-		if (depth == 0) {
+		if(depth == 0) {
 			throw range_error("iopath_recursive_iterator::pop(): cannot pop over the root directory for iteration");
 		}
 		depth--;
@@ -19,12 +19,12 @@ namespace pathman {
 
 	iopath_recursive_iterator& iopath_recursive_iterator::operator++() {
 		//continue iterating over the current directory
-		if (temp != fs::end(temp)) {
+		if(temp != fs::end(temp)) {
 			cur_ipath = temp->path();
 			cur_opath = cur_oroot / cur_ipath.filename();
 			++temp;
 			//start to iterate over the child directory
-			if (fs::is_directory(cur_ipath)) {
+			if(is_directory(cur_ipath)) {
 				stack.push(temp);
 				cur_oroot = cur_opath;
 				temp = fs::directory_iterator(cur_ipath);
@@ -32,31 +32,27 @@ namespace pathman {
 			}
 			return *this;
 		}
-		else {
-			//stack is empty, and the iterator reaches the end, the recursive iteration must also end here
-			if (stack.empty()) {
-				iroot = fs::path();
-				cur_ipath = fs::path();
-				return *this;
-			}
-			//iteration over the current directory is finished, return to continue iterating over the parent directory
-			else {
-				temp = stack.top();
-				stack.pop();
-				cur_oroot = cur_oroot.parent_path();
-				depth--;
-				cur_ipath = temp->path();
-				cur_opath = cur_oroot / cur_ipath.filename();
-				++temp;
-				//iterate over child directory
-				if (fs::is_directory(cur_ipath)) {
-					stack.push(temp);
-					cur_oroot = cur_opath;
-					temp = fs::directory_iterator(cur_ipath);
-					depth++;
-				}
-				return *this;
-			}
+		//stack is empty, and the iterator reaches the end, the recursive iteration must also end here
+		if(stack.empty()) {
+			iroot = fs::path();
+			cur_ipath = fs::path();
+			return *this;
 		}
+		//iteration over the current directory is finished, return to continue iterating over the parent directory
+		temp = stack.top();
+		stack.pop();
+		cur_oroot = cur_oroot.parent_path();
+		depth--;
+		cur_ipath = temp->path();
+		cur_opath = cur_oroot / cur_ipath.filename();
+		++temp;
+		//iterate over child directory
+		if(is_directory(cur_ipath)) {
+			stack.push(temp);
+			cur_oroot = cur_opath;
+			temp = fs::directory_iterator(cur_ipath);
+			depth++;
+		}
+		return *this;
 	}
 }
