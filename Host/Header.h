@@ -16,4 +16,3 @@
 #include "Macros.h"
 
 namespace fs = std::experimental::filesystem;
-

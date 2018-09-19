@@ -23,7 +23,7 @@ std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
 throw std::runtime_error("call: Library loading failed!");
 }
 typedef void(*_func)(type);
-_func func = _func(GetProcAddress(hInst, function));	
+_func func = _func(GetProcAddress(hInst, function));
 rtn rt;
 try {
 rt = func(pass);
@@ -60,7 +60,7 @@ call(const nchar* library, const char* function, passed* pass) {
 		}
 	}
 	else {
-		//probably implement a method here to see if the function can 
+		//probably implement a method here to see if the function can
 		//take multipule arguments stored in a inherited class, and somehow
 		//make the following code automatically adjust to the member variables
 		//or maybe jst pass a void pointer, but non-pure-c structures may cause
@@ -195,7 +195,8 @@ void Launch(const nstring& str) {
 	ZeroMemory(&pi, sizeof(pi));
 
 	// Start the child process.
-	if (!CreateProcessW(NULL,   // No module name (use command line)
+	if (!CreateProcessW(
+		NULL,					// No module name (use command line)
 		cmd,					// Command line
 		NULL,					// Process handle not inheritable
 		NULL,					// Thread handle not inheritable

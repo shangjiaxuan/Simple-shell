@@ -9,7 +9,7 @@ void parser::manual() {
 	cout << "I'm sorry but there's no manual page at the moment." << endl;
 }
 
-//It seems that vectors are not good containers in this case and it seems that it needs a 
+//It seems that vectors are not good containers in this case and it seems that it needs a
 //structure that incorporate strings and pointers to next wstring2string (only one direction needed)
 
 void parser::after_start_selector(std::vector<nstring> arg) {
@@ -51,8 +51,8 @@ void parser::after_start_selector(std::vector<nstring> arg) {
 	else if(fs::exists(arg[cur_arg])){
 		//launching executables may include lnks in the future
 		if (fileman::isexecutable(arg[cur_arg])) {
-			nstring cmd = _T("");
-			size_t size = arg.size();
+			nstring cmd;
+			const size_t size = arg.size();
 			while (true) {
 				cmd += arg[cur_arg];
 				cur_arg++;
@@ -75,7 +75,3 @@ void parser::after_start_selector(std::vector<nstring> arg) {
 		//because console apps in windows does not support unicode console I/O very well, need some work to fix this
 	}
 }
-
-
-
-

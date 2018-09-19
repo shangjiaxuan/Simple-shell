@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void UI::loop(int argc, char* argv[]) {
+void UI::loop(int argc, char* argv[]) const {
 	if (argc > 1) {}
 	host_beginning:
 //		go_to_beginning = false;
@@ -19,7 +19,7 @@ void UI::loop(int argc, char* argv[]) {
 			parser par;
 			prompt();
 			vector<nstring> argumentlist = Get_input();
-			if (argumentlist.size()!=0) {
+			if (!argumentlist.empty()) {
 				cin.clear();
 				par.after_start_selector(argumentlist);
 			}
@@ -29,8 +29,7 @@ void UI::loop(int argc, char* argv[]) {
 }
 
 void UI::prompt() {
-	experimental::filesystem::path p = experimental::filesystem::current_path();
-	cout << p << ">";
+	cout << fs::current_path() << ">";
 }
 
 
@@ -50,10 +49,8 @@ std::string input;
 #ifdef _WIN32
 //////////////////////////////////////////
 //using the Windows file system convention
-	convert This;
 	//	std::cin >> input;
-	char c;
-	c = cin.peek();
+	char c = cin.peek();
 	if (c == ' ') {
 		do {
 			cin.get(c);
@@ -62,7 +59,7 @@ std::string input;
 	}
 	//	if(c != '\"') {
 	//		cin >> input;
-	//	} else 
+	//	} else
 	while (true) {
 		if (c == '\"') {
 			cin.get();
@@ -108,7 +105,7 @@ std::string input;
 	//	stop:
 	nstring rtn;
 #ifdef _UNICODE
-	rtn = This.string2wstring(input);
+	rtn = convert::string2wstring(input);
 #endif
 #ifdef _MBCS
 	rtn = input;
@@ -120,9 +117,14 @@ std::string input;
 }
 
 bool UI::change(const char& a) {
-	if (a == '\a' || a == '\b' || a == '\f' || a == '\n' || a == '\r' || a == '\t' || a == '\'' || a == '\"') {
-		return true;
-	}//'\\'will be dealt with else where. cannot afford to use it too much in cmd shell 
-	 //numbers meaning characters are ignored
-	return false;
+	return (a == '\a' ||
+			a == '\b' ||
+			a == '\f' ||
+			a == '\n' ||
+			a == '\r' ||
+			a == '\t' ||
+			a == '\'' ||
+			a == '\"');
+			//'\\'will be dealt with else where. cannot afford to use it too much in cmd shell
+			//numbers meaning characters are ignored
 }

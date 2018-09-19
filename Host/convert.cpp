@@ -19,11 +19,11 @@ using namespace std;
 	}
 
 	DWORD convert::UNC_size(const LPSTR& multiByteStr) {
-		return MultiByteToWideChar(CP_OEMCP, MB_ERR_INVALID_CHARS, multiByteStr, -1, NULL, 0);
+		return MultiByteToWideChar(CP_OEMCP, MB_ERR_INVALID_CHARS, multiByteStr, -1, nullptr, 0);
 	}
 
 	DWORD convert::MBCS_size(const LPWSTR& unicodeStr) {
-			return WideCharToMultiByte(CP_OEMCP, NULL, unicodeStr, -1,NULL, 0, NULL, NULL);
+		return WideCharToMultiByte(CP_OEMCP, NULL, unicodeStr, -1,nullptr, 0, nullptr, nullptr);
 	}
 
 	wstring convert::MBC2utf16(const LPSTR& multiByteStr) {
@@ -41,10 +41,12 @@ using namespace std;
 	//Need some work to integrate this. Non-ASCII characters cannot be displayed on console
 	//with wcout right now and needs to converted to MBCS
 	string convert::UTF16_2mbcs(const LPWSTR& unicodeStr){
-		DWORD size = MBCS_size(unicodeStr);
+		const DWORD size = MBCS_size(unicodeStr);
 		// ReSharper disable once CppLocalVariableMayBeConst
 		LPSTR multiByteStr = new CHAR[size];
-		if(WideCharToMultiByte(CP_OEMCP, NULL, unicodeStr, -1, multiByteStr, size, NULL, NULL)==0) {
+		char default_char = '?';
+		BOOL use_default = true;
+		if(WideCharToMultiByte(CP_OEMCP, NULL, unicodeStr, -1, multiByteStr, size, &default_char, &use_default)==0) {
 			throw runtime_error("Error converting to MBCS");
 		}
 		string rtn = multiByteStr;

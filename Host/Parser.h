@@ -18,7 +18,7 @@ class parser {
 		void after_start_selector(std::vector<nstring>);	//select the function to call
 
 		//secondary commands' parsers go here
-		void manual();								//for calling out the manual page
+		static void manual();						//for calling out the manual page
 													//manuals will be encased in dlls in the future
 													//this function will call the corresponding man()
 													//functions in the dlls.
