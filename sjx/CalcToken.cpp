@@ -10,7 +10,7 @@ namespace Calc {
 		current = &ist;
 	}
 
-	void Token_stream::putback(Token t) {
+	void Token_stream::putback(const Token& t) {
 		if (full) {
 			throw runtime_error("putback() into a full buffer");
 		}
@@ -88,6 +88,7 @@ namespace Calc {
 				throw runtime_error("Bad token");
 			}
 		}
+		throw runtime_error("Bad istream(stream.good()==false)");
 	}
 
 	Token Token_stream::peek() {

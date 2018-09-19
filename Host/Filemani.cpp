@@ -1,4 +1,6 @@
-﻿#include "Filemani.h"
+﻿#include "Header.h"
+
+#include "Filemani.h"
 
 using namespace std;
 

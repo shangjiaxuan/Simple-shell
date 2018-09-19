@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#pragma once
-
 #include "Header.h"
 
 namespace pathman {
@@ -29,14 +27,14 @@ namespace pathman {
 		fs::path cur_opath;
 
 		void pop();
-		iopath_recursive_iterator end();
+		static iopath_recursive_iterator end();
 		iopath_recursive_iterator& operator++();
 
-		bool operator==(const iopath_recursive_iterator& tar) {
+		bool operator==(const iopath_recursive_iterator& tar) const {
 			return((cur_ipath == tar.cur_ipath) && (iroot == tar.iroot));
 		}
 
-		bool operator!=(const iopath_recursive_iterator& tar) {
+		bool operator!=(const iopath_recursive_iterator& tar) const {
 			return !(*this == tar);
 		}
 	};

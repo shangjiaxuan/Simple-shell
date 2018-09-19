@@ -24,7 +24,7 @@
 //functions for calling functions in dlls
 struct cmdline {
 	size_t argc;
-	nchar** argv;
+	char** argv;
 };
 template <typename rtn, typename  passed>
 rtn call(const nchar* library, const char* function, passed* pass);

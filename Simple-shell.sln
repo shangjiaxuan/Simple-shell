@@ -22,36 +22,24 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sjx", "sjx\sjx.vcxproj", "{
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Debug|ARM = Debug|ARM
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
-		Release|Any CPU = Release|Any CPU
-		Release|ARM = Release|ARM
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5F19A4E2-79CF-4198-B711-1EA7859926CA}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{5F19A4E2-79CF-4198-B711-1EA7859926CA}.Debug|ARM.ActiveCfg = Debug|Win32
 		{5F19A4E2-79CF-4198-B711-1EA7859926CA}.Debug|x64.ActiveCfg = Debug|x64
 		{5F19A4E2-79CF-4198-B711-1EA7859926CA}.Debug|x64.Build.0 = Debug|x64
 		{5F19A4E2-79CF-4198-B711-1EA7859926CA}.Debug|x86.ActiveCfg = Debug|Win32
 		{5F19A4E2-79CF-4198-B711-1EA7859926CA}.Debug|x86.Build.0 = Debug|Win32
-		{5F19A4E2-79CF-4198-B711-1EA7859926CA}.Release|Any CPU.ActiveCfg = Release|Win32
-		{5F19A4E2-79CF-4198-B711-1EA7859926CA}.Release|ARM.ActiveCfg = Release|Win32
 		{5F19A4E2-79CF-4198-B711-1EA7859926CA}.Release|x64.ActiveCfg = Release|x64
 		{5F19A4E2-79CF-4198-B711-1EA7859926CA}.Release|x64.Build.0 = Release|x64
 		{5F19A4E2-79CF-4198-B711-1EA7859926CA}.Release|x86.ActiveCfg = Release|Win32
 		{5F19A4E2-79CF-4198-B711-1EA7859926CA}.Release|x86.Build.0 = Release|Win32
-		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Debug|ARM.ActiveCfg = Debug|Win32
 		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Debug|x64.ActiveCfg = Debug|x64
 		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Debug|x64.Build.0 = Debug|x64
 		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Debug|x86.ActiveCfg = Debug|Win32
 		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Debug|x86.Build.0 = Debug|Win32
-		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Release|Any CPU.ActiveCfg = Release|Win32
-		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Release|ARM.ActiveCfg = Release|Win32
 		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Release|x64.ActiveCfg = Release|x64
 		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Release|x64.Build.0 = Release|x64
 		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Release|x86.ActiveCfg = Release|Win32

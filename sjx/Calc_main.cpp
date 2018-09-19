@@ -14,14 +14,13 @@ void calculator(istream& ist) {
 	while (true) {
 		try {
 			init(ts);
-			if (on == false) {
+			if (!on) {
 				return;
 			}
 			Calc::Token temp;
-			double answer;
 			do {
-				answer = statement(ts);
-				if (on == false) { return; }
+				const double answer = statement(ts);
+				if (!on) { return; }
 				cout << result << answer << '\n';
 				temp = ts.peek();
 			} while (temp.kind == Calc::end);

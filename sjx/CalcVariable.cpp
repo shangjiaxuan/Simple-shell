@@ -8,7 +8,7 @@ namespace Calc {
 
 	map<string, double> var_table;
 
-	double get_value(const string var) {
+	double get_value(const string& var) {
 		try {
 			return var_table.at(var);
 		}
@@ -17,7 +17,7 @@ namespace Calc {
 		}
 	}
 
-	void set_value(const string var, const double val) {
+	void set_value(const string& var, const double val) {
 		try {
 			var_table.at(var) = val;
 		}
@@ -26,14 +26,11 @@ namespace Calc {
 		}
 	}
 
-	bool is_declared(const string var) {
-		if (var_table.count(var) > 0) {
-			return true;
-		}
-		return false;
+	bool is_declared(const string& var) {
+		return var_table.count(var);
 	}
 
-	double define_name(const string var, const double val) {
+	double define_name(const string& var, const double val) {
 		if (is_declared(var)) {
 			throw runtime_error("variable " + var + " is already declared");
 		}
@@ -41,12 +38,12 @@ namespace Calc {
 		return val;
 	}
 
-	double assign_name(const string var, const double val) {
+	double assign_name(const string& var, const double val) {
 		try {
 			var_table.at(var) = val;
 			return val;
 		}
-		catch (out_of_range) {
+		catch (out_of_range&) {
 			throw runtime_error("assign: undefined variable");
 		}
 	}

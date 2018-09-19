@@ -10,10 +10,10 @@ namespace Calc {
 		char kind;
 		double value;
 		std::string name;
-		Token() {}
-		Token(char ch) : kind{ ch } {}
+		Token() :kind{ NULL }, value{NULL} {}
+		Token(char ch) : kind{ ch }, value{0} {}
 		Token(char ch, double val) : kind{ ch }, value{ val } {}
-		Token(char ch, std::string n) : kind{ ch }, name{ n } {}
+		Token(char ch, std::string& n) : kind{ ch }, value{ NULL }, name{ n } {}
 	};
 
 	constexpr char number{ '6' };				//a numeric token
@@ -31,9 +31,10 @@ namespace Calc {
 
 	class Token_stream {
 	public:
+		Token_stream() { current = nullptr; }
 		void init(std::istream&);
 		Token get();
-		void putback(Token t);
+		void putback(const Token& t);
 		void ignore(char c);
 
 		Token peek();						//new one, not stable or tested with integration (testing)

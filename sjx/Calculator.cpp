@@ -117,7 +117,7 @@ namespace Calc {
 		if (t2.kind != '=') {
 			throw runtime_error("declare: '=' missing in declaration of " + var_name);
 		}
-		double d = expression(ts);
+		const double d = expression(ts);
 		define_name(var_name, d);
 		return d;
 	}
@@ -125,16 +125,15 @@ namespace Calc {
 	double assignment(Token_stream& ts) {
 		const Token t = ts.get();
 		const string var_name = t.name;
-		double value = expression(ts);
+		const double value = expression(ts);
 		assign_name(var_name, value);
 		return value;
 	}
 
 	double expression(Token_stream& ts) {
 		double left = term(ts);
-		Token t;
 		while (true) {
-			t = ts.get();
+			const Token t = ts.get();
 			switch (t.kind) {
 			case end:
 				ts.putback(t);
@@ -165,7 +164,7 @@ namespace Calc {
 				left *= primary(ts);
 				break;
 			case '/': {
-				double d = primary(ts);
+				const double d = primary(ts);
 				if (d == 0) {
 					throw runtime_error("divide by zero");
 				}
@@ -173,7 +172,7 @@ namespace Calc {
 				break;
 			}
 			case '%': {
-				double m = primary(ts);
+				const double m = primary(ts);
 				if (m == 0) {
 					throw runtime_error("divide by zero");
 				}
@@ -200,7 +199,7 @@ namespace Calc {
 		switch (t.kind) {
 		case '(':
 		{
-			double d = expression(ts);
+			const double d = expression(ts);
 			t = ts.get();
 			if (t.kind != ')') {
 				throw runtime_error("')' expected");
@@ -210,7 +209,7 @@ namespace Calc {
 		//开平方
 		case root2:
 		{
-			double e = primary(ts);
+			const double e = primary(ts);
 			if (e < 0) {
 				throw runtime_error(
 					"Cannot take the square root of a negative number in the real domain."

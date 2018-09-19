@@ -70,7 +70,7 @@ namespace enc {
 					break;
 				}
 				else if (c == '\\') {
-					char t = ist.peek();
+					const char t = ist.peek();
 					if (t == '\\') {
 						ist.get();
 					}
@@ -84,7 +84,7 @@ namespace enc {
 		}
 	}
 
-	std::string SwapEnc::parse_name(std::string ori) {
+	std::string SwapEnc::parse_name(const std::string& ori) {
 		string rtn;
 		if (ori.substr(ori.length() - 4, 4) == ".enc") {
 			rtn = ori.substr(0, ori.length() - 4);
@@ -97,8 +97,8 @@ namespace enc {
 
 	void __fastcall SwapEnc::encrypt_loop(std::istream& ist) {
 		while (true) {
-			string name = parse_pathnames(ist);
-			if (name == "") {
+			const string name = parse_pathnames(ist);
+			if (name.empty()) {
 				break;
 			}
 			fs::path input = name;
@@ -120,7 +120,7 @@ namespace enc {
 			}
 			//			if (fs::is_regular_file(input)) {
 			else {
-				fs::path output = parse_name(input.string());
+				const fs::path output = parse_name(input.string());
 				enc(input, output);
 			}
 		}
@@ -138,7 +138,7 @@ namespace enc {
 
 	void SwapEnc::command_line(int argc, char** argv) {
 		int i = 1;
-		string a = "";
+		string a;
 		while (true) {
 			a += argv[i];
 			i++;
@@ -166,14 +166,13 @@ namespace enc {
 		cin.get();
 		cin.get(c);
 		switch (c) {
-		case 'Y': case 'y': case '\n':
+		case 'Y': case 'y': case '\n': case EOF:
 			cout << endl;
 			break;
 		case 'N': case 'n':
 			on = false;
 			break;
 		default:
-			char c;
 			do {
 				cin.get(c);
 			} while (c != '\n'&&c != EOF);

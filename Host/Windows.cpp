@@ -1,4 +1,6 @@
-﻿///////////////////////////////////////////////////
+﻿#include "Header.h"
+
+///////////////////////////////////////////////////
 //Code specific to Windows platform
 
 ///////////////////////////////////////////////////
@@ -162,7 +164,7 @@ inline void call<void, cmdline>(const nchar* library, const char* function, cmdl
 		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
 		throw std::runtime_error("call: Library loading failed!");
 	}
-	typedef void(*_func)(size_t, nchar**);
+	typedef void(*_func)(size_t, char**);
 	const _func func = _func(GetProcAddress(hInst, function));
 	try {
 		func(cmd->argc, cmd->argv);

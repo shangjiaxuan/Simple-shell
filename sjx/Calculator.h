@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Header.h"
+//#include "Header.h"
 
 #include "CalcToken.h"
 
