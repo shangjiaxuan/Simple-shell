@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Header.h"
 
 #include "Names.h"								//currently "isexecutable" function relies on this

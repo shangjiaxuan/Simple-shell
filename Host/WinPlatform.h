@@ -1,8 +1,8 @@
-#pragma once
+﻿#pragma once
 
 //header for the Windows-specific functions
 
-#ifdef WIN32
+#ifdef _WIN32
 
 #include <Windows.h>
 #include "Header.h"
@@ -22,10 +22,15 @@
 //void Handle_Error(std::exception&);
 
 //functions for calling functions in dlls
-void call(const nchar* library, const char* function);
-template <class  type>
-void call(const nchar* library, const char* function, type& pass);
+struct cmdline {
+	size_t argc;
+	char** argv;
+};
+template <typename rtn, typename  passed>
+rtn call(const nchar* library, const char* function, passed* pass);
 
-template void call<std::istream>(const nchar*, const char*, std::istream&);
 
+
+
+//template void call<void>(const nchar* library, const char* function, void* null);
 #endif

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Header.h"
 
@@ -9,16 +9,6 @@ namespace pathman {
 		fs::path iroot;
 		fs::path cur_oroot;
 		fs::directory_iterator temp;
-		// inline std::string parse_name(std::string ori) {
-		// 	std::string rtn;
-		// 	if (ori.substr(ori.length() - 4, 4) == ".enc") {
-		// 		rtn = ori.substr(0, ori.length() - 4);
-		// 	}
-		// 	else {
-		// 		rtn = ori + ".enc";
-		// 	}
-		// 	return rtn;
-		// }
 
 		std::stack<fs::directory_iterator> stack;
 
@@ -37,14 +27,14 @@ namespace pathman {
 		fs::path cur_opath;
 
 		void pop();
-		iopath_recursive_iterator end();
+		static iopath_recursive_iterator end();
 		iopath_recursive_iterator& operator++();
 
-		bool operator==(const iopath_recursive_iterator& tar) {
+		bool operator==(const iopath_recursive_iterator& tar) const {
 			return((cur_ipath == tar.cur_ipath) && (iroot == tar.iroot));
 		}
 
-		bool operator!=(const iopath_recursive_iterator& tar) {
+		bool operator!=(const iopath_recursive_iterator& tar) const {
 			return !(*this == tar);
 		}
 	};

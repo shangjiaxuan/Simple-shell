@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Header.h"
 #include "Parser.h"			//needs to pass commands on to the parser

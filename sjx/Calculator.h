@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "Header.h"
+//#include "Header.h"
 
-#include "Token.h"
+#include "CalcToken.h"
 
 namespace Calc {
 
@@ -18,8 +18,8 @@ namespace Calc {
 	void clean_up_mess(Token_stream&);
 }
 
-#ifdef _WINDLL
-DLL_PORT void calculator(std::istream&);
+#ifndef _WINDLL
+void calculator(std::istream&);
 #endif
 
 //DLL_PORT Calc::message calculate(Calc::Token_stream&);

@@ -1,6 +1,5 @@
-﻿#include "Header.h"
-#include "SwapEnc.h"
-#include "Paths.h"
+﻿#include "SwapEnc.h"
+#include "Pathman.h"
 
 using namespace std;
 
@@ -8,7 +7,7 @@ namespace enc {
 
 	void SwapEnc::name_ver() {
 		cout << "Simple encryptor & decryptor\n";
-		cout << "Version " << STRING(VERSION) << '\n' << endl;
+		cout << "Version " << STRING(ENC_VERSION) << '\n' << endl;
 	}
 	void SwapEnc::prompt() {
 		cout << "Please specify files for encryption or decryption.\n";
@@ -16,7 +15,7 @@ namespace enc {
 	}
 
 	void __fastcall SwapEnc::enc(fs::path input, fs::path output) {
-		if(input=="") {
+		if (input == "") {
 			throw std::runtime_error("Specified file empty!");
 		}
 		ifs.open(input, ios::binary);
@@ -71,7 +70,7 @@ namespace enc {
 					break;
 				}
 				else if (c == '\\') {
-					char t = ist.peek();
+					const char t = ist.peek();
 					if (t == '\\') {
 						ist.get();
 					}
@@ -80,12 +79,12 @@ namespace enc {
 					}
 				}
 			}
-//			cout << "Encrypting the file \"" << a << "\"" << endl;
+			//			cout << "Encrypting the file \"" << a << "\"" << endl;
 			return a;
 		}
 	}
 
-	std::string SwapEnc::parse_name(std::string ori) {
+	std::string SwapEnc::parse_name(const std::string& ori) {
 		string rtn;
 		if (ori.substr(ori.length() - 4, 4) == ".enc") {
 			rtn = ori.substr(0, ori.length() - 4);
@@ -98,19 +97,19 @@ namespace enc {
 
 	void __fastcall SwapEnc::encrypt_loop(std::istream& ist) {
 		while (true) {
-			string name = parse_pathnames(ist);
-			if(name=="") {
+			const string name = parse_pathnames(ist);
+			if (name.empty()) {
 				break;
 			}
 			fs::path input = name;
-			if(fs::is_directory(input)) {
+			if (fs::is_directory(input)) {
 				fs::path output = parse_name(input.string());
 				pathman::iopath_recursive_iterator it{ input, output };
-//				cout << "Iterator constructed!\n";
-				while(it!=it.end()) {
-//					cout << "Current input path: " << it.cur_ipath << '\n';
-//					cout << "Current output path: " << it.cur_opath << '\n';
-					if(fs::is_directory(it.cur_ipath)) {
+				//				cout << "Iterator constructed!\n";
+				while (it != it.end()) {
+					//					cout << "Current input path: " << it.cur_ipath << '\n';
+					//					cout << "Current output path: " << it.cur_opath << '\n';
+					if (fs::is_directory(it.cur_ipath)) {
 						fs::create_directory(it.cur_opath);//parse_name(it.cur_opath.string()));
 					}
 					else {
@@ -119,16 +118,16 @@ namespace enc {
 					++it;
 				}
 			}
-//			if (fs::is_regular_file(input)) {
+			//			if (fs::is_regular_file(input)) {
 			else {
-				fs::path output = parse_name(input.string());
-				enc(input,output);
+				const fs::path output = parse_name(input.string());
+				enc(input, output);
 			}
 		}
 	}
 
 	void SwapEnc::run_time() {
-		if(cin.peek()=='\n') {
+		if (cin.peek() == '\n') {
 			cout << "Please specify at least one file!\n" << endl;
 		}
 		else {
@@ -139,22 +138,22 @@ namespace enc {
 
 	void SwapEnc::command_line(int argc, char** argv) {
 		int i = 1;
-		string a = "";
+		string a;
 		while (true) {
 			a += argv[i];
 			i++;
-			if(i>=argc) {
+			if (i >= argc) {
 				break;
 			}
 			a += ' ';
-//			int pos{ 0 };
-//			while(pos<a.length()){
-//				pos=a.find("\\\\", pos);
-//				if (pos != string::npos) {
-//					a.erase(pos, 2);
-//					pos++;
-//				}else{break;}
-//			}
+			//			int pos{ 0 };
+			//			while(pos<a.length()){
+			//				pos=a.find("\\\\", pos);
+			//				if (pos != string::npos) {
+			//					a.erase(pos, 2);
+			//					pos++;
+			//				}else{break;}
+			//			}
 		}
 		istringstream iss{ a };
 		encrypt_loop(iss);
@@ -167,14 +166,13 @@ namespace enc {
 		cin.get();
 		cin.get(c);
 		switch (c) {
-		case 'Y': case 'y': case '\n':
+		case 'Y': case 'y': case '\n': case EOF:
 			cout << endl;
 			break;
 		case 'N': case 'n':
 			on = false;
 			break;
 		default:
-			char c;
 			do {
 				cin.get(c);
 			} while (c != '\n'&&c != EOF);
