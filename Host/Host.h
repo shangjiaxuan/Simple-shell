@@ -31,3 +31,10 @@ private:
 	//!!!currently not incorporated
 	static bool change(const char& a);
 };
+
+//a struct for passing commandline arguments
+struct cmdline {
+	size_t argc;
+	char** argv;
+};
+

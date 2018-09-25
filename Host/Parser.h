@@ -12,6 +12,8 @@
 #include "Names.h"			//required for the command names
 
 #include "Filemani.h"		//required for file management functions
+#include "Host.h"
+
 
 class parser {
 public:
@@ -33,5 +35,4 @@ private:
 
 //following are functions that only stands alone currently
 
-//for launching other executables
-void Launch(const nstring& str);
+

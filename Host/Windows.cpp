@@ -1,15 +1,18 @@
 ﻿#include "Header.h"
+#include "Host.h"			//for cmdline struct
+#include "Launch.h"			//for Launch_Info struct
 
 ///////////////////////////////////////////////////
 //Code specific to Windows platform
 
-///////////////////////////////////////////////////
-//Following code referenced mostly from MSDN forum
-
-#include <functional>
+//#include <functional>
 #ifdef _WIN32
 #include "WinPlatform.h"
+
 using namespace std;
+
+///////////////////////////////////////////////////
+//Following code referenced mostly from MSDN forum
 
 ///////////////////////////////////////////////////////////////
 //For loading dynamic library
@@ -148,37 +151,26 @@ template void call<void, void>(const nchar* library, const char* function, void*
 
 //////////////////////////////////////////////////////////////////
 //Windows API for launching exectutables
-void Launch(const nstring& str) {
-	STARTUPINFOW si;
+void Launch(const Launch_Info& launch_info) {
+	STARTUPINFO si;
 	PROCESS_INFORMATION pi;
-
-	const LPWSTR cmd = LPWSTR(str.c_str());
 
 	ZeroMemory(&si, sizeof(si));
 	si.cb = sizeof(si);
 	ZeroMemory(&pi, sizeof(pi));
 
 	// Start the child process.
-	if(!CreateProcessW(
+	if(!CreateProcess(
 			nullptr,
-			// No module name (use command line)
-			cmd,
-			// Command line
+			launch_info.lpCommandLine,
 			nullptr,
-			// Process handle not inheritable
 			nullptr,
-			// Thread handle not inheritable
-			FALSE,
-			// Set handle inheritance to FALSE
-			0,
-			// No creation flags
-			nullptr,
-			// Use parent's environment block
-			nullptr,
-			// Use parent's starting directory
+			launch_info.bInheritHandles,
+			launch_info.dwCreationFlags,
+			launch_info.lpEnvironment,
+			launch_info.lpCurrentDirectory,
 			&si,
-			// Pointer to STARTUPINFO structure
-			&pi) // Pointer to PROCESS_INFORMATION structure
+			&pi) 
 	) {
 		printf("CreateProcess failed (%d).\n", GetLastError());
 		return;

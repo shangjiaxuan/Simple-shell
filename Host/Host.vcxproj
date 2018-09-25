@@ -177,15 +177,11 @@
     <ClInclude Include="Header.h" />
     <ClInclude Include="Filemani.h" />
     <ClInclude Include="Host.h" />
+    <ClInclude Include="Launch.h" />
     <ClInclude Include="Names.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Macros.h" />
     <ClInclude Include="WinPlatform.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\sjx\sjx.vcxproj">
-      <Project>{23ba0350-902e-4f24-859f-8c41c6be5393}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

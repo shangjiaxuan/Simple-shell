@@ -19,17 +19,10 @@ protected:
 	static DWORD MBCS_size(const LPWSTR&);
 };
 
-//void Handle_Error(std::exception&);
-
-//a struct for passing commandline arguments
-struct cmdline {
-	size_t argc;
-	char** argv;
-};
-
 //for calling functions in dlls
 template<typename rtn, typename passed>
 rtn call(const nchar* library, const char* function, passed* pass);
+
 
 
 //template void call<void>(const nchar* library, const char* function, void* null);

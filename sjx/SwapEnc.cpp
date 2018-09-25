@@ -15,7 +15,7 @@ namespace enc {
 		cout << "You may drag and drop one by one, and then press \"enter\" if you like.\n" << endl;
 	}
 
-	void __fastcall SwapEnc::enc(fs::path input, fs::path output) {
+	inline void __fastcall SwapEnc::enc(fs::path input, fs::path output) {
 		if(input.empty()) {
 			throw std::runtime_error("Specified file empty!");
 		}
@@ -91,7 +91,7 @@ namespace enc {
 		return rtn;
 	}
 
-	void __fastcall SwapEnc::encrypt_loop(std::istream& ist) {
+	inline void __fastcall SwapEnc::encrypt_loop(std::istream& ist) {
 		while(true) {
 			const string name = parse_pathnames(ist);
 			if(name.empty()) {
@@ -102,7 +102,7 @@ namespace enc {
 				fs::path output = parse_name(input.string());
 				pathman::iopath_recursive_iterator it{input, output};
 				//				cout << "Iterator constructed!\n";
-				while(it != it.end()) {
+				while(it != pathman::iopath_recursive_iterator::end()) {
 					//					cout << "Current input path: " << it.cur_ipath << '\n';
 					//					cout << "Current output path: " << it.cur_opath << '\n';
 					if(is_directory(it.cur_ipath)) {

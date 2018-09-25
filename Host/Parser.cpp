@@ -2,6 +2,7 @@
 
 #include "Parser.h"
 
+#include "Launch.h"
 #ifdef _WIN32
 #include "WinPlatform.h"	//required for calling functions from dlls
 #endif
@@ -58,7 +59,9 @@ void parser::after_start_selector(std::vector<nstring> arg) {
 				}
 				cmd += _T(" ");
 			}
-			Launch(cmd);
+			fs::path p = cmd;
+			const Launch_Info info = Launch_Info(p);
+			Launch(info);
 		} else {
 			cout << "I'm sorry, but we currently do not support opening files with default programs yet." << endl;
 			cur_arg++;
@@ -69,3 +72,5 @@ void parser::after_start_selector(std::vector<nstring> arg) {
 		//because console apps in windows does not support unicode console I/O very well, need some work to fix this
 	}
 }
+
+

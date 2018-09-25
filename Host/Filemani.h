@@ -12,4 +12,5 @@ namespace fileman {
 
 	//function for changing the working directory
 	void Change_directory(nstring dir);
+
 };

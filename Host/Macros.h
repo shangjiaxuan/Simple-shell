@@ -18,11 +18,13 @@
 #ifdef _UNICODE
 #define nstring std::wstring
 #define nchar wchar_t
+#define stringcpy wcscpy_s
 #endif
 
 #ifdef _MBCS
 #define nstring std::string
 #define nchar char
+#define stringcpy strcpy_s
 #endif
 
 #endif
