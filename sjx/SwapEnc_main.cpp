@@ -8,15 +8,14 @@ DLL_PORT
 void SwapEnc() {
 	enc::SwapEnc This;
 	enc::SwapEnc::name_ver();
-	while (true) {
+	while(true) {
 		try {
 			enc::SwapEnc::prompt();
 			This.run_time();
-			if (!This.on) {
+			if(!This.on) {
 				return;
 			}
-		}
-		catch (exception& e) {
+		} catch(exception& e) {
 			cerr << '\n' << e.what() << '\n' << endl;
 		}
 	}

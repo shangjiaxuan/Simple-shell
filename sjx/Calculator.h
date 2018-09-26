@@ -6,7 +6,7 @@
 
 namespace Calc {
 
-	void init(Token_stream&);			//initializes for each round of input
+	void init(Token_stream&); //initializes for each round of input
 
 	double statement(Token_stream&);
 	double declaration(Token_stream&);
@@ -28,4 +28,4 @@ void calculator(std::istream&);
 //constexpr char value{ 'v' };
 //constexpr char error{ 'e' };		//Could expand this to catch all the exceptions.
 
-extern bool on;	//quiting switch
+extern bool on; //quiting switch

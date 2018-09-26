@@ -2,72 +2,70 @@
 
 #include "Host.h"
 
+#ifdef _WIN32
 #include "WinPlatform.h"	//input conversion requires including the convert class
-							//will add macros here in the future to support unix-like systems
+#endif
 
 using namespace std;
 
-void UI::loop(int argc, char* argv[]) {
-	if (argc > 1) {}
-	host_beginning:
-//		go_to_beginning = false;
-		cout << "********************************************************************************\n";
-		cout << "My mini program collection " << STRING(VERSION) << '\n';
-		cout << "Which program do you wish to use?\n\n";
-		cout << "Use \"-h\" or \"man\" for help or manual page.\n" << endl;
-		while (cin) {
-			parser par;
-			prompt();
-			vector<nstring> argumentlist = Get_input();
-			if (argumentlist.size()!=0) {
-				cin.clear();
-				par.after_start_selector(argumentlist);
-			}
-			cout << endl;
-			if (go_to_beginning) { goto host_beginning; }
+void UI::loop(int argc, char* argv[]) const {
+	if(argc > 1) {}
+host_beginning:
+	//go_to_beginning = false;
+	cout << "********************************************************************************\n";
+	cout << "My mini program collection " << STRING(VERSION) << '\n';
+	cout << "Which program do you wish to use?\n\n";
+	cout << "Use \"-h\" or \"man\" for help or manual page.\n" << endl;
+	while(cin) {
+		parser par;
+		prompt();
+		vector<nstring> argumentlist = Get_input(cin);
+		if(!argumentlist.empty()) {
+			cin.clear();
+			par.after_start_selector(argumentlist);
 		}
+		cout << endl;
+		if(go_to_beginning) { goto host_beginning; }
+	}
 }
 
 void UI::prompt() {
-	experimental::filesystem::path p = experimental::filesystem::current_path();
-	cout << p << ">";
+	cout << fs::current_path() << ">";
 }
 
 
-std::vector<nstring> UI::Get_input() {
+std::vector<nstring> UI::Get_input(istream& input_stream) {
 	std::vector<nstring> arguments;
-	while (std::cin.peek() != '\n') {
-		arguments.push_back(parse_input());
+	while(input_stream.peek() != '\n') {
+		arguments.push_back(parse_input(input_stream));
 	}
-	cin.get();
+	input_stream.get();
 	return arguments;
 }
 
 ////////////////////////////////
 //For parsing commandline input
-nstring UI::parse_input() {
-std::string input;
+nstring UI::parse_input(istream& input_stream) {
+	std::string input;
 #ifdef _WIN32
-//////////////////////////////////////////
-//using the Windows file system convention
-	convert This;
-	//	std::cin >> input;
-	char c;
-	c = cin.peek();
-	if (c == ' ') {
+	//////////////////////////////////////////
+	//using the Windows file system convention
+	char c = input_stream.peek();
+	if(c == ' ') {
 		do {
-			cin.get(c);
-		} while (c == ' ');
-		cin.putback(c);
+			input_stream.get(c);
+		}
+		while(c == ' ');
+		input_stream.putback(c);
 	}
 	//	if(c != '\"') {
 	//		cin >> input;
-	//	} else 
-	while (true) {
-		if (c == '\"') {
-			cin.get();
-			cin.get(c);
-			while (c != '\"') {
+	//	} else
+	while(true) {
+		if(c == '\"') {
+			input_stream.get();
+			input_stream.get(c);
+			while(c != '\"') {
 				//				if (c == '\\') {
 				//					char a;
 				//					cin.get(a);
@@ -81,48 +79,52 @@ std::string input;
 				//					}
 				//					cin.putback(a);
 				//				}
-				if (c == '\n') {
+				if(c == '\n') {
 					break;
 				}
 				input += c;
-				cin.get(c);
+				input_stream.get(c);
 			}
-		}
-		else if (c == '\n') {
+		} else if(c == '\n') {
 			//				cin.putback(c);
 			break;
-		}
-		else {
-			cin.get(c);
+		} else {
+			input_stream.get(c);
 			input += c;
 		}
-		c = cin.peek();
-		if (c == ' ') {
+		c = input_stream.peek();
+		if(c == ' ') {
 			do {
-				cin.get(c);
-			} while (c == ' ');
-			cin.putback(c);
+				input_stream.get(c);
+			}
+			while(c == ' ');
+			input_stream.putback(c);
 			break;
 		}
 	}
 	//	stop:
 	nstring rtn;
 #ifdef _UNICODE
-	rtn = This.string2wstring(input);
+	rtn = convert::string2wstring(input);
 #endif
 #ifdef _MBCS
 	rtn = input;
 #endif
 	return rtn;
 #endif
-/////////////////////////////////////////////////////////////
-//place for parsing paths and commands in other situations
+	/////////////////////////////////////////////////////////////
+	//place for parsing paths and commands in other situations
 }
 
 bool UI::change(const char& a) {
-	if (a == '\a' || a == '\b' || a == '\f' || a == '\n' || a == '\r' || a == '\t' || a == '\'' || a == '\"') {
-		return true;
-	}//'\\'will be dealt with else where. cannot afford to use it too much in cmd shell 
-	 //numbers meaning characters are ignored
-	return false;
+	return (a == '\a' ||
+			a == '\b' ||
+			a == '\f' ||
+			a == '\n' ||
+			a == '\r' ||
+			a == '\t' ||
+			a == '\'' ||
+			a == '\"');
+	//'\\'will be dealt with else where. cannot afford to use it too much in cmd shell
+	//numbers meaning characters are ignored
 }

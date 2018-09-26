@@ -7,7 +7,7 @@
 namespace enc {
 	class SwapEnc {
 	public:
-		bool on{ true };
+		bool on{true};
 		static void name_ver();
 		static void prompt();
 		void run_time();
@@ -18,7 +18,7 @@ namespace enc {
 		std::ofstream ofs;
 		void Exit();
 		static std::string __fastcall parse_pathnames(std::istream& ist);
-		void __fastcall encrypt_loop(std::istream & ist);
+		void __fastcall encrypt_loop(std::istream& ist);
 		void __fastcall enc(fs::path input, fs::path output);
 	};
 }

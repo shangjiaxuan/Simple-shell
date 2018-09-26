@@ -14,4 +14,3 @@
 #ifndef _WINDLL
 #define DLL_PORT extern "C" __declspec(dllimport)
 #endif
-
