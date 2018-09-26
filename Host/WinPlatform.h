@@ -29,7 +29,6 @@ rtn call(const nchar* library, const char* function, passed* pass);
 
 struct Lnk_Info {
 	Lnk_Info() {// NOLINT
-
 		//default constructor needed if I have to have an empty Lnk_Info structure to compare to
 		//I do not know if I can make this more tidy like the default constructor in
 		//directory_iterator class
