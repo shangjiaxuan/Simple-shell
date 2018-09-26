@@ -16,8 +16,8 @@ namespace fileman {
 
 	bool isexecutable(nstring& str) {
 #ifdef _WIN32
-		if (str.back() == _T('"') && str.length() >= 6 && str.substr(str.length() - 5, 4) != Exec) { return false; }
-		if (str.back() != _T('"') && str.length() >= 4 && str.substr(str.length() - 4, 4) != Exec) { return false; }
+		if(str.back() == _T('"') && str.length() >= 6 && str.substr(str.length() - 5, 4) != Exec) { return false; }
+		if(str.back() != _T('"') && str.length() >= 4 && str.substr(str.length() - 4, 4) != Exec) { return false; }
 		//see if the file starts with a "MZ"(4D5A)
 		ifstream ifs;
 		ifs.open(str);
@@ -37,9 +37,9 @@ namespace fileman {
 
 #ifdef _WIN32
 	bool isshelllink(nstring& str) {
-		if (str.length() < 4) return false;
-		if (str.back() == _T('"') && str.length() >= 6 && str.substr(str.length() - 5, 4) != Link) { return false; }
-		if (str.back() != _T('"') && str.length() >= 4 && str.substr(str.length() - 4, 4) != Link) { return false; }
+		if(str.length() < 4) return false;
+		if(str.back() == _T('"') && str.length() >= 6 && str.substr(str.length() - 5, 4) != Link) { return false; }
+		if(str.back() != _T('"') && str.length() >= 4 && str.substr(str.length() - 4, 4) != Link) { return false; }
 		return true;
 	}
 #endif
@@ -49,10 +49,12 @@ namespace fileman {
 		read(reinterpret_cast<char*>(buffer), num * sizeof WORD);
 		return *this;
 	}
+
 	BinaryFileReader& BinaryFileReader::read_DWORD(DWORD* buffer, std::streamsize num) {
 		read(reinterpret_cast<char*>(buffer), num * sizeof DWORD);
 		return *this;
 	};
+
 	BinaryFileReader& BinaryFileReader::read_LONG(LONG* buffer, std::streamsize num) {
 		read(reinterpret_cast<char*>(buffer), num * sizeof LONG);
 		return *this;

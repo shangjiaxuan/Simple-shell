@@ -170,7 +170,7 @@ void Launch(const Launch_Info& launch_info) {
 			launch_info.lpEnvironment,
 			launch_info.lpCurrentDirectory,
 			&si,
-			&pi) 
+			&pi)
 	) {
 		printf("CreateProcess failed (%d).\n", GetLastError());
 		return;
@@ -185,8 +185,6 @@ void Launch(const Launch_Info& launch_info) {
 }
 
 //////////////////////////////////////
-
-
 
 
 #endif
