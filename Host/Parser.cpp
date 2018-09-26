@@ -62,7 +62,13 @@ void parser::after_start_selector(std::vector<nstring> arg) {
 			fs::path p = cmd;
 			const Launch_Info info = Launch_Info(p);
 			Launch(info);
-		} else {
+		} else if(fileman::isshelllink(arg[cur_arg])) {
+			Lnk_Info info = get_LnkInfo(arg[cur_arg]);
+			//currently lnks are only supported in this way
+			//may add a link parser in the future
+			after_start_selector(vector<nstring>{info.target_path});
+		}
+		else {
 			cout << "I'm sorry, but we currently do not support opening files with default programs yet." << endl;
 			cur_arg++;
 		}

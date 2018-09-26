@@ -9,6 +9,7 @@ namespace fileman {
 	//may add the feature that checks on registry
 	//and gets other programs to open other files
 	bool isexecutable(nstring& str);
+	bool isshelllink(nstring& str);
 
 	//function for changing the working directory
 	void Change_directory(nstring dir);
