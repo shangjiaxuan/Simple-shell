@@ -37,4 +37,3 @@ struct cmdline {
 	size_t argc;
 	char** argv;
 };
-

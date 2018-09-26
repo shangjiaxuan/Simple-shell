@@ -100,17 +100,17 @@ bool non_console(const fs::path& p) {
 			case IMAGE_SUBSYSTEM_WINDOWS_GUI:
 			case IMAGE_SUBSYSTEM_WINDOWS_CE_GUI:
 				//			cout << "GUI!" << endl;
-				return 1;
+				return true;
 				break;
 			case IMAGE_SUBSYSTEM_WINDOWS_CUI:
 			case IMAGE_SUBSYSTEM_OS2_CUI:
 			case IMAGE_SUBSYSTEM_POSIX_CUI:
 				//			cout << "CUI!" << endl;
-				return 0;
+				return false;
 				break;
 			default:
 				cout << "Unknown!" << endl;
-				return 2;
+				return true;
 		}
 	}
 	return true;

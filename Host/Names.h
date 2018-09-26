@@ -17,5 +17,4 @@ extern const nstring Calculator;
 extern const nstring SwapEnc;
 
 
-
 #endif
