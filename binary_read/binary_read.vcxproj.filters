@@ -18,5 +18,13 @@
     <ClCompile Include="binary_read.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PEFileReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

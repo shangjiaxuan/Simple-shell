@@ -2,7 +2,7 @@
 
 #include "Parser.h"
 
-#include "Launch.h"
+
 #ifdef _WIN32
 #include "WinPlatform.h"	//required for calling functions from dlls
 #endif
@@ -59,14 +59,16 @@ void parser::after_start_selector(std::vector<nstring> arg) {
 				}
 				cmd += _T(" ");
 			}
-			fs::path p = cmd;
+			const fs::path p = cmd;
 			const Launch_Info info = Launch_Info(p);
 			Launch(info);
 		} else if(fileman::isshelllink(arg[cur_arg])) {
 			Lnk_Info info = get_LnkInfo(arg[cur_arg]);
 			//currently lnks are only supported in this way
 			//may add a link parser in the future
-			after_start_selector(vector<nstring>{info.target_path});
+			if(info!=Lnk_Info())
+				after_start_selector(vector<nstring>{info.target_path});
+			fs::directory_iterator a;
 		}
 		else {
 			cout << "I'm sorry, but we currently do not support opening files with default programs yet." << endl;
@@ -79,4 +81,39 @@ void parser::after_start_selector(std::vector<nstring> arg) {
 	}
 }
 
+bool non_console(const fs::path& p) {
+	fileman::BinaryFileReader reader;
+	reader.open(p, ios::binary | ios::in);
+	if (reader) {
+		reader.seekg(0x3C);
+		WORD pos1;
+		reader.read_WORD(&pos1, 1);
+		//			cout << pos1 << endl;
+		//following should be "PE\0\0"...etc
+		//see docs on https://msdn.microsoft.com/en-us/magazine/ms809762.aspx
+		reader.seekg(pos1 + 0x5c);
+		WORD subsystem;
+		reader.read_WORD(&subsystem, 1);
+		reader.clear();
+		switch (subsystem) {
+		case IMAGE_SUBSYSTEM_UNKNOWN:
+		case IMAGE_SUBSYSTEM_NATIVE:
+		case IMAGE_SUBSYSTEM_WINDOWS_GUI:
+		case IMAGE_SUBSYSTEM_WINDOWS_CE_GUI:
+//			cout << "GUI!" << endl;
+			return 1;
+			break;
+		case IMAGE_SUBSYSTEM_WINDOWS_CUI:
+		case IMAGE_SUBSYSTEM_OS2_CUI:
+		case IMAGE_SUBSYSTEM_POSIX_CUI:
+//			cout << "CUI!" << endl;
+			return 0;
+			break;
+		default:
+			cout << "Unknown!" << endl;
+			return 2;
+		}
+	}
+	return true;
+};
 

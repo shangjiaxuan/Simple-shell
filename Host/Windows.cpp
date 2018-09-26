@@ -161,7 +161,7 @@ void Launch(const Launch_Info& launch_info) {
 
 	// Start the child process.
 	if(!CreateProcess(
-			nullptr,
+			launch_info.lpApplicationName,
 			launch_info.lpCommandLine,
 			nullptr,
 			nullptr,
@@ -175,13 +175,13 @@ void Launch(const Launch_Info& launch_info) {
 		printf("CreateProcess failed (%d).\n", GetLastError());
 		return;
 	}
-
-	// Wait until child process exits.
-	WaitForSingleObject(pi.hProcess, INFINITE);
-
-	// Close process and thread handles.
-	CloseHandle(pi.hProcess);
-	CloseHandle(pi.hThread);
+	if(!non_console(launch_info.lpApplicationName)) {
+		// Wait until child process exits.
+		WaitForSingleObject(pi.hProcess, INFINITE);
+		// Close process and thread handles.
+		CloseHandle(pi.hProcess);
+		CloseHandle(pi.hThread);
+	}
 }
 
 //////////////////////////////////////

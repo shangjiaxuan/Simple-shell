@@ -19,7 +19,7 @@ host_beginning:
 	while(cin) {
 		parser par;
 		prompt();
-		vector<nstring> argumentlist = Get_input();
+		vector<nstring> argumentlist = Get_input(cin);
 		if(!argumentlist.empty()) {
 			cin.clear();
 			par.after_start_selector(argumentlist);
@@ -34,37 +34,37 @@ void UI::prompt() {
 }
 
 
-std::vector<nstring> UI::Get_input() {
+std::vector<nstring> UI::Get_input(istream& input_stream) {
 	std::vector<nstring> arguments;
-	while(std::cin.peek() != '\n') {
-		arguments.push_back(parse_input());
+	while(input_stream.peek() != '\n') {
+		arguments.push_back(parse_input(input_stream));
 	}
-	cin.get();
+	input_stream.get();
 	return arguments;
 }
 
 ////////////////////////////////
 //For parsing commandline input
-nstring UI::parse_input() {
+nstring UI::parse_input(istream& input_stream) {
 	std::string input;
 #ifdef _WIN32
 	//////////////////////////////////////////
 	//using the Windows file system convention
-	char c = cin.peek();
+	char c = input_stream.peek();
 	if(c == ' ') {
 		do {
-			cin.get(c);
+			input_stream.get(c);
 		}
 		while(c == ' ');
-		cin.putback(c);
+		input_stream.putback(c);
 	}
 	//	if(c != '\"') {
 	//		cin >> input;
 	//	} else
 	while(true) {
 		if(c == '\"') {
-			cin.get();
-			cin.get(c);
+			input_stream.get();
+			input_stream.get(c);
 			while(c != '\"') {
 				//				if (c == '\\') {
 				//					char a;
@@ -83,22 +83,22 @@ nstring UI::parse_input() {
 					break;
 				}
 				input += c;
-				cin.get(c);
+				input_stream.get(c);
 			}
 		} else if(c == '\n') {
 			//				cin.putback(c);
 			break;
 		} else {
-			cin.get(c);
+			input_stream.get(c);
 			input += c;
 		}
-		c = cin.peek();
+		c = input_stream.peek();
 		if(c == ' ') {
 			do {
-				cin.get(c);
+				input_stream.get(c);
 			}
 			while(c == ' ');
-			cin.putback(c);
+			input_stream.putback(c);
 			break;
 		}
 	}

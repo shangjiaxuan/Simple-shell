@@ -13,7 +13,7 @@
 
 #include "Filemani.h"		//required for file management functions
 #include "Host.h"
-
+#include "Launch.h"
 
 class parser {
 public:
@@ -35,4 +35,4 @@ private:
 
 //following are functions that only stands alone currently
 
-
+bool non_console(const fs::path& p);

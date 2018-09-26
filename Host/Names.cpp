@@ -4,16 +4,16 @@
 
 #ifdef _WIN32
 
-const nstring Exit{_T("exit")};
-const nstring Man{ _T("man") };
-const nstring Cd{_T("cd")};
+const nstring Exit{TEXT("exit")};
+const nstring Man{ TEXT("man") };
+const nstring Cd{TEXT("cd")};
 
-const nstring Exec{_T(".exe")};
-const nstring Link{ _T(".lnk") };
+const nstring Exec{TEXT(".exe")};
+const nstring Link{TEXT(".lnk") };
 
-const nchar* sjxDLL{ _T("sjx.dll") };
-const nstring Calculator{ _T("calculator") };
-const nstring SwapEnc{_T("SwapEnc")};
+const nchar* sjxDLL{ TEXT("sjx.dll") };
+const nstring Calculator{ TEXT("calculator") };
+const nstring SwapEnc{TEXT("SwapEnc")};
 
 
 

@@ -39,7 +39,7 @@ Lnk_Info get_LnkInfo(const fs::path& LnkFile_Path) {
 		return Lnk_Info();
 	}
 	//get the path and attributes of target
-	TCHAR temp_path[MAX_PATH];
+	nchar temp_path[MAX_PATH];
 	if (FAILED(shell_link_instance->GetPath(temp_path, MAX_PATH, &(info.target_attributes), NULL))) {
 		cout << "get_Lnkpath(const nstring&): IShellLink failed to get path!\n" << endl;
 		return Lnk_Info();

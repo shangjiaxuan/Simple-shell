@@ -8,6 +8,10 @@ public:
 
 	void loop(int argc, char* argv[]) const;
 
+	//for making vector of parsed arguments
+	//and then pass on to the command parser
+	static std::vector<nstring> Get_input(std::istream& input_stream);
+
 private:
 
 	//prompt shown with each input of command
@@ -20,11 +24,7 @@ private:
 	//following are functions for parsing the direct input into strict commands
 
 	//for pasring a single argument
-	static nstring parse_input();
-
-	//for making vector of parsed arguments
-	//and then pass on to the command parser
-	static std::vector<nstring> Get_input();
+	static nstring parse_input(std::istream& input_stream);
 
 	//certain characters not on the keyboard are supported on console
 	//with the character "\" (eg '\a')

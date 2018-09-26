@@ -13,12 +13,16 @@ void Launch(const Launch_Info& launch_info);
 struct Launch_Info {
 #ifdef _WIN32
 	Launch_Info(fs::path exe_path) {
-		lpCommandLine = new TCHAR[exe_path.native().size()+1];
+//		nstring filename = exe_path.filename().native();
+		LPTSTR temp = new nchar[exe_path.native().size() + 1];
+		stringcpy(temp, exe_path.native().size() + 1, exe_path.native().c_str());
+		lpApplicationName = temp;
+		lpCommandLine = new nchar[exe_path.native().size()+1];
 		stringcpy(lpCommandLine, exe_path.native().size()+1, exe_path.native().c_str());
 		bInheritHandles = false;
 		dwCreationFlags = NULL;
 		lpEnvironment = nullptr;
-		LPTSTR temp = new TCHAR[exe_path.remove_filename().native().size()+1];
+		temp = new TCHAR[exe_path.remove_filename().native().size()+1];
 		stringcpy(temp, exe_path.native().size()+1, exe_path.native().c_str());
 		lpCurrentDirectory = temp;
 	}
@@ -27,7 +31,7 @@ struct Launch_Info {
 		delete[] lpCurrentDirectory;
 	}
 	//	No module name (use command line)
-	//	LPCTSTR                lpApplicationName;
+	LPCTSTR                lpApplicationName;
 	//	Command line
 	LPTSTR                 lpCommandLine;
 	//	Process handle not inheritable
