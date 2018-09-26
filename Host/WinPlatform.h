@@ -4,9 +4,6 @@
 
 #ifdef _WIN32
 
-#include <Windows.h>
-#include <shlobj.h>
-#include <WINNT.h>
 #include "Header.h"
 
 //operation class for simple conversion between UTF-16 and MBCS

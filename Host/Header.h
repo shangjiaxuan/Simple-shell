@@ -4,7 +4,6 @@
 
 //make the files that only include common macros included everywhere
 
-#include <cstdio>
 #include <tchar.h>
 #include <iostream>
 #include <string>
@@ -12,6 +11,11 @@
 #include <fstream>
 #include <filesystem>
 #include <cstring>
+
+#ifdef _WIN32
+#include <Windows.h>
+#include <shlobj.h>
+#endif
 
 #include "Macros.h"
 
