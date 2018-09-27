@@ -1,6 +1,7 @@
 ﻿#include "Header.h"
 
 #include "Filemani.h"
+#include "Launch.h"
 
 using namespace std;
 
@@ -19,18 +20,7 @@ namespace fileman {
 		if(str.back() == _T('"') && str.length() >= 6 && str.substr(str.length() - 5, 4) != Exec) { return false; }
 		if(str.back() != _T('"') && str.length() >= 4 && str.substr(str.length() - 4, 4) != Exec) { return false; }
 		//see if the file starts with a "MZ"(4D5A)
-		ifstream ifs;
-		ifs.open(str);
-		char c;
-		ifs.get(c);
-		if(c == 0x4D) {
-			ifs.get(c);
-			if(c == 0x5A) {
-				ifs.close();
-				return true;
-			}
-		}
-		ifs.close();
+		return PELaunch::DOS_magic_mumber(str);
 #endif
 		return false;
 	}

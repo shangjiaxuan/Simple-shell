@@ -20,5 +20,13 @@ namespace fileman {
 		BinaryFileReader& read_LONG(LONG* buffer, std::streamsize num);
 	};
 
+	template<typename type>
+	bool BinRead(type* buffer, std::streamsize num, std::istream& source) {
+		if (!source) return false;
+		source.read(reinterpret_cast<char*>(buffer), num * sizeof type);
+		if (!source) return false;
+		return true;
+	}
+
 
 };

@@ -156,38 +156,6 @@ PELaunch& PELaunch::operator=(const PELaunch& source) {
 	return *this;
 }
 
-
-int PELaunch::non_console(const fs::path& p) {
-	fileman::BinaryFileReader reader;
-	reader.open(p, ios::binary | ios::in);
-	if(reader) {
-		reader.seekg(0x3C);
-		WORD pos1;
-		reader.read_WORD(&pos1, 1);
-		//			cout << pos1 << endl;
-		//following should be "PE\0\0"...etc
-		//see docs on https://msdn.microsoft.com/en-us/magazine/ms809762.aspx
-		reader.seekg(pos1 + 0x5c);
-		WORD subsystem;
-		reader.read_WORD(&subsystem, 1);
-		reader.clear();
-		switch(subsystem) {
-			case IMAGE_SUBSYSTEM_WINDOWS_CUI:
-			case IMAGE_SUBSYSTEM_OS2_CUI:
-			case IMAGE_SUBSYSTEM_POSIX_CUI:
-				return 0;
-			case IMAGE_SUBSYSTEM_WINDOWS_GUI:
-			case IMAGE_SUBSYSTEM_WINDOWS_CE_GUI:
-				return 1;
-			case IMAGE_SUBSYSTEM_UNKNOWN:
-			case IMAGE_SUBSYSTEM_NATIVE:
-			default:
-				return 2;
-		}
-	}
-	return 3;
-};
-
 //////////////////////////////////////////////////////////////////
 //Windows API for launching exectutables
 void PELaunch::Launch() const {
@@ -221,4 +189,45 @@ void PELaunch::Launch() const {
 		CloseHandle(pi.hProcess);
 		CloseHandle(pi.hThread);
 	}
+}
+
+int PELaunch::non_console(const fs::path& p) {
+	ifstream ifs;
+	ifs.open(p, ios::binary | ios::in);
+	if (ifs) {
+		ifs.seekg(0x3C);
+		WORD pos1;
+		fileman::BinRead(&pos1, 1, ifs);
+		//			cout << pos1 << endl;
+		//following should be "PE\0\0"...etc
+		//see docs on https://msdn.microsoft.com/en-us/magazine/ms809762.aspx
+		ifs.seekg(pos1 + 0x5c);
+		WORD subsystem;
+		fileman::BinRead(&subsystem, 1, ifs);
+		ifs.close();
+		switch (subsystem) {
+		case IMAGE_SUBSYSTEM_WINDOWS_CUI:
+		case IMAGE_SUBSYSTEM_OS2_CUI:
+		case IMAGE_SUBSYSTEM_POSIX_CUI:
+			return 0;
+		case IMAGE_SUBSYSTEM_WINDOWS_GUI:
+		case IMAGE_SUBSYSTEM_WINDOWS_CE_GUI:
+			return 1;
+		case IMAGE_SUBSYSTEM_UNKNOWN:
+		case IMAGE_SUBSYSTEM_NATIVE:
+		default:
+			return 2;
+		}
+	}
+	return 3;
+};
+
+bool PELaunch::DOS_magic_mumber(const fs::path& p) {
+	ifstream ifs;
+	ifs.open(p);
+	INT16 test;
+	fileman::BinRead(&test, 1, ifs);
+	ifs.close();
+	const INT16 i = 0x5A4D;
+	return test == i;
 }

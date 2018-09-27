@@ -7,6 +7,6 @@ int main(int argc, char* argv[]) {
 		std::cout << argv[i] << std::endl;
 	}
 	UI This;
-	This.loop(argc, argv);
+	This.gui(argc, argv);
 	return 0;
 }

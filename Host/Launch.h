@@ -20,6 +20,10 @@ public:
 	//3: failed to open file
 	static int non_console(const fs::path& p);
 
+	//read the beginning of DOS header and see if magic number
+	//"MZ" exists
+	static bool DOS_magic_mumber(const fs::path& p);
+
 	PELaunch(fs::path exe_path);
 	PELaunch(const cmdline<nchar>& cmd);
 	PELaunch(const PELaunch& source);

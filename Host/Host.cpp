@@ -15,8 +15,23 @@ template struct cmdline<nchar>;
 #endif
 
 
-void UI::loop(int argc, char* argv[]) const {
-	if(argc > 1) {}
+void UI::gui(int argc, char* argv[]) const {
+	if(argc > 1) {
+		bool quit_on_finish = true;
+		//parse argv[] here
+		vector<nstring> argumentlist;
+		cout << argv[0] << endl;
+		for(int i=1; i<argc; i++) {
+			cout << argv[i] << endl;
+			argumentlist.push_back(convert::MBC2utf16(argv[i]));
+		}
+		if (!argumentlist.empty()) {
+			cin.clear();
+			parser::after_start_selector(argumentlist);
+		}
+		cout << endl;
+		if (quit_on_finish)exit(0);
+	}
 host_beginning:
 	//go_to_beginning = false;
 	cout << "********************************************************************************\n";
