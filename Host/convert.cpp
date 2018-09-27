@@ -11,23 +11,23 @@
 using namespace std;
 
 //namespace WIN {
-wstring convert::string2wstring(string& str) {
-	return MBC2utf16(const_cast<LPSTR>(str.c_str()));
+wstring convert::string2wstring(const string& str) {
+	return MBC2utf16(str.c_str());
 }
 
-string convert::wstring2string(wstring& wst) {
-	return UTF16_2mbcs(const_cast<LPWSTR>(wst.c_str()));
+string convert::wstring2string(const std::wstring& wst) {
+	return UTF16_2mbcs(wst.c_str());
 }
 
-DWORD convert::UNC_size(const LPSTR& multiByteStr) {
+DWORD convert::UNC_size(LPCSTR& multiByteStr) {
 	return MultiByteToWideChar(CP_OEMCP, MB_ERR_INVALID_CHARS, multiByteStr, -1, nullptr, 0);
 }
 
-DWORD convert::MBCS_size(const LPWSTR& unicodeStr) {
+DWORD convert::MBCS_size(LPCWSTR& unicodeStr) {
 	return WideCharToMultiByte(CP_OEMCP, NULL, unicodeStr, -1, nullptr, 0, nullptr, nullptr);
 }
 
-wstring convert::MBC2utf16(const LPSTR& multiByteStr) {
+wstring convert::MBC2utf16(LPCSTR multiByteStr) {
 	const DWORD size = UNC_size(multiByteStr);
 	// ReSharper disable once CppLocalVariableMayBeConst
 	LPWSTR unicodeStr = new WCHAR[size];
@@ -42,7 +42,7 @@ wstring convert::MBC2utf16(const LPSTR& multiByteStr) {
 ///////////////////////////////////////////////////////////////////////////////////////
 //Need some work to integrate this. Non-ASCII characters cannot be displayed on console
 //with wcout right now and needs to converted to MBCS
-string convert::UTF16_2mbcs(const LPWSTR& unicodeStr) {
+string convert::UTF16_2mbcs(LPCWSTR unicodeStr) {
 	const DWORD size = MBCS_size(unicodeStr);
 	// ReSharper disable once CppLocalVariableMayBeConst
 	LPSTR multiByteStr = new CHAR[size];

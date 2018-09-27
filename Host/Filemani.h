@@ -1,12 +1,6 @@
 ﻿#pragma once
 #include "Header.h"
 
-#include "Names.h"								//currently "isexecutable" function relies on this
-
-#ifdef _WIN32
-#include "WinPlatform.h"						//required for BinaryFileReader
-#endif
-
 namespace fileman {
 	//function for seeing if a file is an executable
 	//nearly means ".exe" on windows

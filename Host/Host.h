@@ -1,7 +1,7 @@
-﻿#pragma once
+﻿
+#pragma once
 
 #include "Header.h"
-#include "Parser.h"			//needs to pass commands on to the parser
 
 class UI {
 public:
@@ -33,7 +33,39 @@ private:
 };
 
 //a struct for passing commandline arguments
+#ifdef _UNICODE
 struct cmdline {
-	size_t argc;
-	char** argv;
+	size_t argc = 0;
+	char** argv = nullptr;
+	cmdline() = default;
+	cmdline(const cmdline&) = default;
+	cmdline(cmdline&&) = default;
+	cmdline& operator=(const cmdline&) = default;
+	cmdline& operator=(cmdline&&) = default;
+	~cmdline() {
+		for(size_t i = 0; i < argc; i++) {
+			delete[] argv[i];
+			argv[i] = nullptr;
+		}
+		delete[] argv;
+	}
 };
+#endif
+
+typedef struct ncmdline {
+	size_t argc = 0;
+	nchar** argv = nullptr;
+	ncmdline() = default;
+	ncmdline(const ncmdline&) = default;
+	ncmdline(ncmdline&&) = default;
+	ncmdline& operator=(const ncmdline&) = default;
+	ncmdline& operator=(ncmdline&&) = default;
+
+	~ncmdline() {
+		for(size_t i = 0; i < argc; i++) {
+			delete[] argv[i];
+			argv[i] = nullptr;
+		}
+		delete[] argv;
+	}
+} ncmdline;

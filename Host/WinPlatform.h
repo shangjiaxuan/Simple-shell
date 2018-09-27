@@ -9,13 +9,13 @@
 //operation class for simple conversion between UTF-16 and MBCS
 class convert {
 public:
-	static std::wstring string2wstring(std::string&);
-	static std::string wstring2string(std::wstring&);
-	static std::wstring MBC2utf16(const LPSTR&);
-	static std::string UTF16_2mbcs(const LPWSTR&);
+	static std::wstring string2wstring(const std::string&);
+	static std::string wstring2string(const std::wstring&);
+	static std::wstring MBC2utf16(LPCSTR);
+	static std::string UTF16_2mbcs(LPCWSTR);
 protected:
-	static DWORD UNC_size(const LPSTR&);
-	static DWORD MBCS_size(const LPWSTR&);
+	static DWORD UNC_size(LPCSTR&);
+	static DWORD MBCS_size(LPCWSTR&);
 };
 
 //for calling functions in dlls

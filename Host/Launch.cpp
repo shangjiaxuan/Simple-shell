@@ -1,6 +1,27 @@
 ﻿#include "Launch.h"
 
+#include "Parser.h"
+
 using namespace std;
+
+
+
+PELaunch::PELaunch(const ncmdline& cmd) {
+	bInheritHandles = false;
+	lpEnvironment = nullptr;
+	dwCreationFlags = NULL;
+	lpCurrentDirectory = nullptr;
+	if (!cmd.argv || cmd.argc == 0 || !cmd.argv[0]) {
+		lpCommandLine = nullptr;
+		lpApplicationName = nullptr;
+		return;
+	}
+	open(cmd.argv[0]);
+	lpApplicationName = cmd.argv[0];
+	const size_t required_size = parser::ncmdline2nchar(cmd, nullptr, NULL);
+	lpCommandLine = new nchar[required_size];
+	parser::ncmdline2nchar(cmd, lpCommandLine, required_size);
+}
 
 //not const reference because exe_path.remove_filename() is called
 PELaunch::PELaunch(fs::path exe_path) {
@@ -29,6 +50,7 @@ PELaunch::PELaunch(fs::path exe_path) {
 	stringcpy(temp, exe_path.native().size() + 1, exe_path.native().c_str());
 	lpCurrentDirectory = temp;
 }
+
 
 PELaunch::PELaunch(const PELaunch& source) {
 	//may not be necessary

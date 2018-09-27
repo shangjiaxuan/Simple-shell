@@ -1,13 +1,11 @@
 ﻿#include "Header.h"
 #include "Host.h"			//for cmdline struct
-#include "Launch.h"			//for PELaunch class
 
 ///////////////////////////////////////////////////
 //Code specific to Windows platform
 
 //#include <functional>
 #ifdef _WIN32
-#include "WinPlatform.h"
 
 using namespace std;
 

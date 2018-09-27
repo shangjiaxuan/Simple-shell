@@ -1,6 +1,7 @@
 ﻿#include "Header.h"
 
 #include "Host.h"
+#include "Parser.h"
 
 #ifdef _WIN32
 #include "WinPlatform.h"	//input conversion requires including the convert class
@@ -17,12 +18,11 @@ host_beginning:
 	cout << "Which program do you wish to use?\n\n";
 	cout << "Use \"-h\" or \"man\" for help or manual page.\n" << endl;
 	while(cin) {
-		parser par;
 		prompt();
 		vector<nstring> argumentlist = Get_input(cin);
 		if(!argumentlist.empty()) {
 			cin.clear();
-			par.after_start_selector(argumentlist);
+			parser::after_start_selector(argumentlist);
 		}
 		cout << endl;
 		if(go_to_beginning) { goto host_beginning; }

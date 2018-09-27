@@ -3,9 +3,7 @@
 #include "Header.h"
 
 #include "Filemani.h"
-#ifdef _WIN32
-#include "WinPlatform.h"
-#endif
+#include "Host.h"			//for cmdline struct
 
 #ifdef _WIN32
 class PELaunch :
@@ -22,6 +20,7 @@ public:
 	static int non_console(const fs::path& p);
 
 	PELaunch(fs::path exe_path);
+	PELaunch(const ncmdline& cmd);
 	PELaunch(const PELaunch& source);
 	PELaunch& operator=(const PELaunch& source);
 	PELaunch(PELaunch&& source) noexcept;
