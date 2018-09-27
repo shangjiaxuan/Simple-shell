@@ -5,7 +5,7 @@
 class UI {
 public:
 
-	void gui(int argc, char* argv[]) const;
+	void loop(int argc, char* argv[]) const;
 
 	//for making vector of parsed arguments
 	//and then pass on to the command parser

@@ -9,13 +9,13 @@
 
 using namespace std;
 
-template struct cmdline<char>;
 #ifdef _UNICODE
 template struct cmdline<nchar>;
 #endif
 
 
-void UI::gui(int argc, char* argv[]) const {
+void UI::loop(int argc, char* argv[]) const {
+	//execute this if called with command
 	if(argc > 1) {
 		bool quit_on_finish = true;
 		//parse argv[] here
@@ -27,6 +27,7 @@ void UI::gui(int argc, char* argv[]) const {
 		}
 		if (!argumentlist.empty()) {
 			cin.clear();
+			parser::cur_arg = 0;
 			parser::after_start_selector(argumentlist);
 		}
 		cout << endl;
@@ -43,6 +44,7 @@ host_beginning:
 		vector<nstring> argumentlist = Get_input(cin);
 		if(!argumentlist.empty()) {
 			cin.clear();
+			parser::cur_arg = 0;
 			parser::after_start_selector(argumentlist);
 		}
 		cout << endl;

@@ -19,6 +19,9 @@ namespace parser {
 	//It seems that vectors are not good containers in this case and it seems that it needs a
 	//structure that incorporate strings and pointers to next wstring2string (only one direction needed)
 	void after_start_selector(std::vector<nstring> arg) {
+		if(!(cur_arg<arg.size())) {
+			return;
+		}
 		if(arg[cur_arg] == Exit) {
 			exit(0);
 		}
