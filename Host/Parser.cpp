@@ -51,25 +51,30 @@ void parser::after_start_selector(std::vector<nstring> arg) {
 		if(fileman::isexecutable(arg[cur_arg])) {
 			nstring cmd;
 			const size_t size = arg.size();
+			//the index of the start of each argument
 			while(true) {
 				cmd += arg[cur_arg];
 				cur_arg++;
-				if(cur_arg >= size - 1) {
+				if(cur_arg >= size) {
 					break;
 				}
 				cmd += _T(" ");
 			}
 			const fs::path p = cmd;
-			const Launch_Info info = Launch_Info(p);
-			Launch(info);
-		} else if(fileman::isshelllink(arg[cur_arg])) {
+			const PELaunch info = PELaunch(p);
+			info.Launch();
+		}
+#ifdef _WIN32
+		else if(fileman::isshelllink(arg[cur_arg])) {
 			Lnk_Info info = get_LnkInfo(arg[cur_arg]);
 			//currently lnks are only supported in this way
 			//may add a link parser in the future
 			if(info != Lnk_Info())
 				after_start_selector(vector<nstring>{info.target_path});
 			fs::directory_iterator a;
-		} else {
+		}
+#endif
+		else {
 			cout << "I'm sorry, but we currently do not support opening files with default programs yet." << endl;
 			cur_arg++;
 		}
@@ -79,39 +84,3 @@ void parser::after_start_selector(std::vector<nstring> arg) {
 		//because console apps in windows does not support unicode console I/O very well, need some work to fix this
 	}
 }
-
-bool non_console(const fs::path& p) {
-	fileman::BinaryFileReader reader;
-	reader.open(p, ios::binary | ios::in);
-	if(reader) {
-		reader.seekg(0x3C);
-		WORD pos1;
-		reader.read_WORD(&pos1, 1);
-		//			cout << pos1 << endl;
-		//following should be "PE\0\0"...etc
-		//see docs on https://msdn.microsoft.com/en-us/magazine/ms809762.aspx
-		reader.seekg(pos1 + 0x5c);
-		WORD subsystem;
-		reader.read_WORD(&subsystem, 1);
-		reader.clear();
-		switch(subsystem) {
-			case IMAGE_SUBSYSTEM_UNKNOWN:
-			case IMAGE_SUBSYSTEM_NATIVE:
-			case IMAGE_SUBSYSTEM_WINDOWS_GUI:
-			case IMAGE_SUBSYSTEM_WINDOWS_CE_GUI:
-				//			cout << "GUI!" << endl;
-				return true;
-				break;
-			case IMAGE_SUBSYSTEM_WINDOWS_CUI:
-			case IMAGE_SUBSYSTEM_OS2_CUI:
-			case IMAGE_SUBSYSTEM_POSIX_CUI:
-				//			cout << "CUI!" << endl;
-				return false;
-				break;
-			default:
-				cout << "Unknown!" << endl;
-				return true;
-		}
-	}
-	return true;
-};

@@ -18,7 +18,7 @@ namespace fileman {
 	//function for changing the working directory
 	void Change_directory(const nstring& dir);
 
-	class BinaryFileReader : public std::fstream {
+	class BinaryFileReader : public std::ifstream {
 	public:
 		BinaryFileReader& read_WORD(WORD* buffer, std::streamsize num);
 		BinaryFileReader& read_DWORD(DWORD* buffer, std::streamsize num);

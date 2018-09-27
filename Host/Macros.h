@@ -19,12 +19,14 @@
 #define nstring std::wstring
 #define nchar wchar_t
 #define stringcpy wcscpy_s
+#define stringlen wcslen
 #endif
 
 #ifdef _MBCS
 #define nstring std::string
 #define nchar char
 #define stringcpy strcpy_s
+#define stringlen strlen
 #endif
 
 #endif

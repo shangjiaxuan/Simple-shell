@@ -12,6 +12,9 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{77e06d95-57b6-4d8f-b203-e6f335a2559d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fileman">
+      <UniqueIdentifier>{dd11f6b0-5c48-4097-9e05-6448ef6caa34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Host.cpp">
@@ -21,9 +24,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="convert.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Filemani.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Parser.cpp">
@@ -38,7 +38,13 @@
     <ClCompile Include="Header.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Filemani.cpp">
+      <Filter>Fileman</Filter>
+    </ClCompile>
     <ClCompile Include="ShellLinkInfo.cpp">
+      <Filter>Fileman</Filter>
+    </ClCompile>
+    <ClCompile Include="Launch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -55,9 +61,6 @@
     <ClInclude Include="Names.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Filemani.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Host.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -66,6 +69,9 @@
     </ClInclude>
     <ClInclude Include="Launch.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Filemani.h">
+      <Filter>Fileman</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

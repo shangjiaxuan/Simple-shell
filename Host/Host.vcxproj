@@ -168,6 +168,7 @@
     <ClCompile Include="Filemani.cpp" />
     <ClCompile Include="Header.cpp" />
     <ClCompile Include="Host.cpp" />
+    <ClCompile Include="Launch.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Names.cpp" />
     <ClCompile Include="Parser.cpp" />

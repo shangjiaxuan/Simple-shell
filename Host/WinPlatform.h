@@ -25,22 +25,15 @@ rtn call(const nchar* library, const char* function, passed* pass);
 //template void call<void>(const nchar* library, const char* function, void* null);
 
 struct Lnk_Info {
-	Lnk_Info() {// NOLINT
-		//default constructor needed if I have to have an empty Lnk_Info structure to compare to
-		//I do not know if I can make this more tidy like the default constructor in
-		//directory_iterator class
-		//the comment above is for disabling RsSharper inspection which seems not to work with
-		// member structs(WIN32_FIND_DATA) that does not have an explicit initializer when 
-		//given all the variables
-		target_attributes = WIN32_FIND_DATA{NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,TEXT(""),TEXT("")};
-		target_path = fs::path();
-		cur_dir = fs::path();
-		icon_path = fs::path();
-		icon_index = NULL;
-		show_cmd = NULL;
-		description = TEXT("");
-		arguments = TEXT("");
-	}
+	Lnk_Info():
+		target_attributes{WIN32_FIND_DATA{}},
+		target_path{fs::path()},
+		cur_dir{fs::path()},
+		icon_path{fs::path()},
+		icon_index{NULL},
+		show_cmd{NULL},
+		description{TEXT("")},
+		arguments{TEXT("")} {}
 
 	WIN32_FIND_DATA target_attributes;
 	fs::path target_path;

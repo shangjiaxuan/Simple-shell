@@ -1,6 +1,6 @@
 ﻿#include "Header.h"
 #include "Host.h"			//for cmdline struct
-#include "Launch.h"			//for Launch_Info struct
+#include "Launch.h"			//for PELaunch class
 
 ///////////////////////////////////////////////////
 //Code specific to Windows platform
@@ -148,41 +148,6 @@ inline void call<void, cmdline>(const nchar* library, const char* function, cmdl
 template void call<void, std::istream>(const nchar* library, const char* function, std::istream* pass);
 template void call<void, void>(const nchar* library, const char* function, void* pass);
 
-
-//////////////////////////////////////////////////////////////////
-//Windows API for launching exectutables
-void Launch(const Launch_Info& launch_info) {
-	STARTUPINFO si;
-	PROCESS_INFORMATION pi;
-
-	ZeroMemory(&si, sizeof(si));
-	si.cb = sizeof(si);
-	ZeroMemory(&pi, sizeof(pi));
-
-	// Start the child process.
-	if(!CreateProcess(
-			launch_info.lpApplicationName,
-			launch_info.lpCommandLine,
-			nullptr,
-			nullptr,
-			launch_info.bInheritHandles,
-			launch_info.dwCreationFlags,
-			launch_info.lpEnvironment,
-			launch_info.lpCurrentDirectory,
-			&si,
-			&pi)
-	) {
-		printf("CreateProcess failed (%d).\n", GetLastError());
-		return;
-	}
-	if(!non_console(launch_info.lpApplicationName)) {
-		// Wait until child process exits.
-		WaitForSingleObject(pi.hProcess, INFINITE);
-		// Close process and thread handles.
-		CloseHandle(pi.hProcess);
-		CloseHandle(pi.hThread);
-	}
-}
 
 //////////////////////////////////////
 
