@@ -166,7 +166,6 @@
   <ItemGroup>
     <ClCompile Include="convert.cpp" />
     <ClCompile Include="Filemani.cpp" />
-    <ClCompile Include="Header.cpp" />
     <ClCompile Include="Host.cpp" />
     <ClCompile Include="Launch.cpp" />
     <ClCompile Include="main.cpp" />

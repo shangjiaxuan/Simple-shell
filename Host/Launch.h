@@ -2,8 +2,9 @@
 
 #include "Header.h"
 
-#include "Filemani.h"
 #include "Host.h"			//for cmdline struct
+#include "Parser.h"
+#include "Filemani.h"
 
 #ifdef _WIN32
 class PELaunch :
@@ -20,7 +21,7 @@ public:
 	static int non_console(const fs::path& p);
 
 	PELaunch(fs::path exe_path);
-	PELaunch(const ncmdline& cmd);
+	PELaunch(const cmdline<nchar>& cmd);
 	PELaunch(const PELaunch& source);
 	PELaunch& operator=(const PELaunch& source);
 	PELaunch(PELaunch&& source) noexcept;
@@ -35,6 +36,7 @@ public:
 		lpCommandLine = nullptr;
 		delete[] lpCurrentDirectory;
 		lpCurrentDirectory = nullptr;
+		close();
 	}
 
 private:

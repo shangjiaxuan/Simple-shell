@@ -1,6 +1,4 @@
-﻿#include "Header.h"
-
-#include "Names.h"
+﻿#include "Names.h"
 
 #ifdef _WIN32
 const nstring Exit{_T("exit")};

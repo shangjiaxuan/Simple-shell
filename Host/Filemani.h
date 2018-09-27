@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Header.h"
+#include "Names.h"		//for isexecutable ... functions 
 
 namespace fileman {
 	//function for seeing if a file is an executable

@@ -1,4 +1,5 @@
 ﻿#include "Header.h"
+
 #include "Host.h"			//for cmdline struct
 
 ///////////////////////////////////////////////////
@@ -124,7 +125,7 @@ call(const nchar* library,
 
 //currently only support the same character set for argv
 template<>
-inline void call<void, cmdline>(const nchar* library, const char* function, cmdline* cmd) {
+inline void call<void, cmdline<char>>(const nchar* library, const char* function, cmdline<char>* cmd) {
 	const HINSTANCE hInst = LoadLibrary(library);
 	if(!hInst) {
 		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;

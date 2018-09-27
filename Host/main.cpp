@@ -3,8 +3,8 @@
 #include "Host.h"
 
 int main(int argc, char* argv[]) {
-	if(argc > 1) {
-		std::cout << "Command received!";
+	for(int i = 0; i < argc; i++) {
+		std::cout << argv[i] << std::endl;
 	}
 	UI This;
 	This.loop(argc, argv);

@@ -9,6 +9,12 @@
 
 using namespace std;
 
+template struct cmdline<char>;
+#ifdef _UNICODE
+template struct cmdline<nchar>;
+#endif
+
+
 void UI::loop(int argc, char* argv[]) const {
 	if(argc > 1) {}
 host_beginning:

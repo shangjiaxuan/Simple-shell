@@ -1,5 +1,4 @@
-﻿
-#pragma once
+﻿#pragma once
 
 #include "Header.h"
 
@@ -33,39 +32,120 @@ private:
 };
 
 //a struct for passing commandline arguments
-#ifdef _UNICODE
+template<typename type>
 struct cmdline {
 	size_t argc = 0;
-	char** argv = nullptr;
+	type** argv = nullptr;
 	cmdline() = default;
-	cmdline(const cmdline&) = default;
-	cmdline(cmdline&&) = default;
-	cmdline& operator=(const cmdline&) = default;
-	cmdline& operator=(cmdline&&) = default;
+
+	cmdline(const cmdline& source) {
+		argc = source.argc;
+		argv = new type*[argc];
+		for(size_t i = 0; i < argc; i++) {
+			size_t arg_length = stringlen(source.argv[i]) + 1;
+			argv[i] = new type[arg_length];
+			stringcpy(argv[i], arg_length, source.argv[i]);
+		}
+	}
+
+	cmdline(cmdline&& source) noexcept {
+		argc = source.argc;
+		argv = new type*[argc];
+		for(size_t i = 0; i < argc; i++) {
+			size_t arg_length = stringlen(source.argv[i]) + 1;
+			argv[i] = new type[arg_length];
+			stringcpy(argv[i], arg_length, source.argv[i]);
+		}
+	}
+
+	cmdline& operator=(const cmdline& source) {
+		argc = source.argc;
+		argv = new type*[argc];
+		for(size_t i = 0; i < argc; i++) {
+			size_t arg_length = stringlen(source.argv[i]) + 1;
+			argv[i] = new type[arg_length];
+			stringcpy(argv[i], arg_length, source.argv[i]);
+		}
+		return *this;
+	}
+
+	cmdline& operator=(cmdline&& source) noexcept {
+		argc = source.argc;
+		argv = new type*[argc];
+		for(size_t i = 0; i < argc; i++) {
+			size_t arg_length = stringlen(source.argv[i]) + 1;
+			argv[i] = new type[arg_length];
+			stringcpy(argv[i], arg_length, source.argv[i]);
+		}
+		return *this;
+	}
+
 	~cmdline() {
 		for(size_t i = 0; i < argc; i++) {
 			delete[] argv[i];
 			argv[i] = nullptr;
 		}
 		delete[] argv;
+		argv = nullptr;
+		argc = 0;
 	}
 };
-#endif
 
-typedef struct ncmdline {
+template<>
+struct cmdline<char> {
 	size_t argc = 0;
-	nchar** argv = nullptr;
-	ncmdline() = default;
-	ncmdline(const ncmdline&) = default;
-	ncmdline(ncmdline&&) = default;
-	ncmdline& operator=(const ncmdline&) = default;
-	ncmdline& operator=(ncmdline&&) = default;
+	char** argv = nullptr;
+	cmdline() = default;
 
-	~ncmdline() {
+	cmdline(const cmdline& source) {
+		argc = source.argc;
+		argv = new char*[argc];
+		for(size_t i = 0; i < argc; i++) {
+			size_t arg_length = strlen(source.argv[i]) + 1;
+			argv[i] = new char[arg_length];
+			strcpy_s(argv[i], arg_length, source.argv[i]);
+		}
+	}
+
+	cmdline(cmdline&& source) noexcept {
+		argc = source.argc;
+		argv = new char*[argc];
+		for(size_t i = 0; i < argc; i++) {
+			size_t arg_length = strlen(source.argv[i]) + 1;
+			argv[i] = new char[arg_length];
+			strcpy_s(argv[i], arg_length, source.argv[i]);
+		}
+	}
+
+	cmdline& operator=(const cmdline& source) {
+		argc = source.argc;
+		argv = new char*[argc];
+		for(size_t i = 0; i < argc; i++) {
+			size_t arg_length = strlen(source.argv[i]) + 1;
+			argv[i] = new char[arg_length];
+			strcpy_s(argv[i], arg_length, source.argv[i]);
+		}
+		return *this;
+	}
+
+	cmdline& operator=(cmdline&& source) noexcept {
+		argc = source.argc;
+		argv = new char*[argc];
+		for(size_t i = 0; i < argc; i++) {
+			size_t arg_length = strlen(source.argv[i]) + 1;
+			argv[i] = new char[arg_length];
+			strcpy_s(argv[i], arg_length, source.argv[i]);
+		}
+		return *this;
+	}
+
+	~cmdline() {
 		for(size_t i = 0; i < argc; i++) {
 			delete[] argv[i];
 			argv[i] = nullptr;
 		}
 		delete[] argv;
+		argv = nullptr;
+		argc = 0;
 	}
-} ncmdline;
+};

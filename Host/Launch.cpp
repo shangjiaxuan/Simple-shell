@@ -1,24 +1,23 @@
 ﻿#include "Launch.h"
 
-#include "Parser.h"
-
 using namespace std;
 
-
-
-PELaunch::PELaunch(const ncmdline& cmd) {
+PELaunch::PELaunch(const cmdline<nchar>& cmd) {
 	bInheritHandles = false;
 	lpEnvironment = nullptr;
 	dwCreationFlags = NULL;
 	lpCurrentDirectory = nullptr;
-	if (!cmd.argv || cmd.argc == 0 || !cmd.argv[0]) {
+	if(!cmd.argv || cmd.argc == 0 || !cmd.argv[0]) {
 		lpCommandLine = nullptr;
 		lpApplicationName = nullptr;
 		return;
 	}
 	open(cmd.argv[0]);
-	lpApplicationName = cmd.argv[0];
-	const size_t required_size = parser::ncmdline2nchar(cmd, nullptr, NULL);
+	size_t required_size = stringlen(cmd.argv[0]) + 1;
+	LPTSTR temp = new nchar[required_size];
+	stringcpy(temp, required_size, cmd.argv[0]);
+	lpApplicationName = temp;
+	required_size = parser::ncmdline2nchar(cmd, nullptr, NULL);
 	lpCommandLine = new nchar[required_size];
 	parser::ncmdline2nchar(cmd, lpCommandLine, required_size);
 }

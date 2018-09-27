@@ -1,7 +1,6 @@
 ﻿#include "Header.h"
 
 #include "Filemani.h"
-#include "Names.h"
 
 using namespace std;
 

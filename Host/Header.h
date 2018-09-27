@@ -1,5 +1,4 @@
-﻿
-#pragma once
+﻿#pragma once
 
 //file that includes all the required standard library, other files can include only this header
 
