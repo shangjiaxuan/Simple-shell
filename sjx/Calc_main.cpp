@@ -5,12 +5,12 @@ using namespace std;
 #ifdef _WINDLL
 DLL_PORT
 #endif
-void calculator(std::istream* ist) {
+void calculator(std::istream& ist) {
 	const string result{"= "};
 	cout << "Simple Calculator\n";
 	cout << "Version " << STRING(CALC_VERSION) << '\n' << endl;
 	Calc::Token_stream ts;
-	ts.init(*ist);
+	ts.init(ist);
 	while(true) {
 		try {
 			init(ts);
