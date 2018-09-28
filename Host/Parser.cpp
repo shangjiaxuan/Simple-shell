@@ -16,58 +16,80 @@ namespace parser {
 		cout << "I'm sorry but there's no manual page at the moment." << endl;
 	}
 
-	//It seems that vectors are not good containers in this case and it seems that it needs a
-	//structure that incorporate strings and pointers to next wstring2string (only one direction needed)
-	void after_start_selector(std::vector<nstring> arg) {
-		if(!(cur_arg<arg.size())) {
+	/////////////////////////////////////////////////////////////////////////////////
+	//As stated in the parse_input and get_input functions' notes, this function will
+	//accept other form of commandline arguments in the future
+	void after_start_selector(cmdline<nchar> cmd) {
+		if(!(cur_arg<cmd.argc)) {
 			return;
 		}
-		if(arg[cur_arg] == Exit) {
+		if(cmd.argv[cur_arg] == Exit) {
 			exit(0);
 		}
-		if(arg[cur_arg] == Cd) {
+		if(cmd.argv[cur_arg] == Cd) {
 			try {
 				cur_arg++;
-				if(arg.size() <= cur_arg) {
+				if(cmd.argc <= cur_arg) {
 					cout << "\ncd: no target specified!" << endl;
 					return;
 				}
-				fileman::Change_directory(arg[cur_arg]);
+				fileman::Change_directory(cmd.argv[cur_arg]);
 			} catch(exception& e) {
 				//			Handle_Error(e);
 				cout << e.what();
 			}
 			cur_arg++;
-		} else if(arg[cur_arg] == Calculator) {
+		} else if(cmd.argv[cur_arg] == Calculator) {
 			cur_arg++;
 			cout << endl;
 			cin.clear();
 			call<void, istream>(sjxDLL, "calculator", &cin);
 			cout << endl;
 			//		go_to_beginning = true;
-		} else if(arg[cur_arg] == SwapEnc) {
+		} else if(cmd.argv[cur_arg] == SwapEnc) {
 			cur_arg++;
 			call<void, void>(sjxDLL, "SwapEnc", nullptr);
 			//		go_to_beginning = true;
-		} else if(arg[cur_arg] == Man) {
+		} else if(cmd.argv[cur_arg] == Man) {
 			cur_arg++;
 			manual();
-		} else if(fs::exists(arg[cur_arg])) {
+		}
+		//see if the current argument is a file
+		//typically a command that start with a path should mean
+		//an executable to launch with commandline or a file to open (with command?)
+		//this should mean the arguments are not going to be parsed within the host
+		//program anymore, thus, cur_arg generally does not need to increment
+		else if(fs::exists(cmd.argv[cur_arg])) {
 			//launching executables may include lnks in the future
-			if(fileman::isexecutable(arg[cur_arg])) {
-				cmdline<nchar> cmd;
-				get_formatted_nchar(cmd, arg, cur_arg, arg.size() - 1);
-				const PELaunch info = PELaunch(cmd);
+			nstring file_path = cmd.argv[cur_arg];
+			if(fileman::isexecutable(file_path)) {
+				cmdline<nchar> output_cmd;
+				output_cmd.argc = cmd.argc - cur_arg;
+				output_cmd.argv = new nchar*[output_cmd.argc];
+				for(size_t i=0; i<output_cmd.argc; i++) {
+					size_t arg_size = stringlen(cmd.argv[i]);
+					output_cmd.argv[i] = new nchar[arg_size + 1];
+					stringcpy(output_cmd.argv[i], arg_size + 1, cmd.argv[i]);
+				}
+				const PELaunch info = PELaunch(output_cmd);
 				info.Launch();
 			}
 #ifdef _WIN32
-			else if(fileman::isshelllink(arg[cur_arg])) {
-				Lnk_Info info = get_LnkInfo(arg[cur_arg]);
+			else if (fileman::isshelllink(file_path)) {
+				Lnk_Info info = get_LnkInfo(file_path);
 				//currently lnks are only supported in this way
-				//may add a link parser in the future
-				if(info != Lnk_Info())
-					after_start_selector(vector<nstring>{info.target_path});
-				fs::directory_iterator a;
+				//may add a link command line parser in the future
+				//When adding, note that the whole line after the link file should also
+				//be treated as part of the new command along with the info in the link
+				if (info != Lnk_Info()) {
+					nchar* str = const_cast<nchar*>(info.target_path.native().c_str());
+					cmdline<nchar> temp;
+					temp.argc = 1; temp.argv = &str;
+					after_start_selector(temp);
+				}
+				else {
+					cout << "Shell Link failed to open!" << endl;
+				}
 			}
 #endif
 			else {
@@ -75,7 +97,7 @@ namespace parser {
 				cur_arg++;
 			}
 		} else {
-			cout << "Sorry, but we cannot find the specified program " << convert::wstring2string(arg[cur_arg]) << endl;
+			cout << "Sorry, but we cannot find the specified program " << convert::UTF16_2mbcs(cmd.argv[cur_arg]) << endl;
 			cur_arg++;
 			//because console apps in windows does not support unicode console I/O very well, need some work to fix this
 		}
@@ -103,6 +125,7 @@ namespace parser {
 		}
 	}
 
+	
 	size_t ncmdline2nchar(const cmdline<nchar>& input, nchar* output, size_t max_output_size) {
 		size_t rtn = 0;
 		if(!output || !max_output_size) {
@@ -160,5 +183,17 @@ namespace parser {
 			nc_ptr++;
 		}
 		return rtn;
+	}
+
+	//currently is simply for "A working function"
+	cmdline<nchar> nchar2ncmdline(const nchar* input) {
+#ifdef _UNICODE
+		const string str = convert::UTF16_2mbcs(input);
+#endif
+#ifdef _MBCS
+		const string str = input;
+#endif
+		istringstream iss{ str };
+		return UI::Get_input(iss);
 	}
 }

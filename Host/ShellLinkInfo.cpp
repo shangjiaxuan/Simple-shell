@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/////////////////////////////////////////////////////////////
+//get info about target file from a .lnk file
+//Function adapted from 
+//https://docs.microsoft.com/en-us/windows/desktop/shell/links
 Lnk_Info get_LnkInfo(const fs::path& LnkFile_Path) {
 	Lnk_Info info;
 	//Initialize a COM library
@@ -11,8 +15,9 @@ Lnk_Info get_LnkInfo(const fs::path& LnkFile_Path) {
 		cout << "get_Lnkpath(const nstring&): CoInitialize(NULL) failed!\n" << endl;
 		return Lnk_Info();
 	}
-	//create a IShellLink instance
 	IShellLink* shell_link_instance = nullptr;
+	IPersistFile* file_interface = nullptr;
+	//create a IShellLink instance
 	if(FAILED(CoCreateInstance(CLSID_ShellLink,
 		//create a single object
 		NULL,
@@ -21,18 +26,17 @@ Lnk_Info get_LnkInfo(const fs::path& LnkFile_Path) {
 		IID_IShellLink,
 		(LPVOID*)&shell_link_instance))) {
 		cout << "get_Lnkpath(const nstring&): Failed to create IShellLink instance!\n" << endl;
-		return Lnk_Info();
+		goto failed;
 	}
 	//associate a file interface instance with the IShellLink instance
-	IPersistFile* file_interface;
 	if(FAILED(shell_link_instance->QueryInterface(IID_IPersistFile, (void**)&file_interface))) {
 		cout << "get_Lnkpath(const nstring&): Failed to associate file interface with IShellLink instance!\n" << endl;
-		return Lnk_Info();
+		goto failed;
 	}
 	//open the file in file interface
 	if(FAILED(file_interface->Load(LnkFile_Path.c_str(), STGM_READ))) {
 		cout << "get_Lnkpath(const nstring&): File interface failed to load specified file!\n" << endl;
-		return Lnk_Info();
+		goto failed;
 	}
 	//resolve the link
 	if(FAILED(shell_link_instance->Resolve(NULL, SLR_UPDATE))) {
@@ -68,4 +72,9 @@ Lnk_Info get_LnkInfo(const fs::path& LnkFile_Path) {
 	shell_link_instance->Release();
 	CoUninitialize();
 	return info;
+failed:
+	if(file_interface)file_interface->Release();
+	if(shell_link_instance)shell_link_instance->Release();
+	CoUninitialize();
+	return Lnk_Info();
 }

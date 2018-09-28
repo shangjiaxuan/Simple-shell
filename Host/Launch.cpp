@@ -158,6 +158,8 @@ PELaunch& PELaunch::operator=(const PELaunch& source) {
 
 //////////////////////////////////////////////////////////////////
 //Windows API for launching exectutables
+//adapted from answer on
+//https://stackoverflow.com/questions/42531/how-do-i-call-createprocess-in-c-to-launch-a-windows-executable
 void PELaunch::Launch() const {
 	STARTUPINFO si;
 	PROCESS_INFORMATION pi;
@@ -191,6 +193,7 @@ void PELaunch::Launch() const {
 	}
 }
 
+
 int PELaunch::non_console(const fs::path& p) {
 	ifstream ifs;
 	ifs.open(p, ios::binary | ios::in);
@@ -198,9 +201,10 @@ int PELaunch::non_console(const fs::path& p) {
 		ifs.seekg(0x3C);
 		WORD pos1;
 		fileman::BinRead(&pos1, 1, ifs);
-		//			cout << pos1 << endl;
+		//cout << pos1 << endl;
 		//following should be "PE\0\0"...etc
-		//see docs on https://msdn.microsoft.com/en-us/magazine/ms809762.aspx
+		//see docs on PE file format on
+		//https://msdn.microsoft.com/en-us/magazine/ms809762.aspx
 		ifs.seekg(pos1 + 0x5c);
 		WORD subsystem;
 		fileman::BinRead(&subsystem, 1, ifs);

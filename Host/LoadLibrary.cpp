@@ -2,23 +2,20 @@
 
 #include "Host.h"			//for cmdline struct
 
-///////////////////////////////////////////////////
-//Code specific to Windows platform
-
-//#include <functional>
 #ifdef _WIN32
 
 using namespace std;
 
-///////////////////////////////////////////////////
-//Following code referenced mostly from MSDN forum
+////////////////////////////////////////////////////////////////////////////////////
+//following code adapted form sources like the one bellow
+//https://stackoverflow.com/questions/8696653/dynamically-load-a-function-from-a-dll
 
 ///////////////////////////////////////////////////////////////
 //For loading dynamic library
 template<typename rtn, typename passed>
 typename std::enable_if<!std::is_same<rtn, void>::value, rtn>::type
 call(const nchar* library, const char* function, passed* pass) {
-	const HINSTANCE hInst = LoadLibrary(library);
+	HINSTANCE hInst = LoadLibrary(library);
 	if(!hInst) {
 		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
 		throw std::runtime_error("call: Library loading failed!");
@@ -61,7 +58,7 @@ call(const nchar* library,
 	const char* function,
 	typename std::enable_if<!std::is_same<passed, void>::value, passed>::type* pass) {
 
-	const HINSTANCE hInst = LoadLibrary(library);
+	HINSTANCE hInst = LoadLibrary(library);
 	if(!hInst) {
 		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
 		throw std::runtime_error("call: Library loading failed!");
@@ -105,7 +102,7 @@ call(const nchar* library,
 		throw std::runtime_error(
 			"ISO C++ does not allow indirection on operand of type void*\ntry using other method of sending information");
 	}
-	const HINSTANCE hInst = LoadLibrary(library);
+	HINSTANCE hInst = LoadLibrary(library);
 	if(!hInst) {
 		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
 		throw std::runtime_error("call: Library loading failed!");
@@ -126,7 +123,7 @@ call(const nchar* library,
 //currently only support the same character set for argv
 template<>
 inline void call<void, cmdline<char>>(const nchar* library, const char* function, cmdline<char>* cmd) {
-	const HINSTANCE hInst = LoadLibrary(library);
+	HINSTANCE hInst = LoadLibrary(library);
 	if(!hInst) {
 		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
 		throw std::runtime_error("call: Library loading failed!");

@@ -172,7 +172,7 @@
     <ClCompile Include="Names.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="ShellLinkInfo.cpp" />
-    <ClCompile Include="Windows.cpp" />
+    <ClCompile Include="LoadLibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />

@@ -1,4 +1,4 @@
-# Simple shell
+﻿# Simple shell
 
 [![Build status](https://ci.appveyor.com/api/projects/status/4ioxd82h1l91yoqd?svg=true)](https://ci.appveyor.com/project/shangjiaxuan/simple-shell)
 
@@ -20,7 +20,7 @@
 
 ## License
 
-* This project's code by it self if free to use in any regard without warranty, but code that was referenced or included may not belong to this project. These code inclue but are not limited to the original calculator-3.0 by my teacher and various MSDN topic and reference pages where I looked for the usage of certain Windows API calls.
+* This project's code by it self if free to use in any regard without warranty, but code that was referenced or included may not belong to this project. These code inclue but are not limited to the original calculator-3.0 by my teacher and various stackoverflow, MSDN and other forum topic and reference pages where I looked for the usage of certain Windows API calls.
 
 * Please note that when developing this program, I was using student version of certaion tools (Including but not limited to ReSharper's plugin and Vsiual Studio community). Thus, if you intend to use it for commercial ends, please file an issue before proceeding.
 

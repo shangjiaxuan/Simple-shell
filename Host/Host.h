@@ -2,6 +2,9 @@
 
 #include "Header.h"
 
+template<typename type>
+struct cmdline;
+
 class UI {
 public:
 
@@ -9,7 +12,7 @@ public:
 
 	//for making vector of parsed arguments
 	//and then pass on to the command parser
-	static std::vector<nstring> Get_input(std::istream& input_stream);
+	static cmdline<nchar> Get_input(std::istream& input_stream);
 
 private:
 
@@ -23,13 +26,14 @@ private:
 	//following are functions for parsing the direct input into strict commands
 
 	//for pasring a single argument
-	static nstring parse_input(std::istream& input_stream);
+	static nchar* parse_input(std::istream& input_stream);
 
 	//certain characters not on the keyboard are supported on console
 	//with the character "\" (eg '\a')
 	//!!!currently not incorporated
 	static bool change(const char& a);
 };
+
 
 //a struct for passing commandline arguments
 template<typename type>
@@ -90,6 +94,7 @@ struct cmdline {
 		argc = 0;
 	}
 };
+
 
 template<>
 struct cmdline<char> {

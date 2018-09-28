@@ -12,40 +12,43 @@
     <Filter Include="00 General Items">
       <UniqueIdentifier>{77e06d95-57b6-4d8f-b203-e6f335a2559d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01 Iomanip">
+    <Filter Include="01 UI">
+      <UniqueIdentifier>{5465bcdc-3127-46a3-b4eb-aecf9e6a49f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02 Iomanip">
       <UniqueIdentifier>{dd11f6b0-5c48-4097-9e05-6448ef6caa34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02 Win32_Functions">
+    <Filter Include="03 Win32_Functions">
       <UniqueIdentifier>{2655ee06-a7b9-43ce-a065-9dcfdff6746c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Host.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Filemani.cpp">
-      <Filter>01 Iomanip</Filter>
+      <Filter>02 Iomanip</Filter>
     </ClCompile>
     <ClCompile Include="Parser.cpp">
-      <Filter>01 Iomanip</Filter>
-    </ClCompile>
-    <ClCompile Include="Windows.cpp">
-      <Filter>02 Win32_Functions</Filter>
+      <Filter>02 Iomanip</Filter>
     </ClCompile>
     <ClCompile Include="ShellLinkInfo.cpp">
-      <Filter>02 Win32_Functions</Filter>
+      <Filter>03 Win32_Functions</Filter>
     </ClCompile>
     <ClCompile Include="convert.cpp">
-      <Filter>02 Win32_Functions</Filter>
+      <Filter>03 Win32_Functions</Filter>
     </ClCompile>
     <ClCompile Include="Names.cpp">
       <Filter>00 General Items</Filter>
     </ClCompile>
     <ClCompile Include="Launch.cpp">
-      <Filter>02 Win32_Functions</Filter>
+      <Filter>03 Win32_Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="Host.cpp">
+      <Filter>01 UI</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadLibrary.cpp">
+      <Filter>03 Win32_Functions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,19 +62,19 @@
       <Filter>00 General Items</Filter>
     </ClInclude>
     <ClInclude Include="Filemani.h">
-      <Filter>01 Iomanip</Filter>
+      <Filter>02 Iomanip</Filter>
     </ClInclude>
     <ClInclude Include="Parser.h">
-      <Filter>01 Iomanip</Filter>
+      <Filter>02 Iomanip</Filter>
     </ClInclude>
     <ClInclude Include="WinPlatform.h">
-      <Filter>02 Win32_Functions</Filter>
+      <Filter>03 Win32_Functions</Filter>
     </ClInclude>
     <ClInclude Include="Launch.h">
-      <Filter>02 Win32_Functions</Filter>
+      <Filter>03 Win32_Functions</Filter>
     </ClInclude>
     <ClInclude Include="Host.h">
-      <Filter>Source Files</Filter>
+      <Filter>01 UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

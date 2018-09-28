@@ -19,19 +19,24 @@ string convert::wstring2string(const std::wstring& wst) {
 	return UTF16_2mbcs(wst.c_str());
 }
 
-DWORD convert::UNC_size(LPCSTR& multiByteStr) {
-	return MultiByteToWideChar(CP_OEMCP, MB_ERR_INVALID_CHARS, multiByteStr, -1, nullptr, 0);
+DWORD convert::UNC_size(LPCSTR multiByteStr) {
+	return MultiByteToWideChar(GetConsoleCP(), MB_ERR_INVALID_CHARS, multiByteStr, -1, nullptr, 0);
 }
 
-DWORD convert::MBCS_size(LPCWSTR& unicodeStr) {
-	return WideCharToMultiByte(CP_OEMCP, NULL, unicodeStr, -1, nullptr, 0, nullptr, nullptr);
+DWORD convert::MBCS_size(LPCWSTR unicodeStr) {
+	return WideCharToMultiByte(GetConsoleCP(), NULL, unicodeStr, -1, nullptr, 0, nullptr, nullptr);
 }
 
+
+
+//////////////////////////////////////////////////////////
+//following charset conversion functions are adapted from
+//
 wstring convert::MBC2utf16(LPCSTR multiByteStr) {
 	const DWORD size = UNC_size(multiByteStr);
 	// ReSharper disable once CppLocalVariableMayBeConst
 	LPWSTR unicodeStr = new WCHAR[size];
-	if(MultiByteToWideChar(CP_OEMCP, MB_ERR_INVALID_CHARS, multiByteStr, -1, unicodeStr, size) == 0) {
+	if(MultiByteToWideChar(GetConsoleCP(), MB_ERR_INVALID_CHARS, multiByteStr, -1, unicodeStr, size) == 0) {
 		throw runtime_error("Error converting to UTF16");
 	}
 	wstring rtn = unicodeStr;
@@ -48,7 +53,7 @@ string convert::UTF16_2mbcs(LPCWSTR unicodeStr) {
 	LPSTR multiByteStr = new CHAR[size];
 	char default_char = '?';
 	BOOL use_default = true;
-	if(WideCharToMultiByte(CP_OEMCP, NULL, unicodeStr, -1, multiByteStr, size, &default_char, &use_default) == 0) {
+	if(WideCharToMultiByte(GetConsoleCP(), NULL, unicodeStr, -1, multiByteStr, size, &default_char, &use_default) == 0) {
 		throw runtime_error("Error converting to MBCS");
 	}
 	string rtn = multiByteStr;

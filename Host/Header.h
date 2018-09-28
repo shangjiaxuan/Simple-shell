@@ -11,6 +11,7 @@
 #include <fstream>
 #include <filesystem>
 #include <cstring>
+#include <sstream>
 
 #ifdef _WIN32
 #include <Windows.h>

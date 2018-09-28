@@ -13,9 +13,8 @@ public:
 	static std::string wstring2string(const std::wstring&);
 	static std::wstring MBC2utf16(LPCSTR);
 	static std::string UTF16_2mbcs(LPCWSTR);
-protected:
-	static DWORD UNC_size(LPCSTR&);
-	static DWORD MBCS_size(LPCWSTR&);
+	static DWORD UNC_size(LPCSTR);
+	static DWORD MBCS_size(LPCWSTR);
 };
 
 //for calling functions in dlls
