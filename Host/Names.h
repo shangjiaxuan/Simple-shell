@@ -5,16 +5,16 @@
 
 #ifdef _WIN32
 
-extern const nstring Exit;
-extern const nstring Man;
-extern const nstring Cd;
+extern const nchar* Exit;
+extern const nchar* Man;
+extern const nchar* Cd;
 
-extern const nstring Exec;
-extern const nstring Link;
+extern const nchar* Exec;
+extern const nchar* Link;
 
 extern const nchar* sjxDLL;
-extern const nstring Calculator;
-extern const nstring SwapEnc;
+extern const nchar* Calculator;
+extern const nchar* SwapEnc;
 
 
 #endif

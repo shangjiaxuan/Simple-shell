@@ -23,10 +23,10 @@ namespace parser {
 		if(!(cur_arg<cmd.argc)) {
 			return;
 		}
-		if(cmd.argv[cur_arg] == Exit) {
+		if(stringcmp(cmd.argv[cur_arg], Exit)==0) {
 			exit(0);
 		}
-		if(cmd.argv[cur_arg] == Cd) {
+		if(stringcmp(cmd.argv[cur_arg], Cd) == 0) {
 			try {
 				cur_arg++;
 				if(cmd.argc <= cur_arg) {
@@ -39,18 +39,18 @@ namespace parser {
 				cout << e.what();
 			}
 			cur_arg++;
-		} else if(cmd.argv[cur_arg] == Calculator) {
+		} else if(stringcmp(cmd.argv[cur_arg], Calculator) == 0) {
 			cur_arg++;
 			cout << endl;
 			cin.clear();
 			call<void, istream>(sjxDLL, "calculator", &cin);
 			cout << endl;
 			//		go_to_beginning = true;
-		} else if(cmd.argv[cur_arg] == SwapEnc) {
+		} else if(stringcmp(cmd.argv[cur_arg], SwapEnc) == 0) {
 			cur_arg++;
 			call<void, void>(sjxDLL, "SwapEnc", nullptr);
 			//		go_to_beginning = true;
-		} else if(cmd.argv[cur_arg] == Man) {
+		} else if(stringcmp(cmd.argv[cur_arg], Man) == 0) {
 			cur_arg++;
 			manual();
 		}
@@ -96,9 +96,36 @@ namespace parser {
 				cout << "I'm sorry, but we currently do not support opening files with default programs yet." << endl;
 				cur_arg++;
 			}
-		} else {
-			cout << "Sorry, but we cannot find the specified program " << convert::UTF16_2mbcs(cmd.argv[cur_arg]) << endl;
-			cur_arg++;
+		}
+		else {
+			//my extension, tries to call appropriate function in dll;
+			//the function must not take arguments and must not return a value for now
+			//may support argc, argv as arguments (use cmdline<char> here) and int return value
+			//in the future (this function is not supported and is subject to change without warning)
+#ifdef _WIN32
+			bool not_found = true;
+			if(cur_arg!=(cmd.argc-1)) {
+				nstring str = cmd.argv[cur_arg];
+				if (fs::exists(str + TEXT(".dll"))) {
+					not_found = false;
+					try {
+						cur_arg++;
+						call<void, void>(str.c_str(), convert::UTF16_2mbcs(cmd.argv[cur_arg]).c_str(), nullptr);
+						cur_arg++;
+					}
+					catch (exception& e) {
+						cur_arg--;
+						cout << e.what() << endl;
+					}
+				}
+				//add other tests here(e.g. ".exe")
+				if (false) {}
+			}
+			if(not_found) {
+				cout << "Sorry, but we cannot find the specified program " << convert::UTF16_2mbcs(cmd.argv[cur_arg]) << endl;
+				cur_arg++;
+			}
+#endif
 			//because console apps in windows does not support unicode console I/O very well, need some work to fix this
 		}
 	}

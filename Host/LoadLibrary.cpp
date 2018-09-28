@@ -24,12 +24,16 @@ call(const nchar* library, const char* function, passed* pass) {
 	if(!pass) {
 		typedef rtn (*_func)();
 		const _func func = _func(GetProcAddress(hInst, function));
-		try {
+		if(!func) {
+			FreeLibrary(hInst);
+			throw runtime_error("call: Cannot find function in library!");
+		}
+		__try {
 			val = func();
-		} catch(...) {
-			std::cerr << "call: Unknown error\n";
+		}__except(EXCEPTION_EXECUTE_HANDLER) {
 			FreeLibrary(hInst);
 			std::cin.get();
+			throw runtime_error("call: SEH error executing function!\n");
 		}
 	} else {
 		//probably implement a method here to see if the function can
@@ -39,12 +43,17 @@ call(const nchar* library, const char* function, passed* pass) {
 		//problems here
 		typedef rtn (*_func)(const passed&);
 		const _func func = _func(GetProcAddress(hInst, function));
-		try {
-			val = func(*pass);
-		} catch(...) {
-			std::cerr << "call: Unknown error\n";
+		if(!func) {
+			FreeLibrary(hInst);
+			throw runtime_error("call: Cannot find function in library!");
+		}
+		__try {
+			val = func();
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER) {
 			FreeLibrary(hInst);
 			std::cin.get();
+			throw runtime_error("call: SEH error executing function!\n");
 		}
 	}
 	FreeLibrary(hInst);
@@ -66,12 +75,17 @@ call(const nchar* library,
 	if(!pass) {
 		typedef void (*_func)();
 		const _func func = _func(GetProcAddress(hInst, function));
-		try {
+		if(!func) {
+			FreeLibrary(hInst);
+			throw runtime_error("call: Cannot find function in library!");
+		}
+		__try {
 			func();
-		} catch(...) {
-			std::cerr << "call: Unknown error\n";
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER) {
 			FreeLibrary(hInst);
 			std::cin.get();
+			throw runtime_error("call: SEH error executing function!\n");
 		}
 	} else {
 		if(std::is_same<passed, void>::value) {
@@ -81,12 +95,17 @@ call(const nchar* library,
 		}
 		typedef void (*_func)(const passed&);
 		const _func func = _func(GetProcAddress(hInst, function));
-		try {
+		if(!func) {
+			FreeLibrary(hInst);
+			throw runtime_error("call: Cannot find function in library!");
+		}
+		__try {
 			func(*pass);
-		} catch(...) {
-			std::cerr << "call: Unknown error\n";
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER) {
 			FreeLibrary(hInst);
 			std::cin.get();
+			throw runtime_error("call: SEH error executing function!\n");
 		}
 	}
 	FreeLibrary(hInst);
@@ -109,12 +128,17 @@ call(const nchar* library,
 	}
 	typedef void (*_func)();
 	const _func func = _func(GetProcAddress(hInst, function));
-	try {
+	if(!func) {
+		FreeLibrary(hInst);
+		throw runtime_error("call: Cannot find function in library!");
+	}
+	__try {
 		func();
-	} catch(...) {
-		std::cerr << "call: Unknown error\n";
+	}
+	__except (EXCEPTION_EXECUTE_HANDLER) {
 		FreeLibrary(hInst);
 		std::cin.get();
+		throw runtime_error("call: SEH error executing function!\n");
 	}
 	FreeLibrary(hInst);
 	std::cin.get();
@@ -130,12 +154,17 @@ inline void call<void, cmdline<char>>(const nchar* library, const char* function
 	}
 	typedef void (*_func)(size_t, char**);
 	const _func func = _func(GetProcAddress(hInst, function));
-	try {
+	if(!func) {
+		FreeLibrary(hInst);
+		throw runtime_error("call: Cannot find function in library!");
+	}
+	__try {
 		func(cmd->argc, cmd->argv);
-	} catch(...) {
-		std::cerr << "call: Unknown error\n";
+	}
+	__except (EXCEPTION_EXECUTE_HANDLER) {
 		FreeLibrary(hInst);
 		std::cin.get();
+		throw runtime_error("call: SEH error executing function!\n");
 	}
 	FreeLibrary(hInst);
 	std::cin.get();
