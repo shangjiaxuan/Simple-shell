@@ -7,11 +7,11 @@ namespace fileman {
 	//nearly means ".exe" on windows
 	//may add the feature that checks on registry
 	//and gets other programs to open other files
-	bool isexecutable(nstring& str);
-	bool isshelllink(nstring& str);
+	bool isexecutable(std::nstring& str);
+	bool isshelllink(std::nstring& str);
 
 	//function for changing the working directory
-	void Change_directory(const nstring& dir);
+	void Change_directory(const std::nstring& dir);
 
 	class BinaryFileReader : public std::ifstream {
 	public:
@@ -22,9 +22,9 @@ namespace fileman {
 
 	template<typename type>
 	bool BinRead(type* buffer, std::streamsize num, std::istream& source) {
-		if (!source) return false;
+		if(!source) return false;
 		source.read(reinterpret_cast<char*>(buffer), num * sizeof type);
-		if (!source) return false;
+		if(!source) return false;
 		return true;
 	}
 

@@ -28,7 +28,6 @@ DWORD convert::MBCS_size(LPCWSTR unicodeStr) {
 }
 
 
-
 //////////////////////////////////////////////////////////
 //following charset conversion functions are adapted from
 //
@@ -53,7 +52,8 @@ string convert::UTF16_2mbcs(LPCWSTR unicodeStr) {
 	LPSTR multiByteStr = new CHAR[size];
 	char default_char = '?';
 	BOOL use_default = true;
-	if(WideCharToMultiByte(GetConsoleCP(), NULL, unicodeStr, -1, multiByteStr, size, &default_char, &use_default) == 0) {
+	if(WideCharToMultiByte(GetConsoleCP(), NULL, unicodeStr, -1, multiByteStr, size, &default_char, &use_default) == 0
+	) {
 		throw runtime_error("Error converting to MBCS");
 	}
 	string rtn = multiByteStr;

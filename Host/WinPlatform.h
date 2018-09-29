@@ -40,8 +40,8 @@ struct Lnk_Info {
 	fs::path icon_path;
 	int icon_index;
 	int show_cmd;
-	nstring description;
-	nstring arguments;
+	std::nstring description;
+	std::nstring arguments;
 
 	bool operator==(const Lnk_Info& compared) const {
 		return this->target_path == compared.target_path;

@@ -106,7 +106,7 @@ struct cmdline<char> {
 		argc = source.argc;
 		argv = new char*[argc];
 		for(size_t i = 0; i < argc; i++) {
-			size_t arg_length = strlen(source.argv[i]) + 1;
+			const size_t arg_length = strlen(source.argv[i]) + 1;
 			argv[i] = new char[arg_length];
 			strcpy_s(argv[i], arg_length, source.argv[i]);
 		}
@@ -116,7 +116,7 @@ struct cmdline<char> {
 		argc = source.argc;
 		argv = new char*[argc];
 		for(size_t i = 0; i < argc; i++) {
-			size_t arg_length = strlen(source.argv[i]) + 1;
+			const size_t arg_length = strlen(source.argv[i]) + 1;
 			argv[i] = new char[arg_length];
 			strcpy_s(argv[i], arg_length, source.argv[i]);
 		}
@@ -126,7 +126,7 @@ struct cmdline<char> {
 		argc = source.argc;
 		argv = new char*[argc];
 		for(size_t i = 0; i < argc; i++) {
-			size_t arg_length = strlen(source.argv[i]) + 1;
+			const size_t arg_length = strlen(source.argv[i]) + 1;
 			argv[i] = new char[arg_length];
 			strcpy_s(argv[i], arg_length, source.argv[i]);
 		}
@@ -137,7 +137,7 @@ struct cmdline<char> {
 		argc = source.argc;
 		argv = new char*[argc];
 		for(size_t i = 0; i < argc; i++) {
-			size_t arg_length = strlen(source.argv[i]) + 1;
+			const size_t arg_length = strlen(source.argv[i]) + 1;
 			argv[i] = new char[arg_length];
 			strcpy_s(argv[i], arg_length, source.argv[i]);
 		}
