@@ -25,44 +25,6 @@ namespace UJr2_funcs {
 			}
 		}
 
-		/*
-		volume* Book::reindex(list::found original) {
-		const int oindex = original.rtn->index_number;
-		volume* traceback= original.rtn;
-		volume* cur = traceback->volume_next;
-		int index = original.rtn->index_number + 1;
-		while(cur->fixed_index&&index==cur->index_number) {
-		traceback = cur;
-		cur = cur->volume_next;
-		index++;
-		if(!cur) {
-		break;
-		}
-		}
-		original.traceback = original.rtn->volume_next;
-		original.rtn->index_number = index;
-		original.rtn->volume_next = cur;
-		traceback->volume_next = original.rtn;
-		//找出所有关键词，用关键词访问书目链表，重命名所有oindex为index
-		vector<string> tokens = get_tokens(original.name);
-		int s = tokens.size();
-		for(int i=0;i<s;i++) {
-		if(linked_list_node* temp = this->index.locate(tokens[i])->head) {
-		while (temp->index_number != oindex) {
-		if (!temp->next_item) {
-		throw runtime_error("Book::reindex: cannot find original index in a certain token");
-		}
-		temp = temp->next_item;
-		}
-		temp->index_number = index;
-		}else {
-		throw runtime_error("Book::reindex: token not found!");
-		}
-		}
-		return original.traceback;
-		}
-		*/
-
 		void Book::add(istream& ist) {
 			string start;
 			int index;
@@ -129,111 +91,6 @@ namespace UJr2_funcs {
 			add_book_tree(name, added_index);
 		}
 
-		/*bool Book::add(std::string name) {
-		To_standard(name);
-		list::found temp = booklist.find(name);
-		switch (temp.status) {
-		case 'P':
-		return false;
-		case 'N':
-		booklist.add_head(name);
-		add_book_tree(name, 0);
-		return true;
-		case 'X':
-		{
-		if (booklist.head->index_number > 0) {
-		booklist.change_head(0, name);
-		add_book_tree(name, 0);
-		return true;
-		}
-		int index = 0;
-		volume* xconti = booklist.head;
-		volume* track = nullptr;
-		while (xconti->index_number == index&&xconti->volume_next) {
-		track = xconti;
-		xconti = xconti->volume_next;
-		index++;
-		}
-		if(track==nullptr) {
-		booklist.add_head(name);
-		}
-		else {
-		booklist.add(track, index, name, false);
-		}
-		{vector<string> tokens = get_tokens(name);
-		int size = tokens.size();
-		for (int i = 0; i < size; i++) {
-		this->index.add_token(tokens[i])->add(index);
-		}
-		}
-		return true;
-		}
-		default:
-		{
-		throw std::runtime_error("Book::add: Unkown found status!");
-		}
-		}
-		}*/
-
-		/*bool Book::add(int index, std::string name) {
-		To_standard(name);
-		list::found temp = booklist.find(index);
-		switch(temp.status) {
-		case 'P':
-		{
-		if (temp.rtn->fixed_index) {
-		if (temp.rtn->name == name) {
-		vector<string> tokens = get_tokens(name);
-		int size = tokens.size();
-		for(int i=0; i<size; i++) {
-		this->index.add_token(tokens[i])->add(index);
-		}
-		return true;
-		}
-		return false;
-		}
-		else {
-		booklist.add(reindex(temp), index, name, true);
-		vector<string> tokens = get_tokens(name);
-		int size = tokens.size();
-		for (int i = 0; i<size; i++) {
-		this->index.add_token(tokens[i])->add(index);
-		}
-		return true;
-		}
-		}
-		case 'N':
-		{
-		booklist.head = new volume;
-		booklist.head->name = name;
-		booklist.head->fixed_index = true;
-		booklist.head->index_number = index;
-		booklist.head->volume_next = nullptr;
-		}
-		return true;
-		case 'S':
-		{
-		volume* newh = new volume;
-		newh->name = name;
-		newh->index_number = index;
-		newh->fixed_index = true;
-		newh->volume_next = booklist.head->volume_next;
-		booklist.head = newh;
-		return true;
-		}
-		case 'L':
-		case 'M':
-		{
-		booklist.add(temp.rtn, index, name, true);
-		return true;
-		}
-		default:
-		{
-		throw runtime_error("add(int): Unkown found status!");
-		}
-		}
-		}*/
-
 		bool Book::del(int deleted_index) {
 			try {
 				const string name = booklist.del(deleted_index);
@@ -284,28 +141,6 @@ namespace UJr2_funcs {
 				return  false;
 			}
 			return true;
-			/*
-			list::found temp = booklist.find(name);
-			switch (temp.status) {
-			case 'P':
-			if(temp.traceback) {
-			temp.traceback = temp.rtn->volume_next;
-			}
-			temp.rtn->~volume();
-			{vector<string> tokens = get_tokens(name);
-			int size = tokens.size();
-			for(int i=0; i<size; i++) {
-			index.del_token(tokens[i]);
-			}
-			}
-			temp.rtn = nullptr;
-			return true;
-			case 'N': case 'X':
-			return false;
-			default:
-			throw runtime_error("del(string): Unknown status!");
-			}
-			*/
 		}
 
 
@@ -377,25 +212,6 @@ namespace UJr2_funcs {
 				throw runtime_error("Book::save: cannot open booklist save file for writing!");
 			}
 			booklist.save(booklist_output);
-			/*	if(booklist.head) {
-			volume* current = booklist.head;
-			while(true) {
-			booklist_output << current->index_number << ' ';
-			if(current->fixed_index) {
-			booklist_output << "t ";
-			}else {
-			booklist_output << "f ";
-			}
-			booklist_output << current->name;
-			if(!current->volume_next) {
-			break;
-			}
-			else {
-			booklist_output << '\n';
-			}
-			current = current->volume_next;
-			}
-			}*/
 			booklist_output.close();
 		}
 
