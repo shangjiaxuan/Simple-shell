@@ -73,15 +73,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>sjx</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>sjx</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>sjx</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>sjx</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -148,7 +152,11 @@
     <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="CalcVariable.cpp" />
     <ClCompile Include="Calc_main.cpp" />
+    <ClCompile Include="CrossingColor.cpp" />
+    <ClCompile Include="Crossing.cpp" />
+    <ClCompile Include="Crossing_main.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="myDataStructures.cpp" />
     <ClCompile Include="Pathman.cpp" />
     <ClCompile Include="SwapEnc.cpp" />
     <ClCompile Include="SwapEnc_main.cpp" />
@@ -158,8 +166,11 @@
     <ClInclude Include="CalcToken.h" />
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="CalcVariable.h" />
+    <ClInclude Include="CrossingColor.h" />
+    <ClInclude Include="Crossing.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Macros.h" />
+    <ClInclude Include="myDataStructures.h" />
     <ClInclude Include="Pathman.h" />
     <ClInclude Include="sjx_Exports.h" />
     <ClInclude Include="SwapEnc.h" />

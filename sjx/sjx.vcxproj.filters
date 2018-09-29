@@ -76,6 +76,15 @@
     <ClInclude Include="UJr2.h">
       <Filter>21 UJr2\0 General Items</Filter>
     </ClInclude>
+    <ClInclude Include="Crossing.h">
+      <Filter>21 UJr2\1 Crossing</Filter>
+    </ClInclude>
+    <ClInclude Include="myDataStructures.h">
+      <Filter>01 Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossingColor.h">
+      <Filter>21 UJr2\1 Crossing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SwapEnc.cpp">
@@ -104,6 +113,18 @@
     </ClCompile>
     <ClCompile Include="UJr2.cpp">
       <Filter>21 UJr2\0 General Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Crossing_main.cpp">
+      <Filter>21 UJr2\1 Crossing</Filter>
+    </ClCompile>
+    <ClCompile Include="myDataStructures.cpp">
+      <Filter>01 Libs</Filter>
+    </ClCompile>
+    <ClCompile Include="Crossing.cpp">
+      <Filter>21 UJr2\1 Crossing</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossingColor.cpp">
+      <Filter>21 UJr2\1 Crossing</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

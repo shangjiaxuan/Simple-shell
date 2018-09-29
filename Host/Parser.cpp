@@ -48,7 +48,10 @@ namespace parser {
 			//		go_to_beginning = true;
 		} else if(stringcmp(cmd.argv[cur_arg], SwapEnc) == 0) {
 			cur_arg++;
+			cout << endl;
+			cin.clear();
 			call<void, void>(sjxDLL, "SwapEnc", nullptr);
+			cout << endl;
 			//		go_to_beginning = true;
 		} else if(stringcmp(cmd.argv[cur_arg], Man) == 0) {
 			cur_arg++;
@@ -60,6 +63,8 @@ namespace parser {
 			//this should mean the arguments are not going to be parsed within the host
 			//program anymore, thus, cur_arg generally does not need to increment
 		else if(fs::exists(cmd.argv[cur_arg])) {
+			cout << endl;
+			cin.clear();
 			//launching executables may include lnks in the future
 			nstring file_path = cmd.argv[cur_arg];
 			if(fileman::isexecutable(file_path)) {

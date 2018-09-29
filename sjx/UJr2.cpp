@@ -9,11 +9,11 @@ int UJr2(int argc, char* argv[]) {
 	//because in general, man and -h should be allowed to act differently
 	//This argument is only used when there's no manual page separately
 	//put in the Host program's default search directory (currently that doesn't exist)
-	if(argc==1 || strcmp(argv[1],"-h")==0 || strcmp(argv[1], "manual_page") == 0) {
+	if(argc == 1 || strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "manual_page") == 0) {
 		cout << "My(Shang Jiaxuan's) collection of programs from 2nd semester of Univesity Junior year\n";
 		cout << "Syntax: sjx Ujr2 \"Program name\" command line arguments (no argument may be a good place to start)\n";
 		cout << "Following function names are allowed:\n";
-		cout << "Crossing\n";
+		cout << "crossing\n";
 		cout << "Vehicle_control\n";
 		cout << "Book\n";
 		cout << "KMP\n";
@@ -21,15 +21,16 @@ int UJr2(int argc, char* argv[]) {
 		cout << "CrossRiver\n";
 		cout << "Haffman\n";
 		cout << "Block_search\n";
-		cout << "BinSort\n"<<endl;
+		cout << "BinSort\n" << endl;
 		cout << "Please note that all commands are case sensitive here!\n" << endl;
 		return 0;
 	}
 	argv++;
 	argc--;
-	if(strcmp(argv[1],"Crossing")==0) {
+	if(strcmp(argv[1], "Crossing") == 0) {
 		return UJr2_funcs::Crossing(argc, argv);
 	}
+	/*
 	if (strcmp(argv[1], "Vehicle_control") == 0) {
 		return UJr2_funcs::Vehicle_control(argc, argv);
 	}
@@ -58,5 +59,5 @@ int UJr2(int argc, char* argv[]) {
 		cout << "UJr2 cannot find the specified program: " << argv[1] << "!\n" << endl;
 		return 0;
 	}
+	*/
 }
-
