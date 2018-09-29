@@ -8,10 +8,10 @@ namespace UJr2_funcs {
 		//让用户输入，并算出各种路线的关系
 		crossing::name_ver();
 		crossing::prompt();
-		bool not_1st{ false };
-		while (true) {
+		bool not_1st{false};
+		while(true) {
 			try {
-				if (not_1st) {
+				if(not_1st) {
 					crossing::Exit();
 					if(crossing::exit) {
 						return 0;
@@ -19,16 +19,17 @@ namespace UJr2_funcs {
 					crossing::name_ver();
 				}
 				crossing::function();
-			}
-			catch (exception& e) {
+			} catch(exception& e) {
 				cout << '\n' << e.what() << '\n' << endl;
 				cin.clear();
 			}
 			not_1st = true;
 		}
 	}
+
 	namespace crossing {
 		bool exit = false;
+
 		//The UI functions go here
 		void name_ver() {
 			cout << "Crossing\n";

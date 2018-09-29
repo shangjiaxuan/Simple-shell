@@ -57,7 +57,3 @@ template class Array_2D<bool>;
 	}
 	// break;
 }*/
-
-
-
-

@@ -18,7 +18,3 @@ public:
 protected:
 	type* data;
 };
-
-
-
-

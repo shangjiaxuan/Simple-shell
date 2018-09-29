@@ -7,19 +7,19 @@ namespace UJr2_funcs {
 	namespace book {
 		void Book::init_ntoken() {
 			const size_t size = default_non_tokens.size();
-			for (size_t i = 0; i < size; i++) {
+			for(size_t i = 0; i < size; i++) {
 				index.add_token(default_non_tokens[i])->list.add(-1);
 			}
 		}
 
 		void Book::reindex(list::found original, volume* new_book) {
 			const int new_index = booklist.reindex(original, new_book);
-			if (original.name.empty()) {
+			if(original.name.empty()) {
 				throw runtime_error("Book::reindex: Empty bookname!");
 			}
 			vector<string> tokens = get_tokens(original.name);
 			const size_t size = tokens.size();
-			for (size_t i = 0; i < size; i++) {
+			for(size_t i = 0; i < size; i++) {
 				CharTree_node<linked_list<int>>* token_loc = index.locate(tokens[i]);
 				token_loc->list.add(new_index);
 			}
@@ -28,33 +28,32 @@ namespace UJr2_funcs {
 		void Book::add(istream& ist) {
 			string start;
 			int index;
-			while (!ist.eof()) {
+			while(!ist.eof()) {
 				ist >> start;
 				istringstream convert(start);
-				if (convert >> index) {
+				if(convert >> index) {
 					char id;
 					string bookname;
 					ist >> id;
 					char c;
 					ist.get(c);
-					while (c == ' ') {
+					while(c == ' ') {
 						ist.get(c);
 					}
 					ist.putback(c);
 					getline(ist, bookname);
-					switch (id) {
-					case 't':
-						add(index, bookname);
-						break;
-					case 'f':
-						add(bookname);
-						break;
-					default:
-						throw runtime_error("Book::add: unknown fixed status!");
+					switch(id) {
+						case 't':
+							add(index, bookname);
+							break;
+						case 'f':
+							add(bookname);
+							break;
+						default:
+							throw runtime_error("Book::add: unknown fixed status!");
 					}
 					//			ist.ignore(numeric_limits<streamsize>::max(), '\n');
-				}
-				else {
+				} else {
 					string following;
 					getline(ist, following);
 					start += following;
@@ -64,7 +63,7 @@ namespace UJr2_funcs {
 		}
 
 		void Book::add(std::string name) {
-			if (name.empty()) {
+			if(name.empty()) {
 				throw runtime_error("Book::add: no bookname specified!");
 			}
 			To_standard(name);
@@ -73,16 +72,16 @@ namespace UJr2_funcs {
 		}
 
 		void Book::add(int added_index, std::string name) {
-			if (name.empty()) {
+			if(name.empty()) {
 				throw runtime_error("Book::add: no bookname specified!");
 			}
 			To_standard(name);
 			const list::found found = booklist.find(added_index);
 			const int new_index = booklist.add(added_index, name);
-			if (found.status == 'P') {
+			if(found.status == 'P') {
 				vector<string> tokens = get_tokens(found.name);
 				const size_t size = tokens.size();
-				for (size_t i = 0; i < size; i++) {
+				for(size_t i = 0; i < size; i++) {
 					CharTree_node<linked_list<int>>* token = index.locate(tokens[i]);
 					token->list.del(added_index);
 					token->list.add(new_index);
@@ -95,8 +94,7 @@ namespace UJr2_funcs {
 			try {
 				const string name = booklist.del(deleted_index);
 				del_book_tree(name, deleted_index);
-			}
-			catch (exception& e) {
+			} catch(exception& e) {
 				cerr << e.what() << endl;
 				return false;
 			}
@@ -135,10 +133,9 @@ namespace UJr2_funcs {
 			try {
 				const int index = booklist.del(name);
 				del_book_tree(name, index);
-			}
-			catch (exception& e) {
+			} catch(exception& e) {
 				cerr << e.what() << endl;
-				return  false;
+				return false;
 			}
 			return true;
 		}
@@ -147,8 +144,8 @@ namespace UJr2_funcs {
 		//有大写又有小写的规范很复杂，要考虑词的性质和长度，还有“I”一类的词，干脆英文全大写（尽管完全和词相关，和位置关系不大（除了第一个词））
 		void Book::To_standard(std::string& bookname) {
 			const size_t size = bookname.size();
-			for (size_t i = 0; i < size; i++) {
-				if (bookname[i] > 96 && bookname[i] < 123) {
+			for(size_t i = 0; i < size; i++) {
+				if(bookname[i] > 96 && bookname[i] < 123) {
 					bookname[i] -= 32;
 				}
 			}
@@ -158,8 +155,8 @@ namespace UJr2_funcs {
 			vector<string> rtn;
 			string current;
 			istringstream str(bookname);
-			while (str >> current) {
-				if (istoken(current)) {
+			while(str >> current) {
+				if(istoken(current)) {
 					rtn.push_back(current);
 				}
 			}
@@ -168,10 +165,10 @@ namespace UJr2_funcs {
 
 		bool Book::istoken(const std::string& token) {
 			CharTree_node<linked_list<int>>* temp = index.locate(token);
-			if (!temp) {
+			if(!temp) {
 				return true;
 			}
-			if (!temp->list) {
+			if(!temp->list) {
 				return true;
 			}
 			return (temp->list.head->index_number != -1);
@@ -179,13 +176,13 @@ namespace UJr2_funcs {
 
 		void Book::load() {
 			index_input.open(index_filename);
-			if (!index_input) {
+			if(!index_input) {
 				return;
 			}
 			index.load(index_input);
 			index_input.close();
 			booklist_input.open(list_filename);
-			if (!booklist_input) {
+			if(!booklist_input) {
 				return;
 			}
 			booklist.load(booklist_input);
@@ -202,13 +199,13 @@ namespace UJr2_funcs {
 		//没有书号链表的不输出大括号
 		void Book::save() {
 			index_output.open(index_filename);
-			if (!index_output) {
+			if(!index_output) {
 				throw runtime_error("Book::save: cannot open index save file for writing!");
 			}
 			index.save(index_output);
 			index_output.close();
 			booklist_output.open(list_filename);
-			if (!booklist_output) {
+			if(!booklist_output) {
 				throw runtime_error("Book::save: cannot open booklist save file for writing!");
 			}
 			booklist.save(booklist_output);
@@ -218,7 +215,7 @@ namespace UJr2_funcs {
 		void Book::add_book_tree(const std::string& bookname, int book_index) {
 			vector<string> tokens = get_tokens(bookname);
 			const size_t size = tokens.size();
-			for (size_t i = 0; i < size; i++) {
+			for(size_t i = 0; i < size; i++) {
 				index.add_token(tokens[i])->list.add(book_index);
 			}
 		}
@@ -226,9 +223,9 @@ namespace UJr2_funcs {
 		void Book::del_book_tree(const std::string& bookname, int book_index) {
 			vector<string> tokens = get_tokens(bookname);
 			const size_t size = tokens.size();
-			for (size_t i = 0; i < size; i++) {
+			for(size_t i = 0; i < size; i++) {
 				CharTree_node<linked_list<int>>* node = index.locate(tokens[i]);
-				if (!node->list || ((!node->list.head->next_item) && node->list.head->index_number == book_index)) {
+				if(!node->list || ((!node->list.head->next_item) && node->list.head->index_number == book_index)) {
 					index.del_token(tokens[i]);
 					continue;
 				}
@@ -248,7 +245,7 @@ namespace UJr2_funcs {
 		void Book::ntoken(std::string token) {
 			To_standard(token);
 			CharTree_node<linked_list<int>>* loc = index.locate(token);
-			if (loc) {
+			if(loc) {
 				delete loc->list.head;
 				loc->list.head = nullptr;
 				loc->list.add(-1);
@@ -259,7 +256,7 @@ namespace UJr2_funcs {
 
 		void list::print_book(int index, std::ostream& ost) const {
 			const found found = find(index);
-			if (found.status != 'P') {
+			if(found.status != 'P') {
 				throw runtime_error("list::print_book: index not found!");
 			}
 			print_book(found.rtn, ost);
@@ -267,14 +264,14 @@ namespace UJr2_funcs {
 
 		void list::print_book(const std::string& name, std::ostream& ost) const {
 			const found found = find(name);
-			if (found.status != 'P') {
+			if(found.status != 'P') {
 				throw runtime_error("list::print_book: name not found!");
 			}
 			print_book(found.rtn, ost);
 		}
 
 		void list::print_book(volume* book, std::ostream& ost) {
-			if (book->fixed_index) {
+			if(book->fixed_index) {
 				ost << "index:\t" << book->index_number << '\n';
 			}
 			ost << "name:\t" << book->name << endl;
@@ -284,15 +281,15 @@ namespace UJr2_funcs {
 			//必须这么写，否则会被析构
 			linked_list<int>& list = index.access(token);
 			//	linked_list_node* list_head = index.access(token).head;
-			if (!list) {
+			if(!list) {
 				throw runtime_error("Book::print_token: book list with given token is empty");
 			}
 			ost << "Books with token \"" << token << "\":\n" << endl;
 			linked_list_node<int>* current = list.head;
 			volume* book = booklist.head;
-			while (current && book) {
+			while(current && book) {
 				book = booklist.find(book, current->index_number).rtn;
-				if (!book) {
+				if(!book) {
 					break;
 				}
 				booklist.print_book(book, ost);

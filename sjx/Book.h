@@ -6,6 +6,7 @@
 namespace UJr2_funcs {
 	namespace book {
 		class UI;
+
 		//管理所有书目的链表
 		//貌似应该再加一个保存到文件的功能，就叫“index.dat”和“booklist.dat”罢
 		//这样就不需要非token的vector了（手动输入一次，保存）
@@ -18,6 +19,7 @@ namespace UJr2_funcs {
 				init_ntoken();
 				load();
 			}
+
 			//the linked list of books
 			list booklist;
 			//the index_number tree of tokens
@@ -40,8 +42,8 @@ namespace UJr2_funcs {
 
 			void ntoken(std::string token);
 
-			const char* index_filename{ "BookIndex.dat" };
-			const char* list_filename{ "Booklist.dat" };
+			const char* index_filename{"BookIndex.dat"};
+			const char* list_filename{"Booklist.dat"};
 			void save();
 			void load();
 
@@ -64,7 +66,7 @@ namespace UJr2_funcs {
 			std::vector<std::string> get_tokens(const std::string& bookname);
 			void init_ntoken();
 			//先简单地写一个表，肯定不完整，以后用户可以调用函数添加（同时删除原有链表）
-			std::vector<std::string> default_non_tokens{ "THE","AM","IS","ARE","OF","AT","TO","UNDER","ABOVE" };
+			std::vector<std::string> default_non_tokens{"THE", "AM", "IS", "ARE", "OF", "AT", "TO", "UNDER", "ABOVE"};
 
 		protected:
 			void add_book_tree(const std::string& bookname, int book_index);
@@ -79,4 +81,3 @@ namespace UJr2_funcs {
 		};
 	}
 }
-

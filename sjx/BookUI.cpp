@@ -2,6 +2,7 @@
 #include <utility>
 
 using namespace std;
+
 namespace UJr2_funcs {
 	namespace book {
 		void UI::prompt() {
@@ -17,11 +18,10 @@ namespace UJr2_funcs {
 		void UI::UI_main() {
 			name_ver();
 			base.load();
-			while (on) {
+			while(on) {
 				try {
 					parser();
-				}
-				catch (exception& e) {
+				} catch(exception& e) {
 					cerr << e.what() << endl;
 					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -33,7 +33,7 @@ namespace UJr2_funcs {
 		void UI::ignore_space(std::istream& ist) {
 			char c;
 			ist.get(c);
-			while (c == ' ') {
+			while(c == ' ') {
 				ist.get(c);
 			}
 			ist.putback(c);
@@ -44,29 +44,22 @@ namespace UJr2_funcs {
 			prompt();
 			cin >> cmd;
 			ignore_space(cin);
-			if (cmd == "exit") {
+			if(cmd == "exit") {
 				on = false;
-			}
-			else if (cmd == "add") {
+			} else if(cmd == "add") {
 				add();
-			}
-			else if (cmd == "del") {
+			} else if(cmd == "del") {
 				del();
-			}
-			else if (cmd == "list") {
+			} else if(cmd == "list") {
 				list();
-			}
-			else if (cmd == "ntoken") {
+			} else if(cmd == "ntoken") {
 				cin >> cmd;
 				base.ntoken(cmd);
-			}
-			else if (cmd == "save") {
+			} else if(cmd == "save") {
 				base.save();
-			}
-			else if (cmd == "find") {
+			} else if(cmd == "find") {
 				find();
-			}
-			else {
+			} else {
 				throw runtime_error("UI::UI_main: unknown command!");
 			}
 			cout << endl;
@@ -75,7 +68,7 @@ namespace UJr2_funcs {
 		void UI::add() {
 			string cmd;
 			getline(cin, cmd);
-			if (add_file(cmd)) {
+			if(add_file(cmd)) {
 				return;
 			}
 			add_manual(cmd);
@@ -85,7 +78,7 @@ namespace UJr2_funcs {
 			ifstream ifs;
 			const string path = parse_path(cmd);
 			ifs.open(path);
-			if (ifs) {
+			if(ifs) {
 				add_stream(ifs);
 				ifs.close();
 				return true;
@@ -100,9 +93,9 @@ namespace UJr2_funcs {
 
 		void UI::add_stream(istream& ist) {
 			string cmd;
-			while (!ist.eof()) {
+			while(!ist.eof()) {
 				getline(ist, cmd);
-				if (!cmd.empty()) {
+				if(!cmd.empty()) {
 					add_string(cmd);
 				}
 			}
@@ -111,8 +104,9 @@ namespace UJr2_funcs {
 		void UI::add_string(const std::string& line) {
 			//有序号的可能
 			istringstream iss(line);
-			int index; string name;
-			if (iss >> index) {
+			int index;
+			string name;
+			if(iss >> index) {
 				getline(iss, name);
 				name = parse_bookname(name);
 				base.add(index, name);
@@ -125,7 +119,7 @@ namespace UJr2_funcs {
 		void UI::del() {
 			string cmd;
 			getline(cin, cmd);
-			if (del_file(cmd)) {
+			if(del_file(cmd)) {
 				return;
 			}
 			del_manual(cmd);
@@ -135,7 +129,7 @@ namespace UJr2_funcs {
 			ifstream ifs;
 			const string path = parse_path(cmd);
 			ifs.open(path);
-			if (ifs) {
+			if(ifs) {
 				del_stream(ifs);
 				ifs.close();
 				return true;
@@ -150,9 +144,9 @@ namespace UJr2_funcs {
 
 		void UI::del_stream(std::istream& ist) {
 			string cmd;
-			while (!ist.eof()) {
+			while(!ist.eof()) {
 				getline(ist, cmd);
-				if (!cmd.empty()) {
+				if(!cmd.empty()) {
 					del_string(cmd);
 				}
 			}
@@ -162,7 +156,7 @@ namespace UJr2_funcs {
 		void UI::del_string(const std::string& line) {
 			istringstream iss(line);
 			int index;
-			if (iss >> index) {
+			if(iss >> index) {
 				base.del(index);
 				return;
 			}
@@ -174,13 +168,11 @@ namespace UJr2_funcs {
 			string cmd;
 			cin >> cmd;
 			ignore_space(cin);
-			if (cmd == "book") {
+			if(cmd == "book") {
 				list_book();
-			}
-			else if (cmd == "index") {
+			} else if(cmd == "index") {
 				list_index();
-			}
-			else {
+			} else {
 				throw runtime_error("UI::list: unknown command!");
 			}
 		}
@@ -189,19 +181,18 @@ namespace UJr2_funcs {
 			char c;
 			ignore_space(cin);
 			cin.get(c);
-			if (c == '>') {
+			if(c == '>') {
 				ofstream ofs;
 				string s;
 				ignore_space(cin);
 				cin >> s;
 				ofs.open(s);
-				if (!ofs) {
+				if(!ofs) {
 					throw runtime_error("UI::list_book: cannot open file for output!");
 				}
 				list_book_stream(ofs);
 				ofs.close();
-			}
-			else {
+			} else {
 				cout << '\n';
 				list_book_stream(cout);
 				cout << endl;
@@ -212,19 +203,18 @@ namespace UJr2_funcs {
 			char c;
 			ignore_space(cin);
 			cin.get(c);
-			if (c == '>') {
+			if(c == '>') {
 				ofstream ofs;
 				string s;
 				ignore_space(cin);
 				cin >> s;
 				ofs.open(s);
-				if (!ofs) {
+				if(!ofs) {
 					throw runtime_error("UI::list_index: cannot open file for output!");
 				}
 				list_index_stream(ofs);
 				ofs.close();
-			}
-			else {
+			} else {
 				cout << '\n';
 				list_index_stream(cout);
 			}
@@ -244,13 +234,11 @@ namespace UJr2_funcs {
 			string cmd;
 			cin >> cmd;
 			ignore_space(cin);
-			if (cmd == "book") {
+			if(cmd == "book") {
 				find_book();
-			}
-			else if (cmd == "token") {
+			} else if(cmd == "token") {
 				find_token();
-			}
-			else {
+			} else {
 				throw runtime_error("UI::list: unknown command!");
 			}
 		}
@@ -261,11 +249,10 @@ namespace UJr2_funcs {
 			ignore_space(cin);
 			getline(cin, cmd);
 			istringstream iss;
-			if (iss >> index) {
+			if(iss >> index) {
 				cout << '\n';
 				base.print_book(index, cout);
-			}
-			else {
+			} else {
 				string name = parse_bookname(cmd);
 				Book::To_standard(name);
 				cout << '\n';
@@ -280,7 +267,7 @@ namespace UJr2_funcs {
 			char c;
 			ignore_space(cin);
 			cin.get(c);
-			if (c == '>') {
+			if(c == '>') {
 				ignore_space(cin);
 				string path;
 				getline(cin, path);
@@ -299,7 +286,7 @@ namespace UJr2_funcs {
 		string UI::parse_bookname(const string& line) {
 			istringstream iss(line);
 			string name;
-			while (iss) {
+			while(iss) {
 				string current;
 				iss >> current;
 				name.append(current);
@@ -314,23 +301,23 @@ namespace UJr2_funcs {
 			istringstream iss(line);
 			char current;
 			iss.get(current);
-			while (current == ' ') {
+			while(current == ' ') {
 				iss.get(current);
 			}
 			iss.putback(current);
-			while (iss) {
+			while(iss) {
 				iss.get(current);
-				switch (current) {
-				case '\"':
-					iss.get(current);
-					while (current != '\"') {
+				switch(current) {
+					case '\"':
+						iss.get(current);
+						while(current != '\"') {
+							path.push_back(current);
+							iss.get(current);
+						}
+						break;
+					default:
 						path.push_back(current);
 						iss.get(current);
-					}
-					break;
-				default:
-					path.push_back(current);
-					iss.get(current);
 				}
 			}
 			return path;

@@ -4,6 +4,7 @@
 
 namespace UJr2_funcs {
 #define MAX_CAR 100
+
 	namespace vehicle_control {
 		struct violation {
 			violation() {
@@ -12,12 +13,14 @@ namespace UJr2_funcs {
 				dealt = false;
 				next = nullptr;
 			}
+
 			~violation() {
-				if (next) {
+				if(next) {
 					delete next;
 				}
 				next = nullptr;
 			}
+
 			int time;
 			std::string location;
 			int code;
@@ -31,6 +34,7 @@ namespace UJr2_funcs {
 				id = -1;
 				price = -1;
 			}
+
 			car(int i, std::string typ, double pric, std::string drive) {
 				id = i;
 				type = typ;
@@ -38,10 +42,12 @@ namespace UJr2_funcs {
 				driver = drive;
 				violations = nullptr;
 			}
+
 			~car() {
 				delete violations;
 				violations = nullptr;
 			}
+
 			int id;
 			std::string type;
 			double price;
@@ -54,21 +60,23 @@ namespace UJr2_funcs {
 			controls() {
 				car_num = 0;
 				all_cars = new car[MAX_CAR];
-/*				Loading save directly in a global variable's
- *				constructor means that the load (e.g. creat empty file)
- *				will always be executed on load of the exe of dll
- *				will decrease performance
-				try {
-					load();
-				}
-
-				catch (...) {}
-*/
+				/*				Loading save directly in a global variable's
+				*				constructor means that the load (e.g. creat empty file)
+				*				will always be executed on load of the exe of dll
+				*				will decrease performance
+								try {
+									load();
+								}
+				
+								catch (...) {}
+				*/
 			}
+
 			~controls() {
 				delete[] all_cars;
 				all_cars = nullptr;
 			}
+
 			void interaction();
 			bool exit = false;
 
@@ -76,11 +84,11 @@ namespace UJr2_funcs {
 			void load();
 		private:
 			car* all_cars;
-			int car_num{ 0 };
+			int car_num{0};
 
 			void list() const;
 
-			const char* save_filename{ "VCtrl_save.dat" };
+			const char* save_filename{"VCtrl_save.dat"};
 
 			void master_add();
 			void master_find() const;

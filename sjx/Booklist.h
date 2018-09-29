@@ -13,16 +13,18 @@ namespace UJr2_funcs {
 				index_number = -2;
 				volume_next = nullptr;
 			}
+
 			//利用delete递归调用析构函数的特点一次性释放书目链表
 			~volume() {
-				if (volume_next) {
+				if(volume_next) {
 					//			volume_next->~volume();
 					delete volume_next;
 					volume_next = nullptr;
 				}
 			}
+
 			int index_number;
-			bool fixed_index{ false };
+			bool fixed_index{false};
 			std::string name;
 			volume* volume_next;
 		};
@@ -31,13 +33,15 @@ namespace UJr2_funcs {
 			list() {
 				head = nullptr;
 			}
+
 			~list() {
-				if (head) {
+				if(head) {
 					//			head->~volume();
 					delete head;
 					//			head = nullptr;
 				}
 			}
+
 			friend Book;
 			struct found;
 			volume* head;
@@ -79,6 +83,7 @@ namespace UJr2_funcs {
 				//the default index for new item
 				int default_index;
 			};
+
 			found find(int index) const;
 			found find(const std::string& name) const;
 			found find(volume* start, int index) const;

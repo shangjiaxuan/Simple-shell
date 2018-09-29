@@ -8,7 +8,7 @@ namespace UJr2_funcs {
 		public:
 			void UI_main();
 		private:
-			bool on{ true };
+			bool on{true};
 			Book base;
 			static void prompt();
 			static void name_ver();
@@ -46,4 +46,3 @@ namespace UJr2_funcs {
 		};
 	}
 }
-
