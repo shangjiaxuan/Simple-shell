@@ -14,7 +14,7 @@ PELaunch::PELaunch(const cmdline<nchar>& cmd) {
 	}
 	open(cmd.argv[0]);
 	size_t required_size = stringlen(cmd.argv[0]) + 1;
-	LPTSTR temp = new nchar[required_size];
+	LPTSTR const temp = new nchar[required_size];
 	stringcpy(temp, required_size, cmd.argv[0]);
 	lpApplicationName = temp;
 	required_size = parser::ncmdline2nchar(cmd, nullptr, NULL);
@@ -40,13 +40,13 @@ PELaunch::PELaunch(fs::path exe_path) {
 	//some apps do not work with NULL as lpCommandLine
 	//command line is modifiable in UNICODE
 	lpCommandLine = new nchar[exe_path.native().size() + 1];
-	stringcpy(lpCommandLine, exe_path.native().size() + 1, exe_path.native().c_str());
+	stringcpy(lpCommandLine, exe_path.native().size() + 1, exe_path.nstring().c_str());
 	//a temporary pointer to modifyable data to initialize unmodifiable data
 	nchar* temp = new nchar[exe_path.native().size() + 1];
-	stringcpy(temp, exe_path.native().size() + 1, exe_path.native().c_str());
+	stringcpy(temp, exe_path.native().size() + 1, exe_path.nstring().c_str());
 	lpApplicationName = temp;
 	temp = new nchar[exe_path.remove_filename().native().size() + 1];
-	stringcpy(temp, exe_path.native().size() + 1, exe_path.native().c_str());
+	stringcpy(temp, exe_path.native().size() + 1, exe_path.nstring().c_str());
 	lpCurrentDirectory = temp;
 }
 
@@ -196,8 +196,8 @@ void PELaunch::Launch() const {
 
 int PELaunch::non_console(const fs::path& p) {
 	ifstream ifs;
-	ifs.open(p, ios::binary | ios::in);
-	if (ifs) {
+	ifs.open(p, binary | in);
+	if(ifs) {
 		ifs.seekg(0x3C);
 		WORD pos1;
 		fileman::BinRead(&pos1, 1, ifs);
@@ -209,18 +209,18 @@ int PELaunch::non_console(const fs::path& p) {
 		WORD subsystem;
 		fileman::BinRead(&subsystem, 1, ifs);
 		ifs.close();
-		switch (subsystem) {
-		case IMAGE_SUBSYSTEM_WINDOWS_CUI:
-		case IMAGE_SUBSYSTEM_OS2_CUI:
-		case IMAGE_SUBSYSTEM_POSIX_CUI:
-			return 0;
-		case IMAGE_SUBSYSTEM_WINDOWS_GUI:
-		case IMAGE_SUBSYSTEM_WINDOWS_CE_GUI:
-			return 1;
-		case IMAGE_SUBSYSTEM_UNKNOWN:
-		case IMAGE_SUBSYSTEM_NATIVE:
-		default:
-			return 2;
+		switch(subsystem) {
+			case IMAGE_SUBSYSTEM_WINDOWS_CUI:
+			case IMAGE_SUBSYSTEM_OS2_CUI:
+			case IMAGE_SUBSYSTEM_POSIX_CUI:
+				return 0;
+			case IMAGE_SUBSYSTEM_WINDOWS_GUI:
+			case IMAGE_SUBSYSTEM_WINDOWS_CE_GUI:
+				return 1;
+			case IMAGE_SUBSYSTEM_UNKNOWN:
+			case IMAGE_SUBSYSTEM_NATIVE:
+			default:
+				return 2;
 		}
 	}
 	return 3;

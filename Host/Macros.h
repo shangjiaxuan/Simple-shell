@@ -14,9 +14,9 @@
 //For specifying macros for partial cross-compiling
 
 #ifdef _WIN32
-//native strings
+//native strings and chars
 #ifdef _UNICODE
-#define nstring std::wstring
+#define nstring wstring
 #define nchar wchar_t
 #define stringcpy wcscpy_s
 #define stringlen wcslen
@@ -24,7 +24,7 @@
 #endif
 
 #ifdef _MBCS
-#define nstring std::string
+#define nstring string
 #define nchar char
 #define stringcpy strcpy_s
 #define stringlen strlen

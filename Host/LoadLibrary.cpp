@@ -15,7 +15,7 @@ using namespace std;
 template<typename rtn, typename passed>
 typename std::enable_if<!std::is_same<rtn, void>::value, rtn>::type
 call(const nchar* library, const char* function, passed* pass) {
-	HINSTANCE hInst = LoadLibrary(library);
+	HINSTANCE const hInst = LoadLibrary(library);
 	if(!hInst) {
 		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
 		throw std::runtime_error("call: Library loading failed!");
@@ -30,10 +30,10 @@ call(const nchar* library, const char* function, passed* pass) {
 		}
 		__try {
 			val = func();
-		}__except(EXCEPTION_EXECUTE_HANDLER) {
+		} __except(EXCEPTION_EXECUTE_HANDLER) {
 			FreeLibrary(hInst);
 			std::cin.get();
-			throw runtime_error("call: SEH error executing function!\n");
+			throw runtime_error("SEH error executing function as \"rtn func()\"!\n");
 		}
 	} else {
 		//probably implement a method here to see if the function can
@@ -48,12 +48,11 @@ call(const nchar* library, const char* function, passed* pass) {
 			throw runtime_error("call: Cannot find function in library!");
 		}
 		__try {
-			val = func();
-		}
-		__except (EXCEPTION_EXECUTE_HANDLER) {
+			val = func(*pass);
+		} __except(EXCEPTION_EXECUTE_HANDLER) {
 			FreeLibrary(hInst);
 			std::cin.get();
-			throw runtime_error("call: SEH error executing function!\n");
+			throw runtime_error("SEH error executing function as \"rtn func(passed)\"!\n");
 		}
 	}
 	FreeLibrary(hInst);
@@ -66,8 +65,7 @@ typename std::enable_if<std::is_same<rtn, void>::value, void>::type
 call(const nchar* library,
 	const char* function,
 	typename std::enable_if<!std::is_same<passed, void>::value, passed>::type* pass) {
-
-	HINSTANCE hInst = LoadLibrary(library);
+	HINSTANCE const hInst = LoadLibrary(library);
 	if(!hInst) {
 		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
 		throw std::runtime_error("call: Library loading failed!");
@@ -81,11 +79,10 @@ call(const nchar* library,
 		}
 		__try {
 			func();
-		}
-		__except (EXCEPTION_EXECUTE_HANDLER) {
+		} __except(EXCEPTION_EXECUTE_HANDLER) {
 			FreeLibrary(hInst);
 			std::cin.get();
-			throw runtime_error("call: SEH error executing function!\n");
+			throw runtime_error("SEH error executing function as \"void func()\"!\n");
 		}
 	} else {
 		if(std::is_same<passed, void>::value) {
@@ -101,11 +98,10 @@ call(const nchar* library,
 		}
 		__try {
 			func(*pass);
-		}
-		__except (EXCEPTION_EXECUTE_HANDLER) {
+		} __except(EXCEPTION_EXECUTE_HANDLER) {
 			FreeLibrary(hInst);
 			std::cin.get();
-			throw runtime_error("call: SEH error executing function!\n");
+			throw runtime_error("SEH error executing function as \"void func(passed pass)\"!\n");
 		}
 	}
 	FreeLibrary(hInst);
@@ -121,7 +117,7 @@ call(const nchar* library,
 		throw std::runtime_error(
 			"ISO C++ does not allow indirection on operand of type void*\ntry using other method of sending information");
 	}
-	HINSTANCE hInst = LoadLibrary(library);
+	HINSTANCE const hInst = LoadLibrary(library);
 	if(!hInst) {
 		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
 		throw std::runtime_error("call: Library loading failed!");
@@ -134,11 +130,10 @@ call(const nchar* library,
 	}
 	__try {
 		func();
-	}
-	__except (EXCEPTION_EXECUTE_HANDLER) {
+	} __except(EXCEPTION_EXECUTE_HANDLER) {
 		FreeLibrary(hInst);
 		std::cin.get();
-		throw runtime_error("call: SEH error executing function!\n");
+		throw runtime_error("SEH error executing function as \"void func()\"!\n");
 	}
 	FreeLibrary(hInst);
 	std::cin.get();
@@ -147,12 +142,12 @@ call(const nchar* library,
 //currently only support the same character set for argv
 template<>
 inline void call<void, cmdline<char>>(const nchar* library, const char* function, cmdline<char>* cmd) {
-	HINSTANCE hInst = LoadLibrary(library);
+	HINSTANCE const hInst = LoadLibrary(library);
 	if(!hInst) {
 		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
 		throw std::runtime_error("call: Library loading failed!");
 	}
-	typedef void (*_func)(size_t, char**);
+	typedef void (*_func)(int, char**);
 	const _func func = _func(GetProcAddress(hInst, function));
 	if(!func) {
 		FreeLibrary(hInst);
@@ -160,11 +155,10 @@ inline void call<void, cmdline<char>>(const nchar* library, const char* function
 	}
 	__try {
 		func(cmd->argc, cmd->argv);
-	}
-	__except (EXCEPTION_EXECUTE_HANDLER) {
+	} __except(EXCEPTION_EXECUTE_HANDLER) {
 		FreeLibrary(hInst);
 		std::cin.get();
-		throw runtime_error("call: SEH error executing function!\n");
+		throw runtime_error("SEH error executing function as \"void func(int argc, char* argv[])\"!\n");
 	}
 	FreeLibrary(hInst);
 	std::cin.get();
