@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Crossing.h"
 
@@ -16,7 +16,7 @@ namespace UJr2_funcs {
 			Color(crossing::relations& rela) {
 				color_num = 0;
 				rel = &rela;
-				group = new int[crossing::possi](); //ÓÃ0³õÊ¼»¯Êı×é
+				group = new int[crossing::possi](); //ç”¨0åˆå§‹åŒ–æ•°ç»„
 				//		for (int i = 0; i < crossing::possi; i++) {
 				//			group[i] = 0;
 				//		}
@@ -32,9 +32,9 @@ namespace UJr2_funcs {
 		protected:
 			crossing::relations* rel;
 			int color_num;
-			int* group;                            //ºÍstruct route¶ÔÓ¦µÄ·Ö×éÊı×é
-			bool evaluate(int cur, int opp) const; //¿´Ä³¸öÔªËØÄÜ·ñ¼ÓÈëÄ¿Ç°µÄ×é
-			void assign(int add);                  //¸øÄ³¸öÔªËØ·ÖÅäÒ»¸ö×é
+			int* group;                            //å’Œstruct routeå¯¹åº”çš„åˆ†ç»„æ•°ç»„
+			bool evaluate(int cur, int opp) const; //çœ‹æŸä¸ªå…ƒç´ èƒ½å¦åŠ å…¥ç›®å‰çš„ç»„
+			void assign(int add);                  //ç»™æŸä¸ªå…ƒç´ åˆ†é…ä¸€ä¸ªç»„
 		};
 	}
 }

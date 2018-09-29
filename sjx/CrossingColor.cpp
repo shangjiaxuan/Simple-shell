@@ -1,4 +1,4 @@
-#include "Crossing.h"
+ï»¿#include "Crossing.h"
 #include "CrossingColor.h"
 
 using namespace std;
@@ -45,8 +45,8 @@ namespace UJr2_funcs {
 			cout << "At least " << this->color_num <<
 			" groups needed for the grouping! The folowing is one possibility:" << endl;
 			for(int i = 1; i <= color_num; i++) {
-				//¸÷¸ö×éµÄ±àºÅ
-				cout << "Group No. " << i << ":\t"; //ÓÃ1stÉ¶µÄÌ«Âé·³ÁË£¬Ó¢ÓïÓï·¨»¹ÒªÐ´¸öº¯Êý...
+				//å„ä¸ªç»„çš„ç¼–å·
+				cout << "Group No. " << i << ":\t"; //ç”¨1stå•¥çš„å¤ªéº»çƒ¦äº†ï¼Œè‹±è¯­è¯­æ³•è¿˜è¦å†™ä¸ªå‡½æ•°...
 				for(int cur = 0; cur < crossing::possi; cur++) {
 					if(this->group[cur] == i) {
 						cout << this->rel->This->routes[cur].from << "->" << this->rel->This->routes[cur].to << '\t';
