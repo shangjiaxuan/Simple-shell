@@ -20,27 +20,23 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00 Host", "Host\Host.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10 sjx", "sjx\sjx.vcxproj", "{23BA0350-902E-4F24-859F-8C41C6BE5393}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Block_search", "Class Projects\Block_search\Block_search.vcxproj", "{0A97FDB1-17ED-4294-BBC3-41515F5F5AC8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "18 Block_search", "Class Projects\Block_search\Block_search.vcxproj", "{0A97FDB1-17ED-4294-BBC3-41515F5F5AC8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Book", "Class Projects\CharTree\CharTree.vcxproj", "{D3C655CF-FBAB-46BE-B828-6E93C3948621}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "13 Book", "Class Projects\CharTree\CharTree.vcxproj", "{D3C655CF-FBAB-46BE-B828-6E93C3948621}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Crossing", "Class Projects\Crossing\Crossing.vcxproj", "{FCAFE54E-B1FD-4D14-8089-B2B975BE734C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "11 Crossing", "Class Projects\Crossing\Crossing.vcxproj", "{FCAFE54E-B1FD-4D14-8089-B2B975BE734C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CrossRiver", "Class Projects\CrossRiver\CrossRiver.vcxproj", "{EDCA9457-99DF-4B3A-B52A-C4BD8AABA5A6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "16 CrossRiver", "Class Projects\CrossRiver\CrossRiver.vcxproj", "{EDCA9457-99DF-4B3A-B52A-C4BD8AABA5A6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Haffman", "Class Projects\Haffman\Haffman.vcxproj", "{1B21B757-D034-46EE-A2A8-96AB9AD12B17}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "17 Haffman", "Class Projects\Haffman\Haffman.vcxproj", "{1B21B757-D034-46EE-A2A8-96AB9AD12B17}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KMP", "Class Projects\KMP\KMP.vcxproj", "{7FA9EC58-7B8A-4A36-823A-50F85301667E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "14 KMP", "Class Projects\KMP\KMP.vcxproj", "{7FA9EC58-7B8A-4A36-823A-50F85301667E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "maze", "Class Projects\maze\maze.vcxproj", "{8A374E9F-EA95-49DE-89AF-812B2E18B0C1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "15 maze", "Class Projects\maze\maze.vcxproj", "{8A374E9F-EA95-49DE-89AF-812B2E18B0C1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Vehicle_control", "Class Projects\Vehicle_control\Vehicle_control.vcxproj", "{D059E20F-AA59-4E2F-A640-145A9E241BFE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "12 Vehicle_control", "Class Projects\Vehicle_control\Vehicle_control.vcxproj", "{D059E20F-AA59-4E2F-A640-145A9E241BFE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repo_related", "Repo_related", "{132C4106-2AA9-450C-8CAA-DA4F7AFE6C2A}"
-	ProjectSection(SolutionItems) = preProject
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BinSort", "Class Projects\BinSort\BinSort.vcxproj", "{7E9448B3-9D7A-4E4D-A60E-6C0D463E2B44}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "19 BinSort", "Class Projects\BinSort\BinSort.vcxproj", "{7E9448B3-9D7A-4E4D-A60E-6C0D463E2B44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
