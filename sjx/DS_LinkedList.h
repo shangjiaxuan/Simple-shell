@@ -76,7 +76,7 @@ public:
 		}
 		throw std::runtime_error("linked_list::del: list is empty!");
 	};
-	void print_index(std::ostream& ost) {
+	void print_index(std::ostream& ost) const {
 		linked_list_node<content_type>* current = head;
 		while (current) {
 			ost << current->index_number << ' ';
@@ -112,7 +112,7 @@ public:
 		}
 		ifs.get();
 	};
-	operator bool() {
+	operator bool() const {
 		return head;
 	}
 	friend CharTree_node<linked_list<content_type>>;

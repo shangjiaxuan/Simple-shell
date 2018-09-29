@@ -72,12 +72,11 @@ public:
 	CharTree_node<content_type>* locate(std::string token) {
 		const size_t size = token.size();
 		CharTree_node<content_type>* current = const_cast<CharTree_node<content_type>*>(&head);
-		unsigned char loc;
 		if (size == 0) {
 			return const_cast<CharTree_node<content_type>*>(&head);
 		}
 		for (int i = 0; i < size; i++) {
-			loc = token[i];
+			unsigned char loc = token[i];
 			if (current->next[loc]) {
 				current = current->next[loc];
 			}
@@ -140,7 +139,7 @@ public:
 		while (remove[size]) {
 			size--;
 		}
-		std::string common = token.substr(0, size);
+		const std::string common = token.substr(0, size);
 		CharTree_node<content_type>* temp = locate(common);
 		loc = token[size];
 		if (temp->next) {
@@ -179,7 +178,7 @@ public:
 		print_tokens_loop(const_cast<CharTree_node<content_type>*>(&(this->head)), token, ost);
 	}
 protected:
-	bool one_succ(CharTree_node<content_type>** list) {
+	static bool one_succ(CharTree_node<content_type>** list) {
 		bool seen{ false };
 		for (int i = 0; i < CharNum; i++) {
 			if (list[i]) {
@@ -195,7 +194,6 @@ protected:
 		return true;
 	}
 	void save_loop(CharTree_node<content_type>* current, std::ofstream& ofs) {
-		char char_buffer;
 		if (current->list.head) {
 			if (current->list.head->index_number < 0) {
 				return;
@@ -209,7 +207,7 @@ protected:
 		}
 		for (unsigned i = 0; i < CharNum; i++) {
 			if (current->next[i]) {
-				char_buffer = i;
+				const char char_buffer = i;
 				ofs << char_buffer;
 				save_loop(current->next[i], ofs);
 				ofs << '\t';
@@ -254,15 +252,13 @@ protected:
 	}
 	bool node_found{ false };
 	void find_node_loop(CharTree_node<content_type>* target, CharTree_node<content_type>* current, std::string& token) {
-		unsigned char temp;
-		char char_buff;
 		for (unsigned i = 0; i < CharNum; i++) {
 			if (!current->next) {
 				return;
 			}
 			if (current->next[i]) {
-				temp = i;
-				char_buff = temp;
+				const unsigned char temp = i;
+				const char char_buff = temp;
 				token.push_back(char_buff);
 				if (current->next[i] == target) {
 					node_found = true;
@@ -291,8 +287,8 @@ protected:
 				return;
 			}
 			if (current->next[i]) {
-				unsigned char c = i;
-				char ch = c;
+				const unsigned char c = i;
+				const char ch = c;
 				token.push_back(ch);
 				print_tokens_loop(current->next[i], token, ost);
 				token.pop_back();
