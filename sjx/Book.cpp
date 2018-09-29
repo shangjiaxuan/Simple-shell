@@ -20,7 +20,7 @@ namespace UJr2_funcs {
 			vector<string> tokens = get_tokens(original.name);
 			const size_t size = tokens.size();
 			for (size_t i = 0; i < size; i++) {
-				node* token_loc = index.locate(tokens[i]);
+				CharTree_node<linked_list<int>>* token_loc = index.locate(tokens[i]);
 				token_loc->list.add(new_index);
 			}
 		}
@@ -47,7 +47,7 @@ namespace UJr2_funcs {
 		vector<string> tokens = get_tokens(original.name);
 		int s = tokens.size();
 		for(int i=0;i<s;i++) {
-		if(item* temp = this->index.locate(tokens[i])->head) {
+		if(linked_list_node* temp = this->index.locate(tokens[i])->head) {
 		while (temp->index_number != oindex) {
 		if (!temp->next_item) {
 		throw runtime_error("Book::reindex: cannot find original index in a certain token");
@@ -121,7 +121,7 @@ namespace UJr2_funcs {
 				vector<string> tokens = get_tokens(found.name);
 				const size_t size = tokens.size();
 				for (size_t i = 0; i < size; i++) {
-					node* token = index.locate(tokens[i]);
+					CharTree_node<linked_list<int>>* token = index.locate(tokens[i]);
 					token->list.del(added_index);
 					token->list.add(new_index);
 				}
@@ -332,7 +332,7 @@ namespace UJr2_funcs {
 		}
 
 		bool Book::istoken(const std::string& token) {
-			node* temp = index.locate(token);
+			CharTree_node<linked_list<int>>* temp = index.locate(token);
 			if (!temp) {
 				return true;
 			}
@@ -411,7 +411,7 @@ namespace UJr2_funcs {
 			vector<string> tokens = get_tokens(bookname);
 			const size_t size = tokens.size();
 			for (size_t i = 0; i < size; i++) {
-				node* node = index.locate(tokens[i]);
+				CharTree_node<linked_list<int>>* node = index.locate(tokens[i]);
 				if (!node->list || ((!node->list.head->next_item) && node->list.head->index_number == book_index)) {
 					index.del_token(tokens[i]);
 					continue;
@@ -431,7 +431,7 @@ namespace UJr2_funcs {
 
 		void Book::ntoken(std::string token) {
 			To_standard(token);
-			node* loc = index.locate(token);
+			CharTree_node<linked_list<int>>* loc = index.locate(token);
 			if (loc) {
 				delete loc->list.head;
 				loc->list.head = nullptr;
@@ -466,13 +466,13 @@ namespace UJr2_funcs {
 
 		void Book::print_token(const std::string& token, std::ostream& ost) {
 			//必须这么写，否则会被析构
-			index_list& list = index.access(token);
-			//	item* list_head = index.access(token).head;
+			linked_list<int>& list = index.access(token);
+			//	linked_list_node* list_head = index.access(token).head;
 			if (!list) {
 				throw runtime_error("Book::print_token: book list with given token is empty");
 			}
 			ost << "Books with token \"" << token << "\":\n" << endl;
-			item* current = list.head;
+			linked_list_node<int>* current = list.head;
 			volume* book = booklist.head;
 			while (current && book) {
 				book = booklist.find(book, current->index_number).rtn;

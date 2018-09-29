@@ -21,7 +21,7 @@ namespace UJr2_funcs {
 			//the linked list of books
 			list booklist;
 			//the index_number tree of tokens
-			CharTree index;
+			CharTree<linked_list<int>> index;
 			//if false, the index_number is already assigned as fixed
 			//the current book using the index_number is not assigned as fixed, will return true
 			//and call the corresponding functions to fix the linked list in the index_number

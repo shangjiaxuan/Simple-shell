@@ -54,10 +54,16 @@ namespace UJr2_funcs {
 			controls() {
 				car_num = 0;
 				all_cars = new car[MAX_CAR];
+/*				Loading save directly in a global variable's
+ *				constructor means that the load (e.g. creat empty file)
+ *				will always be executed on load of the exe of dll
+ *				will decrease performance
 				try {
 					load();
 				}
+
 				catch (...) {}
+*/
 			}
 			~controls() {
 				delete[] all_cars;
@@ -65,6 +71,9 @@ namespace UJr2_funcs {
 			}
 			void interaction();
 			bool exit = false;
+
+			void save() const;
+			void load();
 		private:
 			car* all_cars;
 			int car_num{ 0 };
@@ -72,8 +81,6 @@ namespace UJr2_funcs {
 			void list() const;
 
 			const char* save_filename{ "VCtrl_save.dat" };
-			void save() const;
-			void load();
 
 			void master_add();
 			void master_find() const;

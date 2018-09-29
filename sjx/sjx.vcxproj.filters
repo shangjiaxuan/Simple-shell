@@ -97,6 +97,9 @@
     <ClInclude Include="Booklist.h">
       <Filter>21 UJr2\3 Book</Filter>
     </ClInclude>
+    <ClInclude Include="DS_CharTree.h">
+      <Filter>01 Libs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SwapEnc.cpp">
@@ -155,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="Book.cpp">
       <Filter>21 UJr2\3 Book</Filter>
+    </ClCompile>
+    <ClCompile Include="DS_LinkedList.h">
+      <Filter>01 Libs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
