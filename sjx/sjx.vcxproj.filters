@@ -88,6 +88,15 @@
     <ClInclude Include="VCtrl_controls.h">
       <Filter>21 UJr2\2 Vehicle_control</Filter>
     </ClInclude>
+    <ClInclude Include="BookUI.h">
+      <Filter>21 UJr2\3 Book</Filter>
+    </ClInclude>
+    <ClInclude Include="Book.h">
+      <Filter>21 UJr2\3 Book</Filter>
+    </ClInclude>
+    <ClInclude Include="Booklist.h">
+      <Filter>21 UJr2\3 Book</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SwapEnc.cpp">
@@ -134,6 +143,18 @@
     </ClCompile>
     <ClCompile Include="VCtrl_controls.cpp">
       <Filter>21 UJr2\2 Vehicle_control</Filter>
+    </ClCompile>
+    <ClCompile Include="BookUI.cpp">
+      <Filter>21 UJr2\3 Book</Filter>
+    </ClCompile>
+    <ClCompile Include="Book_main.cpp">
+      <Filter>21 UJr2\3 Book</Filter>
+    </ClCompile>
+    <ClCompile Include="Booklist.cpp">
+      <Filter>21 UJr2\3 Book</Filter>
+    </ClCompile>
+    <ClCompile Include="Book.cpp">
+      <Filter>21 UJr2\3 Book</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

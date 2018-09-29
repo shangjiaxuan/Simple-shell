@@ -64,7 +64,7 @@ namespace UJr2_funcs {
 
 		void controls::save() const {
 			ofstream ofs;
-			ofs.open("save.dat");
+			ofs.open(save_filename);
 			for (int i = 0; i < car_num; i++) {
 				ofs << all_cars[i].id << ' ';
 				ofs << all_cars[i].type << ' ';
@@ -99,12 +99,12 @@ namespace UJr2_funcs {
 
 		void controls::load() {
 			ifstream ifs;
-			ifs.open("save.dat");
+			ifs.open(save_filename);
 			if (!ifs) {
 				ofstream ofs;
-				ofs.open("save.dat");
+				ofs.open(save_filename);
 				ofs.close();
-				ifs.open("save.dat");
+				ifs.open(save_filename);
 				if (!ifs) {
 					throw runtime_error("controls::load(): Cannot open file for loading!");
 				}

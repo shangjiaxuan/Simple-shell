@@ -126,6 +126,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Book.cpp" />
+    <ClCompile Include="Booklist.cpp" />
+    <ClCompile Include="BookUI.cpp" />
+    <ClCompile Include="Book_main.cpp" />
     <ClCompile Include="CalcToken.cpp" />
     <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="CalcVariable.cpp" />
@@ -143,6 +147,9 @@
     <ClCompile Include="VCtrl_main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Book.h" />
+    <ClInclude Include="Booklist.h" />
+    <ClInclude Include="BookUI.h" />
     <ClInclude Include="CalcToken.h" />
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="CalcVariable.h" />

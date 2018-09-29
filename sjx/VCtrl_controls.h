@@ -71,6 +71,7 @@ namespace UJr2_funcs {
 
 			void list() const;
 
+			const char* save_filename{ "VCtrl_save.dat" };
 			void save() const;
 			void load();
 
