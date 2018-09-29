@@ -2,9 +2,9 @@
 //For debugging certain functions directly by compiling into exe
 
 #include "Header.h"
+#include "UJr2.h"
 #include "SwapEnc.h"
 #include "Calculator.h"
-#include "UJr2.h"
 
 using namespace std;
 

@@ -1,4 +1,5 @@
 ﻿#include "UJr2.h"
+#include "VCtrl_controls.h"
 
 using namespace std;
 
@@ -30,10 +31,11 @@ int UJr2(int argc, char* argv[]) {
 	if(strcmp(argv[1], "Crossing") == 0) {
 		return UJr2_funcs::Crossing(argc, argv);
 	}
-	/*
+
 	if (strcmp(argv[1], "Vehicle_control") == 0) {
 		return UJr2_funcs::Vehicle_control(argc, argv);
 	}
+/*
 	if (strcmp(argv[1], "Book") == 0) {
 		return UJr2_funcs::Book(argc, argv);
 	}
@@ -55,9 +57,9 @@ int UJr2(int argc, char* argv[]) {
 	if (strcmp(argv[1], "BinSort") == 0) {
 		return UJr2_funcs::BinSort(argc, argv);
 	}
+	*/
 	else {
 		cout << "UJr2 cannot find the specified program: " << argv[1] << "!\n" << endl;
 		return 0;
 	}
-	*/
 }

@@ -85,6 +85,9 @@
     <ClInclude Include="CrossingColor.h">
       <Filter>21 UJr2\1 Crossing</Filter>
     </ClInclude>
+    <ClInclude Include="VCtrl_controls.h">
+      <Filter>21 UJr2\2 Vehicle_control</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SwapEnc.cpp">
@@ -125,6 +128,12 @@
     </ClCompile>
     <ClCompile Include="CrossingColor.cpp">
       <Filter>21 UJr2\1 Crossing</Filter>
+    </ClCompile>
+    <ClCompile Include="VCtrl_main.cpp">
+      <Filter>21 UJr2\2 Vehicle_control</Filter>
+    </ClCompile>
+    <ClCompile Include="VCtrl_controls.cpp">
+      <Filter>21 UJr2\2 Vehicle_control</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

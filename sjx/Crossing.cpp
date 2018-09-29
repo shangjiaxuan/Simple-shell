@@ -1,6 +1,4 @@
-﻿#define CROSSING
-
-#include "Crossing.h"
+﻿#include "Crossing.h"
 
 using namespace std;
 

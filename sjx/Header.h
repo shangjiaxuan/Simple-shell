@@ -11,10 +11,6 @@
 #include <cmath>
 #include <vector>
 #include <map>
-#ifdef WIN32
-#include <Windows.h>
-#endif
-
 
 #include "Macros.h"
 
