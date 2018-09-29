@@ -73,7 +73,7 @@ void UI::prompt() {
 //create a char** (or cmdline struct) in the future
 cmdline<nchar> UI::Get_input(istream& input_stream) {
 	queue<nchar*> arguments;
-	while(input_stream.peek() != '\n'&&!input_stream.eof()) {
+	while(input_stream.peek() != '\n' && !input_stream.eof()) {
 		arguments.push(parse_input(input_stream));
 	}
 	cmdline<nchar> rtn;
@@ -111,7 +111,7 @@ nchar* UI::parse_input(istream& input_stream) {
 			input_stream.get();
 			input_stream.get(c);
 			while(c != '\"') {
-				if(c == '\n'||c==EOF) {
+				if(c == '\n' || c == EOF) {
 					break;
 				}
 				input += c;

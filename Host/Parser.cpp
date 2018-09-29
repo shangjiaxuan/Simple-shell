@@ -81,7 +81,7 @@ namespace parser {
 				//may add a link command line parser in the future
 				//When adding, note that the whole line after the link file should also
 				//be treated as part of the new command along with the info in the link
-				if (info != Lnk_Info()) {
+				if(info != Lnk_Info()) {
 					const cmdline<nchar> temp = nchar2ncmdline(info.target_path.nstring().c_str());
 					after_start_selector(temp);
 				} else {
@@ -123,7 +123,8 @@ namespace parser {
 			}
 			if(not_found) {
 #ifdef _UNICODE
-				cout << "Sorry, but we cannot find the specified program " << convert::UTF16_2mbcs(cmd.argv[cur_arg]) << endl;
+				cout << "Sorry, but we cannot find the specified program " << convert::UTF16_2mbcs(cmd.argv[cur_arg]) <<
+				endl;
 #endif
 #ifdef _MBCS
 				cout << "Sorry, but we cannot find the specified program " << cmd.argv[cur_arg] << endl;
