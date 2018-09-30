@@ -17,7 +17,6 @@ namespace UJr2_funcs {
 
 		void UI::UI_main() {
 			name_ver();
-			base.load();
 			while(on) {
 				try {
 					parser();

@@ -2,48 +2,20 @@
 
 #define CharNum 256
 
-template<typename type>
-struct CharTree_node {
-	//字符节点
-	CharTree_node() {
-		next = nullptr;
-	};
-
-	~CharTree_node() {
-		if(next) {
-			for(int i = 0; i < CharNum; i++) {
-				if(next[i]) {
-					delete next[i];
-					next[i] = nullptr;
-				}
-			}
-			delete[] next;
-			next = nullptr;
-		}
-	};
-
-	CharTree_node<type>** next;
-	type list;
-
-	CharTree_node<type>*& operator [](size_t elem) {
-		return next[elem];
-	}
-};
-
 //class of a CharTree
 //This structure maps its contents into a structure for fast(?) string reading and access
 //structure overview:
 //maps char to its corresponding place in a pointer array to the next node
 //node content: 256 pointers to the next node and a pointer to the corresponding data
-//pubilc:
+//public:
 //	start of the tree:
-//	const CharTree_node<content_type> head;
+//	node<content_type> head;
 //	Locates node for given string:
-//	CharTree_node<content_type>* locate(std::string token);
+//	node<content_type>* locate(std::string token);
 //	Access a given content for string:
 //	content_type& access(std::string token);
 //	returns a pointer to node for adding content to given string(creates if string not exists in tree):
-//	CharTree_node<content_type>* add_token(std::string token);
+//	node<content_type>* add_token(std::string token);
 //	Delete given node's content, removes empty branch at the same time:
 //	bool del_token(std::string token)
 //	Save the tree into a given filestream:
@@ -51,35 +23,57 @@ struct CharTree_node {
 //	Loads saved data from given file stream:
 //	void load(std::ifstream& ifs)
 //	Recursively searches the corresponding string for a given node in tree:
-//	std::string find_node(CharTree_node<content_type>* target)
+//	std::string find_node(node<content_type>* target)
 //	Prints the strings and values stored in the tree:
 //	void print_tokens(std::ostream& ost) 
 //protected:
 //	Helper function to see if there's only one child on the given node(for deallocationg empty branches):
-//	bool one_succ(CharTree_node<content_type>** list);
+//	bool one_successor(node<content_type>** list);
 //	Helper function for recursive saving:
-//	void save_loop(CharTree_node<content_type>* current, std::ofstream& ofs);
+//	void save_loop(node<content_type>* current, std::ofstream& ofs);
 //	Helper function for recursive loading:
-//	void load_loop(CharTree_node<content_type>* current, std::ifstream& ifs);
-//	Helper function for starting the loop (head is const because empty strings are not considered, but needs a const cast to start loop):
-//	void load_loop_start(std::ifstream& ifs);
-//	Variable for internal signaling if a node is found currenly existing:
+//	void load_loop(node<content_type>* current, std::ifstream& ifs);
+//	Variable for internal signaling if a node is found currently existing:
 //	bool node_found;
 //	Helper function for recursive searching:
-//	void find_node_loop(CharTree_node<content_type>* target, CharTree_node<content_type>* current, std::string& token);
+//	void find_node_loop(node<content_type>* target, node<content_type>* current, std::string& token);
 //	Helper function for recursive print:
-//	void print_tokens_loop(CharTree_node<content_type>* current, std::string& token, std::ostream& ost);
+//	void print_tokens_loop(node<content_type>* current, std::string& token, std::ostream& ost);
 template<typename content_type>
 class CharTree {
 	//字符树的头和操作
 public:
-	const CharTree_node<content_type> head;
+	struct node {
+		//字符节点
+		node() {
+			next = nullptr;
+		};
+		~node() {
+			if (next) {
+				for (int i = 0; i < CharNum; i++) {
+					if (next[i]) {
+						delete next[i];
+						next[i] = nullptr;
+					}
+				}
+				delete[] next;
+				next = nullptr;
+			}
+		};
+		node** next;
+		content_type data;
+		node*& operator [](size_t elem) {
+			return next[elem];
+		}
+	};
 
-	CharTree_node<content_type>* locate(std::string token) {
+	node* head;
+
+	node* locate(std::string token) {
 		const size_t size = token.size();
-		CharTree_node<content_type>* current = const_cast<CharTree_node<content_type>*>(&head);
+		node* current = head;
 		if(size == 0) {
-			return const_cast<CharTree_node<content_type>*>(&head);
+			return head;
 		}
 		for(int i = 0; i < size; i++) {
 			unsigned char loc = token[i];
@@ -94,21 +88,22 @@ public:
 
 	//按引用传递，不然链表会被析构函数消除
 	content_type& access(std::string token) {
-		CharTree_node<content_type>* node = locate(token);
+		node* node = locate(token);
 		if(!node) {
 			throw std::runtime_error("CharTree::access: no such token exists!");
 		}
-		return node->list;
+		return node->data;
 		//	return locate(token)->head;
 	}
 
-	CharTree_node<content_type>* add_token(std::string token) {
+	node* add_token(std::string token) {
 		const size_t size = token.size();
-		CharTree_node<content_type>* current = const_cast<CharTree_node<content_type>*>(&head);
+		if (!head) head = new node;
+		node* current = head;
 		for(int i = 0; i < size; i++) {
 			unsigned char loc = token[i];
 			if(!current->next) {
-				current->next = new CharTree_node<content_type>*[CharNum];
+				current->next = new node*[CharNum];
 				for(int j = 0; j < CharNum; j++) {
 					current->next[j] = nullptr;
 				}
@@ -116,7 +111,7 @@ public:
 			if(current->next[loc] != nullptr) {
 				current = current->next[loc];
 			} else {
-				current->next[loc] = new CharTree_node<content_type>;
+				current->next[loc] = new node;
 				current = current->next[loc];
 			}
 		}
@@ -125,14 +120,14 @@ public:
 
 	bool del_token(std::string token) {
 		size_t size = token.size();
-		CharTree_node<content_type>* current = const_cast<CharTree_node<content_type>*>(&head);
+		node* current = head;
 		//see if the character is the only one and the branch can be removed
 		bool* remove = new bool[size]();
 		unsigned char loc;
 		for(int i = 0; i < size; i++) {
 			loc = token[i];
 			if(current->next[loc]) {
-				if(one_succ(current->next)) {
+				if(one_successor(current->next)) {
 					remove[i] = true;
 				}
 				current = current->next[loc];
@@ -146,7 +141,7 @@ public:
 			size--;
 		}
 		const std::string common = token.substr(0, size);
-		CharTree_node<content_type>* temp = locate(common);
+		node* temp = locate(common);
 		loc = token[size];
 		if(temp->next) {
 			delete (temp->next[loc]);
@@ -158,37 +153,37 @@ public:
 	};
 
 	void save(std::ofstream& ofs) {
-		CharTree_node<content_type>* current = const_cast<CharTree_node<content_type>*>(&head);
-		save_loop(current, ofs);
+		save_loop(head, ofs);
 	};
 
+	//should be renamed to "combine (without security)"
 	void load(std::ifstream& ifs) {
-		CharTree_node<content_type>* start = const_cast<CharTree_node<content_type>*>(&head);
+		node* start = head;
 		if(!start->next) {
-			start->next = new CharTree_node<content_type>*[CharNum];
+			start->next = new node*[CharNum];
 			for(int i = 0; i < CharNum; i++) {
 				start->next[i] = nullptr;
 			}
 			//		start->head = nullptr;
 		}
-		load_loop_start(ifs);
+		load_loop(head, ifs);
 	}
 
-	//	void load_item_list(CharTree_node* current, std::ifstream& ifs);
-	std::string find_node(CharTree_node<content_type>* target) {
+	//	void load_item_list(node* current, std::ifstream& ifs);
+	std::string find_node(node* target) {
 		std::string token;
 		node_found = false;
-		find_node_loop(target, const_cast<CharTree_node<content_type>*>(&head), token);
+		find_node_loop(target, head, token);
 		return token;
 	}
 
 	void print_tokens(std::ostream& ost) {
 		std::string token = "";
-		print_tokens_loop(const_cast<CharTree_node<content_type>*>(&(this->head)), token, ost);
+		print_tokens_loop(head, token, ost);
 	}
 
 protected:
-	static bool one_succ(CharTree_node<content_type>** list) {
+	static bool one_successor(node** list) {
 		bool seen{false};
 		for(int i = 0; i < CharNum; i++) {
 			if(list[i]) {
@@ -199,19 +194,17 @@ protected:
 			}
 		}
 		if(!seen) {
-			throw std::runtime_error("CharTree::one_succ: No successor found!");
+			throw std::runtime_error("CharTree::one_successor: No successor found!");
 		}
 		return true;
 	}
-
-	void save_loop(CharTree_node<content_type>* current, std::ofstream& ofs) {
-		if(current->list.head) {
-			if(current->list.head->index_number < 0) {
+	//must change!
+	void save_loop(node* current, std::ofstream& ofs) {
+		if(current->data.head) {
+			if(current->data.head->data < 0) {
 				return;
 			}
-			ofs << '{';
-			current->list.print_index(ofs);
-			ofs << '}';
+			ofs << '{' << current->data << '}';
 		}
 		if(!current->next) {
 			return;
@@ -226,7 +219,7 @@ protected:
 		}
 	}
 
-	void load_loop(CharTree_node<content_type>* current, std::ifstream& ifs) {
+	void load_loop(node* current, std::ifstream& ifs) {
 		if(ifs.eof()) {
 			return;
 		}
@@ -237,18 +230,26 @@ protected:
 			if(temp == '\t') {
 				return;
 			} else if(temp == '{') {
-				ifs.putback(temp);
-				current->list.load_index(ifs);
+				ifs >> current->data;
+				char c; 
+				ifs.get(c);
+				while(c==' '||c=='\n') {
+					ifs.get(c);
+				}
+				if(c!='}') {
+					throw std::runtime_error{ "CharTree: load_loop: parenthesis mismatch!" };
+				}
+				//do not put back '}'
 				continue;
 			} else {
 				if(!current->next) {
-					current->next = new CharTree_node<content_type>*[CharNum];
+					current->next = new node*[CharNum];
 					for(int i = 0; i < CharNum; i++) {
 						current->next[i] = nullptr;
 					}
 				}
 				if(!current->next[loc]) {
-					current->next[loc] = new CharTree_node<content_type>;
+					current->next[loc] = new node;
 				}
 				load_loop(current->next[loc], ifs);
 				continue;
@@ -256,15 +257,9 @@ protected:
 		}
 	};
 
-	void load_loop_start(std::ifstream& ifs) {
-		//	while(!ifs.eof()) {
-		load_loop(const_cast<CharTree_node<content_type>*>(&head), ifs);
-		//	}
-	}
-
 	bool node_found{false};
 
-	void find_node_loop(CharTree_node<content_type>* target, CharTree_node<content_type>* current, std::string& token) {
+	void find_node_loop(node* target, node* current, std::string& token) {
 		for(unsigned i = 0; i < CharNum; i++) {
 			if(!current->next) {
 				return;
@@ -285,13 +280,12 @@ protected:
 			}
 		}
 	}
-
-	void print_tokens_loop(CharTree_node<content_type>* current, std::string& token, std::ostream& ost) {
-		if(current->list) {
-			//cout<<list;
-			if(current->list.head->index_number >= 0) {
+	//must change!
+	void print_tokens_loop(node* current, std::string& token, std::ostream& ost) {
+		if(current->data) {
+			if(current->data.head->data >= 0) {
 				ost << token << ":\t";
-				current->list.print_index(ost);
+				ost << current->data;
 				ost << std::endl;
 			}
 		}

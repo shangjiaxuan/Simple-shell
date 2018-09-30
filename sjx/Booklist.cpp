@@ -7,69 +7,6 @@ namespace UJr2_funcs {
 	namespace book {
 		list::found list::find(int index) const {
 			return find(head, index);
-			/*	static int default_index;
-				int cur_index{ 0 };
-				if (!head) {
-					return { 'N', nullptr , nullptr , "" , 0 };
-				}
-				if (index < head->index_number) {
-					return { 'S' , nullptr, head->volume_next, "", 0 };
-				}
-				if (index == head->index_number) {
-					volume* temp = head;
-					while (temp->volume_next != nullptr) {
-						if (temp->index_number == cur_index) {
-							cur_index++;
-						}
-						else {
-							default_index = cur_index;
-						}
-						temp = temp->volume_next;
-					}
-
-					return { 'P' , head, nullptr, head->name, index };
-				}
-				volume* current = head;
-				volume* traceback = nullptr;
-				while (index > current->index_number) {
-					if(cur_index==current->index_number) {
-						cur_index++;
-					}else {
-						default_index = cur_index;
-					}
-					if (current->volume_next == nullptr) {
-						default_index = cur_index + 1;
-						return { 'M' , current, nullptr, "", default_index };
-					}
-					traceback = current;
-					current = current->volume_next;
-				}
-				if (index == current->index_number) {
-					volume* temp = head;
-					while (temp->volume_next != nullptr) {
-						if (temp->index_number == cur_index) {
-							cur_index++;
-						}
-						else {
-							default_index = cur_index;
-						}
-						temp = temp->volume_next;
-					}
-					default_index = cur_index + 1;
-					return { 'P' , current, traceback, current->name, default_index };
-				}
-				volume* temp = head;
-				while (temp->volume_next != nullptr) {
-					if (temp->index_number == cur_index) {
-						cur_index++;
-					}
-					else {
-						default_index = cur_index;
-					}
-					temp = temp->volume_next;
-				}
-				default_index = cur_index + 1;
-				return { 'L' , nullptr, traceback->volume_next, "", default_index };*/
 		}
 
 		list::found list::find(volume* start, int index) const {
@@ -284,7 +221,7 @@ namespace UJr2_funcs {
 			volume* current = head;
 			int index = 0;
 			while(current) {
-				if(current->index_number>index) {
+				if(current->data>index) {
 					return index;
 				}
 				current = current->volume_next;
@@ -324,9 +261,9 @@ namespace UJr2_funcs {
 				original.rtn->volume_next = prev->volume_next;
 				prev->volume_next = original.rtn;
 				return original.rtn->index_number;
-				//		if(added->index_number==0) {
+				//		if(added->data==0) {
 				//			added->volume_next = head;
-				//			head->index_number = 1;
+				//			head->data = 1;
 				//			head = added;
 				//			return 1;
 				//		}
@@ -405,7 +342,7 @@ namespace UJr2_funcs {
 			/*	if (head) {
 					volume* current = head;
 					while (true) {
-						ofs << current->index_number << ' ';
+						ofs << current->data << ' ';
 						if (current->fixed_index) {
 							ofs << "t ";
 						}

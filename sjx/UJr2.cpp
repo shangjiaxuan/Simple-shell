@@ -11,7 +11,7 @@ int UJr2(int argc, char* argv[]) {
 	//This argument is only used when there's no manual page separately
 	//put in the Host program's default search directory (currently that doesn't exist)
 	if(argc == 1 || strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "manual_page") == 0) {
-		cout << "My(Shang Jiaxuan's) collection of programs from 2nd semester of Univesity Junior year\n";
+		cout << "My(Shang Jiaxuan's) collection of programs from 2nd semester of University Junior year\n";
 		cout << "Syntax: sjx Ujr2 \"Program name\" command line arguments (no argument may be a good place to start)\n";
 		cout << "Following function names are allowed:\n";
 		cout << "crossing\n";

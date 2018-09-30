@@ -5,10 +5,10 @@ using namespace std;
 
 namespace UJr2_funcs {
 	namespace book {
-		void Book::init_ntoken() {
+		void Book::init_nontoken() {
 			const size_t size = default_non_tokens.size();
 			for(size_t i = 0; i < size; i++) {
-				index.add_token(default_non_tokens[i])->list.add(-1);
+				index.add_token(default_non_tokens[i])->data.add(-1);
 			}
 		}
 
@@ -20,8 +20,8 @@ namespace UJr2_funcs {
 			vector<string> tokens = get_tokens(original.name);
 			const size_t size = tokens.size();
 			for(size_t i = 0; i < size; i++) {
-				CharTree_node<linked_list<int>>* token_loc = index.locate(tokens[i]);
-				token_loc->list.add(new_index);
+				CharTree<sorted_index_list<int>>::node* token_loc = index.locate(tokens[i]);
+				token_loc->data.add(new_index);
 			}
 		}
 
@@ -52,7 +52,6 @@ namespace UJr2_funcs {
 						default:
 							throw runtime_error("Book::add: unknown fixed status!");
 					}
-					//			ist.ignore(numeric_limits<streamsize>::max(), '\n');
 				} else {
 					string following;
 					getline(ist, following);
@@ -82,9 +81,9 @@ namespace UJr2_funcs {
 				vector<string> tokens = get_tokens(found.name);
 				const size_t size = tokens.size();
 				for(size_t i = 0; i < size; i++) {
-					CharTree_node<linked_list<int>>* token = index.locate(tokens[i]);
-					token->list.del(added_index);
-					token->list.add(new_index);
+					CharTree<sorted_index_list<int>>::node* token = index.locate(tokens[i]);
+					token->data.del(added_index);
+					token->data.add(new_index);
 				}
 			}
 			add_book_tree(name, added_index);
@@ -164,14 +163,14 @@ namespace UJr2_funcs {
 		}
 
 		bool Book::istoken(const std::string& token) {
-			CharTree_node<linked_list<int>>* temp = index.locate(token);
+			CharTree<sorted_index_list<int>>::node* temp = index.locate(token);
 			if(!temp) {
 				return true;
 			}
-			if(!temp->list) {
+			if(!temp->data) {
 				return true;
 			}
-			return (temp->list.head->index_number != -1);
+			return (temp->data.head->data != -1);
 		}
 
 		void Book::load() {
@@ -216,7 +215,7 @@ namespace UJr2_funcs {
 			vector<string> tokens = get_tokens(bookname);
 			const size_t size = tokens.size();
 			for(size_t i = 0; i < size; i++) {
-				index.add_token(tokens[i])->list.add(book_index);
+				index.add_token(tokens[i])->data.add(book_index);
 			}
 		}
 
@@ -224,12 +223,12 @@ namespace UJr2_funcs {
 			vector<string> tokens = get_tokens(bookname);
 			const size_t size = tokens.size();
 			for(size_t i = 0; i < size; i++) {
-				CharTree_node<linked_list<int>>* node = index.locate(tokens[i]);
-				if(!node->list || ((!node->list.head->next_item) && node->list.head->index_number == book_index)) {
+				CharTree<sorted_index_list<int>>::node* node = index.locate(tokens[i]);
+				if(!node->data || ((!node->data.head->next) && node->data.head->data == book_index)) {
 					index.del_token(tokens[i]);
 					continue;
 				}
-				node->list.del(book_index);
+				node->data.del(book_index);
 			}
 		}
 
@@ -244,14 +243,14 @@ namespace UJr2_funcs {
 
 		void Book::ntoken(std::string token) {
 			To_standard(token);
-			CharTree_node<linked_list<int>>* loc = index.locate(token);
+			CharTree<sorted_index_list<int>>::node* loc = index.locate(token);
 			if(loc) {
-				delete loc->list.head;
-				loc->list.head = nullptr;
-				loc->list.add(-1);
+				delete loc->data.head;
+				loc->data.head = nullptr;
+				loc->data.add(-1);
 				return;
 			}
-			index.add_token(token)->list.add(-1);
+			index.add_token(token)->data.add(-1);
 		}
 
 		void list::print_book(int index, std::ostream& ost) const {
@@ -280,20 +279,20 @@ namespace UJr2_funcs {
 		void Book::print_token(const std::string& token, std::ostream& ost) {
 			//必须这么写，否则会被析构
 			linked_list<int>& list = index.access(token);
-			//	linked_list_node* list_head = index.access(token).head;
+			//	node* list_head = index.access(token).head;
 			if(!list) {
 				throw runtime_error("Book::print_token: book list with given token is empty");
 			}
 			ost << "Books with token \"" << token << "\":\n" << endl;
-			linked_list_node<int>* current = list.head;
+			linked_list<int>::node* current = list.head;
 			volume* book = booklist.head;
 			while(current && book) {
-				book = booklist.find(book, current->index_number).rtn;
+				book = booklist.find(book, current->data).rtn;
 				if(!book) {
 					break;
 				}
 				booklist.print_book(book, ost);
-				current = current->next_item;
+				current = current->next;
 				book = book->volume_next;
 			}
 		}

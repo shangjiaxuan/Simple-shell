@@ -32,10 +32,10 @@ void Array_2D<type>::write(type* pos, type val) {
 template class Array_2D<bool>;
 
 
-/*void CharTree::load_item_list(CharTree_node* current, ifstream& ifs) {
+/*void CharTree::load_item_list(node* current, ifstream& ifs) {
 	int index_number;
-	current->list.head = new linked_list_node;
-	linked_list_node* cur = current->list.head;
+	current->list.head = new node;
+	node* cur = current->list.head;
 	char temp;
 	ifs.get(temp);
 	while(temp != '}') {
@@ -45,11 +45,11 @@ template class Array_2D<bool>;
 		ifs.get();
 		ifs.get(temp);
 		if(isdigit(temp)) {
-			cur->next_item = new linked_list_node;
-			cur = cur->next_item;
+			cur->next = new node;
+			cur = cur->next;
 			ifs.putback(temp);
 		} else if(temp=='}') {
-			cur->next_item = nullptr;
+			cur->next = nullptr;
 			break;
 		} else {
 			throw  runtime_error("CharTree::load_item_list: index expected!");
