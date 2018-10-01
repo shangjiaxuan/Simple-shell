@@ -1,4 +1,6 @@
-﻿#include "Crossing.h"
+﻿#include "myDataStructures.h"
+
+#include "Crossing.h"
 
 using namespace std;
 

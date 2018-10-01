@@ -1,5 +1,4 @@
 ﻿#include "Book.h"
-#include <utility>
 
 using namespace std;
 
@@ -170,7 +169,7 @@ namespace UJr2_funcs {
 			if(!temp->data) {
 				return true;
 			}
-			return (temp->data.head->data != -1);
+			return (temp->data.front() != -1);
 		}
 
 		void Book::load() {
@@ -224,7 +223,7 @@ namespace UJr2_funcs {
 			const size_t size = tokens.size();
 			for(size_t i = 0; i < size; i++) {
 				CharTree<sorted_index_list<int>>::node* node = index.locate(tokens[i]);
-				if(!node->data || ((!node->data.head->next) && node->data.head->data == book_index)) {
+				if(!node->data || ((node->data.front()==node->data.back()) && node->data.front() == book_index)) {
 					index.del_token(tokens[i]);
 					continue;
 				}
@@ -245,8 +244,7 @@ namespace UJr2_funcs {
 			To_standard(token);
 			CharTree<sorted_index_list<int>>::node* loc = index.locate(token);
 			if(loc) {
-				delete loc->data.head;
-				loc->data.head = nullptr;
+				loc->data.destroy();
 				loc->data.add(-1);
 				return;
 			}
@@ -284,15 +282,15 @@ namespace UJr2_funcs {
 				throw runtime_error("Book::print_token: book list with given token is empty");
 			}
 			ost << "Books with token \"" << token << "\":\n" << endl;
-			linked_list<int>::node* current = list.head;
+			list.start_iteration();
 			volume* book = booklist.head;
-			while(current && book) {
-				book = booklist.find(book, current->data).rtn;
+			while(book&&!list.iteration_ended()) {
+				book = booklist.find(book, list.current()).rtn;
 				if(!book) {
 					break;
 				}
 				booklist.print_book(book, ost);
-				current = current->next;
+				++list;
 				book = book->volume_next;
 			}
 		}

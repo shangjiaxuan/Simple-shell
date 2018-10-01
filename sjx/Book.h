@@ -2,10 +2,22 @@
 
 #include "myDataStructures.h"
 #include "Booklist.h"
+#include "BookIndex.h"
 
 namespace UJr2_funcs {
 	namespace book {
+
 		class UI;
+		class BookIndex : public CharTree<sorted_index_list<int>> {
+		protected:
+			void print_useful_content(node* current, std::ostream& ost, std::string token) override {
+				if (current->data.front() >= 0) {
+					ost << token << ":\t";
+					ost << current->data;
+					ost << std::endl;
+				}
+			}
+		};
 
 		//管理所有书目的链表
 		//貌似应该再加一个保存到文件的功能，就叫“index.dat”和“booklist.dat”罢
@@ -23,7 +35,7 @@ namespace UJr2_funcs {
 			//the linked list of books
 			list booklist;
 			//the index_number tree of tokens
-			CharTree<sorted_index_list<int>> index;
+			BookIndex index;
 			//if false, the index_number is already assigned as fixed
 			//the current book using the index_number is not assigned as fixed, will return true
 			//and call the corresponding functions to fix the linked list in the index_number

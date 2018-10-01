@@ -20,10 +20,11 @@ public:
 	linked_list() {
 		head = nullptr;
 		tail = nullptr;
+		current_iterated_object = nullptr;
 	}
 
 	linked_list(const linked_list& source) {
-		copy(*this, source);
+		linked_list<content_type>::copy(*this, source);
 	}
 
 	linked_list& operator=(linked_list const& source) {
@@ -32,57 +33,25 @@ public:
 	}
 
 	linked_list(linked_list&& source) noexcept {
-		head = source.head;
-		tail = source.tail;
-		source.head = nullptr;
-		source.tail = nullptr;
+		move(*this, source);
 	}
 
 	linked_list& operator=(linked_list&& source) noexcept {
-		head->destroy();
-		head = source.head;
-		tail = source.tail;
-		source.head = nullptr;
-		source.tail = nullptr;
+		move(*this, source);
 		return *this;
 	}
 
-	void copy(linked_list& destination, const linked_list& source) {
-		if (!source.head) {
-			head = nullptr;
-			tail = nullptr;
-			return;
-		}
-		node* current_source = source.head;
-		head = new node;
-		node* current_dest = head;
-		while (current_source) {
-			current_dest->data = current_source->data;
-			if(current_source->next) {
-				current_dest->next = new node;
-				current_dest = current_dest->next;
-			}
-			current_source = current_source->next;
-		}
-		current_dest->next = nullptr;
+	virtual ~linked_list() {
+		destroy();
 	}
 
-	~linked_list() {
-		if(head) {
+	void destroy() {
+		if (head) {
 			head->destroy();
 			delete head;
 			head = nullptr;
+			current_iterated_object = nullptr;
 		}
-	}
-
-	//will be changed to a more direct approach
-	node* back_node() const {
-		if (!head) {return nullptr;}
-		node* current = head;
-		while(current->next) {
-			current = current->next;
-		}
-		return current;
 	}
 
 	operator bool() const {
@@ -103,12 +72,13 @@ public:
 
 	friend std::istream& operator>>(std::istream& ist, linked_list& list) {
 		content_type temp;
-		node* current = list.back_node();
+		node* current = list.tail;
 		if(!current){
 			ist.peek();
 			if((ist>>temp)&&ist){ 
 				list.head = new node;
 				current = list.head;
+				list.current_iterated_object = list.head;
 				goto assignment;
 			}
 			else {
@@ -135,17 +105,64 @@ public:
 		temp->next = head;
 		temp->data = item;
 		head = temp;
+		if(!current_iterated_object) {
+			current_iterated_object = head;
+		}
 	}
+
 	void push_back(content_type item) {
 		tail->next = new node;
 		tail = tail->next;
 		tail->next = nullptr;
 		tail->data = item;
 	}
+
+	content_type& current() {
+		if(!iteration_ended_value) return current_iterated_object->data;
+		return tail->data;
+	}
+
+	content_type& front() {
+		return head->data;
+	}
+	content_type& back() {
+		return tail->data;
+	}
+
+	content_type& operator++() {
+		if(current_iterated_object->next) {
+			current_iterated_object = current_iterated_object->next;
+			return current_iterated_object->data;
+		}
+		else {
+			iteration_ended_value = true;
+			return current_iterated_object->data;
+		}
+	}
+
+	content_type& peek_iteration() {
+		if (current_iterated_object->next) {
+			return current_iterated_object->next->data;
+		}
+		else {
+			iteration_ended_value = true;
+			return current_iterated_object->data;
+		}
+	}
+
+	void start_iteration() {
+		iteration_ended_value = false;
+		current_iterated_object = head;
+	}
+
+	bool iteration_ended() const {
+		return iteration_ended_value;
+	}
+
 protected:
-	node* head;
+	node* head{ nullptr };
 	//not completely implemented yet
-	node* tail;
+	node* tail{ nullptr };
 	void insert(node* pre, content_type item) {
 		if(!pre) {
 			throw std::runtime_error{ "Linked list insert: predecessor is nullptr" };
@@ -155,17 +172,66 @@ protected:
 		pre->next->next = temp;
 		pre->next->data = item;
 	}
+
+	void del_base(node* pre_start, node* end_del) {
+		node* temp = end_del->next;
+		end_del->next = nullptr;
+		pre_start->destroy();
+		pre_start->next = temp;
+	}
+private:
+	//for iteration purpose
+	node* current_iterated_object;
+	bool iteration_ended_value = false;
+	//base functions
+	virtual void copy(linked_list& destination, const linked_list& source) {
+		if (!source.head) {
+			destination.head = nullptr;
+			destination.tail = nullptr;
+			return;
+		}
+		node* current_source = source.head;
+		destination.head = new node;
+		node* current_dest = destination.head;
+		while (current_source) {
+			current_dest->data = current_source->data;
+			if (current_source->next) {
+				current_dest->next = new node;
+				current_dest = current_dest->next;
+			}
+			current_source = current_source->next;
+		}
+		current_dest->next = nullptr;
+		destination.current_iterated_object = destination.head;
+	}
+
+	virtual void move(linked_list&& destination, linked_list&& source) noexcept {
+		if((&destination)==(&source)) {
+			return;
+		}
+		if(destination.head) {
+			destination.head->destroy();
+		}
+		destination.head = source.head;
+		destination.tail = source.tail;
+		destination.current_iterated_object = source.current_iterated_object;
+		destination.iteration_ended_value = source.iteration_ended_value;
+		source.head = nullptr;
+		source.tail = nullptr;
+		source.current_iterated_object = nullptr;
+		source.iteration_ended_value = true;
+	}
 };
 
-template <typename index_type>
-class sorted_index_list: public linked_list<int> {
+template<typename index_type>
+class sorted_index_list : public linked_list<index_type> {
 public:
 	void add(index_type index) {
-		if(!head) {
+		if(empty()) {
 			push_front(index);
 			return;
 		}
-		if(tail&&(tail->data<index)) {
+		if(back()<index) {
 			push_back(index);
 			return;
 		}
@@ -177,7 +243,7 @@ public:
 	}
 
 	void del(index_type index) {
-		if(!head) {
+		if(empty()) {
 			throw std::range_error{ "sorted_index_list: del: list is empty!" };
 		}
 		node* pre_start = find_pre(head, index);
@@ -189,10 +255,7 @@ public:
 			if(!(end_del->next)) {
 				tail = pre_start;
 			}
-			node* temp = end_del->next;
-			end_del->next = nullptr;
-			pre_start->destroy();
-			pre_start->next = temp;
+			del_base(pre_start, end_del);
 			return;
 		}
 		throw std::runtime_error{"sorted_index_list: del: index not found!"};

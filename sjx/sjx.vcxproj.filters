@@ -100,6 +100,9 @@
     <ClInclude Include="DS_CharTree.h">
       <Filter>01 Libs</Filter>
     </ClInclude>
+    <ClInclude Include="BookIndex.h">
+      <Filter>21 UJr2\3 Book</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SwapEnc.cpp">
@@ -161,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="DS_LinkedList.h">
       <Filter>01 Libs</Filter>
+    </ClCompile>
+    <ClCompile Include="BookIndex.cpp">
+      <Filter>21 UJr2\3 Book</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

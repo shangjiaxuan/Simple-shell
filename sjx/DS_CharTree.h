@@ -45,13 +45,11 @@ class CharTree {
 public:
 	struct node {
 		//字符节点
-		node() {
-			next = nullptr;
-		};
-		~node() {
+		void destroy() {
 			if (next) {
 				for (int i = 0; i < CharNum; i++) {
 					if (next[i]) {
+						next[i]->destroy();
 						delete next[i];
 						next[i] = nullptr;
 					}
@@ -59,17 +57,43 @@ public:
 				delete[] next;
 				next = nullptr;
 			}
-		};
-		node** next;
+		}
+		node** next{ nullptr };
 		content_type data;
 		node*& operator [](size_t elem) {
 			return next[elem];
 		}
 	};
 
-	node* head;
+	CharTree() = default;
 
-	node* locate(std::string token) {
+	CharTree(const CharTree& source) {
+		CharTree<content_type>::copy(*this, source);
+	}
+
+	CharTree& operator=(const CharTree& source) {
+		copy(*this, source);
+		return *this;
+	}
+
+	CharTree(CharTree&& source) noexcept {
+		move(*this, source);
+	}
+
+	CharTree& operator=(CharTree&& source) noexcept {
+		move(*this, source);
+		return *this;
+	}
+
+	virtual ~CharTree() {
+		head->destroy();
+		delete head;
+		node_found = false;
+	}
+
+	node* head{ nullptr };
+
+	node* locate(std::string token) const {
 		const size_t size = token.size();
 		node* current = head;
 		if(size == 0) {
@@ -144,8 +168,11 @@ public:
 		node* temp = locate(common);
 		loc = token[size];
 		if(temp->next) {
-			delete (temp->next[loc]);
-			temp->next[loc] = nullptr;
+			if(temp->next[loc]) {
+				temp->next[loc]->destroy();
+				delete (temp->next[loc]);
+				temp->next[loc] = nullptr;
+			}
 		}
 		delete[] remove;
 		//	remove = nullptr;
@@ -198,12 +225,9 @@ protected:
 		}
 		return true;
 	}
-	//must change!
+
 	void save_loop(node* current, std::ofstream& ofs) {
-		if(current->data.head) {
-			if(current->data.head->data < 0) {
-				return;
-			}
+		if(current->data) {
 			ofs << '{' << current->data << '}';
 		}
 		if(!current->next) {
@@ -280,14 +304,14 @@ protected:
 			}
 		}
 	}
-	//must change!
+	virtual void print_useful_content(node* current, std::ostream& ost, std::string token) {
+		ost << token << ":\t";
+		ost << current->data;
+		ost << std::endl;
+	}
 	void print_tokens_loop(node* current, std::string& token, std::ostream& ost) {
 		if(current->data) {
-			if(current->data.head->data >= 0) {
-				ost << token << ":\t";
-				ost << current->data;
-				ost << std::endl;
-			}
+			print_useful_content(current, ost, token);
 		}
 		for(unsigned i = 0; i < CharNum; i++) {
 			if(!current->next) {
@@ -302,5 +326,38 @@ protected:
 			}
 		}
 	}
+private:
+	virtual void copy(CharTree& destination, const CharTree& source) {
+		if(destination.head) {
+			destination.head->destroy();
+		}
+		destination.node_found = source.node_found;
+		destination.head = new node;
+		node* cur_dest = destination.head;
+		node* cur_source = source.head;
+		copy_node_loop(cur_dest, cur_source);
+	}
 
+	virtual void copy_node_loop(node* destination, node* source) {
+		if (!source) return;
+		destination->destroy();
+		destination->data = source->data;
+		if (source->next) destination->next = new node*[CharNum]();
+		for(int i=0; i<CharNum; i++) {
+			if(source->next[i]) {
+				destination->next[i] = new node;
+				copy_node_loop(destination->next[i], source->next[i]);
+			}
+		}
+	}
+
+	virtual void move(CharTree&& destination, CharTree&& source) noexcept {
+		if((&destination)==(&source)) {
+			return;
+		}
+		destination.head = source.head;
+		destination.node_found = source.node_found;
+		source.head = nullptr;
+		destination.head = nullptr;
+	}
 };
