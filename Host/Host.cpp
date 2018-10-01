@@ -55,7 +55,11 @@ host_beginning:
 		if(cmd.argc) {
 			cin.clear();
 			parser::cur_arg = 0;
-			parser::after_start_selector(cmd);
+			try {
+				parser::after_start_selector(cmd);
+			}catch(exception& e) {
+				cerr << e.what() << endl;
+			}
 		}
 		cout << endl;
 		if(go_to_beginning) { goto host_beginning; }

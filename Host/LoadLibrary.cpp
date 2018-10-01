@@ -1,10 +1,27 @@
 ﻿#include "Header.h"
 
 #include "Host.h"			//for cmdline struct
+#include "WinPlatform.h"
 
 #ifdef _WIN32
 
 using namespace std;
+
+HINSTANCE try_load_library(const nchar* library) {
+	HINSTANCE const hInst = LoadLibrary(library);
+	if (!hInst) {
+		std::cerr << "Error!: Cannot load \"";
+#ifdef _MBCS
+		std::cerr << library;
+#endif
+#ifdef _UNICODE
+		std::cerr << convert::UTF16_2mbcs(library);
+#endif
+		std::cerr << "\" for access!" << std::endl;
+		throw std::runtime_error("call: Library loading failed!");
+	}
+	return hInst;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////
 //following code adapted form sources like the one bellow
@@ -15,11 +32,7 @@ using namespace std;
 template<typename rtn, typename passed>
 typename std::enable_if<!std::is_same<rtn, void>::value, rtn>::type
 call(const nchar* library, const char* function, passed* pass) {
-	HINSTANCE const hInst = LoadLibrary(library);
-	if(!hInst) {
-		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
-		throw std::runtime_error("call: Library loading failed!");
-	}
+	HINSTANCE hInst = try_load_library(library);
 	rtn val;
 	if(!pass) {
 		typedef rtn (*_func)();
@@ -65,11 +78,7 @@ typename std::enable_if<std::is_same<rtn, void>::value, void>::type
 call(const nchar* library,
 	const char* function,
 	typename std::enable_if<!std::is_same<passed, void>::value, passed>::type* pass) {
-	HINSTANCE const hInst = LoadLibrary(library);
-	if(!hInst) {
-		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
-		throw std::runtime_error("call: Library loading failed!");
-	}
+	HINSTANCE hInst = try_load_library(library);
 	if(!pass) {
 		typedef void (*_func)();
 		const _func func = _func(GetProcAddress(hInst, function));
@@ -117,11 +126,7 @@ call(const nchar* library,
 		throw std::runtime_error(
 			"ISO C++ does not allow indirection on operand of type void*\ntry using other method of sending information");
 	}
-	HINSTANCE const hInst = LoadLibrary(library);
-	if(!hInst) {
-		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
-		throw std::runtime_error("call: Library loading failed!");
-	}
+	HINSTANCE hInst = try_load_library(library);
 	typedef void (*_func)();
 	const _func func = _func(GetProcAddress(hInst, function));
 	if(!func) {
@@ -141,12 +146,8 @@ call(const nchar* library,
 
 //currently only support the same character set for argv
 template<>
-inline void call<void, cmdline<char>>(const nchar* library, const char* function, cmdline<char>* cmd) {
-	HINSTANCE const hInst = LoadLibrary(library);
-	if(!hInst) {
-		std::cerr << "Error!: Cannot load " << library << " for access!" << std::endl;
-		throw std::runtime_error("call: Library loading failed!");
-	}
+void call<void, cmdline<char>>(const nchar* library, const char* function, cmdline<char>* cmd) {
+	HINSTANCE hInst = try_load_library(library);
 	typedef void (*_func)(int, char**);
 	const _func func = _func(GetProcAddress(hInst, function));
 	if(!func) {
