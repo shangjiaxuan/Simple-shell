@@ -145,8 +145,11 @@
     <ClCompile Include="DS_LinkedList.h" />
     <ClCompile Include="KMP.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Maze.cpp" />
+    <ClCompile Include="Maze_main.cpp" />
     <ClCompile Include="myDataStructures.cpp" />
     <ClCompile Include="Pathman.cpp" />
+    <ClCompile Include="step.cpp" />
     <ClCompile Include="SwapEnc.cpp" />
     <ClCompile Include="SwapEnc_main.cpp" />
     <ClCompile Include="UJr2.cpp" />
@@ -169,9 +172,11 @@
     <ClInclude Include="Header.h" />
     <ClInclude Include="KMP.h" />
     <ClInclude Include="Macros.h" />
+    <ClInclude Include="Maze.h" />
     <ClInclude Include="myDataStructures.h" />
     <ClInclude Include="Pathman.h" />
     <ClInclude Include="sjx_Exports.h" />
+    <ClInclude Include="step.h" />
     <ClInclude Include="SwapEnc.h" />
     <ClInclude Include="UJr2.h" />
     <ClInclude Include="VCtrl_controls.h" />

@@ -12,7 +12,7 @@ namespace UJr2_funcs {
 	int Book(int argc, char* argv[]);
 	int KMP(int argc, char* argv[]);
 	int CrossRiver(int argc, char* argv[]);
-//		int maze(int argc, char* argv[]);
+	int maze(int argc, char* argv[]);
 
 	/*
 		int Haffman(int argc, char* argv[]);
