@@ -39,26 +39,26 @@ int UJr2(int argc, char* argv[]) {
 		if(strcmp(argv[1], "Book") == 0) {
 			return UJr2_funcs::Book(argc, argv);
 		}
-		if (strcmp(argv[1], "KMP") == 0) {
+		if(strcmp(argv[1], "KMP") == 0) {
 			return UJr2_funcs::KMP(argc, argv);
 		}
-		/*
-			if (strcmp(argv[1], "maze") == 0) {
-				return UJr2_funcs::maze(argc, argv);
-			}
-			if (strcmp(argv[1], "CrossRiver") == 0) {
-				return UJr2_funcs::CrossRiver(argc, argv);
-			}
-			if (strcmp(argv[1], "Haffman") == 0) {
-				return UJr2_funcs::Haffman(argc, argv);
-			}
-			if (strcmp(argv[1], "Block_search") == 0) {
-				return UJr2_funcs::Block_search(argc, argv);
-			}
-			if (strcmp(argv[1], "BinSort") == 0) {
-				return UJr2_funcs::BinSort(argc, argv);
-			}
-			*/
+			/*
+				if (strcmp(argv[1], "maze") == 0) {
+					return UJr2_funcs::maze(argc, argv);
+				}
+				if (strcmp(argv[1], "CrossRiver") == 0) {
+					return UJr2_funcs::CrossRiver(argc, argv);
+				}
+				if (strcmp(argv[1], "Haffman") == 0) {
+					return UJr2_funcs::Haffman(argc, argv);
+				}
+				if (strcmp(argv[1], "Block_search") == 0) {
+					return UJr2_funcs::Block_search(argc, argv);
+				}
+				if (strcmp(argv[1], "BinSort") == 0) {
+					return UJr2_funcs::BinSort(argc, argv);
+				}
+				*/
 		else {
 			cout << "UJr2 cannot find the specified program: " << argv[1] << "!\n" << endl;
 			return 0;

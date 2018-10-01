@@ -7,14 +7,15 @@ class linked_list {
 public:
 	struct node {
 		void destroy() {
-			if (next) {
+			if(next) {
 				next->destroy();
 				delete next;
 				next = nullptr;
 			}
 		}
+
 		content_type data{};
-		node* next{ nullptr };
+		node* next{nullptr};
 	};
 
 	linked_list() {
@@ -46,7 +47,7 @@ public:
 	}
 
 	void destroy() {
-		if (head) {
+		if(head) {
 			head->destroy();
 			delete head;
 			head = nullptr;
@@ -57,13 +58,14 @@ public:
 	operator bool() const {
 		return head;
 	}
+
 	bool empty() const {
 		return !head;
 	}
 
 	friend std::ostream& operator<<(std::ostream& ost, const linked_list& list) {
 		node* current = list.head;
-		while (current) {
+		while(current) {
 			ost << current->data << ' ';
 			current = current->next;
 		}
@@ -73,25 +75,24 @@ public:
 	friend std::istream& operator>>(std::istream& ist, linked_list& list) {
 		content_type temp;
 		node* current = list.tail;
-		if(!current){
+		if(!current) {
 			ist.peek();
-			if((ist>>temp)&&ist){ 
+			if((ist >> temp) && ist) {
 				list.head = new node;
 				current = list.head;
 				list.current_iterated_object = list.head;
 				goto assignment;
-			}
-			else {
+			} else {
 				//clears the input fail flag if ist>>temp fails
 				ist.clear();
 				return ist;
 			}
 		}
 		ist.peek();
-		while ((ist >> temp) && ist) {
+		while((ist >> temp) && ist) {
 			current->next = new node;
 			current = current->next;
-			assignment:
+		assignment:
 			current->data = temp;
 			ist.peek();
 		}
@@ -100,6 +101,7 @@ public:
 		ist.clear();
 		return ist;
 	}
+
 	void push_front(content_type item) {
 		node* temp = new node;
 		temp->next = head;
@@ -125,6 +127,7 @@ public:
 	content_type& front() {
 		return head->data;
 	}
+
 	content_type& back() {
 		return tail->data;
 	}
@@ -133,18 +136,16 @@ public:
 		if(current_iterated_object->next) {
 			current_iterated_object = current_iterated_object->next;
 			return current_iterated_object->data;
-		}
-		else {
+		} else {
 			iteration_ended_value = true;
 			return current_iterated_object->data;
 		}
 	}
 
 	content_type& peek_iteration() {
-		if (current_iterated_object->next) {
+		if(current_iterated_object->next) {
 			return current_iterated_object->next->data;
-		}
-		else {
+		} else {
 			iteration_ended_value = true;
 			return current_iterated_object->data;
 		}
@@ -160,12 +161,13 @@ public:
 	}
 
 protected:
-	node* head{ nullptr };
+	node* head{nullptr};
 	//not completely implemented yet
-	node* tail{ nullptr };
+	node* tail{nullptr};
+
 	void insert(node* pre, content_type item) {
 		if(!pre) {
-			throw std::runtime_error{ "Linked list insert: predecessor is nullptr" };
+			throw std::runtime_error{"Linked list insert: predecessor is nullptr"};
 		}
 		node* temp = pre->next;
 		pre->next = new node;
@@ -179,13 +181,15 @@ protected:
 		pre_start->destroy();
 		pre_start->next = temp;
 	}
+
 private:
 	//for iteration purpose
 	node* current_iterated_object;
 	bool iteration_ended_value = false;
+
 	//base functions
 	virtual void copy(linked_list& destination, const linked_list& source) {
-		if (!source.head) {
+		if(!source.head) {
 			destination.head = nullptr;
 			destination.tail = nullptr;
 			return;
@@ -193,9 +197,9 @@ private:
 		node* current_source = source.head;
 		destination.head = new node;
 		node* current_dest = destination.head;
-		while (current_source) {
+		while(current_source) {
 			current_dest->data = current_source->data;
-			if (current_source->next) {
+			if(current_source->next) {
 				current_dest->next = new node;
 				current_dest = current_dest->next;
 			}
@@ -206,7 +210,7 @@ private:
 	}
 
 	virtual void move(linked_list&& destination, linked_list&& source) noexcept {
-		if((&destination)==(&source)) {
+		if((&destination) == (&source)) {
 			return;
 		}
 		if(destination.head) {
@@ -231,25 +235,25 @@ public:
 			push_front(index);
 			return;
 		}
-		if(back()<index) {
+		if(back() < index) {
 			push_back(index);
 			return;
 		}
 		node* pre = find_pre(head, index);
-		if((pre->next->data)==index) {
-			throw std::runtime_error{ "sorted_index_list: add: index exists!" };
+		if((pre->next->data) == index) {
+			throw std::runtime_error{"sorted_index_list: add: index exists!"};
 		}
 		insert(pre, index);
 	}
 
 	void del(index_type index) {
 		if(empty()) {
-			throw std::range_error{ "sorted_index_list: del: list is empty!" };
+			throw std::range_error{"sorted_index_list: del: list is empty!"};
 		}
 		node* pre_start = find_pre(head, index);
-		if(pre_start->next->data==index) {
+		if(pre_start->next->data == index) {
 			node* end_del = pre_start;
-			while(end_del->next&&(end_del->next->data==index)) {
+			while(end_del->next && (end_del->next->data == index)) {
 				end_del = end_del->next;
 			}
 			if(!(end_del->next)) {
@@ -260,16 +264,16 @@ public:
 		}
 		throw std::runtime_error{"sorted_index_list: del: index not found!"};
 	}
+
 private:
 	static node* find_pre(node* start, index_type index) {
-		if (!start) {
-			throw std::runtime_error{ "sorted_index_list: find_pre: start of search is nullptr!" };
+		if(!start) {
+			throw std::runtime_error{"sorted_index_list: find_pre: start of search is nullptr!"};
 		}
 		node* current = start;
-		while (current->next && (current->next->data < index)) {
+		while(current->next && (current->next->data < index)) {
 			current = current->next;
 		}
 		return current;
 	}
 };
-

@@ -4,18 +4,19 @@ using namespace std;
 
 namespace UJr2_funcs {
 	int KMP(int argc, char* argv[]) {
-		while (kmp::on) {
+		while(kmp::on) {
 			try {
 				kmp::interaction();
-			}
-			catch (exception& e) {
+			} catch(exception& e) {
 				cerr << '\n' << e.what() << '\n' << endl;
 			}
 		}
 		return 0;
 	}
+
 	namespace kmp {
 		bool on{true};
+
 		void interaction() {
 			string target;
 			string pattern;
@@ -37,7 +38,7 @@ namespace UJr2_funcs {
 			KMP This(pattern.c_str(), target.c_str());
 			long long plc = This.find();
 			if(plc != -1) {
-				cout << "\nThe pattern is found at character number " << This.find() + 1 << '\n' << endl;
+				cout << "\nThe pattern is found starting at the " << This.find() + 1 << "th character\n" << endl;
 			} else {
 				cout << "\nNo pattern string found!" << '\n' << endl;
 			}
@@ -50,13 +51,7 @@ namespace UJr2_funcs {
 					cout << endl;
 					break;
 				}
-				if(s == "Y" || s == "y") {
-					kmp::on = true;
-					cin.clear();
-					cout << endl;
-					break;
-				}
-				if(s.size() == 0) {
+				if(s == "Y" || s == "y" || s.empty()) {
 					kmp::on = true;
 					cin.clear();
 					cout << endl;
@@ -80,16 +75,16 @@ namespace UJr2_funcs {
 		void KMP::Pattern(const char* w) {
 			pattern_size = strlen(w);
 			char* temp_pattern = new char[pattern_size];
-			for(long long i=0; i<pattern_size; i++) {
+			for(long long i = 0; i < pattern_size; i++) {
 				temp_pattern[i] = w[i];
 			}
-			pattern=temp_pattern;
+			pattern = temp_pattern;
 		}
 
 		void KMP::Target(const char* t) {
 			target_size = strlen(t);
 			char* temp_target = new char[target_size];
-			for (long long i = 0; i < target_size; i++) {
+			for(long long i = 0; i < target_size; i++) {
 				temp_target[i] = t[i];
 			}
 			target = temp_target;
@@ -130,10 +125,7 @@ namespace UJr2_funcs {
 			if(ptplc == pattern_size) {
 				return tgplc - pattern_size;
 			}
-			//	else{//(ptplc == 0) {
 			return -1;
-			//	}
-			//	throw std::runtime_error("find: Unkown error! (Ended with intermediate pattern place)");
 		}
 
 		long long KMP::find_nth(long long n) const {

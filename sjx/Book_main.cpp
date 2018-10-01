@@ -2,6 +2,7 @@
 
 namespace UJr2_funcs {
 	book::UI This;
+
 	int Book(int argc, char* argv[]) {
 		try {
 			This.UI_main();

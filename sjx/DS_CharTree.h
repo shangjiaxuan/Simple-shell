@@ -46,9 +46,9 @@ public:
 	struct node {
 		//字符节点
 		void destroy() {
-			if (next) {
-				for (int i = 0; i < CharNum; i++) {
-					if (next[i]) {
+			if(next) {
+				for(int i = 0; i < CharNum; i++) {
+					if(next[i]) {
 						next[i]->destroy();
 						delete next[i];
 						next[i] = nullptr;
@@ -58,8 +58,10 @@ public:
 				next = nullptr;
 			}
 		}
-		node** next{ nullptr };
+
+		node** next{nullptr};
 		content_type data;
+
 		node*& operator [](size_t elem) {
 			return next[elem];
 		}
@@ -91,7 +93,7 @@ public:
 		node_found = false;
 	}
 
-	node* head{ nullptr };
+	node* head{nullptr};
 
 	node* locate(std::string token) const {
 		const size_t size = token.size();
@@ -122,7 +124,7 @@ public:
 
 	node* add_token(std::string token) {
 		const size_t size = token.size();
-		if (!head) head = new node;
+		if(!head) head = new node;
 		node* current = head;
 		for(int i = 0; i < size; i++) {
 			unsigned char loc = token[i];
@@ -255,13 +257,13 @@ protected:
 				return;
 			} else if(temp == '{') {
 				ifs >> current->data;
-				char c; 
+				char c;
 				ifs.get(c);
-				while(c==' '||c=='\n') {
+				while(c == ' ' || c == '\n') {
 					ifs.get(c);
 				}
-				if(c!='}') {
-					throw std::runtime_error{ "CharTree: load_loop: parenthesis mismatch!" };
+				if(c != '}') {
+					throw std::runtime_error{"CharTree: load_loop: parenthesis mismatch!"};
 				}
 				//do not put back '}'
 				continue;
@@ -304,11 +306,13 @@ protected:
 			}
 		}
 	}
+
 	virtual void print_useful_content(node* current, std::ostream& ost, std::string token) {
 		ost << token << ":\t";
 		ost << current->data;
 		ost << std::endl;
 	}
+
 	void print_tokens_loop(node* current, std::string& token, std::ostream& ost) {
 		if(current->data) {
 			print_useful_content(current, ost, token);
@@ -326,6 +330,7 @@ protected:
 			}
 		}
 	}
+
 private:
 	virtual void copy(CharTree& destination, const CharTree& source) {
 		if(destination.head) {
@@ -339,11 +344,11 @@ private:
 	}
 
 	virtual void copy_node_loop(node* destination, node* source) {
-		if (!source) return;
+		if(!source) return;
 		destination->destroy();
 		destination->data = source->data;
-		if (source->next) destination->next = new node*[CharNum]();
-		for(int i=0; i<CharNum; i++) {
+		if(source->next) destination->next = new node*[CharNum]();
+		for(int i = 0; i < CharNum; i++) {
 			if(source->next[i]) {
 				destination->next[i] = new node;
 				copy_node_loop(destination->next[i], source->next[i]);
@@ -352,7 +357,7 @@ private:
 	}
 
 	virtual void move(CharTree&& destination, CharTree&& source) noexcept {
-		if((&destination)==(&source)) {
+		if((&destination) == (&source)) {
 			return;
 		}
 		destination.head = source.head;

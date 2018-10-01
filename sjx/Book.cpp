@@ -223,7 +223,7 @@ namespace UJr2_funcs {
 			const size_t size = tokens.size();
 			for(size_t i = 0; i < size; i++) {
 				CharTree<sorted_index_list<int>>::node* node = index.locate(tokens[i]);
-				if(!node->data || ((node->data.front()==node->data.back()) && node->data.front() == book_index)) {
+				if(!node->data || ((node->data.front() == node->data.back()) && node->data.front() == book_index)) {
 					index.del_token(tokens[i]);
 					continue;
 				}
@@ -284,7 +284,7 @@ namespace UJr2_funcs {
 			ost << "Books with token \"" << token << "\":\n" << endl;
 			list.start_iteration();
 			volume* book = booklist.head;
-			while(book&&!list.iteration_ended()) {
+			while(book && !list.iteration_ended()) {
 				book = booklist.find(book, list.current()).rtn;
 				if(!book) {
 					break;
