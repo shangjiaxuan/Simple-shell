@@ -2,7 +2,6 @@
 
 #include "myDataStructures.h"
 #include "Booklist.h"
-#include "BookIndex.h"
 
 namespace UJr2_funcs {
 	namespace book {

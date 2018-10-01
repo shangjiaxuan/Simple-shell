@@ -39,10 +39,10 @@ int UJr2(int argc, char* argv[]) {
 		if(strcmp(argv[1], "Book") == 0) {
 			return UJr2_funcs::Book(argc, argv);
 		}
-			/*
-			if (strcmp(argv[1], "KMP") == 0) {
-				return UJr2_funcs::KMP(argc, argv);
-			}
+		if (strcmp(argv[1], "KMP") == 0) {
+			return UJr2_funcs::KMP(argc, argv);
+		}
+		/*
 			if (strcmp(argv[1], "maze") == 0) {
 				return UJr2_funcs::maze(argc, argv);
 			}

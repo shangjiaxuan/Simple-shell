@@ -131,7 +131,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Book.cpp" />
-    <ClCompile Include="BookIndex.cpp" />
     <ClCompile Include="Booklist.cpp" />
     <ClCompile Include="BookUI.cpp" />
     <ClCompile Include="Book_main.cpp" />
@@ -143,6 +142,7 @@
     <ClCompile Include="Crossing.cpp" />
     <ClCompile Include="Crossing_main.cpp" />
     <ClCompile Include="DS_LinkedList.h" />
+    <ClCompile Include="KMP.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="myDataStructures.cpp" />
     <ClCompile Include="Pathman.cpp" />
@@ -154,7 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Book.h" />
-    <ClInclude Include="BookIndex.h" />
     <ClInclude Include="Booklist.h" />
     <ClInclude Include="BookUI.h" />
     <ClInclude Include="CalcToken.h" />
@@ -164,6 +163,7 @@
     <ClInclude Include="Crossing.h" />
     <ClInclude Include="DS_CharTree.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="KMP.h" />
     <ClInclude Include="Macros.h" />
     <ClInclude Include="myDataStructures.h" />
     <ClInclude Include="Pathman.h" />
