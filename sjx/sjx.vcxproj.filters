@@ -29,12 +29,6 @@
     <Filter Include="21 UJr2\4 KMP">
       <UniqueIdentifier>{1867f96e-71d2-4430-a6a6-5b13d811517c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="21 UJr2\5 maze">
-      <UniqueIdentifier>{f85b3c56-0627-4454-8901-51d89f8cd8ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="21 UJr2\6 CrossRiver">
-      <UniqueIdentifier>{9db8a306-e73c-407b-9251-b61e9414c13e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="21 UJr2\7 Haffman">
       <UniqueIdentifier>{c8746d8a-70b8-400f-bbaa-06b305fad5a0}</UniqueIdentifier>
     </Filter>
@@ -46,6 +40,12 @@
     </Filter>
     <Filter Include="21 UJr2\0 General Items">
       <UniqueIdentifier>{0cbe7a45-269f-4f15-b8d2-53fce5c52bd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="21 UJr2\5 CrossRiver">
+      <UniqueIdentifier>{9db8a306-e73c-407b-9251-b61e9414c13e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="21 UJr2\6 maze">
+      <UniqueIdentifier>{f85b3c56-0627-4454-8901-51d89f8cd8ac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +102,15 @@
     </ClInclude>
     <ClInclude Include="KMP.h">
       <Filter>21 UJr2\4 KMP</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_cycQueue.h">
+      <Filter>01 Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_FixedStack.h">
+      <Filter>01 Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossRiver.h">
+      <Filter>21 UJr2\5 CrossRiver</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +176,9 @@
     </ClCompile>
     <ClCompile Include="KMP.cpp">
       <Filter>21 UJr2\4 KMP</Filter>
+    </ClCompile>
+    <ClCompile Include="Crossriver.cpp">
+      <Filter>21 UJr2\5 CrossRiver</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

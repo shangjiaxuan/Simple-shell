@@ -3,6 +3,8 @@
 
 #include "DS_LinkedList.h"
 #include "DS_CharTree.h"
+#include "DS_FixedStack.h"
+#include "DS_cycQueue.h"
 
 template<typename type>
 class Array_2D {

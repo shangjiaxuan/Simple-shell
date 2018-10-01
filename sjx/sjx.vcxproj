@@ -141,6 +141,7 @@
     <ClCompile Include="CrossingColor.cpp" />
     <ClCompile Include="Crossing.cpp" />
     <ClCompile Include="Crossing_main.cpp" />
+    <ClCompile Include="Crossriver.cpp" />
     <ClCompile Include="DS_LinkedList.h" />
     <ClCompile Include="KMP.cpp" />
     <ClCompile Include="main.cpp" />
@@ -161,7 +162,10 @@
     <ClInclude Include="CalcVariable.h" />
     <ClInclude Include="CrossingColor.h" />
     <ClInclude Include="Crossing.h" />
+    <ClInclude Include="CrossRiver.h" />
     <ClInclude Include="DS_CharTree.h" />
+    <ClInclude Include="DS_cycQueue.h" />
+    <ClInclude Include="DS_FixedStack.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="KMP.h" />
     <ClInclude Include="Macros.h" />
