@@ -3,11 +3,10 @@
 using namespace std;
 namespace UJr2_funcs {
 	namespace Maze {
-		void Maze_map::print_map_value(std::ostream & ost) {
-			unsigned a;
+		void Maze_map::print_map_value(std::ostream & ost) const {
 			for (size_t i = 0; i < length; i++) {
 				for (size_t j = 0; j < width; j++) {
-					a = map[i][j];
+					const unsigned a = map[i][j];
 					ost << a << '\t';
 				}
 				ost << '\n';
@@ -57,7 +56,7 @@ namespace UJr2_funcs {
 				maze->print_map_value(std::cout);
 				solve_maze();
 				print_result(cout);
-				conti();
+				Exit();
 			}
 
 			void Maze::name_ver() {
@@ -70,7 +69,7 @@ namespace UJr2_funcs {
 				find_route_verbose(cout);
 			}
 
-			void Maze::print_result(ostream& ost) {
+			void Maze::print_result(ostream& ost) const {
 				ost << "The result is:\n";
 				ost << *Route;
 				ost << "Row:\t" << end_row << '\n';
@@ -114,9 +113,9 @@ namespace UJr2_funcs {
 				//		set_passed();
 			}
 
-			void Maze::parse_route(step added) {
-				size_t size = Route->size();
-				size_t end{ 0 };
+			void Maze::parse_route(step added) const {
+				const size_t size = Route->size();
+//				size_t end{ 0 };
 				if (size != 0) {
 					bool go_back{ false };
 					for (size_t i = size - 1; i >= 0; i--) {
@@ -140,16 +139,16 @@ namespace UJr2_funcs {
 				Route->push(added);
 			}
 
-			void Maze::set_passed(const step& added) {
+			void Maze::set_passed(const step& added) const {
 				maze->map[added.row][added.col] = 2;
 			}
 
-			void Maze::reset_passed(const step& deleted) {
+			void Maze::reset_passed(const step& deleted) const {
 				maze->map[deleted.row][deleted.col] = 0;
 			}
 
 			//true only if the location headed is a okay path and not covered before
-			bool Maze::direction_okay() {
+			bool Maze::direction_okay() const {
 				if (current.direction == up) {
 					if (current.row == 0) {
 						return false;
@@ -195,11 +194,8 @@ namespace UJr2_funcs {
 				return true;
 			}
 
-			bool Maze::finished() {
-				if (current.row == end_row && current.col == end_col) {
-					return true;
-				}
-				return false;
+			bool Maze::finished() const {
+				return ((current.row == end_row) && (current.col == end_col));
 			}
 
 			void Maze::find_route() {
@@ -228,15 +224,12 @@ namespace UJr2_funcs {
 					look_around();
 					ost << "Queue is now:\n";
 					Queue->print(ost);
+					ost << endl;
 					ost << "Setting new current state...\n";
 					pop_front();
-					ost << "Current state is now:\n";
-					ost << current;
-					//			ost << "Walking according to direction...\n";
-					//			walk();
 					steps++;
 					ost << "Current state is now:\n";
-					ost << current;
+					ost << current << endl;
 					ost << "Current maze is:\n";
 					maze->print_map_value(ost);
 				}
@@ -297,14 +290,7 @@ namespace UJr2_funcs {
 							throw range_error("Maze::load_maze(std::ifstream&): maze can only be consisted of '0's, '1's, '2's, or '3's!");
 						}
 					}
-					//		if(col!=maze->width-1) {
-					//			throw range_error("Maze::load_maze(std::istream&): wrong length of line!");
-					//		}
-					//		row++;
-				}//while (line != "");
-			//	if(row!=maze->length-1) {
-			//		throw range_error("Maze::load_maze(std::istream&): wrong number of lines!");
-			//	}
+				}
 				if (!started || !ended) {
 					throw runtime_error("Maze::load_maze(std::ifstream&): no start or end point specified!");
 				}
@@ -315,11 +301,11 @@ namespace UJr2_funcs {
 				static size_t width;
 				size_t length{ 0 };
 				getline(ifs, line);
-				while (line != "" && !ifs.eof()) {
+				while (!line.empty() && !ifs.eof()) {
 					length++;
 					width = line.size();
 					if (line.size() != width) {
-						throw runtime_error("Maze::scan_maze_input(std::ifstream&): Different lenghth on different lines!");
+						throw runtime_error("Maze::scan_maze_input(std::ifstream&): Different length on different lines!");
 					}
 					getline(ifs, line);
 				}
@@ -330,7 +316,7 @@ namespace UJr2_funcs {
 				Route = new FixedStack<step>{ length*width };
 			}
 
-			void Maze::conti() {
+			void Maze::Exit() {
 				char c;
 				cout << "Continue? [Y/n]\t";
 				cin.get(c);
@@ -342,11 +328,11 @@ namespace UJr2_funcs {
 					on = false;
 					return;
 				default:
-					throw runtime_error("Maze::conti(): unknown choice!");
+					throw runtime_error("Maze::Exit(): unknown choice!");
 				}
 			}
 
-			string Maze::parse_path(string line) {
+			string Maze::parse_path(const string& line) {
 				string path;
 				istringstream iss(line);
 				char current;

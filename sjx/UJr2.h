@@ -13,10 +13,7 @@ namespace UJr2_funcs {
 	int KMP(int argc, char* argv[]);
 	int CrossRiver(int argc, char* argv[]);
 	int maze(int argc, char* argv[]);
-
-	/*
-		int Haffman(int argc, char* argv[]);
-		int Block_search(int argc, char* argv[]);
-		int BinSort(int argc, char* argv[]);
-	*/
+	int Haffman(int argc, char* argv[]);
+	int Block_search(int argc, char* argv[]);
+	int BinSort(int argc, char* argv[]);
 }

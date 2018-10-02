@@ -48,7 +48,7 @@ public:
 	void encode();
 	void decode();
 	void print_code();
-	bool conti{true};
+	bool on{true};
 };
 
 extern bool on;

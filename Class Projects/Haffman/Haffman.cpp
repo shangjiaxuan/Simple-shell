@@ -172,14 +172,14 @@ void Haffman::UI() {
 	char c=0;
 	cin >> cmd;
 	if(cmd=="exit") {
-		conti = false;
+		on = false;
 		on = false;
 	}
 	else if(cmd=="re-encode") {
 		while (c != '\n') {
 			cin.get(c);
 		}
-		conti = false;
+		on = false;
 	}
 	else if(cmd=="encode") {
 		while(c!='\n') {

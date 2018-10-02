@@ -7,7 +7,7 @@ std::string parse_path(std::string line);
 extern bool on;
 
 struct node {
-	int data;
+	int data{};
 	long long lchild{ -1 };
 	long long rchild{ -1 };
 	long long parent{ -1 };

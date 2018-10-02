@@ -35,9 +35,6 @@
     <Filter Include="21 UJr2\8 Block_search">
       <UniqueIdentifier>{7b3790d9-1044-4d69-9ac0-b20e9e0e39f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="21 UJr2\9 Binsort">
-      <UniqueIdentifier>{b43aa952-eb8f-4b84-9ac3-63ec61bf90dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="21 UJr2\0 General Items">
       <UniqueIdentifier>{0cbe7a45-269f-4f15-b8d2-53fce5c52bd0}</UniqueIdentifier>
     </Filter>
@@ -46,6 +43,9 @@
     </Filter>
     <Filter Include="21 UJr2\6 maze">
       <UniqueIdentifier>{f85b3c56-0627-4454-8901-51d89f8cd8ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="21 UJr2\9 BinSort">
+      <UniqueIdentifier>{b43aa952-eb8f-4b84-9ac3-63ec61bf90dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +117,15 @@
     </ClInclude>
     <ClInclude Include="step.h">
       <Filter>21 UJr2\6 maze</Filter>
+    </ClInclude>
+    <ClInclude Include="Haffman.h">
+      <Filter>21 UJr2\7 Haffman</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_search.h">
+      <Filter>21 UJr2\8 Block_search</Filter>
+    </ClInclude>
+    <ClInclude Include="BinSort.h">
+      <Filter>21 UJr2\9 BinSort</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +203,18 @@
     </ClCompile>
     <ClCompile Include="Maze_main.cpp">
       <Filter>21 UJr2\6 maze</Filter>
+    </ClCompile>
+    <ClCompile Include="Haffman.cpp">
+      <Filter>21 UJr2\7 Haffman</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_search.cpp">
+      <Filter>21 UJr2\8 Block_search</Filter>
+    </ClCompile>
+    <ClCompile Include="BinSort.cpp">
+      <Filter>21 UJr2\9 BinSort</Filter>
+    </ClCompile>
+    <ClCompile Include="BinSearch.cpp">
+      <Filter>21 UJr2\9 BinSort</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

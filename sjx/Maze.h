@@ -12,7 +12,7 @@ namespace UJr2_funcs {
 			size_t length;
 			size_t width;
 			FixedStack<Maze::step>*** map;
-			FixedStack<Maze::step>** data;
+			FixedStack<Maze::step>* data;
 			Route_map() {
 				length = 0;
 				width = 0;
@@ -52,7 +52,7 @@ namespace UJr2_funcs {
 		public:
 			Maze_map() :Array_2D<char>() {};
 			Maze_map(size_t row, size_t col) : Array_2D<char>(row, col) {};
-			void print_map_value(std::ostream& ost);
+			void print_map_value(std::ostream& ost) const;
 			void init() override {
 				for (size_t i = 0; i < length; i++) {
 					for (size_t j = 0; j < width; j++) {
@@ -80,26 +80,26 @@ namespace UJr2_funcs {
 				Route_map* route_map{ nullptr };
 				Cyclic_Queue<step>* Queue{ nullptr };
 				FixedStack<step>* Route{ nullptr };
-				step current;
-				size_t end_row;
-				size_t end_col;
-				size_t start_row;
-				size_t start_col;
+				step current{};
+				size_t end_row{};
+				size_t end_col{};
+				size_t start_row{};
+				size_t start_col{};
 
 				void solve_maze();
-				void print_result(std::ostream& ost);
+				void print_result(std::ostream& ost) const;
 
 				void start();
 				void look_around();
 				void pop_front();
 				void walk();
-				void parse_route(step added);
-				void set_passed(const step& added);
-				void reset_passed(const step& deleted);
+				void parse_route(step added) const;
+				void set_passed(const step& added) const;
+				void reset_passed(const step& deleted) const;
 
-				bool direction_okay();
+				bool direction_okay() const;
 				bool Queue_okay();
-				bool finished();
+				bool finished() const;
 
 				void find_route();
 				void find_route_verbose(std::ostream& ost);
@@ -107,11 +107,11 @@ namespace UJr2_funcs {
 				void set_end(size_t row, size_t col);
 				void set_start(size_t row, size_t col);
 
-				void prompt();
+				static void prompt();
 				void load_maze(std::istream& ist);
 				void scan_maze_input(std::ifstream& ifs);
-				void conti();
-				std::string parse_path(std::string line);
+				static void Exit();
+				static std::string parse_path(const std::string& line);
 			};
 		}
 	}

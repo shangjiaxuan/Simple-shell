@@ -130,6 +130,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BinSearch.cpp" />
+    <ClCompile Include="BinSort.cpp" />
+    <ClCompile Include="Block_search.cpp" />
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="Booklist.cpp" />
     <ClCompile Include="BookUI.cpp" />
@@ -143,6 +146,7 @@
     <ClCompile Include="Crossing_main.cpp" />
     <ClCompile Include="Crossriver.cpp" />
     <ClCompile Include="DS_LinkedList.h" />
+    <ClCompile Include="Haffman.cpp" />
     <ClCompile Include="KMP.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
@@ -157,6 +161,8 @@
     <ClCompile Include="VCtrl_main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BinSort.h" />
+    <ClInclude Include="Block_search.h" />
     <ClInclude Include="Book.h" />
     <ClInclude Include="Booklist.h" />
     <ClInclude Include="BookUI.h" />
@@ -169,6 +175,7 @@
     <ClInclude Include="DS_CharTree.h" />
     <ClInclude Include="DS_cycQueue.h" />
     <ClInclude Include="DS_FixedStack.h" />
+    <ClInclude Include="Haffman.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="KMP.h" />
     <ClInclude Include="Macros.h" />

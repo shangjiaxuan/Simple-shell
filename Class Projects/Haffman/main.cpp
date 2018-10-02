@@ -7,7 +7,7 @@ int main() {
 	do {
 		try {
 			Haffman This;
-			while(This.conti) {
+			while(This.on) {
 				try {
 					This.UI();
 				}
