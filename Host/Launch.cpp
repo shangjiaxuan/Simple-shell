@@ -1,5 +1,7 @@
 ﻿#include "Launch.h"
 
+#include "Parser.h"			//for converting cmdline struct
+
 using namespace std;
 
 PELaunch::PELaunch(const cmdline<nchar>& cmd) {
@@ -15,7 +17,7 @@ PELaunch::PELaunch(const cmdline<nchar>& cmd) {
 	open(cmd.argv[0]);
 	size_t required_size = stringlen(cmd.argv[0]) + 1;
 	LPTSTR const temp = new nchar[required_size];
-	stringcpy(temp, required_size, cmd.argv[0]);
+	stringcpy(temp, cmd.argv[0]);
 	lpApplicationName = temp;
 	required_size = parser::ncmdline2nchar(cmd, nullptr, NULL);
 	lpCommandLine = new nchar[required_size];
@@ -39,14 +41,14 @@ PELaunch::PELaunch(fs::path exe_path) {
 	//Use path itself as commandline if given only a path without arguments
 	//some apps do not work with NULL as lpCommandLine
 	//command line is modifiable in UNICODE
-	lpCommandLine = new nchar[exe_path.native().size() + 1];
-	stringcpy(lpCommandLine, exe_path.native().size() + 1, exe_path.nstring().c_str());
-	//a temporary pointer to modifyable data to initialize unmodifiable data
-	nchar* temp = new nchar[exe_path.native().size() + 1];
-	stringcpy(temp, exe_path.native().size() + 1, exe_path.nstring().c_str());
+	lpCommandLine = new nchar[exe_path.nstring().size() + 1];
+	stringcpy(lpCommandLine, exe_path.nstring().c_str());
+	//a temporary pointer to modifiable data to initialize unmodifiable data
+	nchar* temp = new nchar[exe_path.nstring().size() + 1];
+	stringcpy(temp, exe_path.nstring().c_str());
 	lpApplicationName = temp;
-	temp = new nchar[exe_path.remove_filename().native().size() + 1];
-	stringcpy(temp, exe_path.native().size() + 1, exe_path.nstring().c_str());
+	temp = new nchar[exe_path.remove_filename().nstring().size() + 1];
+	stringcpy(temp, exe_path.nstring().c_str());
 	lpCurrentDirectory = temp;
 }
 
@@ -58,19 +60,19 @@ PELaunch::PELaunch(const PELaunch& source) {
 	//may need fix when lpEnvironment is not always NULL
 	lpEnvironment = source.lpEnvironment;
 	dwCreationFlags = source.dwCreationFlags;
-	size_t str_size = stringlen(source.lpCommandLine) + 1;
-	lpCommandLine = new nchar[str_size];
-	stringcpy(lpCommandLine, str_size, source.lpCommandLine);
+	size_t str_size = stringlen(source.lpCommandLine);
+	lpCommandLine = new nchar[str_size + 1];
+	stringcpy(lpCommandLine, source.lpCommandLine);
 	//initialize lpApplicationName
-	str_size = stringlen(source.lpApplicationName) + 1;
-	//create a temporary pointer to modifyable data to initialize unmodifiable data
-	nchar* temp = new nchar[str_size];
-	stringcpy(temp, str_size, source.lpApplicationName);
+	str_size = stringlen(source.lpApplicationName);
+	//create a temporary pointer to modifiable data to initialize unmodifiable data
+	nchar* temp = new nchar[str_size + 1];
+	stringcpy(temp, source.lpApplicationName);
 	lpApplicationName = temp;
 	//initialize lpCurrentDirectory
-	str_size = stringlen(source.lpCurrentDirectory) + 1;
-	temp = new nchar[str_size];
-	stringcpy(temp, str_size, source.lpCurrentDirectory);
+	str_size = stringlen(source.lpCurrentDirectory);
+	temp = new nchar[str_size + 1];
+	stringcpy(temp, source.lpCurrentDirectory);
 	lpCurrentDirectory = temp;
 }
 
@@ -81,19 +83,19 @@ PELaunch::PELaunch(PELaunch&& source) noexcept {
 	//may need fix when lpEnvironment is not always NULL
 	lpEnvironment = source.lpEnvironment;
 	dwCreationFlags = source.dwCreationFlags;
-	size_t str_size = stringlen(source.lpCommandLine) + 1;
-	lpCommandLine = new nchar[str_size];
-	stringcpy(lpCommandLine, str_size, source.lpCommandLine);
+	size_t str_size = stringlen(source.lpCommandLine);
+	lpCommandLine = new nchar[str_size + 1];
+	stringcpy(lpCommandLine, source.lpCommandLine);
 	//initialize lpApplicationName
-	str_size = stringlen(source.lpApplicationName) + 1;
-	//create a temporary pointer to modifyable data to initialize unmodifiable data
-	nchar* temp = new nchar[str_size];
-	stringcpy(temp, str_size, source.lpApplicationName);
+	str_size = stringlen(source.lpApplicationName);
+	//create a temporary pointer to modifiable data to initialize unmodifiable data
+	nchar* temp = new nchar[str_size + 1];
+	stringcpy(temp, source.lpApplicationName);
 	lpApplicationName = temp;
 	//initialize lpCurrentDirectory
-	str_size = stringlen(source.lpCurrentDirectory) + 1;
-	temp = new nchar[str_size];
-	stringcpy(temp, str_size, source.lpCurrentDirectory);
+	str_size = stringlen(source.lpCurrentDirectory);
+	temp = new nchar[str_size + 1];
+	stringcpy(temp, source.lpCurrentDirectory);
 	lpCurrentDirectory = temp;
 }
 
@@ -108,19 +110,19 @@ PELaunch& PELaunch::operator=(PELaunch&& source) noexcept {
 	//may need fix when lpEnvironment is not always NULL
 	lpEnvironment = source.lpEnvironment;
 	dwCreationFlags = source.dwCreationFlags;
-	size_t str_size = stringlen(source.lpCommandLine) + 1;
-	lpCommandLine = new nchar[str_size];
-	stringcpy(lpCommandLine, str_size, source.lpCommandLine);
+	size_t str_size = stringlen(source.lpCommandLine);
+	lpCommandLine = new nchar[str_size + 1];
+	stringcpy(lpCommandLine, source.lpCommandLine);
 	//initialize lpApplicationName
-	str_size = stringlen(source.lpApplicationName) + 1;
-	//create a temporary pointer to modifyable data to initialize unmodifiable data
-	nchar* temp = new nchar[str_size];
-	stringcpy(temp, str_size, source.lpApplicationName);
+	str_size = stringlen(source.lpApplicationName);
+	//create a temporary pointer to modifiable data to initialize unmodifiable data
+	nchar* temp = new nchar[str_size + 1];
+	stringcpy(temp, source.lpApplicationName);
 	lpApplicationName = temp;
 	//initialize lpCurrentDirectory
-	str_size = stringlen(source.lpCurrentDirectory) + 1;
-	temp = new nchar[str_size];
-	stringcpy(temp, str_size, source.lpCurrentDirectory);
+	str_size = stringlen(source.lpCurrentDirectory);
+	temp = new nchar[str_size + 1];
+	stringcpy(temp, source.lpCurrentDirectory);
 	lpCurrentDirectory = temp;
 	return *this;
 }
@@ -139,25 +141,25 @@ PELaunch& PELaunch::operator=(const PELaunch& source) {
 	//may need fix when lpEnvironment is not always NULL
 	lpEnvironment = source.lpEnvironment;
 	dwCreationFlags = source.dwCreationFlags;
-	size_t str_size = stringlen(source.lpCommandLine) + 1;
-	lpCommandLine = new nchar[str_size];
-	stringcpy(lpCommandLine, str_size, source.lpCommandLine);
+	size_t str_size = stringlen(source.lpCommandLine);
+	lpCommandLine = new nchar[str_size + 1];
+	stringcpy(lpCommandLine, source.lpCommandLine);
 	//initialize lpApplicationName
-	str_size = stringlen(source.lpApplicationName) + 1;
-	//create a temporary pointer to modifyable data to initialize unmodifiable data
-	nchar* temp = new nchar[str_size];
-	stringcpy(temp, str_size, source.lpApplicationName);
+	str_size = stringlen(source.lpApplicationName);
+	//create a temporary pointer to modifiable data to initialize unmodifiable data
+	nchar* temp = new nchar[str_size + 1];
+	stringcpy(temp, source.lpApplicationName);
 	lpApplicationName = temp;
 	//initialize lpCurrentDirectory
-	str_size = stringlen(source.lpCurrentDirectory) + 1;
-	temp = new nchar[str_size];
-	stringcpy(temp, str_size, source.lpCurrentDirectory);
+	str_size = stringlen(source.lpCurrentDirectory);
+	temp = new nchar[str_size + 1];
+	stringcpy(temp, source.lpCurrentDirectory);
 	lpCurrentDirectory = temp;
 	return *this;
 }
 
 //////////////////////////////////////////////////////////////////
-//Windows API for launching exectutables
+//Windows API for launching executables
 //adapted from answer on
 //https://stackoverflow.com/questions/42531/how-do-i-call-createprocess-in-c-to-launch-a-windows-executable
 void PELaunch::Launch() const {
@@ -226,7 +228,7 @@ int PELaunch::non_console(const fs::path& p) {
 	return 3;
 };
 
-bool PELaunch::DOS_magic_mumber(const fs::path& p) {
+bool PELaunch::DOS_magic_number(const fs::path& p) {
 	ifstream ifs;
 	ifs.open(p);
 	INT16 test;

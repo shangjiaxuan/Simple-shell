@@ -1,11 +1,7 @@
 ﻿#pragma once
-
 //header for the Windows-specific functions
-
+#include "../Lib/Header.h"
 #ifdef _WIN32
-
-#include "Header.h"
-
 //operation class for simple conversion between UTF-16 and MBCS
 class convert {
 public:

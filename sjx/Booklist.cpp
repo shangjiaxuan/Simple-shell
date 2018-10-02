@@ -1,5 +1,4 @@
 ﻿#include "Booklist.h"
-#include <utility>
 
 using namespace std;
 
@@ -231,10 +230,20 @@ namespace UJr2_funcs {
 		}
 		*/
 
-		volume* list::find_default() const {
-			volume* traceback = nullptr;
-			volume* current = head;
-			int index = 0;
+		volume* list::find_default(volume* start) const {
+			volume* traceback;
+			volume* current;
+			int index;
+			if ((!start)||start==head) {
+				traceback = nullptr;
+				current = head;
+				index = 0;
+			}
+			else {
+				traceback = start;
+				current = start->volume_next;
+				index = traceback->index_number + 1;
+			}
 			while(current) {
 				if(current->index_number > index) {
 					return traceback;
@@ -254,13 +263,22 @@ namespace UJr2_funcs {
 				if(!original.rtn) {
 					throw runtime_error("list::reindex: list cannot be empty!");
 				}
-				volume* prev = find_default();
-				added->volume_next = original.rtn->volume_next;
-				head = added;
-				original.rtn->index_number = prev->index_number + 1;
-				original.rtn->volume_next = prev->volume_next;
-				prev->volume_next = original.rtn;
-				return original.rtn->index_number;
+				volume* prev = find_default(nullptr);
+				if (prev == original.rtn) {
+					head = added;
+					added->volume_next = original.rtn;
+					original.rtn->volume_next = nullptr;
+					return ++(original.rtn->index_number);
+				}
+				else {
+					added->volume_next = original.rtn->volume_next;
+					head = added;
+					original.rtn->index_number = prev->index_number + 1;
+					original.rtn->volume_next = prev->volume_next;
+					prev->volume_next = original.rtn;
+					return original.rtn->index_number;
+				}
+
 				//		if(added->data==0) {
 				//			added->volume_next = head;
 				//			head->data = 1;
@@ -273,7 +291,7 @@ namespace UJr2_funcs {
 			}
 			original.traceback->volume_next = added;
 			added->volume_next = original.rtn->volume_next;
-			volume* default_location = find_default();
+			volume* default_location = find_default(nullptr);
 			if(!default_location) {
 				throw runtime_error("list::reindex: list cannot be empty!");
 			}

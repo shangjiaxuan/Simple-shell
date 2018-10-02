@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Header.h"
+#include "../Lib/Header.h"
 
 #include "sjx_Exports.h"
 

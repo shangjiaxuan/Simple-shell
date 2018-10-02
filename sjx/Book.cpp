@@ -19,7 +19,7 @@ namespace UJr2_funcs {
 			vector<string> tokens = get_tokens(original.name);
 			const size_t size = tokens.size();
 			for(size_t i = 0; i < size; i++) {
-				CharTree<sorted_index_list<int>>::node* token_loc = index.locate(tokens[i]);
+				CharTree<char,sorted_index_list<int>>::node* token_loc = index.locate(tokens[i]);
 				token_loc->data.add(new_index);
 			}
 		}
@@ -80,7 +80,7 @@ namespace UJr2_funcs {
 				vector<string> tokens = get_tokens(found.name);
 				const size_t size = tokens.size();
 				for(size_t i = 0; i < size; i++) {
-					CharTree<sorted_index_list<int>>::node* token = index.locate(tokens[i]);
+					CharTree<char,sorted_index_list<int>>::node* token = index.locate(tokens[i]);
 					token->data.del(added_index);
 					token->data.add(new_index);
 				}
@@ -162,7 +162,7 @@ namespace UJr2_funcs {
 		}
 
 		bool Book::istoken(const std::string& token) {
-			CharTree<sorted_index_list<int>>::node* temp = index.locate(token);
+			CharTree<char,sorted_index_list<int>>::node* temp = index.locate(token);
 			if(!temp) {
 				return true;
 			}
@@ -177,6 +177,7 @@ namespace UJr2_funcs {
 			if(!index_input) {
 				return;
 			}
+			index.head->destroy();
 			index.load(index_input);
 			index_input.close();
 			booklist_input.open(list_filename);
@@ -222,9 +223,10 @@ namespace UJr2_funcs {
 			vector<string> tokens = get_tokens(bookname);
 			const size_t size = tokens.size();
 			for(size_t i = 0; i < size; i++) {
-				CharTree<sorted_index_list<int>>::node* node = index.locate(tokens[i]);
+				CharTree<char, sorted_index_list<int>>::node* node = index.locate(tokens[i]);
 				if(!node->data || ((node->data.front() == node->data.back()) && node->data.front() == book_index)) {
-					index.del_token(tokens[i]);
+					index.access(tokens[i]).del(book_index);
+					if (!node->data) index.del_token(tokens[i]);
 					continue;
 				}
 				node->data.del(book_index);
@@ -242,7 +244,7 @@ namespace UJr2_funcs {
 
 		void Book::ntoken(std::string token) {
 			To_standard(token);
-			CharTree<sorted_index_list<int>>::node* loc = index.locate(token);
+			CharTree<char, sorted_index_list<int>>::node* loc = index.locate(token);
 			if(loc) {
 				loc->data.destroy();
 				loc->data.add(-1);

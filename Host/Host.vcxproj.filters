@@ -52,13 +52,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h">
-      <Filter>00 General Items</Filter>
-    </ClInclude>
     <ClInclude Include="Names.h">
-      <Filter>00 General Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Macros.h">
       <Filter>00 General Items</Filter>
     </ClInclude>
     <ClInclude Include="Filemani.h">

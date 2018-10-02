@@ -1,6 +1,4 @@
-﻿#include "myDataStructures.h"
-
-#include "Crossing.h"
+﻿#include "Crossing.h"
 #include "CrossingColor.h"
 
 using namespace std;
@@ -57,10 +55,10 @@ namespace UJr2_funcs {
 		}
 
 		void Exit() {
-			char c = cin.get();
+			cin.get();
 			cout << "Continue?[Y/n]\t";
 			cin.clear();
-			c = cin.get(); //cin的输入很奇怪，貌似自带一个'\n'
+			const char c = cin.get(); //cin的输入很奇怪，貌似自带一个'\n'
 			switch(c) {
 				case 'n': case 'N':
 					//fix here
@@ -69,7 +67,7 @@ namespace UJr2_funcs {
 				case '\n': case 'y': case 'Y':
 					break;
 				default:
-					throw runtime_error("Exit(): Unkown choice encountered!");
+					throw runtime_error("Exit(): Unknown choice encountered!");
 			}
 		}
 	}

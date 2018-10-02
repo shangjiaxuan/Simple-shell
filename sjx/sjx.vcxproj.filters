@@ -11,58 +11,46 @@
     <Filter Include="12 Enc">
       <UniqueIdentifier>{645aa977-ff4e-4895-83fd-87e4765d967a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01 Libs">
-      <UniqueIdentifier>{4a8df0a9-8b34-41d1-9ad9-3e56fd32a33f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="21 UJr2">
+    <Filter Include="20 UJr2">
       <UniqueIdentifier>{ec5855a4-5eda-40ce-9130-6f8c8a1f2c15}</UniqueIdentifier>
     </Filter>
-    <Filter Include="21 UJr2\1 Crossing">
+    <Filter Include="20 UJr2\1 Crossing">
       <UniqueIdentifier>{79eae2b2-0bcb-40c6-b272-af175fe127fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="21 UJr2\2 Vehicle_control">
+    <Filter Include="20 UJr2\2 Vehicle_control">
       <UniqueIdentifier>{dc4d2043-eedf-4da9-8967-635dbb5efae5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="21 UJr2\3 Book">
+    <Filter Include="20 UJr2\3 Book">
       <UniqueIdentifier>{78971ac6-42e0-4e5a-bd55-a5edcdec993a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="21 UJr2\4 KMP">
+    <Filter Include="20 UJr2\4 KMP">
       <UniqueIdentifier>{1867f96e-71d2-4430-a6a6-5b13d811517c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="21 UJr2\7 Haffman">
+    <Filter Include="20 UJr2\7 Haffman">
       <UniqueIdentifier>{c8746d8a-70b8-400f-bbaa-06b305fad5a0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="21 UJr2\8 Block_search">
+    <Filter Include="20 UJr2\8 Block_search">
       <UniqueIdentifier>{7b3790d9-1044-4d69-9ac0-b20e9e0e39f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="21 UJr2\0 General Items">
+    <Filter Include="20 UJr2\0 General Items">
       <UniqueIdentifier>{0cbe7a45-269f-4f15-b8d2-53fce5c52bd0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="21 UJr2\5 CrossRiver">
+    <Filter Include="20 UJr2\5 CrossRiver">
       <UniqueIdentifier>{9db8a306-e73c-407b-9251-b61e9414c13e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="21 UJr2\6 maze">
+    <Filter Include="20 UJr2\6 maze">
       <UniqueIdentifier>{f85b3c56-0627-4454-8901-51d89f8cd8ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="21 UJr2\9 BinSort">
+    <Filter Include="20 UJr2\9 BinSort">
       <UniqueIdentifier>{b43aa952-eb8f-4b84-9ac3-63ec61bf90dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h">
-      <Filter>00 General Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Macros.h">
-      <Filter>00 General Items</Filter>
-    </ClInclude>
     <ClInclude Include="sjx_Exports.h">
       <Filter>00 General Items</Filter>
     </ClInclude>
     <ClInclude Include="SwapEnc.h">
       <Filter>12 Enc</Filter>
-    </ClInclude>
-    <ClInclude Include="Pathman.h">
-      <Filter>01 Libs</Filter>
     </ClInclude>
     <ClInclude Include="CalcToken.h">
       <Filter>11 Calc</Filter>
@@ -74,66 +62,51 @@
       <Filter>11 Calc</Filter>
     </ClInclude>
     <ClInclude Include="UJr2.h">
-      <Filter>21 UJr2\0 General Items</Filter>
+      <Filter>20 UJr2\0 General Items</Filter>
     </ClInclude>
     <ClInclude Include="Crossing.h">
-      <Filter>21 UJr2\1 Crossing</Filter>
-    </ClInclude>
-    <ClInclude Include="myDataStructures.h">
-      <Filter>01 Libs</Filter>
+      <Filter>20 UJr2\1 Crossing</Filter>
     </ClInclude>
     <ClInclude Include="CrossingColor.h">
-      <Filter>21 UJr2\1 Crossing</Filter>
+      <Filter>20 UJr2\1 Crossing</Filter>
     </ClInclude>
     <ClInclude Include="VCtrl_controls.h">
-      <Filter>21 UJr2\2 Vehicle_control</Filter>
+      <Filter>20 UJr2\2 Vehicle_control</Filter>
     </ClInclude>
     <ClInclude Include="BookUI.h">
-      <Filter>21 UJr2\3 Book</Filter>
+      <Filter>20 UJr2\3 Book</Filter>
     </ClInclude>
     <ClInclude Include="Book.h">
-      <Filter>21 UJr2\3 Book</Filter>
+      <Filter>20 UJr2\3 Book</Filter>
     </ClInclude>
     <ClInclude Include="Booklist.h">
-      <Filter>21 UJr2\3 Book</Filter>
-    </ClInclude>
-    <ClInclude Include="DS_CharTree.h">
-      <Filter>01 Libs</Filter>
+      <Filter>20 UJr2\3 Book</Filter>
     </ClInclude>
     <ClInclude Include="KMP.h">
-      <Filter>21 UJr2\4 KMP</Filter>
-    </ClInclude>
-    <ClInclude Include="DS_cycQueue.h">
-      <Filter>01 Libs</Filter>
-    </ClInclude>
-    <ClInclude Include="DS_FixedStack.h">
-      <Filter>01 Libs</Filter>
+      <Filter>20 UJr2\4 KMP</Filter>
     </ClInclude>
     <ClInclude Include="CrossRiver.h">
-      <Filter>21 UJr2\5 CrossRiver</Filter>
+      <Filter>20 UJr2\5 CrossRiver</Filter>
     </ClInclude>
     <ClInclude Include="Maze.h">
-      <Filter>21 UJr2\6 maze</Filter>
+      <Filter>20 UJr2\6 maze</Filter>
     </ClInclude>
     <ClInclude Include="step.h">
-      <Filter>21 UJr2\6 maze</Filter>
+      <Filter>20 UJr2\6 maze</Filter>
     </ClInclude>
     <ClInclude Include="Haffman.h">
-      <Filter>21 UJr2\7 Haffman</Filter>
+      <Filter>20 UJr2\7 Haffman</Filter>
     </ClInclude>
     <ClInclude Include="Block_search.h">
-      <Filter>21 UJr2\8 Block_search</Filter>
+      <Filter>20 UJr2\8 Block_search</Filter>
     </ClInclude>
     <ClInclude Include="BinSort.h">
-      <Filter>21 UJr2\9 BinSort</Filter>
+      <Filter>20 UJr2\9 BinSort</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SwapEnc.cpp">
       <Filter>12 Enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Pathman.cpp">
-      <Filter>01 Libs</Filter>
     </ClCompile>
     <ClCompile Include="Calculator.cpp">
       <Filter>11 Calc</Filter>
@@ -154,67 +127,61 @@
       <Filter>00 General Items</Filter>
     </ClCompile>
     <ClCompile Include="UJr2.cpp">
-      <Filter>21 UJr2\0 General Items</Filter>
+      <Filter>20 UJr2\0 General Items</Filter>
     </ClCompile>
     <ClCompile Include="Crossing_main.cpp">
-      <Filter>21 UJr2\1 Crossing</Filter>
-    </ClCompile>
-    <ClCompile Include="myDataStructures.cpp">
-      <Filter>01 Libs</Filter>
+      <Filter>20 UJr2\1 Crossing</Filter>
     </ClCompile>
     <ClCompile Include="Crossing.cpp">
-      <Filter>21 UJr2\1 Crossing</Filter>
+      <Filter>20 UJr2\1 Crossing</Filter>
     </ClCompile>
     <ClCompile Include="CrossingColor.cpp">
-      <Filter>21 UJr2\1 Crossing</Filter>
+      <Filter>20 UJr2\1 Crossing</Filter>
     </ClCompile>
     <ClCompile Include="VCtrl_main.cpp">
-      <Filter>21 UJr2\2 Vehicle_control</Filter>
+      <Filter>20 UJr2\2 Vehicle_control</Filter>
     </ClCompile>
     <ClCompile Include="VCtrl_controls.cpp">
-      <Filter>21 UJr2\2 Vehicle_control</Filter>
+      <Filter>20 UJr2\2 Vehicle_control</Filter>
     </ClCompile>
     <ClCompile Include="BookUI.cpp">
-      <Filter>21 UJr2\3 Book</Filter>
+      <Filter>20 UJr2\3 Book</Filter>
     </ClCompile>
     <ClCompile Include="Book_main.cpp">
-      <Filter>21 UJr2\3 Book</Filter>
+      <Filter>20 UJr2\3 Book</Filter>
     </ClCompile>
     <ClCompile Include="Booklist.cpp">
-      <Filter>21 UJr2\3 Book</Filter>
+      <Filter>20 UJr2\3 Book</Filter>
     </ClCompile>
     <ClCompile Include="Book.cpp">
-      <Filter>21 UJr2\3 Book</Filter>
-    </ClCompile>
-    <ClCompile Include="DS_LinkedList.h">
-      <Filter>01 Libs</Filter>
+      <Filter>20 UJr2\3 Book</Filter>
     </ClCompile>
     <ClCompile Include="KMP.cpp">
-      <Filter>21 UJr2\4 KMP</Filter>
+      <Filter>20 UJr2\4 KMP</Filter>
     </ClCompile>
     <ClCompile Include="Crossriver.cpp">
-      <Filter>21 UJr2\5 CrossRiver</Filter>
+      <Filter>20 UJr2\5 CrossRiver</Filter>
     </ClCompile>
     <ClCompile Include="Maze.cpp">
-      <Filter>21 UJr2\6 maze</Filter>
+      <Filter>20 UJr2\6 maze</Filter>
     </ClCompile>
     <ClCompile Include="step.cpp">
-      <Filter>21 UJr2\6 maze</Filter>
+      <Filter>20 UJr2\6 maze</Filter>
     </ClCompile>
     <ClCompile Include="Maze_main.cpp">
-      <Filter>21 UJr2\6 maze</Filter>
+      <Filter>20 UJr2\6 maze</Filter>
     </ClCompile>
     <ClCompile Include="Haffman.cpp">
-      <Filter>21 UJr2\7 Haffman</Filter>
+      <Filter>20 UJr2\7 Haffman</Filter>
     </ClCompile>
     <ClCompile Include="Block_search.cpp">
-      <Filter>21 UJr2\8 Block_search</Filter>
+      <Filter>20 UJr2\8 Block_search</Filter>
     </ClCompile>
     <ClCompile Include="BinSort.cpp">
-      <Filter>21 UJr2\9 BinSort</Filter>
+      <Filter>20 UJr2\9 BinSort</Filter>
     </ClCompile>
     <ClCompile Include="BinSearch.cpp">
-      <Filter>21 UJr2\9 BinSort</Filter>
+      <Filter>20 UJr2\9 BinSort</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

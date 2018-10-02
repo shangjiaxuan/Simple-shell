@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Header.h"
+#include "../Lib/Header.h"
 
 #ifdef _WINDLL
 DLL_PORT void SwapEnc();

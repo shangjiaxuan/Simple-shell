@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Header.h"
+#include "UJr2.h"
 
 namespace UJr2_funcs {
 	namespace Maze {

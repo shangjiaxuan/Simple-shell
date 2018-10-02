@@ -74,7 +74,7 @@ namespace parser {
 				for(size_t i = 0; i < output_cmd.argc; i++) {
 					const size_t arg_size = stringlen(cmd.argv[i]);
 					output_cmd.argv[i] = new nchar[arg_size + 1];
-					stringcpy(output_cmd.argv[i], arg_size + 1, cmd.argv[i]);
+					stringcpy(output_cmd.argv[i], cmd.argv[i]);
 				}
 				const PELaunch info = PELaunch(output_cmd);
 				info.Launch();
@@ -162,7 +162,7 @@ namespace parser {
 		for(size_t i = 0; i < output.argc; i++) {
 			const size_t arg_size = cmd[i + start].size() + 1;
 			output.argv[i] = new nchar[arg_size];
-			stringcpy(output.argv[i], arg_size, cmd[i + start].c_str());
+			stringcpy(output.argv[i], cmd[i + start].c_str());
 		}
 	}
 
@@ -188,7 +188,7 @@ namespace parser {
 		if(copied_size > max_output_size) {
 			return 2; //chop off in middle of copy
 		}
-		stringcpy(nc_ptr, arg_size + 1, input.argv[0]);
+		stringcpy(nc_ptr, input.argv[0]);
 		nc_ptr += arg_size;
 		copied_size += 2;
 		if(copied_size > max_output_size) {
@@ -210,7 +210,7 @@ namespace parser {
 			if(copied_size > max_output_size) {
 				return 2; //chop off in middle of copy
 			}
-			stringcpy(nc_ptr, arg_size + 1, input.argv[i]);
+			stringcpy(nc_ptr, input.argv[i]);
 			nc_ptr += arg_size;
 			i++;
 			if(i >= input.argc) {

@@ -1,6 +1,4 @@
-﻿#include "Header.h"
-
-#include "Host.h"			//for cmdline struct
+﻿#include "Host.h"			//for cmdline struct
 #include "WinPlatform.h"
 
 #ifdef _WIN32
@@ -155,7 +153,7 @@ void call<void, cmdline<char>>(const nchar* library, const char* function, cmdli
 		throw runtime_error("call: Cannot find function in library!");
 	}
 	__try {
-		func(cmd->argc, cmd->argv);
+		func(int(cmd->argc), cmd->argv);
 	} __except(EXCEPTION_EXECUTE_HANDLER) {
 		FreeLibrary(hInst);
 		std::cin.get();

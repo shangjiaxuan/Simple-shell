@@ -20,9 +20,8 @@ namespace UJr2_funcs {
 				try {
 					parser();
 				} catch(exception& e) {
-					cerr << e.what() << endl;
+					cerr << e.what() << '\n' << endl;
 					cin.clear();
-					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				}
 			}
 		}

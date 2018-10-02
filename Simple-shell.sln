@@ -20,11 +20,23 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00 Host", "Host\Host.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10 sjx", "sjx\sjx.vcxproj", "{23BA0350-902E-4F24-859F-8C41C6BE5393}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "19 BinSort", "Class Projects\BinSort\BinSort.vcxproj", "{7E9448B3-9D7A-4E4D-A60E-6C0D463E2B44}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02 test", "01 test\01 test.vcxproj", "{1258E91E-FCCC-4EEF-ACC6-D62600660555}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01 CmdTreeGen", "CmdTreeGen\CmdTreeGen.vcxproj", "{7B9ED51D-5A67-4C94-BC31-F08D4C10ADB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{23D23EE6-3584-4CBC-B0A5-6E4B3830EEA0}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\DS_CharTree.h = Lib\DS_CharTree.h
+		Lib\DS_cycQueue.h = Lib\DS_cycQueue.h
+		Lib\DS_FixedStack.h = Lib\DS_FixedStack.h
+		Lib\DS_LinkedList.h = Lib\DS_LinkedList.h
+		Lib\Header.h = Lib\Header.h
+		Lib\Macros.h = Lib\Macros.h
+		Lib\myDataStructures.cpp = Lib\myDataStructures.cpp
+		Lib\myDataStructures.h = Lib\myDataStructures.h
+		Lib\Pathman.h = Lib\Pathman.h
+		Lib\Utilities.h = Lib\Utilities.h
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,14 +62,6 @@ Global
 		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Release|x64.Build.0 = Release|x64
 		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Release|x86.ActiveCfg = Release|Win32
 		{23BA0350-902E-4F24-859F-8C41C6BE5393}.Release|x86.Build.0 = Release|Win32
-		{7E9448B3-9D7A-4E4D-A60E-6C0D463E2B44}.Debug|x64.ActiveCfg = Debug|x64
-		{7E9448B3-9D7A-4E4D-A60E-6C0D463E2B44}.Debug|x64.Build.0 = Debug|x64
-		{7E9448B3-9D7A-4E4D-A60E-6C0D463E2B44}.Debug|x86.ActiveCfg = Debug|Win32
-		{7E9448B3-9D7A-4E4D-A60E-6C0D463E2B44}.Debug|x86.Build.0 = Debug|Win32
-		{7E9448B3-9D7A-4E4D-A60E-6C0D463E2B44}.Release|x64.ActiveCfg = Release|x64
-		{7E9448B3-9D7A-4E4D-A60E-6C0D463E2B44}.Release|x64.Build.0 = Release|x64
-		{7E9448B3-9D7A-4E4D-A60E-6C0D463E2B44}.Release|x86.ActiveCfg = Release|Win32
-		{7E9448B3-9D7A-4E4D-A60E-6C0D463E2B44}.Release|x86.Build.0 = Release|Win32
 		{1258E91E-FCCC-4EEF-ACC6-D62600660555}.Debug|x64.ActiveCfg = Debug|x64
 		{1258E91E-FCCC-4EEF-ACC6-D62600660555}.Debug|x64.Build.0 = Debug|x64
 		{1258E91E-FCCC-4EEF-ACC6-D62600660555}.Debug|x86.ActiveCfg = Debug|Win32

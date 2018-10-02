@@ -28,26 +28,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -73,15 +73,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <TargetName>sjx</TargetName>
+    <IncludePath>$(SolutionDir)Lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>sjx</TargetName>
+    <IncludePath>$(SolutionDir)Lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetName>sjx</TargetName>
+    <IncludePath>$(SolutionDir)Lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>sjx</TargetName>
+    <IncludePath>$(SolutionDir)Lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -145,14 +149,11 @@
     <ClCompile Include="Crossing.cpp" />
     <ClCompile Include="Crossing_main.cpp" />
     <ClCompile Include="Crossriver.cpp" />
-    <ClCompile Include="DS_LinkedList.h" />
     <ClCompile Include="Haffman.cpp" />
     <ClCompile Include="KMP.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="Maze_main.cpp" />
-    <ClCompile Include="myDataStructures.cpp" />
-    <ClCompile Include="Pathman.cpp" />
     <ClCompile Include="step.cpp" />
     <ClCompile Include="SwapEnc.cpp" />
     <ClCompile Include="SwapEnc_main.cpp" />
@@ -172,16 +173,9 @@
     <ClInclude Include="CrossingColor.h" />
     <ClInclude Include="Crossing.h" />
     <ClInclude Include="CrossRiver.h" />
-    <ClInclude Include="DS_CharTree.h" />
-    <ClInclude Include="DS_cycQueue.h" />
-    <ClInclude Include="DS_FixedStack.h" />
     <ClInclude Include="Haffman.h" />
-    <ClInclude Include="Header.h" />
     <ClInclude Include="KMP.h" />
-    <ClInclude Include="Macros.h" />
     <ClInclude Include="Maze.h" />
-    <ClInclude Include="myDataStructures.h" />
-    <ClInclude Include="Pathman.h" />
     <ClInclude Include="sjx_Exports.h" />
     <ClInclude Include="step.h" />
     <ClInclude Include="SwapEnc.h" />

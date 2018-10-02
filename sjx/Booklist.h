@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Header.h"
+#include "UJr2.h"
 
 namespace UJr2_funcs {
 	namespace book {
@@ -87,7 +87,7 @@ namespace UJr2_funcs {
 			found find(int index) const;
 			found find(const std::string& name) const;
 			found find(volume* start, int index) const;
-			volume* find_default() const;
+			volume* find_default(volume* start) const;
 		};
 	}
 }

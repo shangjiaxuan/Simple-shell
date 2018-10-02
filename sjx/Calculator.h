@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-//#include "Header.h"
-
 #include "CalcToken.h"
 
 namespace Calc {

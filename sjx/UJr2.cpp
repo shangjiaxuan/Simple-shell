@@ -1,5 +1,4 @@
 ﻿#include "UJr2.h"
-#include "VCtrl_controls.h"
 
 using namespace std;
 

@@ -1,6 +1,4 @@
-﻿#include "Header.h"
-
-#include "Host.h"
+﻿#include "Host.h"
 #include "Parser.h"
 #include <queue>
 
@@ -22,19 +20,19 @@ void UI::loop(int argc, char* argv[]) const {
 		//this should be considered a hit to future improvements
 		bool quit_on_finish = true;
 		cmdline<nchar> cmd;
-		//the command passed to parser should not include the appname itself
+		//the command passed to parser should not include the app name itself
 		cmd.argc = argc - 1;
 		cmd.argv = new nchar*[argc - 1];
 		for(int i = 1; i < argc; i++) {
 #ifdef _UNICODE
 			const size_t arg_size = convert::UNC_size(argv[i]);
 			cmd.argv[i - 1] = new nchar[arg_size];
-			stringcpy(cmd.argv[i - 1], arg_size, convert::MBC2utf16(argv[i]).c_str());
+			stringcpy(cmd.argv[i - 1], convert::MBC2utf16(argv[i]).c_str());
 #endif
 #ifdef _MBCS
 			const size_t arg_size = strlen(argv[i]);
 			cmd.argv[i - 1] = new nchar[arg_size];
-			stringcpy(cmd.argv[i - 1], arg_size, argv[i]);
+			stringcpy(cmd.argv[i - 1], argv[i]);
 #endif
 		}
 		cin.clear();
@@ -46,7 +44,7 @@ void UI::loop(int argc, char* argv[]) const {
 host_beginning:
 	//go_to_beginning = false;
 	cout << "********************************************************************************\n";
-	cout << "My mini program collection " << STRING(VERSION) << '\n';
+	cout << "My mini program collection " << STRING(HOST_VERSION) << '\n';
 	cout << "Which program do you wish to use?\n\n";
 	cout << "Use \"-h\" or \"man\" for help or manual page.\n" << endl;
 	while(cin) {
@@ -95,7 +93,7 @@ cmdline<nchar> UI::Get_input(istream& input_stream) {
 //For parsing commandline input
 //may be changed to return a nchar*(NULL terminated) instead in the future
 //this function can only read from char streams and wide chars should be
-//treated seperately with care
+//treated separately with care
 //This function only works with streams with current input console codepage for now
 nchar* UI::parse_input(istream& input_stream) {
 	std::string input;
@@ -141,7 +139,7 @@ nchar* UI::parse_input(istream& input_stream) {
 #ifdef _UNICODE
 	const size_t unc_size = convert::UNC_size(input.c_str());
 	rtn = new nchar[unc_size + 1];
-	stringcpy(rtn, unc_size + 1, convert::string2wstring(input).c_str());
+	stringcpy(rtn, convert::string2wstring(input).c_str());
 #endif
 #ifdef _MBCS
 	const size_t mbcs_size = strlen(input.c_str());

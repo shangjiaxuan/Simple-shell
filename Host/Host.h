@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Header.h"
+#include "../Lib/Header.h"
 
 template<typename type>
 struct cmdline;
@@ -46,9 +46,9 @@ struct cmdline {
 		argc = source.argc;
 		argv = new type*[argc];
 		for(size_t i = 0; i < argc; i++) {
-			size_t arg_length = stringlen(source.argv[i]) + 1;
-			argv[i] = new type[arg_length];
-			stringcpy(argv[i], arg_length, source.argv[i]);
+			size_t arg_length = stringlen(source.argv[i]);
+			argv[i] = new type[arg_length + 1];
+			stringcpy(argv[i], source.argv[i]);
 		}
 	}
 
@@ -56,9 +56,9 @@ struct cmdline {
 		argc = source.argc;
 		argv = new type*[argc];
 		for(size_t i = 0; i < argc; i++) {
-			size_t arg_length = stringlen(source.argv[i]) + 1;
-			argv[i] = new type[arg_length];
-			stringcpy(argv[i], arg_length, source.argv[i]);
+			size_t arg_length = stringlen(source.argv[i]);
+			argv[i] = new type[arg_length + 1];
+			stringcpy(argv[i], source.argv[i]);
 		}
 	}
 
@@ -66,9 +66,9 @@ struct cmdline {
 		argc = source.argc;
 		argv = new type*[argc];
 		for(size_t i = 0; i < argc; i++) {
-			size_t arg_length = stringlen(source.argv[i]) + 1;
-			argv[i] = new type[arg_length];
-			stringcpy(argv[i], arg_length, source.argv[i]);
+			size_t arg_length = stringlen(source.argv[i]);
+			argv[i] = new type[arg_length + 1];
+			stringcpy(argv[i], source.argv[i]);
 		}
 		return *this;
 	}
@@ -77,9 +77,9 @@ struct cmdline {
 		argc = source.argc;
 		argv = new type*[argc];
 		for(size_t i = 0; i < argc; i++) {
-			size_t arg_length = stringlen(source.argv[i]) + 1;
-			argv[i] = new type[arg_length];
-			stringcpy(argv[i], arg_length, source.argv[i]);
+			size_t arg_length = stringlen(source.argv[i]);
+			argv[i] = new type[arg_length + 1];
+			stringcpy(argv[i], source.argv[i]);
 		}
 		return *this;
 	}
