@@ -1,6 +1,4 @@
-﻿#include "Header.h"
-
-#include "Filemani.h"
+﻿#include "Filemani.h"
 #include "Launch.h"
 
 using namespace std;
@@ -11,7 +9,7 @@ namespace fileman {
 			std::experimental::filesystem::current_path(dir);
 		} catch(std::experimental::filesystem::filesystem_error& e) {
 			std::cerr << e.what() << '\n' << std::endl;
-			throw std::runtime_error("Error: Cannot chage into that working directory!\n");
+			throw std::runtime_error("Error: Cannot change into that working directory!\n");
 		}
 	}
 
@@ -20,7 +18,7 @@ namespace fileman {
 		if(str.back() == _T('"') && str.length() >= 6 && str.substr(str.length() - 5, 4) != Exec) { return false; }
 		if(str.back() != _T('"') && str.length() >= 4 && str.substr(str.length() - 4, 4) != Exec) { return false; }
 		//see if the file starts with a "MZ"(4D5A)
-		return PELaunch::DOS_magic_mumber(str);
+		return PELaunch::DOS_magic_number(str);
 #endif
 		return false;
 	}

@@ -7,13 +7,17 @@
 
 #pragma once
 
-#include "Header.h"
+#include "../Lib/Header.h"
 
 #include "Host.h"
 #include "Names.h"			//required for the command names
 
 namespace parser {
 	//select the function to call
+	//probably known commands will be represented with a tree
+	//with 256/512 indexes as indicator of the char/char16_t's corresponding subtree's root
+	//and a number to represent the command (parsing the command then starts with the number)
+	//index 0 indicates unknown command
 	void after_start_selector(cmdline<nchar> cmd);
 
 	//secondary commands' parsers go here

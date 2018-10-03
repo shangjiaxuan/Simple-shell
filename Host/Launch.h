@@ -1,9 +1,8 @@
 ﻿#pragma once
 
-#include "Header.h"
+#include "../Lib/Header.h"
 
 #include "Host.h"			//for cmdline struct
-#include "Parser.h"
 #include "Filemani.h"
 
 #ifdef _WIN32
@@ -22,7 +21,7 @@ public:
 
 	//read the beginning of DOS header and see if magic number
 	//"MZ" exists
-	static bool DOS_magic_mumber(const fs::path& p);
+	static bool DOS_magic_number(const fs::path& p);
 
 	PELaunch(fs::path exe_path);
 	PELaunch(const cmdline<nchar>& cmd);
@@ -31,7 +30,7 @@ public:
 	PELaunch(PELaunch&& source) noexcept;
 	PELaunch& operator=(PELaunch&& source) noexcept;
 
-	//note that evey time an instance goes out of scope,
+	//note that every time an instance goes out of scope,
 	//the strings stored in memory are deleted
 	~PELaunch() {
 		delete[] lpApplicationName;

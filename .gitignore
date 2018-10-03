@@ -318,7 +318,8 @@ __pycache__/
 *.iobj
 *.ipdb
 *.zip
-
+*.dat
+*commands_uncompressed*
 
 
 

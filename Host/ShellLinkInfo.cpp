@@ -1,6 +1,4 @@
-﻿#include "Header.h"
-
-#include "WinPlatform.h"
+﻿#include "WinPlatform.h"
 
 using namespace std;
 

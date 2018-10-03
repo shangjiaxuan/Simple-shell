@@ -24,6 +24,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>sjx</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <ProjectName>10 sjx</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -71,25 +72,26 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
+    <TargetName>sjx</TargetName>
+    <IncludePath>$(SolutionDir)Lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
+    <TargetName>sjx</TargetName>
+    <IncludePath>$(SolutionDir)Lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
+    <TargetName>sjx</TargetName>
+    <IncludePath>$(SolutionDir)Lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
+    <TargetName>sjx</TargetName>
+    <IncludePath>$(SolutionDir)Lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;SJX_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>Libs.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>myDataStructures.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -98,11 +100,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;SJX_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>Libs.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>myDataStructures.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -111,56 +110,77 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;SJX_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>Libs.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>myDataStructures.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>
+      </GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;SJX_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>Libs.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>myDataStructures.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>
+      </GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BinSearch.cpp" />
+    <ClCompile Include="BinSort.cpp" />
+    <ClCompile Include="Block_search.cpp" />
+    <ClCompile Include="Book.cpp" />
+    <ClCompile Include="Booklist.cpp" />
+    <ClCompile Include="BookUI.cpp" />
+    <ClCompile Include="Book_main.cpp" />
     <ClCompile Include="CalcToken.cpp" />
     <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="CalcVariable.cpp" />
     <ClCompile Include="Calc_main.cpp" />
+    <ClCompile Include="CrossingColor.cpp" />
+    <ClCompile Include="Crossing.cpp" />
+    <ClCompile Include="Crossing_main.cpp" />
+    <ClCompile Include="Crossriver.cpp" />
+    <ClCompile Include="Haffman.cpp" />
+    <ClCompile Include="KMP.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Pathman.cpp" />
+    <ClCompile Include="Maze.cpp" />
+    <ClCompile Include="Maze_main.cpp" />
+    <ClCompile Include="step.cpp" />
     <ClCompile Include="SwapEnc.cpp" />
     <ClCompile Include="SwapEnc_main.cpp" />
+    <ClCompile Include="UJr2.cpp" />
+    <ClCompile Include="VCtrl_controls.cpp" />
+    <ClCompile Include="VCtrl_main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BinSort.h" />
+    <ClInclude Include="Block_search.h" />
+    <ClInclude Include="Book.h" />
+    <ClInclude Include="Booklist.h" />
+    <ClInclude Include="BookUI.h" />
     <ClInclude Include="CalcToken.h" />
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="CalcVariable.h" />
-    <ClInclude Include="Header.h" />
-    <ClInclude Include="Macros.h" />
-    <ClInclude Include="Pathman.h" />
+    <ClInclude Include="CrossingColor.h" />
+    <ClInclude Include="Crossing.h" />
+    <ClInclude Include="CrossRiver.h" />
+    <ClInclude Include="Haffman.h" />
+    <ClInclude Include="KMP.h" />
+    <ClInclude Include="Maze.h" />
     <ClInclude Include="sjx_Exports.h" />
+    <ClInclude Include="step.h" />
     <ClInclude Include="SwapEnc.h" />
+    <ClInclude Include="UJr2.h" />
+    <ClInclude Include="VCtrl_controls.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

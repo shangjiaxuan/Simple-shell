@@ -48,7 +48,10 @@ namespace parser {
 			//		go_to_beginning = true;
 		} else if(stringcmp(cmd.argv[cur_arg], SwapEnc) == 0) {
 			cur_arg++;
+			cout << endl;
+			cin.clear();
 			call<void, void>(sjxDLL, "SwapEnc", nullptr);
+			cout << endl;
 			//		go_to_beginning = true;
 		} else if(stringcmp(cmd.argv[cur_arg], Man) == 0) {
 			cur_arg++;
@@ -60,6 +63,8 @@ namespace parser {
 			//this should mean the arguments are not going to be parsed within the host
 			//program anymore, thus, cur_arg generally does not need to increment
 		else if(fs::exists(cmd.argv[cur_arg])) {
+			cout << endl;
+			cin.clear();
 			//launching executables may include lnks in the future
 			nstring file_path = cmd.argv[cur_arg];
 			if(fileman::isexecutable(file_path)) {
@@ -69,7 +74,7 @@ namespace parser {
 				for(size_t i = 0; i < output_cmd.argc; i++) {
 					const size_t arg_size = stringlen(cmd.argv[i]);
 					output_cmd.argv[i] = new nchar[arg_size + 1];
-					stringcpy(output_cmd.argv[i], arg_size + 1, cmd.argv[i]);
+					stringcpy(output_cmd.argv[i], cmd.argv[i]);
 				}
 				const PELaunch info = PELaunch(output_cmd);
 				info.Launch();
@@ -81,7 +86,7 @@ namespace parser {
 				//may add a link command line parser in the future
 				//When adding, note that the whole line after the link file should also
 				//be treated as part of the new command along with the info in the link
-				if (info != Lnk_Info()) {
+				if(info != Lnk_Info()) {
 					const cmdline<nchar> temp = nchar2ncmdline(info.target_path.nstring().c_str());
 					after_start_selector(temp);
 				} else {
@@ -123,7 +128,8 @@ namespace parser {
 			}
 			if(not_found) {
 #ifdef _UNICODE
-				cout << "Sorry, but we cannot find the specified program " << convert::UTF16_2mbcs(cmd.argv[cur_arg]) << endl;
+				cout << "Sorry, but we cannot find the specified program " << convert::UTF16_2mbcs(cmd.argv[cur_arg]) <<
+				endl;
 #endif
 #ifdef _MBCS
 				cout << "Sorry, but we cannot find the specified program " << cmd.argv[cur_arg] << endl;
@@ -156,7 +162,7 @@ namespace parser {
 		for(size_t i = 0; i < output.argc; i++) {
 			const size_t arg_size = cmd[i + start].size() + 1;
 			output.argv[i] = new nchar[arg_size];
-			stringcpy(output.argv[i], arg_size, cmd[i + start].c_str());
+			stringcpy(output.argv[i], cmd[i + start].c_str());
 		}
 	}
 
@@ -182,7 +188,7 @@ namespace parser {
 		if(copied_size > max_output_size) {
 			return 2; //chop off in middle of copy
 		}
-		stringcpy(nc_ptr, arg_size + 1, input.argv[0]);
+		stringcpy(nc_ptr, input.argv[0]);
 		nc_ptr += arg_size;
 		copied_size += 2;
 		if(copied_size > max_output_size) {
@@ -204,7 +210,7 @@ namespace parser {
 			if(copied_size > max_output_size) {
 				return 2; //chop off in middle of copy
 			}
-			stringcpy(nc_ptr, arg_size + 1, input.argv[i]);
+			stringcpy(nc_ptr, input.argv[i]);
 			nc_ptr += arg_size;
 			i++;
 			if(i >= input.argc) {

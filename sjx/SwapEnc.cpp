@@ -1,5 +1,5 @@
 ﻿#include "SwapEnc.h"
-#include "Pathman.h"
+#include "../Lib/Pathman.h"
 
 using namespace std;
 
