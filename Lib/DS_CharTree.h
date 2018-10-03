@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-//#define CharNum 256
 #include "Utilities.h"
 
 //class of a CharTree
@@ -41,7 +40,7 @@
 //	Helper function for recursive print:
 //	void print_tokens_loop(node<content_type>* current, std::string& token, std::ostream& ost);
 template<typename tree_type, typename content_type>
-class CharTree {
+class Basic_Type_Tree {
 	//字符树的头和操作
 public:
 	struct node {
@@ -68,27 +67,27 @@ public:
 		}
 	};
 
-	CharTree() = default;
+	Basic_Type_Tree() = default;
 
-	CharTree(const CharTree& source) {
-		CharTree<tree_type, content_type>::copy(*this, source);
+	Basic_Type_Tree(const Basic_Type_Tree& source) {
+		Basic_Type_Tree<tree_type, content_type>::copy(*this, source);
 	}
 
-	CharTree& operator=(const CharTree& source) {
+	Basic_Type_Tree& operator=(const Basic_Type_Tree& source) {
 		copy(*this, source);
 		return *this;
 	}
 
-	CharTree(CharTree&& source) noexcept {
-		move(*this, source);
+	Basic_Type_Tree(Basic_Type_Tree&& source) noexcept {
+		Basic_Type_Tree<tree_type,content_type>::move(*this, source);
 	}
 
-	CharTree& operator=(CharTree&& source) noexcept {
+	Basic_Type_Tree& operator=(Basic_Type_Tree&& source) noexcept {
 		move(*this, source);
 		return *this;
 	}
 
-	virtual ~CharTree() {
+	virtual ~Basic_Type_Tree() {
 		head->destroy();
 		delete head;
 		node_found = false;
@@ -322,9 +321,9 @@ protected:
 	}
 
 	virtual void print_useful_content(node* current, std::ostream& ost, const std::basic_string<tree_type>& token){
-		ost << token << ":\t";
-		ost << current->data;
-		ost << std::endl;
+//		ost << token << ":\t";
+//		ost << current->data;
+//		ost << std::endl;
 	}
 
 	virtual void print_tokens_loop(node* current, std::basic_string<tree_type>& token, std::ostream& ost) {
@@ -346,7 +345,7 @@ protected:
 	}
 
 private:
-	virtual void copy(CharTree& destination, const CharTree& source) {
+	virtual void copy(Basic_Type_Tree& destination, const Basic_Type_Tree& source) {
 		if(destination.head) {
 			destination.head->destroy();
 		}
@@ -370,7 +369,7 @@ private:
 		}
 	}
 
-	virtual void move(CharTree&& destination, CharTree&& source) noexcept {
+	virtual void move(Basic_Type_Tree&& destination, Basic_Type_Tree&& source) noexcept {
 		if((&destination) == (&source)) {
 			return;
 		}
@@ -381,20 +380,31 @@ private:
 	}
 };
 
-#ifdef _WIN32
-inline void CharTree<wchar_t, int>::print_useful_content(node* current, std::ostream& ost, const std::wstring& token)  {
-	const DWORD size = WideCharToMultiByte(GetConsoleCP(), NULL, token.c_str(), -1, nullptr, 0, nullptr, nullptr);
-	LPSTR const multiByteStr = new CHAR[size];  // NOLINT(misc-misplaced-const)
-	char default_char = '?';
-	BOOL use_default = true;
-	if (WideCharToMultiByte(GetConsoleCP(), NULL, token.c_str(), -1, multiByteStr, size, &default_char, &use_default) == 0
-		) {
-		throw std::runtime_error("Error calling WideCharToMultiByte converting to MBCS");
+template <typename type>
+class CharTree : public Basic_Type_Tree<char, type> {
+	void print_useful_content(typename Basic_Type_Tree<char, type>::node* current, std::ostream& ost, const std::string& token) override {
+		ost << token << ":\t";
+		ost << current->data;
+		ost << std::endl;
 	}
-	ost << multiByteStr << ":\t";
-	ost << current->data;
-	ost << std::endl;
-	delete[] multiByteStr;
-}
-#endif
+};
 
+template <typename type>
+class WCharTree : public Basic_Type_Tree<wchar_t, type> {
+	void print_useful_content(typename Basic_Type_Tree<wchar_t, type>::node* current, std::ostream& ost, const std::wstring& token) override {
+#ifdef _WIN32
+		const DWORD size = WideCharToMultiByte(GetConsoleCP(), NULL, token.c_str(), -1, nullptr, 0, nullptr, nullptr);
+		LPSTR const multiByteStr = new CHAR[size];  // NOLINT(misc-misplaced-const)
+		char default_char = '?';
+		BOOL use_default = true;
+		if (WideCharToMultiByte(GetConsoleCP(), NULL, token.c_str(), -1, multiByteStr, size, &default_char, &use_default) == 0
+			) {
+			throw std::runtime_error("Error calling WideCharToMultiByte converting to MBCS");
+		}
+		ost << multiByteStr << ":\t";
+		ost << current->data;
+		ost << std::endl;
+		delete[] multiByteStr;
+#endif
+	}
+};

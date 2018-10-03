@@ -19,7 +19,7 @@ namespace UJr2_funcs {
 			vector<string> tokens = get_tokens(original.name);
 			const size_t size = tokens.size();
 			for(size_t i = 0; i < size; i++) {
-				CharTree<char,sorted_index_list<int>>::node* token_loc = index.locate(tokens[i]);
+				Basic_Type_Tree<char,sorted_index_list<int>>::node* token_loc = index.locate(tokens[i]);
 				token_loc->data.add(new_index);
 			}
 		}
@@ -80,7 +80,7 @@ namespace UJr2_funcs {
 				vector<string> tokens = get_tokens(found.name);
 				const size_t size = tokens.size();
 				for(size_t i = 0; i < size; i++) {
-					CharTree<char,sorted_index_list<int>>::node* token = index.locate(tokens[i]);
+					Basic_Type_Tree<char,sorted_index_list<int>>::node* token = index.locate(tokens[i]);
 					token->data.del(added_index);
 					token->data.add(new_index);
 				}
@@ -162,7 +162,7 @@ namespace UJr2_funcs {
 		}
 
 		bool Book::istoken(const std::string& token) {
-			CharTree<char,sorted_index_list<int>>::node* temp = index.locate(token);
+			Basic_Type_Tree<char,sorted_index_list<int>>::node* temp = index.locate(token);
 			if(!temp) {
 				return true;
 			}
@@ -223,7 +223,7 @@ namespace UJr2_funcs {
 			vector<string> tokens = get_tokens(bookname);
 			const size_t size = tokens.size();
 			for(size_t i = 0; i < size; i++) {
-				CharTree<char, sorted_index_list<int>>::node* node = index.locate(tokens[i]);
+				Basic_Type_Tree<char, sorted_index_list<int>>::node* node = index.locate(tokens[i]);
 				if(!node->data || ((node->data.front() == node->data.back()) && node->data.front() == book_index)) {
 					index.access(tokens[i]).del(book_index);
 					if (!node->data) index.del_token(tokens[i]);
@@ -244,7 +244,7 @@ namespace UJr2_funcs {
 
 		void Book::ntoken(std::string token) {
 			To_standard(token);
-			CharTree<char, sorted_index_list<int>>::node* loc = index.locate(token);
+			Basic_Type_Tree<char, sorted_index_list<int>>::node* loc = index.locate(token);
 			if(loc) {
 				loc->data.destroy();
 				loc->data.add(-1);

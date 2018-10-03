@@ -2,6 +2,8 @@
 
 #include "Header.h"
 
+//may add a Linked_Cyclic_Queue class to dynamically allocate Cyclic_Queues with given fixed size
+//This will require a linked list of cyclic queues
 template<typename type>
 class Cyclic_Queue {
 public:

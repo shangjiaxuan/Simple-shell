@@ -9,3 +9,7 @@ static constexpr size_t find_MAX() {
 	return start;
 }
 
+template<typename type>
+static constexpr size_t find_SQRT_OF_MAX() {
+	return size_t(sqrt(find_MAX<type>()));
+}

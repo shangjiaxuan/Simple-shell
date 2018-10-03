@@ -17,6 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00 Host", "Host\Host.vcxproj", "{5F19A4E2-79CF-4198-B711-1EA7859926CA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{23BA0350-902E-4F24-859F-8C41C6BE5393} = {23BA0350-902E-4F24-859F-8C41C6BE5393}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10 sjx", "sjx\sjx.vcxproj", "{23BA0350-902E-4F24-859F-8C41C6BE5393}"
 EndProject

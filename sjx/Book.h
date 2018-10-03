@@ -8,7 +8,7 @@ namespace UJr2_funcs {
 
 		class UI;
 
-		class BookIndex : public CharTree<char, sorted_index_list<int>> {
+		class BookIndex : public CharTree<sorted_index_list<int>> {
 		protected:
 			void print_useful_content(node* current, std::ostream& ost, const std::string& token) override {
 				if(current->data.front() >= 0) {

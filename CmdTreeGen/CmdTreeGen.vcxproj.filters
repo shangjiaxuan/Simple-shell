@@ -29,7 +29,7 @@
     <ClInclude Include="..\commands\macro_commands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Lib\DS_CharTree.h">
+    <ClInclude Include="..\commands\commands_uncompressed.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

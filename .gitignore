@@ -319,6 +319,7 @@ __pycache__/
 *.ipdb
 *.zip
 *.dat
+*commands_uncompressed*
 
 
 
