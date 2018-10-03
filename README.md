@@ -17,7 +17,7 @@ e.g. support some UNIX commands, 'cd'ing directly to other drives(multiple root 
 
 * Other compilers may or may not work with the code. File a issue if you want your compiler supported, but may not be attended until the program reaches a stable stage.
 
-* Please note that there's a `__try{}__except(){}` block in LoadLibrary functions, you may need to redefine behavior(possibly using a macro to not compile the code that involve default calling of library functions and use c++ try block insead of a SEH error handling block) if you use a compiler that does not support it. 
+* Please note that there's a [`__try{}__except(){} block`](https://docs.microsoft.com/en-us/cpp/cpp/structured-exception-handling-c-cpp?view=vs-2017)  in LoadLibrary functions, you may need to redefine behavior(possibly using a macro to not compile the code that involve default calling of library functions and use c++ try block insead of a SEH error handling block) if you use a compiler that does not support it. 
 
 * Also, `_WINDLL`, `_WIN32`, `_UNICODE`, `_MBCS` macros are used in the program, please adapt those macros and codes if your development environment does not use them
 
@@ -29,10 +29,12 @@ e.g. support some UNIX commands, 'cd'ing directly to other drives(multiple root 
 
 ## License
 
-* This project's code by it self if free to use in any regard without warranty, but code that was referenced or included may not belong to this project. These code inclue but are not limited to the original calculator-3.0 by my teacher and various stackoverflow(licensed under `CC BY-SA 3.0` if not specified), MSDN (licensed under `Ms-LPL` if not specified) and other forum topic and reference pages where I looked for the usage of certain Windows API calls.(Note that my code is licensed under `MPL-2.0`, but I guess I won't do anything if someone violates it with MY code without causing too much harm...)
+* This project's code by it self if free to use in any regard without warranty, but code that was referenced or included may not belong to this project. These code inclue but are not limited to the original calculator-3.0 by my teacher and various stackoverflow(licensed under [`CC BY-SA 3.0`](https://creativecommons.org/licenses/by-sa/3.0/) and `MIT` as stated ([here](https://meta.stackexchange.com/questions/271080/the-mit-license-clarity-on-using-code-on-stack-overflow-and-stack-exchange)), if not specified), MSDN (licensed under [`Ms-LPL`]( Simple-shell/License-other/MS-LPL.txt ) if not specified) and other forum topic and reference pages where I looked for the usage of certain Windows API calls.
+
+* (Note that my code is licensed under [`MPL-2.0`]( Simple-shell/LICENSE ), but I guess I won't do anything if someone violates it with MY code without causing too much harm...)
 
 * Please note that when developing this program, I was using student version of certaion tools (Including but not limited to ReSharper's plugin and Vsiual Studio community). Thus, if you intend to use it for commercial ends, please file an issue before proceeding. 
-(According to license terms up to Oct 4th, 2018, there is no issue here......)
+(According to license terms up to Oct 4th, 2018, there is no issue here......(see the [`License directory`](Simple-shell/License-other/)))
 
 ### End remark
 
