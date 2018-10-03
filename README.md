@@ -29,12 +29,12 @@ e.g. support some UNIX commands, 'cd'ing directly to other drives(multiple root 
 
 ## License
 
-* This project's code by it self if free to use in any regard without warranty, but code that was referenced or included may not belong to this project. These code inclue but are not limited to the original calculator-3.0 by my teacher and various stackoverflow(licensed under [`CC BY-SA 3.0`](https://creativecommons.org/licenses/by-sa/3.0/) and `MIT` as stated ([here](https://meta.stackexchange.com/questions/271080/the-mit-license-clarity-on-using-code-on-stack-overflow-and-stack-exchange)), if not specified), MSDN (licensed under [`Ms-LPL`]( Simple-shell/License-other/MS-LPL.txt ) if not specified) and other forum topic and reference pages where I looked for the usage of certain Windows API calls.
+* This project's code by it self if free to use in any regard without warranty, but code that was referenced or included may not belong to this project. These code inclue but are not limited to the original calculator-3.0 by my teacher and various stackoverflow(licensed under [`CC BY-SA 3.0`](https://creativecommons.org/licenses/by-sa/3.0/) and `MIT` as stated ([here](https://meta.stackexchange.com/questions/271080/the-mit-license-clarity-on-using-code-on-stack-overflow-and-stack-exchange)), if not specified), MSDN (licensed under [`Ms-LPL`]( ./License-other/MS-LPL.txt ) if not specified) and other forum topic and reference pages where I looked for the usage of certain Windows API calls.
 
 * (Note that my code is licensed under [`MPL-2.0`]( ./LICENSE ), but I guess I won't do anything if someone violates it with MY code without causing too much harm...)
 
 * Please note that when developing this program, I was using student version of certaion tools (Including but not limited to ReSharper's plugin and Vsiual Studio community). Thus, if you intend to use it for commercial ends, please file an issue before proceeding. 
-(According to license terms up to Oct 4th, 2018, there is no issue here......(see the [`License directory`](Simple-shell/License-other/)))
+(According to license terms up to Oct 4th, 2018, there is no issue here......(see the [`License directory`](./License-other/)))
 
 ### End remark
 
