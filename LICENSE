@@ -19,14 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-NOTE:
-
-Certain code in the repository may be licensed under other terms. E.G. code
-may be adapted from adapted code snipets found on 'Microsoft Docs', Stackexchange,
-'MSDN' forums etc. (Some of the code snippet can even be found at multiple places,
-e.g. the CreateProcess function usage and the MultibyteToWideChar function templates.
-These code will contain information in the source code format. Please make sure 
-that your useage comply to their own terms.)
-
-
