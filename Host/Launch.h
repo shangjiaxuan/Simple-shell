@@ -33,33 +33,31 @@ public:
 	//note that every time an instance goes out of scope,
 	//the strings stored in memory are deleted
 	~PELaunch() {
-		delete[] lpApplicationName;
-		lpApplicationName = nullptr;
-		delete[] lpCommandLine;
-		lpCommandLine = nullptr;
-		delete[] lpCurrentDirectory;
-		lpCurrentDirectory = nullptr;
-		close();
+		destroy();
 	}
+
+	void destroy();
+	static void copy(PELaunch& destination, const PELaunch& source);
+	static void move(PELaunch& destination, PELaunch& source) noexcept;
 
 private:
 	//	path to the application
-	LPCTSTR lpApplicationName;
+	LPCTSTR lpApplicationName{};
 	//	Command line (complete commandline with module name)
-	LPTSTR lpCommandLine;
+	LPTSTR lpCommandLine{};
 	//	Process handle not inheritable as default
 	//	LPSECURITY_ATTRIBUTES lpProcessAttributes;
 	//	Thread handle not inheritable as default
 	//	LPSECURITY_ATTRIBUTES lpThreadAttributes;
 	//	handle inheritance may be used for running other exes in the shell
 	//	so no default false assumed here 
-	BOOL bInheritHandles;
+	BOOL bInheritHandles{};
 	//	Creation flags e.g. CREATE_NEW_CONSOLE
-	DWORD dwCreationFlags;
+	DWORD dwCreationFlags{};
 	//	currently always NULL for now
-	LPVOID lpEnvironment;
+	LPVOID lpEnvironment{};
 	//	Use file location's directory
-	LPCTSTR lpCurrentDirectory;
+	LPCTSTR lpCurrentDirectory{};
 	//	Pointer to STARTUPINFO structure
 	//	LPSTARTUPINFO		  lpStartupInfo;
 	//	Pointer to PROCESS_INFORMATION structure

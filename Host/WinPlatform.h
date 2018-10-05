@@ -13,10 +13,6 @@ public:
 	static DWORD MBCS_size(LPCWSTR);
 };
 
-//for calling functions in dlls
-template<typename rtn, typename passed>
-rtn call(const nchar* library, const char* function, passed* pass);
-
 //template void call<void>(const nchar* library, const char* function, void* null);
 
 struct Lnk_Info {

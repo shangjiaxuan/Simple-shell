@@ -54,107 +54,20 @@ PELaunch::PELaunch(fs::path exe_path) {
 
 
 PELaunch::PELaunch(const PELaunch& source) {
-	//may not be necessary
-	open(source.lpApplicationName);
-	bInheritHandles = source.bInheritHandles;
-	//may need fix when lpEnvironment is not always NULL
-	lpEnvironment = source.lpEnvironment;
-	dwCreationFlags = source.dwCreationFlags;
-	size_t str_size = stringlen(source.lpCommandLine);
-	lpCommandLine = new nchar[str_size + 1];
-	stringcpy(lpCommandLine, source.lpCommandLine);
-	//initialize lpApplicationName
-	str_size = stringlen(source.lpApplicationName);
-	//create a temporary pointer to modifiable data to initialize unmodifiable data
-	nchar* temp = new nchar[str_size + 1];
-	stringcpy(temp, source.lpApplicationName);
-	lpApplicationName = temp;
-	//initialize lpCurrentDirectory
-	str_size = stringlen(source.lpCurrentDirectory);
-	temp = new nchar[str_size + 1];
-	stringcpy(temp, source.lpCurrentDirectory);
-	lpCurrentDirectory = temp;
+	copy(*this, source);
 }
 
 PELaunch::PELaunch(PELaunch&& source) noexcept {
-	//may not be necessary
-	open(source.lpApplicationName);
-	bInheritHandles = source.bInheritHandles;
-	//may need fix when lpEnvironment is not always NULL
-	lpEnvironment = source.lpEnvironment;
-	dwCreationFlags = source.dwCreationFlags;
-	size_t str_size = stringlen(source.lpCommandLine);
-	lpCommandLine = new nchar[str_size + 1];
-	stringcpy(lpCommandLine, source.lpCommandLine);
-	//initialize lpApplicationName
-	str_size = stringlen(source.lpApplicationName);
-	//create a temporary pointer to modifiable data to initialize unmodifiable data
-	nchar* temp = new nchar[str_size + 1];
-	stringcpy(temp, source.lpApplicationName);
-	lpApplicationName = temp;
-	//initialize lpCurrentDirectory
-	str_size = stringlen(source.lpCurrentDirectory);
-	temp = new nchar[str_size + 1];
-	stringcpy(temp, source.lpCurrentDirectory);
-	lpCurrentDirectory = temp;
+	move(*this, source);
 }
 
 PELaunch& PELaunch::operator=(PELaunch&& source) noexcept {
-	if(this == &source) {
-		return *this;
-	}
-	this->~PELaunch();
-	//may not be necessary
-	open(source.lpApplicationName);
-	bInheritHandles = source.bInheritHandles;
-	//may need fix when lpEnvironment is not always NULL
-	lpEnvironment = source.lpEnvironment;
-	dwCreationFlags = source.dwCreationFlags;
-	size_t str_size = stringlen(source.lpCommandLine);
-	lpCommandLine = new nchar[str_size + 1];
-	stringcpy(lpCommandLine, source.lpCommandLine);
-	//initialize lpApplicationName
-	str_size = stringlen(source.lpApplicationName);
-	//create a temporary pointer to modifiable data to initialize unmodifiable data
-	nchar* temp = new nchar[str_size + 1];
-	stringcpy(temp, source.lpApplicationName);
-	lpApplicationName = temp;
-	//initialize lpCurrentDirectory
-	str_size = stringlen(source.lpCurrentDirectory);
-	temp = new nchar[str_size + 1];
-	stringcpy(temp, source.lpCurrentDirectory);
-	lpCurrentDirectory = temp;
+	move(*this, source);
 	return *this;
 }
 
 PELaunch& PELaunch::operator=(const PELaunch& source) {
-	if(this == &source) {
-		return *this;
-	}
-	this->~PELaunch();
-	//may not be necessary
-	open(source.lpApplicationName);
-	if(!*this) {
-		throw runtime_error("failed to open file again in PElaunch::operator=(const PELaunch& source)");
-	}
-	bInheritHandles = source.bInheritHandles;
-	//may need fix when lpEnvironment is not always NULL
-	lpEnvironment = source.lpEnvironment;
-	dwCreationFlags = source.dwCreationFlags;
-	size_t str_size = stringlen(source.lpCommandLine);
-	lpCommandLine = new nchar[str_size + 1];
-	stringcpy(lpCommandLine, source.lpCommandLine);
-	//initialize lpApplicationName
-	str_size = stringlen(source.lpApplicationName);
-	//create a temporary pointer to modifiable data to initialize unmodifiable data
-	nchar* temp = new nchar[str_size + 1];
-	stringcpy(temp, source.lpApplicationName);
-	lpApplicationName = temp;
-	//initialize lpCurrentDirectory
-	str_size = stringlen(source.lpCurrentDirectory);
-	temp = new nchar[str_size + 1];
-	stringcpy(temp, source.lpCurrentDirectory);
-	lpCurrentDirectory = temp;
+	copy(*this, source);
 	return *this;
 }
 
@@ -237,3 +150,63 @@ bool PELaunch::DOS_magic_number(const fs::path& p) {
 	const INT16 i = 0x5A4D;
 	return test == i;
 }
+
+void PELaunch::copy(PELaunch& destination, const PELaunch& source) {
+	//may not be necessary
+	destination.destroy();
+	destination.open(source.lpApplicationName);
+	if (!destination) {
+		throw runtime_error("failed to open file again in PElaunch::operator=(const PELaunch& source)");
+	}
+	destination.bInheritHandles = source.bInheritHandles;
+	//may need fix when lpEnvironment is not always NULL
+	destination.lpEnvironment = source.lpEnvironment;
+	destination.dwCreationFlags = source.dwCreationFlags;
+	size_t str_size = stringlen(source.lpCommandLine);
+	destination.lpCommandLine = new nchar[str_size + 1];
+	stringcpy(destination.lpCommandLine, source.lpCommandLine);
+	//initialize lpApplicationName
+	str_size = stringlen(source.lpApplicationName);
+	//create a temporary pointer to modifiable data to initialize unmodifiable data
+	nchar* temp = new nchar[str_size + 1];
+	stringcpy(temp, source.lpApplicationName);
+	destination.lpApplicationName = temp;
+	//initialize lpCurrentDirectory
+	str_size = stringlen(source.lpCurrentDirectory);
+	temp = new nchar[str_size + 1];
+	stringcpy(temp, source.lpCurrentDirectory);
+	destination.lpCurrentDirectory = temp;
+}
+
+void PELaunch::move(PELaunch& destination, PELaunch& source) noexcept {
+	if ((&destination) == (&source)) return;
+	destination.destroy();
+	destination.swap(source);
+	destination.bInheritHandles = source.bInheritHandles;
+	destination.dwCreationFlags = source.dwCreationFlags;
+	destination.lpApplicationName = source.lpApplicationName;
+	destination.lpCommandLine = source.lpCommandLine;
+	destination.lpCurrentDirectory = source.lpCurrentDirectory;
+	destination.lpEnvironment = source.lpEnvironment;
+	source.bInheritHandles = NULL;
+	source.dwCreationFlags = NULL;
+	source.lpApplicationName = nullptr;
+	source.lpCommandLine = nullptr;
+	source.lpCurrentDirectory = nullptr;
+	source.lpEnvironment = nullptr;
+}
+
+void PELaunch::destroy() {
+	close();
+	bInheritHandles = NULL;
+	dwCreationFlags = NULL;
+	delete[] lpApplicationName;
+	lpApplicationName = nullptr;
+	delete[] lpCommandLine;
+	lpCommandLine = nullptr;
+	delete[] lpCurrentDirectory;
+	lpCurrentDirectory = nullptr;
+	free(lpEnvironment);
+	lpEnvironment = nullptr;
+}
+

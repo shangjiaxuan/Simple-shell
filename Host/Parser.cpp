@@ -4,7 +4,7 @@
 #include "Launch.h"			//required for launching executables
 
 #ifdef _WIN32
-#include "WinPlatform.h"	//required for calling functions from dlls
+#include "LoadLibrary.h"	//required for calling functions from dlls
 #endif
 
 using namespace std;
@@ -43,14 +43,14 @@ namespace parser {
 			cur_arg++;
 			cout << endl;
 			cin.clear();
-			call<void, istream>(sjxDLL, "calculator", &cin);
+			call<void, istream&>(sjxDLL, "calculator", cin);
 			cout << endl;
 			//		go_to_beginning = true;
 		} else if(stringcmp(cmd.argv[cur_arg], SwapEnc) == 0) {
 			cur_arg++;
 			cout << endl;
 			cin.clear();
-			call<void, void>(sjxDLL, "SwapEnc", nullptr);
+			call<void, void>(sjxDLL, "SwapEnc");
 			cout << endl;
 			//		go_to_beginning = true;
 		} else if(stringcmp(cmd.argv[cur_arg], Man) == 0) {
@@ -112,7 +112,7 @@ namespace parser {
 					try {
 						cur_arg++;
 #ifdef _UNICODE
-						call<void, void>(str.c_str(), convert::UTF16_2mbcs(cmd.argv[cur_arg]).c_str(), nullptr);
+						call<void, void>(str.c_str(), convert::UTF16_2mbcs(cmd.argv[cur_arg]).c_str());
 #endif
 #ifdef _MBCS
 						call<void, void>(str.c_str(), cmd.argv[cur_arg], nullptr);

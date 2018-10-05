@@ -73,29 +73,21 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)Intermediates\$(ProjectName)\$(PlatformTarget)-$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)Build\$(PlatformTarget)-$(Configuration)\</OutDir>
     <TargetName>Host</TargetName>
     <IncludePath>$(SolutionDir)Lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)Intermediates\$(ProjectName)\$(PlatformTarget)-$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)Build\$(PlatformTarget)-$(Configuration)\</OutDir>
     <TargetName>Host</TargetName>
     <IncludePath>$(SolutionDir)Lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)Intermediates\$(ProjectName)\$(PlatformTarget)-$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)Build\$(PlatformTarget)-$(Configuration)\</OutDir>
     <TargetName>Host</TargetName>
     <IncludePath>$(SolutionDir)Lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)Intermediates\$(ProjectName)\$(PlatformTarget)-$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)Build\$(PlatformTarget)-$(Configuration)\</OutDir>
     <TargetName>Host</TargetName>
     <IncludePath>$(SolutionDir)Lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
@@ -105,6 +97,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PrecompiledHeaderFile>Header.h</PrecompiledHeaderFile>
       <ExceptionHandling>SyncCThrow</ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -164,6 +157,7 @@
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PrecompiledHeaderFile>Header.h</PrecompiledHeaderFile>
       <ExceptionHandling>SyncCThrow</ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -181,11 +175,12 @@
     <ClCompile Include="Filemani.cpp" />
     <ClCompile Include="Host.cpp" />
     <ClCompile Include="Launch.cpp" />
+    <ClCompile Include="LoadLibraryLib.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Names.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="ShellLinkInfo.cpp" />
-    <ClCompile Include="LoadLibrary.cpp" />
+    <ClCompile Include="LoadLibrary.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Filemani.h" />

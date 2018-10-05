@@ -43,55 +43,53 @@ struct cmdline {
 	cmdline() = default;
 
 	cmdline(const cmdline& source) {
-		argc = source.argc;
-		argv = new type*[argc];
-		for(size_t i = 0; i < argc; i++) {
-			size_t arg_length = stringlen(source.argv[i]);
-			argv[i] = new type[arg_length + 1];
-			stringcpy(argv[i], source.argv[i]);
-		}
+		copy(*this, source);
 	}
 
 	cmdline(cmdline&& source) noexcept {
-		argc = source.argc;
-		argv = new type*[argc];
-		for(size_t i = 0; i < argc; i++) {
-			size_t arg_length = stringlen(source.argv[i]);
-			argv[i] = new type[arg_length + 1];
-			stringcpy(argv[i], source.argv[i]);
-		}
+		move(*this, source);
 	}
 
 	cmdline& operator=(const cmdline& source) {
-		argc = source.argc;
-		argv = new type*[argc];
-		for(size_t i = 0; i < argc; i++) {
-			size_t arg_length = stringlen(source.argv[i]);
-			argv[i] = new type[arg_length + 1];
-			stringcpy(argv[i], source.argv[i]);
-		}
+		copy(*this, source);
 		return *this;
 	}
 
 	cmdline& operator=(cmdline&& source) noexcept {
-		argc = source.argc;
-		argv = new type*[argc];
-		for(size_t i = 0; i < argc; i++) {
-			size_t arg_length = stringlen(source.argv[i]);
-			argv[i] = new type[arg_length + 1];
-			stringcpy(argv[i], source.argv[i]);
-		}
+		move(*this, source);
 		return *this;
 	}
 
 	~cmdline() {
-		for(size_t i = 0; i < argc; i++) {
+		destroy();
+	}
+
+	void destroy() {
+		for (size_t i = 0; i < argc; i++) {
 			delete[] argv[i];
 			argv[i] = nullptr;
 		}
 		delete[] argv;
 		argv = nullptr;
 		argc = 0;
+	}
+
+	static void copy(cmdline& destination, const cmdline& source) {
+		destination.argc = source.argc;
+		destination.argv = new type*[source.argc];
+		for (size_t i = 0; i < source.argc; i++) {
+			const size_t arg_length = stringlen(source.argv[i]);
+			destination.argv[i] = new type[arg_length + 1];
+			stringcpy(destination.argv[i], source.argv[i]);
+		}
+	}
+
+	static void move(cmdline& destination, cmdline& source) {
+		if((&destination)==(&source)) return;
+		destination.argc = source.argc;
+		destination.argv = source.argv;
+		source.argc = 0;
+		source.argv = nullptr;
 	}
 };
 
@@ -103,54 +101,52 @@ struct cmdline<char> {
 	cmdline() = default;
 
 	cmdline(const cmdline& source) {
-		argc = source.argc;
-		argv = new char*[argc];
-		for(size_t i = 0; i < argc; i++) {
-			const size_t arg_length = strlen(source.argv[i]) + 1;
-			argv[i] = new char[arg_length];
-			strcpy_s(argv[i], arg_length, source.argv[i]);
-		}
+		copy(*this, source);
 	}
 
 	cmdline(cmdline&& source) noexcept {
-		argc = source.argc;
-		argv = new char*[argc];
-		for(size_t i = 0; i < argc; i++) {
-			const size_t arg_length = strlen(source.argv[i]) + 1;
-			argv[i] = new char[arg_length];
-			strcpy_s(argv[i], arg_length, source.argv[i]);
-		}
+		move(*this, source);
 	}
 
 	cmdline& operator=(const cmdline& source) {
-		argc = source.argc;
-		argv = new char*[argc];
-		for(size_t i = 0; i < argc; i++) {
-			const size_t arg_length = strlen(source.argv[i]) + 1;
-			argv[i] = new char[arg_length];
-			strcpy_s(argv[i], arg_length, source.argv[i]);
-		}
+		copy(*this, source);
 		return *this;
 	}
 
 	cmdline& operator=(cmdline&& source) noexcept {
-		argc = source.argc;
-		argv = new char*[argc];
-		for(size_t i = 0; i < argc; i++) {
-			const size_t arg_length = strlen(source.argv[i]) + 1;
-			argv[i] = new char[arg_length];
-			strcpy_s(argv[i], arg_length, source.argv[i]);
-		}
+		move(*this, source);
 		return *this;
 	}
 
 	~cmdline() {
-		for(size_t i = 0; i < argc; i++) {
+		destroy();
+	}
+
+	void destroy() {
+		for (size_t i = 0; i < argc; i++) {
 			delete[] argv[i];
 			argv[i] = nullptr;
 		}
 		delete[] argv;
 		argv = nullptr;
 		argc = 0;
+	}
+
+	static void copy(cmdline& destination, const cmdline& source) {
+		destination.argc = source.argc;
+		destination.argv = new char*[source.argc];
+		for (size_t i = 0; i < source.argc; i++) {
+			const size_t arg_length = strlen(source.argv[i]);
+			destination.argv[i] = new char[arg_length + 1];
+			strcpy(destination.argv[i], source.argv[i]);
+		}
+	}
+
+	static void move(cmdline& destination, cmdline& source) {
+		if ((&destination) == (&source)) return;
+		destination.argc = source.argc;
+		destination.argv = source.argv;
+		source.argc = 0;
+		source.argv = nullptr;
 	}
 };

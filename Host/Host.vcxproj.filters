@@ -47,7 +47,10 @@
     <ClCompile Include="Host.cpp">
       <Filter>01 UI</Filter>
     </ClCompile>
-    <ClCompile Include="LoadLibrary.cpp">
+    <ClCompile Include="LoadLibrary.h">
+      <Filter>03 Win32_Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadLibraryLib.cpp">
       <Filter>03 Win32_Functions</Filter>
     </ClCompile>
   </ItemGroup>
