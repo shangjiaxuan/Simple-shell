@@ -15,10 +15,10 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\Lib\DS_CharTree.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DS_CharTree.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DS_CharTree.ipp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DS_cycQueue.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DS_cycQueue.ipp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DS_FixedStack.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DS_LinkedList.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Header.h" />

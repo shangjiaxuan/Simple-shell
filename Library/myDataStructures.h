@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Header.h"
 
 #include "DS_LinkedList.h"

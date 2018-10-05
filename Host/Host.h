@@ -1,6 +1,6 @@
-﻿#pragma once
+#pragma once
 
-#include "../Lib/Header.h"
+#include "../Library/Header.h"
 
 template<typename type>
 struct cmdline;

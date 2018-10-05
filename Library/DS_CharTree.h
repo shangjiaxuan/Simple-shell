@@ -70,5 +70,10 @@ private:
 	virtual void move(Basic_Type_Tree&& destination, Basic_Type_Tree&& source) noexcept;
 };
 
+template<typename content_type>
+class CharTree;
+template<typename content_type>
+class WCharTree;
+
 #include "DS_CharTree.ipp"
 

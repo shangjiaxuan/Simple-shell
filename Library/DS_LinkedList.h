@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "Header.h"
 
@@ -256,7 +256,7 @@ public:
 		if(empty()) {
 			throw std::range_error{"sorted_index_list: del: list is empty!"};
 		}
-		linked_list<index_type>::node* pre_start = find_pre(head, index);
+		typename linked_list<index_type>::node* pre_start = find_pre(head, index);
 		if (!pre_start) {
 			node* temp = head->next;
 			head->next = nullptr;

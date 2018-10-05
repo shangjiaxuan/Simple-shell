@@ -1,6 +1,6 @@
-﻿#pragma once
+#pragma once
 
-#include "../Lib/DS_CharTree.h"
+#include "../Library/DS_CharTree.h"
 
 #ifdef _UNICODE
 #define NCharTree WCharTree

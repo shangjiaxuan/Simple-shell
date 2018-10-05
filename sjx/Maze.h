@@ -1,8 +1,8 @@
-﻿#pragma once
+#pragma once
 
 #include "UJr2.h"
 
-#include "../Lib/myDataStructures.h"
+#include "../Library/myDataStructures.h"
 #include "step.h"
 
 namespace UJr2_funcs {

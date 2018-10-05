@@ -1,5 +1,5 @@
-﻿#pragma once
-#include "../Lib/Header.h"
+#pragma once
+#include "../Library/Header.h"
 
 //file for declaring the constant strings, all simple commands go here
 

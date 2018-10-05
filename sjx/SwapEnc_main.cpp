@@ -1,4 +1,4 @@
-﻿#include "SwapEnc.h"
+#include "SwapEnc.h"
 
 using namespace std;
 

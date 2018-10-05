@@ -1,4 +1,4 @@
-﻿#include "myDataStructures.h"
+#include "myDataStructures.h"
 
 using namespace std;
 

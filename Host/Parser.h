@@ -1,4 +1,4 @@
-﻿/////////////////////////////////////////////////
+/////////////////////////////////////////////////
 //The core command parser
 //Used for parsing commands
 //call the correct functions for furthur parsing
@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../Lib/Header.h"
+#include "../Library/Header.h"
 
 #include "Host.h"
 #include "Names.h"			//required for the command names

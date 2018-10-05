@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 template<typename type>
 static constexpr size_t find_MAX() {

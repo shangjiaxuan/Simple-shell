@@ -1,5 +1,5 @@
-﻿#pragma once
-#include "../Lib/Header.h"
+#pragma once
+#include "../Library/Header.h"
 #include "Names.h"		//for isexecutable ... functions 
 
 namespace fileman {
