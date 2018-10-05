@@ -27,21 +27,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02 test", "01 test\01 test.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01 CmdTreeGen", "CmdTreeGen\CmdTreeGen.vcxproj", "{7B9ED51D-5A67-4C94-BC31-F08D4C10ADB8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{23D23EE6-3584-4CBC-B0A5-6E4B3830EEA0}"
-	ProjectSection(SolutionItems) = preProject
-		Lib\DS_CharTree.h = Lib\DS_CharTree.h
-		Lib\DS_cycQueue.h = Lib\DS_cycQueue.h
-		Lib\DS_FixedStack.h = Lib\DS_FixedStack.h
-		Lib\DS_LinkedList.h = Lib\DS_LinkedList.h
-		Lib\Header.h = Lib\Header.h
-		Lib\Macros.h = Lib\Macros.h
-		Lib\myDataStructures.cpp = Lib\myDataStructures.cpp
-		Lib\myDataStructures.h = Lib\myDataStructures.h
-		Lib\Pathman.h = Lib\Pathman.h
-		Lib\Utilities.h = Lib\Utilities.h
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00 Library", "Library\Library.vcxitems", "{C1071397-E310-45FD-AF72-674842E59151}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Library\Library.vcxitems*{1258e91e-fccc-4eef-acc6-d62600660555}*SharedItemsImports = 4
+		Library\Library.vcxitems*{23ba0350-902e-4f24-859f-8c41c6be5393}*SharedItemsImports = 4
+		Library\Library.vcxitems*{5f19a4e2-79cf-4198-b711-1ea7859926ca}*SharedItemsImports = 4
+		Library\Library.vcxitems*{7b9ed51d-5a67-4c94-bc31-f08d4c10adb8}*SharedItemsImports = 4
+		Library\Library.vcxitems*{c1071397-e310-45fd-af72-674842e59151}*SharedItemsImports = 9
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86

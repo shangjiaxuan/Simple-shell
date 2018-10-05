@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{c1071397-e310-45fd-af72-674842e59151}</ItemsProjectGuid>
+    <ItemsProjectName>00 Library</ItemsProjectName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\Lib\DS_CharTree.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DS_CharTree.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DS_CharTree.ipp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DS_cycQueue.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DS_FixedStack.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DS_LinkedList.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Header.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Macros.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)myDataStructures.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Pathman.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Utilities.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)myDataStructures.cpp" />
+  </ItemGroup>
+</Project>
