@@ -31,7 +31,7 @@ namespace UJr2_funcs {
 			getline(cin, path);
 			path = parse_path(path);
 			ifstream ifs;
-			ifs.open(path, ios:;binary);
+			ifs.open(path, ios::binary);
 			if (!ifs) {
 				throw runtime_error("Haffman::init(): Cannot open specified file!");
 			}

@@ -2,7 +2,7 @@
 
 #include "../Library/Header.h"
 
-#include "sjx_Exports.h"
+#include "../sjx_Exports.h"
 
 namespace enc {
 	class SwapEnc {

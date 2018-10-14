@@ -1,9 +1,9 @@
 ﻿//////////////////////////////////////////////////////////////////////
 //For debugging certain functions directly by compiling into exe
 
-#include "UJr2.h"
-#include "SwapEnc.h"
-#include "Calculator.h"
+#include "UJr2/UJr2.h"
+#include "SwapEnc/SwapEnc.h"
+#include "calculator/Calculator.h"
 
 using namespace std;
 

@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "UJr2.h"
+#include "../UJr2.h"
 
 namespace UJr2_funcs {
 #define MAX_CAR 100

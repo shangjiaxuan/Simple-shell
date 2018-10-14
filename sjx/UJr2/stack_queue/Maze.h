@@ -1,6 +1,6 @@
 #pragma once
 
-#include "UJr2.h"
+#include "../UJr2.h"
 
 #include "../Library/myDataStructures.h"
 #include "step.h"

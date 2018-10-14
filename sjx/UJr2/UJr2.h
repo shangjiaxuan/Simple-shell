@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "sjx_Exports.h"
+#include "../sjx_Exports.h"
 
 #ifndef _WINDLL
 int UJr2(int argc, char* argv[]);

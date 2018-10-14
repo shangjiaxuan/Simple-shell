@@ -49,138 +49,138 @@
     <ClInclude Include="sjx_Exports.h">
       <Filter>00 General Items</Filter>
     </ClInclude>
-    <ClInclude Include="SwapEnc.h">
-      <Filter>12 Enc</Filter>
-    </ClInclude>
-    <ClInclude Include="CalcToken.h">
-      <Filter>11 Calc</Filter>
-    </ClInclude>
-    <ClInclude Include="CalcVariable.h">
-      <Filter>11 Calc</Filter>
-    </ClInclude>
-    <ClInclude Include="Calculator.h">
-      <Filter>11 Calc</Filter>
-    </ClInclude>
-    <ClInclude Include="UJr2.h">
-      <Filter>20 UJr2\0 General Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Crossing.h">
-      <Filter>20 UJr2\1 Crossing</Filter>
-    </ClInclude>
-    <ClInclude Include="CrossingColor.h">
-      <Filter>20 UJr2\1 Crossing</Filter>
-    </ClInclude>
-    <ClInclude Include="VCtrl_controls.h">
+    <ClInclude Include="UJr2/VCtrl/VCtrl_controls.h">
       <Filter>20 UJr2\2 Vehicle_control</Filter>
     </ClInclude>
-    <ClInclude Include="BookUI.h">
-      <Filter>20 UJr2\3 Book</Filter>
+    <ClInclude Include="UJr2/UJr2.h">
+      <Filter>20 UJr2\0 General Items</Filter>
     </ClInclude>
-    <ClInclude Include="Book.h">
-      <Filter>20 UJr2\3 Book</Filter>
+    <ClInclude Include="SwapEnc/SwapEnc.h">
+      <Filter>12 Enc</Filter>
     </ClInclude>
-    <ClInclude Include="Booklist.h">
-      <Filter>20 UJr2\3 Book</Filter>
+    <ClInclude Include="UJr2/stack_queue/step.h">
+      <Filter>20 UJr2\6 maze</Filter>
     </ClInclude>
-    <ClInclude Include="KMP.h">
+    <ClInclude Include="UJr2/KMP/KMP.h">
       <Filter>20 UJr2\4 KMP</Filter>
     </ClInclude>
-    <ClInclude Include="CrossRiver.h">
-      <Filter>20 UJr2\5 CrossRiver</Filter>
-    </ClInclude>
-    <ClInclude Include="Maze.h">
+    <ClInclude Include="UJr2/stack_queue/Maze.h">
       <Filter>20 UJr2\6 maze</Filter>
     </ClInclude>
-    <ClInclude Include="step.h">
-      <Filter>20 UJr2\6 maze</Filter>
-    </ClInclude>
-    <ClInclude Include="Haffman.h">
+    <ClInclude Include="UJr2/Haffman/Haffman.h">
       <Filter>20 UJr2\7 Haffman</Filter>
     </ClInclude>
-    <ClInclude Include="Block_search.h">
-      <Filter>20 UJr2\8 Block_search</Filter>
+    <ClInclude Include="UJr2/stack_queue/CrossRiver.h">
+      <Filter>20 UJr2\5 CrossRiver</Filter>
     </ClInclude>
-    <ClInclude Include="BinSort.h">
+    <ClInclude Include="UJr2/Crossing/CrossingColor.h">
+      <Filter>20 UJr2\1 Crossing</Filter>
+    </ClInclude>
+    <ClInclude Include="UJr2/Crossing/Crossing.h">
+      <Filter>20 UJr2\1 Crossing</Filter>
+    </ClInclude>
+    <ClInclude Include="calculator/CalcVariable.h">
+      <Filter>11 Calc</Filter>
+    </ClInclude>
+    <ClInclude Include="calculator/Calculator.h">
+      <Filter>11 Calc</Filter>
+    </ClInclude>
+    <ClInclude Include="calculator/CalcToken.h">
+      <Filter>11 Calc</Filter>
+    </ClInclude>
+    <ClInclude Include="UJr2/Book/BookUI.h">
+      <Filter>20 UJr2\3 Book</Filter>
+    </ClInclude>
+    <ClInclude Include="UJr2/Book/Booklist.h">
+      <Filter>20 UJr2\3 Book</Filter>
+    </ClInclude>
+    <ClInclude Include="UJr2/Book/Book.h">
+      <Filter>20 UJr2\3 Book</Filter>
+    </ClInclude>
+    <ClInclude Include="UJr2/Search/BinSort.h">
       <Filter>20 UJr2\9 BinSort</Filter>
+    </ClInclude>
+    <ClInclude Include="UJr2/Search/Block_search.h">
+      <Filter>20 UJr2\8 Block_search</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SwapEnc.cpp">
-      <Filter>12 Enc</Filter>
-    </ClCompile>
-    <ClCompile Include="Calculator.cpp">
-      <Filter>11 Calc</Filter>
-    </ClCompile>
-    <ClCompile Include="CalcToken.cpp">
-      <Filter>11 Calc</Filter>
-    </ClCompile>
-    <ClCompile Include="CalcVariable.cpp">
-      <Filter>11 Calc</Filter>
-    </ClCompile>
-    <ClCompile Include="Calc_main.cpp">
-      <Filter>11 Calc</Filter>
-    </ClCompile>
-    <ClCompile Include="SwapEnc_main.cpp">
-      <Filter>12 Enc</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>00 General Items</Filter>
     </ClCompile>
-    <ClCompile Include="UJr2.cpp">
-      <Filter>20 UJr2\0 General Items</Filter>
-    </ClCompile>
-    <ClCompile Include="Crossing_main.cpp">
-      <Filter>20 UJr2\1 Crossing</Filter>
-    </ClCompile>
-    <ClCompile Include="Crossing.cpp">
-      <Filter>20 UJr2\1 Crossing</Filter>
-    </ClCompile>
-    <ClCompile Include="CrossingColor.cpp">
-      <Filter>20 UJr2\1 Crossing</Filter>
-    </ClCompile>
-    <ClCompile Include="VCtrl_main.cpp">
-      <Filter>20 UJr2\2 Vehicle_control</Filter>
-    </ClCompile>
-    <ClCompile Include="VCtrl_controls.cpp">
-      <Filter>20 UJr2\2 Vehicle_control</Filter>
-    </ClCompile>
-    <ClCompile Include="BookUI.cpp">
-      <Filter>20 UJr2\3 Book</Filter>
-    </ClCompile>
-    <ClCompile Include="Book_main.cpp">
-      <Filter>20 UJr2\3 Book</Filter>
-    </ClCompile>
-    <ClCompile Include="Booklist.cpp">
-      <Filter>20 UJr2\3 Book</Filter>
-    </ClCompile>
-    <ClCompile Include="Book.cpp">
-      <Filter>20 UJr2\3 Book</Filter>
-    </ClCompile>
-    <ClCompile Include="KMP.cpp">
-      <Filter>20 UJr2\4 KMP</Filter>
-    </ClCompile>
-    <ClCompile Include="Crossriver.cpp">
-      <Filter>20 UJr2\5 CrossRiver</Filter>
-    </ClCompile>
-    <ClCompile Include="Maze.cpp">
-      <Filter>20 UJr2\6 maze</Filter>
-    </ClCompile>
-    <ClCompile Include="step.cpp">
-      <Filter>20 UJr2\6 maze</Filter>
-    </ClCompile>
-    <ClCompile Include="Maze_main.cpp">
-      <Filter>20 UJr2\6 maze</Filter>
-    </ClCompile>
-    <ClCompile Include="Haffman.cpp">
-      <Filter>20 UJr2\7 Haffman</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_search.cpp">
-      <Filter>20 UJr2\8 Block_search</Filter>
-    </ClCompile>
-    <ClCompile Include="BinSort.cpp">
+    <ClCompile Include="UJr2/Search/BinSort.cpp">
       <Filter>20 UJr2\9 BinSort</Filter>
     </ClCompile>
-    <ClCompile Include="BinSearch.cpp">
+    <ClCompile Include="UJr2/Search/Block_search.cpp">
+      <Filter>20 UJr2\8 Block_search</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/Book/Book.cpp">
+      <Filter>20 UJr2\3 Book</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/Book/Book_main.cpp">
+      <Filter>20 UJr2\3 Book</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/Book/Booklist.cpp">
+      <Filter>20 UJr2\3 Book</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/Book/BookUI.cpp">
+      <Filter>20 UJr2\3 Book</Filter>
+    </ClCompile>
+    <ClCompile Include="calculator/Calc_main.cpp">
+      <Filter>11 Calc</Filter>
+    </ClCompile>
+    <ClCompile Include="calculator/CalcToken.cpp">
+      <Filter>11 Calc</Filter>
+    </ClCompile>
+    <ClCompile Include="calculator/Calculator.cpp">
+      <Filter>11 Calc</Filter>
+    </ClCompile>
+    <ClCompile Include="calculator/CalcVariable.cpp">
+      <Filter>11 Calc</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/Crossing/Crossing_main.cpp">
+      <Filter>20 UJr2\1 Crossing</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/Crossing/Crossing.cpp">
+      <Filter>20 UJr2\1 Crossing</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/Crossing/CrossingColor.cpp">
+      <Filter>20 UJr2\1 Crossing</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/stack_queue/Crossriver.cpp">
+      <Filter>20 UJr2\5 CrossRiver</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/Haffman/Haffman.cpp">
+      <Filter>20 UJr2\7 Haffman</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/KMP/KMP.cpp">
+      <Filter>20 UJr2\4 KMP</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/stack_queue/Maze.cpp">
+      <Filter>20 UJr2\6 maze</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/stack_queue/Maze_main.cpp">
+      <Filter>20 UJr2\6 maze</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/stack_queue/step.cpp">
+      <Filter>20 UJr2\6 maze</Filter>
+    </ClCompile>
+    <ClCompile Include="SwapEnc/SwapEnc.cpp">
+      <Filter>12 Enc</Filter>
+    </ClCompile>
+    <ClCompile Include="SwapEnc/SwapEnc_main.cpp">
+      <Filter>12 Enc</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/UJr2.cpp">
+      <Filter>20 UJr2\0 General Items</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/VCtrl/VCtrl_controls.cpp">
+      <Filter>20 UJr2\2 Vehicle_control</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/VCtrl/VCtrl_main.cpp">
+      <Filter>20 UJr2\2 Vehicle_control</Filter>
+    </ClCompile>
+    <ClCompile Include="UJr2/Search/BinSearch.cpp">
       <Filter>20 UJr2\9 BinSort</Filter>
     </ClCompile>
   </ItemGroup>

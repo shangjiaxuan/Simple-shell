@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "UJr2.h"
+#include "../UJr2.h"
 
 namespace UJr2_funcs {
 	namespace block_search {
