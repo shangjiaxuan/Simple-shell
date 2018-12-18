@@ -1,5 +1,5 @@
 #include "SwapEnc.h"
-#include "../Library/Pathman.h"
+#include "../MyLibrary/Pathman.h"
 
 using namespace std;
 
@@ -155,9 +155,9 @@ namespace enc {
 
 	void SwapEnc::Exit() {
 		char c;
-		cout << "\nContinue?[Y/n]\t";
 		cin.clear();
-		cin.get();
+		cin.ignore(1i64, '\n');
+		cout << "\nContinue?[Y/n]\t";
 		cin.get(c);
 		switch(c) {
 			case 'Y': case 'y': case '\n': case EOF:

@@ -43,11 +43,11 @@ call(const nchar* library, const char* function, passed pass) {
 		val = func(pass);
 	} __except(EXCEPTION_EXECUTE_HANDLER) {
 		FreeLibrary(hInstance);
-		std::cin.get();
+		cin.clear();
 		throw runtime_error("SEH error executing function as \"rtn func(passed)\"!\n");
 	}
 	FreeLibrary(hInstance);
-	std::cin.get();
+	cin.clear();
 	return val;
 }
 
@@ -67,11 +67,11 @@ call(const nchar* library,
 		func(pass);
 	} __except(EXCEPTION_EXECUTE_HANDLER) {
 		FreeLibrary(hInstance);
-		std::cin.get();
+		cin.clear();
 		throw runtime_error("SEH error executing function as \"void func(passed pass)\"!\n");
 	}
 	FreeLibrary(hInstance);
-	std::cin.get();
+	cin.clear();
 }
 
 template<typename rtn, typename passed>
@@ -91,11 +91,11 @@ call(const nchar* library,
 	}
 	__except (EXCEPTION_EXECUTE_HANDLER) {
 		FreeLibrary(hInstance);
-		std::cin.get();
+		cin.clear();
 		throw runtime_error("SEH error executing function as \"void func(passed pass)\"!\n");
 	}
 	FreeLibrary(hInstance);
-	std::cin.get();
+	cin.clear();
 	return val;
 }
 
@@ -114,11 +114,11 @@ call(const nchar* library,
 		func();
 	} __except(EXCEPTION_EXECUTE_HANDLER) {
 		FreeLibrary(hInstance);
-		std::cin.get();
+		cin.clear();
 		throw runtime_error("SEH error executing function as \"void func()\"!\n");
 	}
 	FreeLibrary(hInstance);
-	std::cin.get();
+	cin.clear();
 }
 
 template<>

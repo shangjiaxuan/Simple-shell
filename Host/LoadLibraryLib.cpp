@@ -33,11 +33,9 @@ int call<int, cmdline<char>&>(const nchar* library, const char* function, cmdlin
 	}
 	__except (EXCEPTION_EXECUTE_HANDLER) {
 		FreeLibrary(hInst);
-		std::cin.get();
 		throw runtime_error("SEH error executing function as \"void func(int argc, char* argv[])\"!\n");
 	}
 	FreeLibrary(hInst);
-	std::cin.get();
 	return val;
 }
 

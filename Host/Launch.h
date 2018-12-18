@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Library/Header.h"
+#include "../MyLibrary/Header.h"
 
 #include "Host.h"			//for cmdline struct
 #include "Filemani.h"

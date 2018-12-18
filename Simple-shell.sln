@@ -21,11 +21,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01 Host", "Host\Host.vcxpro
 		{23BA0350-902E-4F24-859F-8C41C6BE5393} = {23BA0350-902E-4F24-859F-8C41C6BE5393}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04 test", "01 test\01 test.vcxproj", "{1258E91E-FCCC-4EEF-ACC6-D62600660555}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04 test", "01 test\test.vcxproj", "{1258E91E-FCCC-4EEF-ACC6-D62600660555}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03 CmdTreeGen", "CmdTreeGen\CmdTreeGen.vcxproj", "{7B9ED51D-5A67-4C94-BC31-F08D4C10ADB8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00 MyLibrary", "MyLibrary\MyLibrary.vcxitems", "{C1071397-E310-45FD-AF72-674842E59151}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00 Library", "MyLibrary\MyLibrary.vcxitems", "{C1071397-E310-45FD-AF72-674842E59151}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02 Win32", "Win32\Win32.vcxitems", "{BD61970B-8DDF-48D4-8A29-CEA7AED170B2}"
 EndProject
@@ -33,12 +33,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10 sjx", "sjx\sjx.vcxproj",
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Library\Library.vcxitems*{1258e91e-fccc-4eef-acc6-d62600660555}*SharedItemsImports = 4
-		Library\Library.vcxitems*{23ba0350-902e-4f24-859f-8c41c6be5393}*SharedItemsImports = 4
-		Library\Library.vcxitems*{5f19a4e2-79cf-4198-b711-1ea7859926ca}*SharedItemsImports = 4
-		Library\Library.vcxitems*{7b9ed51d-5a67-4c94-bc31-f08d4c10adb8}*SharedItemsImports = 4
+		MyLibrary\MyLibrary.vcxitems*{1258e91e-fccc-4eef-acc6-d62600660555}*SharedItemsImports = 4
+		MyLibrary\MyLibrary.vcxitems*{23ba0350-902e-4f24-859f-8c41c6be5393}*SharedItemsImports = 4
+		MyLibrary\MyLibrary.vcxitems*{5f19a4e2-79cf-4198-b711-1ea7859926ca}*SharedItemsImports = 4
+		MyLibrary\MyLibrary.vcxitems*{7b9ed51d-5a67-4c94-bc31-f08d4c10adb8}*SharedItemsImports = 4
 		Win32\Win32.vcxitems*{bd61970b-8ddf-48d4-8a29-cea7aed170b2}*SharedItemsImports = 9
-		Library\Library.vcxitems*{c1071397-e310-45fd-af72-674842e59151}*SharedItemsImports = 9
+		MyLibrary\MyLibrary.vcxitems*{c1071397-e310-45fd-af72-674842e59151}*SharedItemsImports = 9
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

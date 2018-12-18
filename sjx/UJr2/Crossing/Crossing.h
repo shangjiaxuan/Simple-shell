@@ -2,7 +2,7 @@
 
 #include "../UJr2.h"
 
-#include "../Library/myDataStructures.h"
+#include "../MyLibrary/myDataStructures.h"
 
 namespace UJr2_funcs {
 	namespace crossing {

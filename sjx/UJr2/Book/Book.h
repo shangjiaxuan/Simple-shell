@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Library/myDataStructures.h"
+#include "../MyLibrary/myDataStructures.h"
 #include "Booklist.h"
 
 namespace UJr2_funcs {
@@ -10,7 +10,7 @@ namespace UJr2_funcs {
 
 		class BookIndex : public CharTree<sorted_index_list<int>> {
 		protected:
-			void print_useful_content(node* current, std::ostream& ost, const std::string& token) override {
+			void visit_node(node* current, std::ostream& ost, const std::string& token) override {
 				if(current->data.front() >= 0) {
 					ost << token << ":\t";
 					ost << current->data;

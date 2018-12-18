@@ -15,12 +15,16 @@ void calculator(istream& ist) {
 		try {
 			init(ts);
 			if(!on) {
+				ist.ignore();
 				return;
 			}
 			Calc::Token temp;
 			do {
 				const double answer = statement(ts);
-				if(!on) { return; }
+				if(!on) {
+					ist.ignore();
+					return;
+				}
 				cout << result << answer << '\n';
 				temp = ts.peek();
 			}

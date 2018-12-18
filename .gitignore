@@ -302,6 +302,7 @@ __pycache__/
 [Aa]rchive/
 [Bb]uild/
 [Ii]ntermediates/
+[Tt]est/
 .leu
 *.png
 *.dll

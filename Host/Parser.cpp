@@ -44,6 +44,8 @@ namespace parser {
 			cout << endl;
 			cin.clear();
 			call<void, istream&>(sjxDLL, "calculator", cin);
+			cin.clear();
+//			cin.ignore(1i64, '\n');
 			cout << endl;
 			//		go_to_beginning = true;
 		} else if(stringcmp(cmd.argv[cur_arg], SwapEnc) == 0) {
@@ -51,6 +53,8 @@ namespace parser {
 			cout << endl;
 			cin.clear();
 			call<void, void>(sjxDLL, "SwapEnc");
+			cin.clear();
+//			cin.ignore(1i64, '\n');
 			cout << endl;
 			//		go_to_beginning = true;
 		} else if(stringcmp(cmd.argv[cur_arg], Man) == 0) {

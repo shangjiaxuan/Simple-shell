@@ -9,9 +9,9 @@
 
 #include "Header.h"
 #include "cmd_struct.h"
-#include "../Library/DS_CharTree.h"
+#include "../MyLibrary/DS_CharTree.h"
 #include <queue>
-#include "../Library/DS_cycQueue.h"
+#include "../MyLibrary/DS_cycQueue.h"
 #ifdef _UNICODE
 #include "../Host/WinPlatform.h"
 #endif

@@ -203,7 +203,7 @@ void
 Basic_Type_Tree<tree_type, content_type>::
 print_tokens(std::ostream& ost) {
 	std::basic_string<tree_type> token;
-	print_tokens_loop(head, token, ost);
+	root_first_recurse(head, token, ost);
 }
 
 template<typename tree_type, typename content_type>
@@ -314,9 +314,9 @@ find_node_loop(node* target, node* current, std::basic_string<tree_type>& token)
 template<typename tree_type, typename content_type>
 void
 Basic_Type_Tree<tree_type, content_type>::
-print_tokens_loop(node* current, std::basic_string<tree_type>& token, std::ostream& ost) {
+root_first_recurse(node* current, std::basic_string<tree_type>& token, std::ostream& ost) {
 	if(current->data) {
-		print_useful_content(current, ost, token);
+		visit_node(current, ost, token);
 	}
 	for(unsigned i = 0; i < find_MAX<tree_type>(); i++) {
 		if(!current->next) {
@@ -326,7 +326,7 @@ print_tokens_loop(node* current, std::basic_string<tree_type>& token, std::ostre
 			const unsigned char c = i;
 			const char ch = c;
 			token.push_back(ch);
-			print_tokens_loop(current->next[i], token, ost);
+			root_first_recurse(current->next[i], token, ost);
 			token.pop_back();
 		}
 	}
@@ -377,7 +377,7 @@ move(Basic_Type_Tree&& destination, Basic_Type_Tree&& source) noexcept {
 
 template <typename type>
 class CharTree : public Basic_Type_Tree<char, type> {
-	void print_useful_content(typename Basic_Type_Tree<char, type>::node* current, std::ostream& ost, const std::string& token) override {
+	void visit_node(typename Basic_Type_Tree<char, type>::node* current, std::ostream& ost, const std::string& token) override {
 		ost << token << ":\t";
 		ost << current->data;
 		ost << std::endl;
@@ -386,7 +386,7 @@ class CharTree : public Basic_Type_Tree<char, type> {
 
 template <typename type>
 class WCharTree : public Basic_Type_Tree<wchar_t, type> {
-	void print_useful_content(typename Basic_Type_Tree<wchar_t, type>::node* current, std::ostream& ost, const std::wstring& token) override {
+	void visit_node(typename Basic_Type_Tree<wchar_t, type>::node* current, std::ostream& ost, const std::wstring& token) override {
 #ifdef _WIN32
 		const DWORD size = WideCharToMultiByte(GetConsoleCP(), NULL, token.c_str(), -1, nullptr, 0, nullptr, nullptr);
 		LPSTR const multiByteStr = new CHAR[size];  // NOLINT(misc-misplaced-const)

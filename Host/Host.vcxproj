@@ -108,7 +108,8 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>
+      </GenerateDebugInformation>
       <ModuleDefinitionFile />
       <DelayLoadDLLs>
       </DelayLoadDLLs>
@@ -168,7 +169,8 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>
+      </GenerateDebugInformation>
       <DelayLoadDLLs>
       </DelayLoadDLLs>
       <LinkTimeCodeGeneration>

@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../Library/Header.h"
+#include "../MyLibrary/Header.h"
 
 #include "Host.h"
 #include "Names.h"			//required for the command names

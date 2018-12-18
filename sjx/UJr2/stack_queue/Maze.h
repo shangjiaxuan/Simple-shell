@@ -2,7 +2,7 @@
 
 #include "../UJr2.h"
 
-#include "../Library/myDataStructures.h"
+#include "../MyLibrary/myDataStructures.h"
 #include "step.h"
 
 namespace UJr2_funcs {

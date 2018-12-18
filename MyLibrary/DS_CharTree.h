@@ -60,10 +60,9 @@ protected:
 	//Helper function for recursive searching:
 	void find_node_loop(node* target, node* current, std::basic_string<tree_type>& token);
 
-	//this function is actually a function for going through the whole tree
-	//with the print function to visit nodes that stores data
-	virtual void print_tokens_loop(node* current, std::basic_string<tree_type>& token, std::ostream& ost);
-	virtual void print_useful_content(node* current, std::ostream& ost, const std::basic_string<tree_type>& token) {}
+	//A recursive method that writes its visited output to a stream that can be extracted or used directly
+	virtual void root_first_recurse(node* current, std::basic_string<tree_type>& token, std::ostream& ost);
+	virtual void visit_node(node* current, std::ostream& ost, const std::basic_string<tree_type>& token) {}
 private:
 	virtual void copy(Basic_Type_Tree& destination, const Basic_Type_Tree& source);
 	virtual void copy_node_loop(node* destination, node* source);
