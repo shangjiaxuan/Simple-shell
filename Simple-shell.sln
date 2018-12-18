@@ -25,7 +25,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04 test", "01 test\01 test.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03 CmdTreeGen", "CmdTreeGen\CmdTreeGen.vcxproj", "{7B9ED51D-5A67-4C94-BC31-F08D4C10ADB8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00 Library", "Library\Library.vcxitems", "{C1071397-E310-45FD-AF72-674842E59151}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00 MyLibrary", "MyLibrary\MyLibrary.vcxitems", "{C1071397-E310-45FD-AF72-674842E59151}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02 Win32", "Win32\Win32.vcxitems", "{BD61970B-8DDF-48D4-8A29-CEA7AED170B2}"
 EndProject
