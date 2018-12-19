@@ -25,6 +25,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Macros.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)myDataStructures.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Pathman.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ThreadManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ThreadManager.ipp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Utilities.h" />
   </ItemGroup>
   <ItemGroup>
