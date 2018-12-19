@@ -1,4 +1,4 @@
-﻿#include "CrossRiver.h"
+#include "CrossRiver.h"
 
 using namespace std;
 namespace UJr2_funcs {

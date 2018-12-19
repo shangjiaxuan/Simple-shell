@@ -1,4 +1,4 @@
-﻿#include "Block_search.h"
+#include "Block_search.h"
 
 using namespace std;
 

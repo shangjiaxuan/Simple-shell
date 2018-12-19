@@ -1,4 +1,4 @@
-﻿#include "Launch.h"
+#include "Launch.h"
 
 #include "Parser.h"			//for converting cmdline struct
 

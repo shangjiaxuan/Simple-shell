@@ -1,4 +1,4 @@
-﻿#include "KMP.h"
+#include "KMP.h"
 
 using namespace std;
 

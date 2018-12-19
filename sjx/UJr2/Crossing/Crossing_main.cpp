@@ -1,4 +1,4 @@
-﻿#include "Crossing.h"
+#include "Crossing.h"
 #include "CrossingColor.h"
 
 using namespace std;

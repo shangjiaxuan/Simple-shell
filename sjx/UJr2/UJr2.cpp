@@ -1,4 +1,4 @@
-﻿#include "UJr2.h"
+#include "UJr2.h"
 
 using namespace std;
 

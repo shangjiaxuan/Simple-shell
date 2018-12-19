@@ -1,4 +1,4 @@
-﻿#include "WinPlatform.h"
+#include "WinPlatform.h"
 
 using namespace std;
 

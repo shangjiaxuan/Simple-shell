@@ -17,20 +17,16 @@ std::vector<output> Thread_Manager<input, output>::vector_async(std::vector<inpu
 		}
 		return rtn;
 	default:
-		std::vector<size_t> tasks(subthreads);
-		std::vector<char> locks(subthreads);
-		std::vector<output> rtn(size);
+		bool* locks=new bool[subthreads];
 		for (unsigned i = 0; i < ((subthreads < size) ? subthreads : size); i++) {
 			std::thread t(launch_function, &locks[i], function, &source[i], &rtn[i]);
 			t.detach();
-			tasks[i] = i;
 		}
 		for (size_t i = subthreads; i < size;) {
 			for (unsigned j = 0; j < subthreads && i < size; j++) {
 				if (!locks[j]) {
 					std::thread t(launch_function, &locks[j], function, &source[i], &rtn[i]);
 					t.detach();
-					tasks[j] = i;
 					i++;
 				}
 			}
@@ -42,12 +38,13 @@ std::vector<output> Thread_Manager<input, output>::vector_async(std::vector<inpu
 				not_finished = not_finished || locks[i];
 			}
 		} while (not_finished);
+		delete[] locks;
 		return rtn;
 	}
 };
 
 template<typename input, typename output>
-void Thread_Manager<input, output>::launch_function(char* lock, output(*const function)(input&), input* data, output* out) {
+void Thread_Manager<input, output>::launch_function(bool* lock, output(*const function)(input&), input* data, output* out) {
 	*lock = true;
 	*out = function(*data);
 	*lock = false;
@@ -71,20 +68,16 @@ std::vector<output> Thread_Manager<input, output>::vector_async_copy(std::vector
 		}
 		return rtn;
 	default:
-		std::vector<size_t> tasks(subthreads);
-		std::vector<char> locks(subthreads);
-		std::vector<output> rtn(size);
+		bool* locks = new bool[subthreads];
 		for (unsigned i = 0; i < ((subthreads < size) ? subthreads : size); i++) {
 			std::thread t(launch_function_copy, &locks[i], function, source[i], &rtn[i]);
 			t.detach();
-			tasks[i] = i;
 		}
 		for (size_t i = subthreads; i < size;) {
 			for (unsigned j = 0; j < subthreads && i < size; j++) {
 				if (!locks[j]) {
 					std::thread t(launch_function_copy, &locks[j], function, source[i], &rtn[i]);
 					t.detach();
-					tasks[j] = i;
 					i++;
 				}
 			}
@@ -96,12 +89,13 @@ std::vector<output> Thread_Manager<input, output>::vector_async_copy(std::vector
 				not_finished = not_finished || locks[i];
 			}
 		} while (not_finished);
+		delete[] locks;
 		return rtn;
 	}
 };
 
 template<typename input, typename output>
-void Thread_Manager<input, output>::launch_function_copy(char* lock, output(*const function)(input), input data, output* out) {
+void Thread_Manager<input, output>::launch_function_copy(bool* lock, output(*const function)(input), input data, output* out) {
 	*lock = true;
 	*out = function(data);
 	*lock = false;

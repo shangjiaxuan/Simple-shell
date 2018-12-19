@@ -1,4 +1,4 @@
-﻿#include "BookUI.h"
+#include "BookUI.h"
 
 namespace UJr2_funcs {
 	book::UI This;

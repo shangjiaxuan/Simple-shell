@@ -1,4 +1,4 @@
-﻿#include "Filemani.h"
+#include "Filemani.h"
 #include "Launch.h"
 
 using namespace std;

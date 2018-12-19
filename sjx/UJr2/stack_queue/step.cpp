@@ -1,4 +1,4 @@
-﻿#include "step.h"
+#include "step.h"
 
 using namespace std;
 namespace UJr2_funcs {

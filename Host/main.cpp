@@ -1,4 +1,4 @@
-﻿#include "Host.h"
+#include "Host.h"
 
 int main(int argc, char* argv[]) {
 	std::cout << argc;

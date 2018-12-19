@@ -1,4 +1,4 @@
-﻿#include "Haffman.h"
+#include "Haffman.h"
 
 using namespace std;
 

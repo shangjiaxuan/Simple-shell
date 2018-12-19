@@ -1,4 +1,4 @@
-﻿#include "Booklist.h"
+#include "Booklist.h"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-﻿#include "Names.h"
+#include "Names.h"
 
 #ifdef _WIN32
 const nchar* Exit{_T("exit")};

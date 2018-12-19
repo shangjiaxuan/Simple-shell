@@ -1,4 +1,4 @@
-﻿#include "BinSort.h"
+#include "BinSort.h"
 
 using namespace std;
 

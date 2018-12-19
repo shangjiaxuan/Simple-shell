@@ -1,4 +1,4 @@
-﻿#include "Maze.h"
+#include "Maze.h"
 
 namespace UJr2_funcs {
 	int maze(int argc, char* argv[]) {
