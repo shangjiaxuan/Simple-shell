@@ -8,7 +8,7 @@
 These are the changes to each version that has been tagged and released on Github.
 Prior versions before the cleanup of `v0.0.1.2` are described within the scope of `v0.0.1.2` 
 
-## 0.0.2.0
+## v0.0.2.0
   -- Planned
 - [x] Simple command parsing
   - [ ] Parsing complex commands
@@ -38,7 +38,7 @@ Prior versions before the cleanup of `v0.0.1.2` are described within the scope o
   - [x] Proxy manual function
   - [ ] Manual viewing system
     
-## 0.0.1.2
+## v0.0.1.2
 
 - [x] Initial release
 - [x] Support 
