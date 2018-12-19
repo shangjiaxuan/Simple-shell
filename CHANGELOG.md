@@ -17,6 +17,7 @@ Prior versions before the cleanup of `v0.0.1.2` are described within the scope o
   - [ ] chcp command
   - [ ] Unicode support
     - [x] UTF-16 coding in non-io functions and conversion in IO functions
+    - [ ] Default UTF-8 code page
 - [x] Dynamic loading library
   - [x] Example function calling in dll improved
   - [x] Launching arbitrary functions with default parameters 
@@ -32,6 +33,7 @@ Prior versions before the cleanup of `v0.0.1.2` are described within the scope o
   - [ ] Filesystem related (using c++17 standard library)
     - [x] cd command
     - [ ] dir and ls commands
+    - [ ] mklink command
 - [ ] Manual and documentation
   - [x] Proxy manual function
   - [ ] Manual viewing system
