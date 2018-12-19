@@ -1,7 +1,7 @@
 #pragma once
 
 template<typename input, typename output>
-std::vector<output> Thread_Manager<input, output>::vector_async(std::vector<input>& source, output(*const function)(input&)) {
+std::vector<output> Thread_Manager<input, output>::vector_thread(std::vector<input>& source, output(*const function)(input&)) {
 	const unsigned subthreads = std::thread::hardware_concurrency() - 1;
 	size_t size = source.size();
 	std::vector<output> rtn(size);
@@ -52,7 +52,7 @@ void Thread_Manager<input, output>::launch_function(bool* lock, output(*const fu
 
 
 template<typename input, typename output>
-std::vector<output> Thread_Manager<input, output>::vector_async_copy(std::vector<input>& source, output(*const function)(input)) {
+std::vector<output> Thread_Manager<input, output>::vector_thread_copy(std::vector<input>& source, output(*const function)(input)) {
 	const unsigned subthreads = std::thread::hardware_concurrency() - 1;
 	size_t size = source.size();
 	std::vector<output> rtn(size);
