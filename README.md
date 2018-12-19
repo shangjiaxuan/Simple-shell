@@ -33,7 +33,7 @@ e.g. support some UNIX commands, 'cd'ing directly to other drives(multiple root 
 
 * (Note that my code is licensed under [`MIT`]( ./LICENSE ), but I guess I won't do anything if someone violates it with MY code without causing too much harm...)
 
-* Please note that when developing this program, I was using student version of certaion tools (Including but not limited to ReSharper's plugin and Vsiual Studio community). Thus, if you intend to use it for commercial ends, please file an issue before proceeding. 
+* Please note that when developing this program, I was using student version of certaion tools (Including but not limited to ReSharper's plugin and Vsiual Studio community) (Update: no longer using this specific one.). Thus, if you intend to use it for commercial ends, please file an issue before proceeding. 
 (According to license terms up to Oct 4th, 2018, there is no issue here......(see the [`License directory`](./License-other/)))
 
 ### End remark
