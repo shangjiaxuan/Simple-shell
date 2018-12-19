@@ -10,6 +10,11 @@ the developers managing and developing this open source project. In return,
 they should reciprocate that respect in addressing your issue or assessing
 patches and features.
 
+NOTE:  
+You can always make your own extensions as exemplified in the `sjx.dll`. You can use a 
+normal interface like a "int main(int argc, char** argv)" or you can directly add your 
+extension to the code to use any set of input and output for your function. In the latter 
+case, you will need to be responsible for the maintenence and safery of your extension.
 
 ## Using the issue tracker
 
@@ -18,14 +23,13 @@ The issue tracker is the preferred channel for [bug reports](#bug-reports),
 [submitting pull requests](#pull-requests), but please respect the
 following restrictions:
 
-* Please **do not** use the issue tracker for personal support requests.  Stack
-  Overflow is a better place to get help.
-
 * Please **do not** derail or troll issues. Keep the discussion on topic and
   respect the opinions of others.
 
 * Please **do not** open issues or pull requests which *belongs to* third party
-  components.
+  components.  
+  (However, integration of your code as extension here directly will make you a contributer, 
+  and thus making you responsible for maintaining your extension)
 
 
 ## Bug reports
@@ -39,7 +43,7 @@ Guidelines for bug reports:
    reported.
 
 2. **Check if the issue has been fixed** &mdash; try to reproduce it using the
-   latest `master` or development branch in the repository.
+   latest `master` or `develop` branch in the repository.
 
 3. **Isolate the problem** &mdash; ideally create an
    [SSCCE](http://www.sscce.org/) and a live example.
@@ -75,26 +79,28 @@ Example:
 
 ## Feature requests
 
-Feature requests are welcome. But take a moment to find out whether your idea
-fits with the scope and aims of the project. It's up to *you* to make a strong
-case to convince the project's developers of the merits of this feature. Please
-provide as much detail and context as possible.
+Feature requests are welcome. Please provide as much detail and context as possible.  
+Feature requests for integrating your own extension will always be direct and easy, 
+if you take care of your part of wrapping the extension into a dll, and even more so if your
+interface is a "int main(int argc, char** argv)", which will only need a addition to the documentation.
+Feature requests for new commands will be considered if the request is valued important or if the
+you would provide simple code guidelines for integrating them.
 
 
 ## Pull requests
 
 Good pull requests, patches, improvements and new features are a fantastic
-help. They should remain focused in scope and avoid containing unrelated
-commits.
+help. Any help on adding features and resolving bugs is welcome as long as 
+you push it to the develop branch.
 
 **Please ask first** before embarking on any significant pull request (e.g.
 implementing features, refactoring code, porting to a different language),
 otherwise you risk spending a lot of time working on something that the
-project's developers might not want to merge into the project.
+project's developers might not want to merge into the project. (Although it
+is quite unlikely right now.)
 
 Please adhere to the [coding guidelines](#code-guidelines) used throughout the
-project (indentation, accurate comments, etc.) and any other requirements
-(such as test coverage).
+project (format, good practices, etc.) and any other requirements.
 
 Adhering to the following process is the best way to get your work
 included in the project:
@@ -114,8 +120,8 @@ included in the project:
 2. If you cloned a while ago, get the latest changes from upstream:
 
    ```bash
-   git checkout master
-   git pull upstream master
+   git checkout develop
+   git pull upstream develop
    ```
 
 3. Create a new topic branch (off the main project development branch) to
@@ -135,7 +141,7 @@ included in the project:
 5. Locally merge (or rebase) the upstream development branch into your topic branch:
 
    ```bash
-   git pull [--rebase] upstream master
+   git pull [--rebase] upstream develop
    ```
 
 6. Push your topic branch up to your fork:
@@ -145,16 +151,23 @@ included in the project:
    ```
 
 7. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
-    with a clear title and description against the `master` branch.
+    with a clear title and description against the `develop` branch.
 
 
 ## Code guidelines
 
-- Always use proper indentation.
-- In Visual Studio under `Tools > Options > Text Editor > C# > Advanced`, make sure
-  `Place 'System' directives first when sorting usings` option is enabled (checked).
-- Before committing, organize usings for each updated C# source file. Either you can
-  right-click editor and select `Organize Usings > Remove and sort` OR use extension
-  like [BatchFormat](http://visualstudiogallery.msdn.microsoft.com/a7f75c34-82b4-4357-9c66-c18e32b9393e).
-- Before committing, run Code Analysis in `Debug` configuration and follow the guidelines
-  to fix CA issues. Code Analysis commits can be made separately.
+- Indent when needed. Tabs and 4 spaces are both acceptable. 
+Please configure the editor to 4 spaces at least for this project for consistency .
+- Variable, class, namespace, function, etc's naming has no specific guidelines, but names desperately decorated like `tHeapProACH_1O1`(a.k.a. "the approach 101", in English...) are **NOT accepted** without revision  
+Generally, use underscores, upper and lower case switches to convey a sense of seperation of "words", and try to convey a concise and exact idea in variable names if possible. 
+- Try to fit the code within at most 150 characters per line. 80 or 120 limit is prefered, but not enforced.
+- Modifications to templates are welcome, but should preserve the previous interface or you will need to file an issue before proceeding because dependent code may need a lot of revision.
+- Try to follow common cpp guidelines in the mechanics of methods.  
+e.g.  
+**Try NOT to throw exceptions in destructors**  
+**Try NOT to leave memory leaks and random pointers after deleting**  
+**Try to be thread safe and exception safe where critical**  
+
+NOTE: Any attempt to add unsafe extensions that may case data loss, break down of the OS, 
+and other failures and undesired behaviors without warning will be banned from contributing to this project.
+

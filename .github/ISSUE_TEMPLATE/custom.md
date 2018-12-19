@@ -4,4 +4,4 @@ about: Describe this issue template's purpose here.
 
 ---
 
-[A template for other purposes, e.g contact me]
+[A proxy template for other purposes (freestyle), used e.g to contact me]
