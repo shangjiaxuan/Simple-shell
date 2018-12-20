@@ -21,10 +21,10 @@
 #include <map>
 
 #ifdef _WIN32
-#include <Windows.h>
-#include <shlobj.h>
-#undef max
-#undef min
+	#include <Windows.h>
+	#include <shlobj.h>
+	#undef max
+	#undef min
 #endif
 
 

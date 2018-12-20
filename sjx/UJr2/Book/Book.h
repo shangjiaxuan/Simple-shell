@@ -3,19 +3,25 @@
 #include "../MyLibrary/myDataStructures.h"
 #include "Booklist.h"
 
+#define CharTree(type) Basic_Type_Tree<char,type>
+
 namespace UJr2_funcs {
 	namespace book {
 
 		class UI;
-
-		class BookIndex : public CharTree<sorted_index_list<int>> {
-		protected:
-			void visit_node(node* current, std::ostream& ost, const std::string& token) override {
-				if(current->data.front() >= 0) {
-					ost << token << ":\t";
-					ost << current->data;
-					ost << std::endl;
+		class BookIndex : public CharTree(sorted_index_list<int>) {
+			static void print_one_data(sorted_index_list<int>& data, void* ost, const std::string& token) {
+				if (data.front() >= 0) {
+					*(std::ostream*)ost << token << ":\t";
+					*(std::ostream*)ost << data;
+					*(std::ostream*)ost << std::endl;
 				}
+			}
+		public:
+			void print_data(std::ostream& ost) {
+				std::string token{};
+				std::ostream* ptr = &ost;
+				root_first_recurse_loop(head, token, ptr, print_one_data);
 			}
 		};
 

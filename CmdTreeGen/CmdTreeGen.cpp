@@ -72,7 +72,8 @@ int main() {
 void helper_tree::make_static_list(std::ostream& ost) {
 	node* cur_node = head;
 	num_of_node = 0;
-	print_tokens(cout);
+	nstring token = nstring();
+	root_first_recurse_loop(cur_node, token, &num_of_node, calc_num_of_data);
 	Cyclic_Queue<node*> visit_queue{num_of_node* (find_MAX<nchar>() + 1) };
 	Cyclic_Queue<unsigned long> index_queue{num_of_node* (find_MAX<nchar>() + 1) };
 	num_of_node = 0;

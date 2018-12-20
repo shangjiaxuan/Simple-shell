@@ -201,9 +201,9 @@ find_node(node* target) {
 template<typename tree_type, typename content_type>
 void 
 Basic_Type_Tree<tree_type, content_type>::
-print_tokens(std::ostream& ost) {
+print_tokens(std::ostream& passed) {
 	std::basic_string<tree_type> token;
-	root_first_recurse(head, token, ost);
+	root_first_recurse_loop(head, token, &passed, print_one_token);
 }
 
 template<typename tree_type, typename content_type>
@@ -314,9 +314,9 @@ find_node_loop(node* target, node* current, std::basic_string<tree_type>& token)
 template<typename tree_type, typename content_type>
 void
 Basic_Type_Tree<tree_type, content_type>::
-root_first_recurse(node* current, std::basic_string<tree_type>& token, std::ostream& ost) {
-	if(current->data) {
-		visit_node(current, ost, token);
+root_first_recurse_loop(node* current, std::basic_string<tree_type>& token, void* passed, visit_func function) {
+	if(current->data && function) {
+		function(current->data, passed, token);
 	}
 	for(unsigned i = 0; i < find_MAX<tree_type>(); i++) {
 		if(!current->next) {
@@ -326,7 +326,7 @@ root_first_recurse(node* current, std::basic_string<tree_type>& token, std::ostr
 			const unsigned char c = i;
 			const char ch = c;
 			token.push_back(ch);
-			root_first_recurse(current->next[i], token, ost);
+			root_first_recurse_loop(current->next[i], token, passed, function);
 			token.pop_back();
 		}
 	}
@@ -375,6 +375,7 @@ move(Basic_Type_Tree&& destination, Basic_Type_Tree&& source) noexcept {
 	destination.head = nullptr;
 }
 
+/*
 template <typename type>
 class CharTree : public Basic_Type_Tree<char, type> {
 	void visit_node(typename Basic_Type_Tree<char, type>::node* current, std::ostream& ost, const std::string& token) override {
@@ -403,5 +404,5 @@ class WCharTree : public Basic_Type_Tree<wchar_t, type> {
 #endif
 	}
 };
-
+*/
 

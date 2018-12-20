@@ -239,7 +239,7 @@ namespace UJr2_funcs {
 		}
 
 		void Book::print_index(std::ostream& ost) {
-			index.print_tokens(ost);
+			index.print_data(ost);
 		}
 
 		void Book::ntoken(std::string token) {

@@ -48,6 +48,11 @@ public:
 	//Prints the strings and values stored in the tree (the function to use when going through all the nodes with info):
 	void print_tokens(std::ostream& ost);
 
+	typedef void(*visit_func)(content_type&, void*, const std::basic_string<tree_type>&);
+	virtual void root_first_recurse(void* passed, visit_func function) {
+		std::basic_string<tree_type> token{};
+		root_first_recurse_loop(head, token, passed, function);
+	}
 protected:
 	//Helper function to see if there's only one child on the given node(for deallocationg empty branches):
 	static bool one_successor(node** list);
@@ -61,18 +66,28 @@ protected:
 	void find_node_loop(node* target, node* current, std::basic_string<tree_type>& token);
 
 	//A recursive method that writes its visited output to a stream that can be extracted or used directly
-	virtual void root_first_recurse(node* current, std::basic_string<tree_type>& token, std::ostream& ost);
-	virtual void visit_node(node* current, std::ostream& ost, const std::basic_string<tree_type>& token) {}
+	virtual void root_first_recurse_loop(node* current, std::basic_string<tree_type>& token, void* passed, visit_func function);
+	virtual void print_string(std::ostream& ost, std::basic_string<tree_type>& token) {};
+	virtual void print_one_token(content_type& content, std::basic_string<tree_type>& token, void* passed) {
+		print_string((*((std::ostream*)passed)),token);
+	}
+	/*
+	virtual void print_one_data(content_type& data, void* ost, const std::string& token) {
+		*(std::ostream*)ost << token << ":\t";
+		*(std::ostream*)ost << data;
+		*(std::ostream*)ost << std::endl;
+	}
+	*/
 private:
 	virtual void copy(Basic_Type_Tree& destination, const Basic_Type_Tree& source);
 	virtual void copy_node_loop(node* destination, node* source);
 	virtual void move(Basic_Type_Tree&& destination, Basic_Type_Tree&& source) noexcept;
 };
-
+/*
 template<typename content_type>
 class CharTree;
 template<typename content_type>
 class WCharTree;
-
+*/
 #include "DS_CharTree.ipp"
 
