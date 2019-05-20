@@ -50,9 +50,11 @@
 	//macros for importing and exporting dynammic library
 	#ifdef _WINDLL
 		#define DLL_PORT extern "C" __declspec(dllexport)
+		#define EXPORT __declspec(dllexport)
 	#endif
 	#ifndef _WINDLL
 		#define DLL_PORT extern "C" __declspec(dllimport)
+		#define EXPORT __declspec(dllimport)
 	#endif
 #endif
 

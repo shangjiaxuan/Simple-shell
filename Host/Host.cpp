@@ -1,4 +1,4 @@
-﻿#include "Host.h"
+#include "Host.h"
 #include "Parser.h"
 #include <queue>
 

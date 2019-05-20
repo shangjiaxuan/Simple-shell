@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Utilities.h"
+#include <string>
 
 //class of a CharTree
 //This structure maps its contents into a structure for fast(?) string reading and access
